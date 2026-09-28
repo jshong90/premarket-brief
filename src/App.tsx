@@ -76,7 +76,7 @@ export default function Scanner() {
   return <div className="app-shell">
     <header className="topbar">
       <a href="./index.html" className="brand" aria-label="The Warren home"><span className="brand-mark">W</span><span>THE WARREN<span className="brand-sub">MARKET DESK</span></span></a>
-      <nav className="topnav" aria-label="Main navigation"><a href="#morning-brief"><Sunrise size={15}/>Morning brief</a><button onClick={()=>setDrawer('method')}>Scanner info <ArrowUpRight size={13}/></button></nav>
+      
       <ThemeToggle/><button className="connection-button" onClick={()=>setDrawer('connections')}><Clock3 size={14}/><span>06:20 Pacific</span><ChevronRight size={15}/></button>
     </header>
     <main>
