@@ -145,7 +145,7 @@ html[data-theme="dark"] .ticker-mark,html[data-theme="dark"] .benchmark-pill,htm
 html[data-theme="light"] .ticker-mark.aapl,html[data-theme="light"] .ticker-mark.csco,html[data-theme="light"] .ticker-mark.tsla,html[data-theme="light"] .ticker-mark.amzn,html[data-theme="light"] .ticker-mark.nvda{background:#efede8;border-color:#d0ccc5;color:#555}
 html[data-theme="dark"] .ticker-mark.aapl,html[data-theme="dark"] .ticker-mark.csco,html[data-theme="dark"] .ticker-mark.tsla,html[data-theme="dark"] .ticker-mark.amzn,html[data-theme="dark"] .ticker-mark.nvda{background:#3a3e42;border-color:#555b60;color:#d1d3d5}
 html[data-theme="light"] .capture-track,html[data-theme="light"] .coverage-track,html[data-theme="light"] .sector-track,html[data-theme="light"] .distribution-bar{background:#e2ded7}
-html[data-theme="dark"] .capture-track,html[data-theme="dark"] .coverage-track,html[data-theme="dark"] .sector-track,html[data-theme="dark"] .distribution-bar{background:#44494e}
+html[data-theme="dark"] .capture-track,html[data-theme="dark"] .coverage-track,html[data-theme="dark"] .sector-track{background:#44494e}
 html[data-theme="light"] .capture-track>span,html[data-theme="light"] .coverage-track span,html[data-theme="light"] .sector-track>i,html[data-theme="light"] .distribution-bar>span{background:#8b8b8b}
 html[data-theme="dark"] .capture-track>span,html[data-theme="dark"] .coverage-track span,html[data-theme="dark"] .sector-track>i,html[data-theme="dark"] .distribution-bar>span{background:#a4a8ac}
 html[data-theme="light"] .eyebrow,html[data-theme="light"] .brief-section-number,html[data-theme="light"] .page-heading p,html[data-theme="light"] .date-label,html[data-theme="light"] .panel-heading h2,html[data-theme="light"] .section-meta,html[data-theme="light"] .tabs-note,html[data-theme="light"] .table-footer,html[data-theme="light"] .statusbar,html[data-theme="light"] .text-link{color:#666}
@@ -190,6 +190,12 @@ html[data-theme="light"] .classification.laggard{background:#f1d8d1;border-color
 .distribution-bar>.neutral,.scale-row i.neutral{background:#bea16e}
 .distribution-bar>.laggard,.scale-row i.laggard{background:#c5807a}
 
+/* Resilience spectrum colors are fixed across themes. */
+.distribution-bar>.exceptional,.scale-row i.exceptional{background:#c3f86b}
+.distribution-bar>.clear,.scale-row i.clear{background:#89b861}
+.distribution-bar>.moderate,.scale-row i.moderate{background:#708c5d}
+.distribution-bar>.neutral,.scale-row i.neutral{background:#bea16e}
+.distribution-bar>.laggard,.scale-row i.laggard{background:#c5807a}
 /* Improve accent and divider contrast while keeping market direction colors. */
 html[data-theme="light"]{--accent-foreground:var(--foreground);--border:#b7b3ac;--input:#aaa69f}
 html[data-theme="dark"]{--accent-foreground:var(--foreground);--border:#666c72;--input:#747a80}
