@@ -184,11 +184,7 @@ html[data-theme="light"] .classification.exceptional,html[data-theme="light"] .c
 html[data-theme="light"] .classification.moderate{background:#f0e2d1;border-color:#d7bea1;color:#86694f}
 html[data-theme="light"] .classification.neutral{background:#eee0cf;border-color:#d4bda3;color:#806044}
 html[data-theme="light"] .classification.laggard{background:#f1d8d1;border-color:#d6a399;color:#a34f45}
-.distribution-bar>.exceptional,.scale-row i.exceptional{background:#c3f86b}
-.distribution-bar>.clear,.scale-row i.clear{background:#89b861}
-.distribution-bar>.moderate,.scale-row i.moderate{background:#708c5d}
-.distribution-bar>.neutral,.scale-row i.neutral{background:#bea16e}
-.distribution-bar>.laggard,.scale-row i.laggard{background:#c5807a}
+
 
 /* Resilience spectrum colors are fixed across themes. */
 .distribution-bar>.exceptional,.scale-row i.exceptional{background:#c3f86b}
