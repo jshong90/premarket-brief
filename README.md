@@ -18,9 +18,9 @@ The scanner rows in the included packet are the **legacy September 28, 2026 exam
 
 A ChatGPT task is scheduled to produce the daily snapshot JSON at 06:20 Pacific. It uses TradingView first and alternate sources only for required fields TradingView cannot supply. It retains source, observation time, cutoff and collection time, and reports missing coverage.
 
-To update the hosted dashboard, rename that day's JSON to `snapshot.json` and replace `data/snapshot.json` in the repository. Both pages update together. No rebuild is required. For source development, update `public/data/snapshot.json`; rebuilding copies it to `dist/data/snapshot.json`. Archive dated JSON files separately if desired.
+To publish a new snapshot, replace `public/data/snapshot.json` and commit the change. Vercel rebuilds the dashboard and deploys it from that packet. Keep dated archives separately if desired.
 
-**Automatic publication to GitHub is not connected.** The website does not run a scheduler or inherit the ChatGPT TradingView connection. The task delivers its data file here; a separate repository integration is required to publish it automatically. The current TradingView OHLCV tool supplies the futures bars but excludes equity extended-hours bars. Timestamped stock and sector ranges therefore need an alternate source. Data availability and latency depend on provider access. No credentials belong in the HTML or public repository.
+**Automatic snapshot publication to GitHub is not connected.** The website does not run a scheduler or inherit the ChatGPT TradingView connection. The scheduled task delivers its data file here but does not write it into this repository; commit the new packet at `public/data/snapshot.json` to publish it through Vercel. The current TradingView OHLCV tool supplies the futures bars but excludes equity extended-hours bars. Timestamped stock and sector ranges therefore need an alternate source. Data availability and latency depend on provider access. No credentials belong in the HTML or public repository.
 
 Run locally with `npm run dev`; use the Vercel preview or production URL for hosted access.
 
@@ -39,7 +39,7 @@ Target universe: US common stocks with market cap ≥ $50B. NQ for the specified
 
 ## Snapshot file contract
 
-`data/snapshot.json` illustrates the row layout with legacy inputs. For a new daily packet:
+`public/data/snapshot.json` illustrates the row layout with legacy inputs; Vite publishes it at `dist/data/snapshot.json`. For a new daily packet:
 
 - `sessionDate`: YYYY-MM-DD in New York; `cutoffAt`: ISO timestamp exactly at 09:20 ET; `fetchedAt`: actual ISO collection time at or after the cutoff.
 - `status`: `frozen`, `partial`, or `unavailable`. `imported` is reserved for legacy, unverified examples and must not assert a cutoff.
