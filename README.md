@@ -24,18 +24,9 @@ To publish a new snapshot, replace `public/data/snapshot.json` and commit the ch
 
 Run locally with `npm run dev`; use the Vercel preview or production URL for hosted access.
 
-## Methodology
+## Scanner description
 
-- Range drawdown = (1 − session low / session high) × 100, positive magnitude.
-- Downside capture = ticker drawdown / benchmark drawdown × 100. Lower is more resilient.
-- RS advantage = benchmark drawdown − ticker drawdown, in percentage points.
-- Recovery = (last eligible price / premarket low − 1) × 100, displayed and ranked separately.
-
-Thresholds: below 40% exceptional; 40% to below 70% clear; 70% to below 100% moderate; 100% through 125% market-like; above 125% laggard.
-
-The high/low range ignores event order and measures relative range size, not chronological maximum drawdown. The equity window is shorter than the futures window. Capture is undefined for a zero or missing benchmark range. Calculations use unrounded valid inputs; display values are rounded.
-
-Target universe: US common stocks with market cap ≥ $50B. NQ for the specified growth names and technology/communication sectors, ES otherwise, explicitly COST, MA, WMT and MCD. All 11 sector ETFs use ES. Assignments are in `src/lib/scanner.ts`.
+The scanner uses premarket price ranges and some comparison rules to calculate relative strength. Results are based on the best available data and are intended as an aid, not a signal.
 
 ## Snapshot file contract
 
@@ -51,7 +42,7 @@ Target universe: US common stocks with market cap ≥ $50B. NQ for the specified
 - Benchmark fields: `id`, `high`, `low`, `drawdown`, `source`, `asOf`, optional `highTime`, `lowTime`, `issue`.
 - `asOf`, `highTime`, `lowTime` identify the actual bar timestamps inside the eligible window. New rows need complete high/low timestamps, a valid range, and positive known equity session volume to be ranked. Missing metadata leaves that row unranked. Delays belong in `issue` and `messages`.
 
-The loader validates the packet, rejects observations outside the cutoff window, and recomputes drawdown from raw ranges for new snapshots. It cannot authenticate the provider or establish that every expected bar was supplied; the collector must verify coverage. Invalid files show an error and the clearly labeled legacy example.
+The loader validates the snapshot packet before display. It cannot authenticate the provider or independently verify source coverage; invalid files show an error and the clearly labeled legacy example.
 
 ## Development
 
@@ -66,7 +57,7 @@ npm run build
 
 The production build writes to `dist/`. Vercel uses the checked-in build configuration and publishes that directory. Direct dependencies are pinned; `package-lock.json` locks the full dependency tree.
 
-Validation covers TypeScript, scanner formulas and thresholds, missing and zero data, benchmark mapping, recovery, daylight-saving offsets, the fixed 09:20 cutoff, out-of-window rejection, incomplete ranges and legacy rankings.
+Validation covers TypeScript, snapshot structure, source metadata, date handling, cutoff handling and the legacy example.
 
 ## Consolidated layout
 The morning brief has five sections: overnight indices, overnight bonds, upcoming macro events, upcoming earnings, and overnight news. The button beside the Morning brief heading skips to the scanner; the button beside the Relative strength heading returns to the brief. Both use same-page anchors and account for the sticky header.
