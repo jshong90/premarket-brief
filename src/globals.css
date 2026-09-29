@@ -79,7 +79,8 @@ html[data-theme="light"] .theme-toggle{border-color:#d19a6d;background:#fff5e8;c
 html{scroll-behavior:smooth;scroll-padding-top:var(--dashboard-offset,265px)}
 .dashboard-section:focus{outline:none}
 .morning-section{margin-bottom:48px}
-.morning-sections{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.morning-sections{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:16px;row-gap:16px;align-items:start}
+.morning-column{display:grid;align-content:start;gap:16px;min-width:0}
 .morning-sections>section:last-child{grid-column:1/-1}
 .morning-sections .briefing-section-head{justify-content:flex-start;align-items:baseline}
 .morning-sections .briefing-section-head h2{font-size:22px;line-height:1.3;margin:0;color:var(--foreground)}
@@ -241,18 +242,17 @@ html[data-theme="dark"] body h1,html[data-theme="dark"] body h2,html[data-theme=
 .key-levels-table tbody tr:last-child>*{border-bottom:0}
 .key-levels-note{margin:12px 0 0;color:var(--muted-foreground);font-size:12px;line-height:1.6}
 /* Keep the bonds card compact so the adjacent key levels carry more visual weight. */
-.morning-sections>.briefing-section:nth-child(2) .briefing-section-head{padding:14px 19px 11px}
-.morning-sections>.briefing-section:nth-child(2) .briefing-section-head h2{font-size:19px}
-.morning-sections>.briefing-section:nth-child(2) .briefing-notes{padding:0 19px}
-.morning-sections>.briefing-section:nth-child(2) .briefing-note{padding:12px 0 13px}
-.morning-sections>.briefing-section:nth-child(2) .briefing-note h3{font-size:15px;margin-bottom:4px}
-.morning-sections>.briefing-section:nth-child(2) .briefing-note p{font-size:13px;line-height:1.55;margin-bottom:9px}
-.morning-sections>.briefing-section:nth-child(2) .briefing-source strong,
-.morning-sections>.briefing-section:nth-child(2) .briefing-source a{font-size:11px}
-.morning-sections{align-items:start}
-.key-levels-section{grid-column:2}
+.morning-bonds-section .briefing-section-head{padding:14px 19px 11px}
+.morning-bonds-section .briefing-section-head h2{font-size:19px}
+.morning-bonds-section .briefing-notes{padding:0 19px}
+.morning-bonds-section .briefing-note{padding:12px 0 13px}
+.morning-bonds-section .briefing-note h3{font-size:15px;margin-bottom:4px}
+.morning-bonds-section .briefing-note p{font-size:13px;line-height:1.55;margin-bottom:9px}
+.morning-bonds-section .briefing-source strong,
+.morning-bonds-section .briefing-source a{font-size:11px}
 @media(max-width:700px){
-  .morning-sections>.briefing-section:nth-child(2) .briefing-section-head{padding:14px 14px 11px}
-  .morning-sections>.briefing-section:nth-child(2) .briefing-notes{padding:0 14px}
-  .key-levels-section{grid-column:auto}
+  .morning-sections{row-gap:16px}
+  .morning-column{gap:16px}
+  .morning-bonds-section .briefing-section-head{padding:14px 14px 11px}
+  .morning-bonds-section .briefing-notes{padding:0 14px}
 }
