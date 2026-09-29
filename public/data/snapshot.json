@@ -1,6 +1,6 @@
 {
   "sessionDate": "2026-09-28",
-  "fetchedAt": "2026-09-29T02:27:16.293Z",
+  "fetchedAt": "2026-09-29T02:32:56.660Z",
   "status": "partial",
   "universeCount": 12,
   "universeComplete": false,
@@ -9,9 +9,9 @@
     "massive": false
   },
   "messages": [
-    "Historical prices retrieved from TradingView on 2026-09-29T02:27:16Z. TradingView warns its market data may be delayed 15+ minutes.",
+    "Historical prices retrieved from TradingView on 2026-09-29T02:32:56Z. TradingView warns its market data may be delayed 15+ minutes.",
     "ES, NQ, YM, RTY, VIX, and the 10-year yield have valid 09:19 ET one-minute observations. The 09:20 ET bar is excluded.",
-    "TradingView OHLCV reports no pre/post-market bars for equities and ETFs. Their Friday closes and 06:20 PT prices remain blank; missing rows are not ranked.",
+    "TradingView OHLCV provides Friday closes for the displayed stocks and 11 sector ETFs, but no 06:20 PT pre/post-market bars for them. Their scan prices and ranges remain blank; missing rows are not ranked.",
     "Only 12 stock rows are present and discovery is incomplete; this is not the full $50B+ US common-stock universe."
   ],
   "stocks": [
@@ -24,12 +24,14 @@
       "high": null,
       "low": null,
       "last": null,
-      "previousClose": null,
+      "previousClose": 341.04,
       "volume": null,
       "marketCap": null,
-      "source": "TradingView Official MCP · AAPL · OHLCV; feed returns no pre/post-market bars",
+      "source": "TradingView Official MCP · NASDAQ:AAPL · Friday 15:59 ET 1-minute close bar; no pre/post-market bars",
       "asOf": null,
-      "issue": "No 06:20 PT premarket bar or timestamped premarket range available from the connected feed; Friday close also not collected for this row."
+      "issue": "Friday close verified. No 06:20 PT premarket bar or timestamped premarket range is available from the connected feed; this row remains unranked.",
+      "previousCloseAt": "2026-09-25T19:59:00.000Z",
+      "retrievedAt": "2026-09-29T02:32:27.130Z"
     },
     {
       "ticker": "CSCO",
@@ -40,12 +42,14 @@
       "high": null,
       "low": null,
       "last": null,
-      "previousClose": null,
+      "previousClose": 106.68,
       "volume": null,
       "marketCap": null,
-      "source": "TradingView Official MCP · CSCO · OHLCV; feed returns no pre/post-market bars",
+      "source": "TradingView Official MCP · NASDAQ:CSCO · Friday 15:59 ET 1-minute close bar; no pre/post-market bars",
       "asOf": null,
-      "issue": "No 06:20 PT premarket bar or timestamped premarket range available from the connected feed; Friday close also not collected for this row."
+      "issue": "Friday close verified. No 06:20 PT premarket bar or timestamped premarket range is available from the connected feed; this row remains unranked.",
+      "previousCloseAt": "2026-09-25T19:59:00.000Z",
+      "retrievedAt": "2026-09-29T02:32:27.130Z"
     },
     {
       "ticker": "TSLA",
@@ -56,12 +60,14 @@
       "high": null,
       "low": null,
       "last": null,
-      "previousClose": null,
+      "previousClose": 372.01,
       "volume": null,
       "marketCap": null,
-      "source": "TradingView Official MCP · TSLA · OHLCV; feed returns no pre/post-market bars",
+      "source": "TradingView Official MCP · NASDAQ:TSLA · Friday 15:59 ET 1-minute close bar; no pre/post-market bars",
       "asOf": null,
-      "issue": "No 06:20 PT premarket bar or timestamped premarket range available from the connected feed; Friday close also not collected for this row."
+      "issue": "Friday close verified. No 06:20 PT premarket bar or timestamped premarket range is available from the connected feed; this row remains unranked.",
+      "previousCloseAt": "2026-09-25T19:59:00.000Z",
+      "retrievedAt": "2026-09-29T02:32:27.130Z"
     },
     {
       "ticker": "AMZN",
@@ -72,12 +78,14 @@
       "high": null,
       "low": null,
       "last": null,
-      "previousClose": null,
+      "previousClose": 249.74,
       "volume": null,
       "marketCap": null,
-      "source": "TradingView Official MCP · AMZN · OHLCV; feed returns no pre/post-market bars",
+      "source": "TradingView Official MCP · NASDAQ:AMZN · Friday 15:59 ET 1-minute close bar; no pre/post-market bars",
       "asOf": null,
-      "issue": "No 06:20 PT premarket bar or timestamped premarket range available from the connected feed; Friday close also not collected for this row."
+      "issue": "Friday close verified. No 06:20 PT premarket bar or timestamped premarket range is available from the connected feed; this row remains unranked.",
+      "previousCloseAt": "2026-09-25T19:59:00.000Z",
+      "retrievedAt": "2026-09-29T02:32:27.130Z"
     },
     {
       "ticker": "QCOM",
@@ -88,12 +96,14 @@
       "high": null,
       "low": null,
       "last": null,
-      "previousClose": null,
+      "previousClose": 201.92,
       "volume": null,
       "marketCap": null,
-      "source": "TradingView Official MCP · QCOM · OHLCV; feed returns no pre/post-market bars",
+      "source": "TradingView Official MCP · NASDAQ:QCOM · Friday 15:59 ET 1-minute close bar; no pre/post-market bars",
       "asOf": null,
-      "issue": "No 06:20 PT premarket bar or timestamped premarket range available from the connected feed; Friday close also not collected for this row."
+      "issue": "Friday close verified. No 06:20 PT premarket bar or timestamped premarket range is available from the connected feed; this row remains unranked.",
+      "previousCloseAt": "2026-09-25T19:59:00.000Z",
+      "retrievedAt": "2026-09-29T02:32:27.130Z"
     },
     {
       "ticker": "COST",
@@ -104,12 +114,14 @@
       "high": null,
       "low": null,
       "last": null,
-      "previousClose": null,
+      "previousClose": 922.63,
       "volume": null,
       "marketCap": null,
-      "source": "TradingView Official MCP · COST · OHLCV; feed returns no pre/post-market bars",
+      "source": "TradingView Official MCP · NASDAQ:COST · Friday 15:59 ET 1-minute close bar; no pre/post-market bars",
       "asOf": null,
-      "issue": "No 06:20 PT premarket bar or timestamped premarket range available from the connected feed; Friday close also not collected for this row."
+      "issue": "Friday close verified. No 06:20 PT premarket bar or timestamped premarket range is available from the connected feed; this row remains unranked.",
+      "previousCloseAt": "2026-09-25T19:59:00.000Z",
+      "retrievedAt": "2026-09-29T02:32:27.130Z"
     },
     {
       "ticker": "MA",
@@ -120,12 +132,14 @@
       "high": null,
       "low": null,
       "last": null,
-      "previousClose": null,
+      "previousClose": 567.67,
       "volume": null,
       "marketCap": null,
-      "source": "TradingView Official MCP · MA · OHLCV; feed returns no pre/post-market bars",
+      "source": "TradingView Official MCP · NYSE:MA · Friday 15:59 ET 1-minute close bar; no pre/post-market bars",
       "asOf": null,
-      "issue": "No 06:20 PT premarket bar or timestamped premarket range available from the connected feed; Friday close also not collected for this row."
+      "issue": "Friday close verified. No 06:20 PT premarket bar or timestamped premarket range is available from the connected feed; this row remains unranked.",
+      "previousCloseAt": "2026-09-25T19:59:00.000Z",
+      "retrievedAt": "2026-09-29T02:32:27.130Z"
     },
     {
       "ticker": "GOOGL",
@@ -136,12 +150,14 @@
       "high": null,
       "low": null,
       "last": null,
-      "previousClose": null,
+      "previousClose": 343.88,
       "volume": null,
       "marketCap": null,
-      "source": "TradingView Official MCP · GOOGL · OHLCV; feed returns no pre/post-market bars",
+      "source": "TradingView Official MCP · NASDAQ:GOOGL · Friday 15:59 ET 1-minute close bar; no pre/post-market bars",
       "asOf": null,
-      "issue": "No 06:20 PT premarket bar or timestamped premarket range available from the connected feed; Friday close also not collected for this row."
+      "issue": "Friday close verified. No 06:20 PT premarket bar or timestamped premarket range is available from the connected feed; this row remains unranked.",
+      "previousCloseAt": "2026-09-25T19:59:00.000Z",
+      "retrievedAt": "2026-09-29T02:32:27.130Z"
     },
     {
       "ticker": "WMT",
@@ -152,12 +168,14 @@
       "high": null,
       "low": null,
       "last": null,
-      "previousClose": null,
+      "previousClose": 107.97,
       "volume": null,
       "marketCap": null,
-      "source": "TradingView Official MCP · WMT · OHLCV; feed returns no pre/post-market bars",
+      "source": "TradingView Official MCP · NASDAQ:WMT · Friday 15:59 ET 1-minute close bar; no pre/post-market bars",
       "asOf": null,
-      "issue": "No 06:20 PT premarket bar or timestamped premarket range available from the connected feed; Friday close also not collected for this row."
+      "issue": "Friday close verified. No 06:20 PT premarket bar or timestamped premarket range is available from the connected feed; this row remains unranked.",
+      "previousCloseAt": "2026-09-25T19:59:00.000Z",
+      "retrievedAt": "2026-09-29T02:32:27.130Z"
     },
     {
       "ticker": "MCD",
@@ -168,12 +186,14 @@
       "high": null,
       "low": null,
       "last": null,
-      "previousClose": null,
+      "previousClose": 236.5,
       "volume": null,
       "marketCap": null,
-      "source": "TradingView Official MCP · MCD · OHLCV; feed returns no pre/post-market bars",
+      "source": "TradingView Official MCP · NYSE:MCD · Friday 15:59 ET 1-minute close bar; no pre/post-market bars",
       "asOf": null,
-      "issue": "No 06:20 PT premarket bar or timestamped premarket range available from the connected feed; Friday close also not collected for this row."
+      "issue": "Friday close verified. No 06:20 PT premarket bar or timestamped premarket range is available from the connected feed; this row remains unranked.",
+      "previousCloseAt": "2026-09-25T19:59:00.000Z",
+      "retrievedAt": "2026-09-29T02:32:27.130Z"
     },
     {
       "ticker": "NVDA",
@@ -184,12 +204,14 @@
       "high": null,
       "low": null,
       "last": null,
-      "previousClose": null,
+      "previousClose": 225.04,
       "volume": null,
       "marketCap": null,
-      "source": "TradingView Official MCP · NVDA · OHLCV; feed returns no pre/post-market bars",
+      "source": "TradingView Official MCP · NASDAQ:NVDA · Friday 15:59 ET 1-minute close bar; no pre/post-market bars",
       "asOf": null,
-      "issue": "No 06:20 PT premarket bar or timestamped premarket range available from the connected feed; Friday close also not collected for this row."
+      "issue": "Friday close verified. No 06:20 PT premarket bar or timestamped premarket range is available from the connected feed; this row remains unranked.",
+      "previousCloseAt": "2026-09-25T19:59:00.000Z",
+      "retrievedAt": "2026-09-29T02:32:27.130Z"
     },
     {
       "ticker": "APP",
@@ -200,12 +222,14 @@
       "high": null,
       "low": null,
       "last": null,
-      "previousClose": null,
+      "previousClose": 310.71,
       "volume": null,
       "marketCap": null,
-      "source": "TradingView Official MCP · APP · OHLCV; feed returns no pre/post-market bars",
+      "source": "TradingView Official MCP · NASDAQ:APP · Friday 15:59 ET 1-minute close bar; no pre/post-market bars",
       "asOf": null,
-      "issue": "No 06:20 PT premarket bar or timestamped premarket range available from the connected feed; Friday close also not collected for this row."
+      "issue": "Friday close verified. No 06:20 PT premarket bar or timestamped premarket range is available from the connected feed; this row remains unranked.",
+      "previousCloseAt": "2026-09-25T19:59:00.000Z",
+      "retrievedAt": "2026-09-29T02:32:27.130Z"
     }
   ],
   "sectors": [
@@ -217,13 +241,15 @@
       "high": null,
       "low": null,
       "last": null,
-      "previousClose": null,
+      "previousClose": 196.26,
       "drawdown": null,
       "volume": null,
       "marketCap": null,
-      "source": "TradingView Official MCP · XLK · OHLCV; feed returns no pre/post-market bars",
+      "source": "TradingView Official MCP · AMEX:XLK · Friday 15:59 ET 1-minute close bar; no pre/post-market bars",
       "asOf": null,
-      "issue": "No 06:20 PT premarket bar or timestamped premarket range available from the connected feed; Friday close also not collected for this row."
+      "issue": "Friday close verified. No 06:20 PT premarket bar or timestamped premarket range is available from the connected feed; this row remains unranked.",
+      "previousCloseAt": "2026-09-25T19:59:00.000Z",
+      "retrievedAt": "2026-09-29T02:32:56.660Z"
     },
     {
       "ticker": "XLC",
@@ -233,13 +259,15 @@
       "high": null,
       "low": null,
       "last": null,
-      "previousClose": null,
+      "previousClose": 112.93,
       "drawdown": null,
       "volume": null,
       "marketCap": null,
-      "source": "TradingView Official MCP · XLC · OHLCV; feed returns no pre/post-market bars",
+      "source": "TradingView Official MCP · AMEX:XLC · Friday 15:59 ET 1-minute close bar; no pre/post-market bars",
       "asOf": null,
-      "issue": "No 06:20 PT premarket bar or timestamped premarket range available from the connected feed; Friday close also not collected for this row."
+      "issue": "Friday close verified. No 06:20 PT premarket bar or timestamped premarket range is available from the connected feed; this row remains unranked.",
+      "previousCloseAt": "2026-09-25T19:59:00.000Z",
+      "retrievedAt": "2026-09-29T02:32:56.660Z"
     },
     {
       "ticker": "XLY",
@@ -249,13 +277,15 @@
       "high": null,
       "low": null,
       "last": null,
-      "previousClose": null,
+      "previousClose": 110.54,
       "drawdown": null,
       "volume": null,
       "marketCap": null,
-      "source": "TradingView Official MCP · XLY · OHLCV; feed returns no pre/post-market bars",
+      "source": "TradingView Official MCP · AMEX:XLY · Friday 15:59 ET 1-minute close bar; no pre/post-market bars",
       "asOf": null,
-      "issue": "No 06:20 PT premarket bar or timestamped premarket range available from the connected feed; Friday close also not collected for this row."
+      "issue": "Friday close verified. No 06:20 PT premarket bar or timestamped premarket range is available from the connected feed; this row remains unranked.",
+      "previousCloseAt": "2026-09-25T19:59:00.000Z",
+      "retrievedAt": "2026-09-29T02:32:56.660Z"
     },
     {
       "ticker": "XLF",
@@ -265,13 +295,15 @@
       "high": null,
       "low": null,
       "last": null,
-      "previousClose": null,
+      "previousClose": 54.83,
       "drawdown": null,
       "volume": null,
       "marketCap": null,
-      "source": "TradingView Official MCP · XLF · OHLCV; feed returns no pre/post-market bars",
+      "source": "TradingView Official MCP · AMEX:XLF · Friday 15:59 ET 1-minute close bar; no pre/post-market bars",
       "asOf": null,
-      "issue": "No 06:20 PT premarket bar or timestamped premarket range available from the connected feed; Friday close also not collected for this row."
+      "issue": "Friday close verified. No 06:20 PT premarket bar or timestamped premarket range is available from the connected feed; this row remains unranked.",
+      "previousCloseAt": "2026-09-25T19:59:00.000Z",
+      "retrievedAt": "2026-09-29T02:32:56.660Z"
     },
     {
       "ticker": "XLI",
@@ -281,13 +313,15 @@
       "high": null,
       "low": null,
       "last": null,
-      "previousClose": null,
+      "previousClose": 170.42,
       "drawdown": null,
       "volume": null,
       "marketCap": null,
-      "source": "TradingView Official MCP · XLI · OHLCV; feed returns no pre/post-market bars",
+      "source": "TradingView Official MCP · AMEX:XLI · Friday 15:59 ET 1-minute close bar; no pre/post-market bars",
       "asOf": null,
-      "issue": "No 06:20 PT premarket bar or timestamped premarket range available from the connected feed; Friday close also not collected for this row."
+      "issue": "Friday close verified. No 06:20 PT premarket bar or timestamped premarket range is available from the connected feed; this row remains unranked.",
+      "previousCloseAt": "2026-09-25T19:59:00.000Z",
+      "retrievedAt": "2026-09-29T02:32:56.660Z"
     },
     {
       "ticker": "XLV",
@@ -297,13 +331,15 @@
       "high": null,
       "low": null,
       "last": null,
-      "previousClose": null,
+      "previousClose": 170.74,
       "drawdown": null,
       "volume": null,
       "marketCap": null,
-      "source": "TradingView Official MCP · XLV · OHLCV; feed returns no pre/post-market bars",
+      "source": "TradingView Official MCP · AMEX:XLV · Friday 15:59 ET 1-minute close bar; no pre/post-market bars",
       "asOf": null,
-      "issue": "No 06:20 PT premarket bar or timestamped premarket range available from the connected feed; Friday close also not collected for this row."
+      "issue": "Friday close verified. No 06:20 PT premarket bar or timestamped premarket range is available from the connected feed; this row remains unranked.",
+      "previousCloseAt": "2026-09-25T19:59:00.000Z",
+      "retrievedAt": "2026-09-29T02:32:56.660Z"
     },
     {
       "ticker": "XLP",
@@ -313,13 +349,15 @@
       "high": null,
       "low": null,
       "last": null,
-      "previousClose": null,
+      "previousClose": 82.08,
       "drawdown": null,
       "volume": null,
       "marketCap": null,
-      "source": "TradingView Official MCP · XLP · OHLCV; feed returns no pre/post-market bars",
+      "source": "TradingView Official MCP · AMEX:XLP · Friday 15:59 ET 1-minute close bar; no pre/post-market bars",
       "asOf": null,
-      "issue": "No 06:20 PT premarket bar or timestamped premarket range available from the connected feed; Friday close also not collected for this row."
+      "issue": "Friday close verified. No 06:20 PT premarket bar or timestamped premarket range is available from the connected feed; this row remains unranked.",
+      "previousCloseAt": "2026-09-25T19:59:00.000Z",
+      "retrievedAt": "2026-09-29T02:32:56.660Z"
     },
     {
       "ticker": "XLU",
@@ -329,13 +367,15 @@
       "high": null,
       "low": null,
       "last": null,
-      "previousClose": null,
+      "previousClose": 39.525,
       "drawdown": null,
       "volume": null,
       "marketCap": null,
-      "source": "TradingView Official MCP · XLU · OHLCV; feed returns no pre/post-market bars",
+      "source": "TradingView Official MCP · AMEX:XLU · Friday 15:59 ET 1-minute close bar; no pre/post-market bars",
       "asOf": null,
-      "issue": "No 06:20 PT premarket bar or timestamped premarket range available from the connected feed; Friday close also not collected for this row."
+      "issue": "Friday close verified. No 06:20 PT premarket bar or timestamped premarket range is available from the connected feed; this row remains unranked.",
+      "previousCloseAt": "2026-09-25T19:59:00.000Z",
+      "retrievedAt": "2026-09-29T02:32:56.660Z"
     },
     {
       "ticker": "XLRE",
@@ -345,13 +385,15 @@
       "high": null,
       "low": null,
       "last": null,
-      "previousClose": null,
+      "previousClose": 41.545,
       "drawdown": null,
       "volume": null,
       "marketCap": null,
-      "source": "TradingView Official MCP · XLRE · OHLCV; feed returns no pre/post-market bars",
+      "source": "TradingView Official MCP · AMEX:XLRE · Friday 15:59 ET 1-minute close bar; no pre/post-market bars",
       "asOf": null,
-      "issue": "No 06:20 PT premarket bar or timestamped premarket range available from the connected feed; Friday close also not collected for this row."
+      "issue": "Friday close verified. No 06:20 PT premarket bar or timestamped premarket range is available from the connected feed; this row remains unranked.",
+      "previousCloseAt": "2026-09-25T19:59:00.000Z",
+      "retrievedAt": "2026-09-29T02:32:56.660Z"
     },
     {
       "ticker": "XLB",
@@ -361,13 +403,15 @@
       "high": null,
       "low": null,
       "last": null,
-      "previousClose": null,
+      "previousClose": 49.79,
       "drawdown": null,
       "volume": null,
       "marketCap": null,
-      "source": "TradingView Official MCP · XLB · OHLCV; feed returns no pre/post-market bars",
+      "source": "TradingView Official MCP · AMEX:XLB · Friday 15:59 ET 1-minute close bar; no pre/post-market bars",
       "asOf": null,
-      "issue": "No 06:20 PT premarket bar or timestamped premarket range available from the connected feed; Friday close also not collected for this row."
+      "issue": "Friday close verified. No 06:20 PT premarket bar or timestamped premarket range is available from the connected feed; this row remains unranked.",
+      "previousCloseAt": "2026-09-25T19:59:00.000Z",
+      "retrievedAt": "2026-09-29T02:32:56.660Z"
     },
     {
       "ticker": "XLE",
@@ -377,13 +421,15 @@
       "high": null,
       "low": null,
       "last": null,
-      "previousClose": null,
+      "previousClose": 62.05,
       "drawdown": null,
       "volume": null,
       "marketCap": null,
-      "source": "TradingView Official MCP · XLE · OHLCV; feed returns no pre/post-market bars",
+      "source": "TradingView Official MCP · AMEX:XLE · Friday 15:59 ET 1-minute close bar; no pre/post-market bars",
       "asOf": null,
-      "issue": "No 06:20 PT premarket bar or timestamped premarket range available from the connected feed; Friday close also not collected for this row."
+      "issue": "Friday close verified. No 06:20 PT premarket bar or timestamped premarket range is available from the connected feed; this row remains unranked.",
+      "previousCloseAt": "2026-09-25T19:59:00.000Z",
+      "retrievedAt": "2026-09-29T02:32:56.660Z"
     }
   ],
   "benchmarks": [
@@ -419,10 +465,11 @@
       "previousClose": 7742.32,
       "change": null,
       "changeUnit": "%",
-      "source": "TradingView Official MCP · SP:SPX · 1-minute close bar for Friday 3:59–4:00 p.m. ET",
+      "source": "TradingView Official MCP · SP:SPX · 1-minute Friday close bar; no 06:20 cash-index observation",
       "asOf": null,
-      "issue": "The cash index has no 06:20 PT observation; the value shown is Friday close only.",
-      "previousCloseAt": "2026-09-25T19:59:00.000Z"
+      "issue": "The cash index has no 06:20 PT observation; Friday close only.",
+      "previousCloseAt": "2026-09-25T19:59:00.000Z",
+      "retrievedAt": "2026-09-29T02:27:16.293Z"
     },
     {
       "id": "SPY",
@@ -433,10 +480,11 @@
       "previousClose": 771.3,
       "change": null,
       "changeUnit": "%",
-      "source": "TradingView Official MCP · AMEX:SPY · 1-minute close bar for Friday 3:59–4:00 p.m. ET",
+      "source": "TradingView Official MCP · AMEX:SPY · 1-minute Friday close bar; feed omits pre/post-market bars",
       "asOf": null,
-      "issue": "Connected OHLCV feed omits ETF premarket bars; 06:20 PT value is unavailable.",
-      "previousCloseAt": "2026-09-25T19:59:00.000Z"
+      "issue": "Friday close only; the 06:20 PT premarket price is unavailable from this feed.",
+      "previousCloseAt": "2026-09-25T19:59:00.000Z",
+      "retrievedAt": "2026-09-29T02:27:16.293Z"
     },
     {
       "id": "QQQ",
@@ -447,10 +495,11 @@
       "previousClose": 744.45,
       "change": null,
       "changeUnit": "%",
-      "source": "TradingView Official MCP · NASDAQ:QQQ · 1-minute close bar for Friday 3:59–4:00 p.m. ET",
+      "source": "TradingView Official MCP · NASDAQ:QQQ · 1-minute Friday close bar; feed omits pre/post-market bars",
       "asOf": null,
-      "issue": "Connected OHLCV feed omits ETF premarket bars; 06:20 PT value is unavailable.",
-      "previousCloseAt": "2026-09-25T19:59:00.000Z"
+      "issue": "Friday close only; the 06:20 PT premarket price is unavailable from this feed.",
+      "previousCloseAt": "2026-09-25T19:59:00.000Z",
+      "retrievedAt": "2026-09-29T02:27:16.293Z"
     },
     {
       "id": "VIX",
@@ -462,10 +511,11 @@
       "change": 1.17,
       "changeUnit": "pts",
       "approximate": false,
-      "source": "TradingView Official MCP · CBOE:VIX · 1-minute bars; Friday close and Monday 09:19 ET bar",
+      "source": "TradingView Official MCP · CBOE:VIX · Friday 15:59 ET close bar + Monday 09:19 ET one-minute bar",
       "asOf": "2026-09-28T13:19:00.000Z",
       "issue": "Provider delay notice: market data may be delayed 15+ minutes.",
-      "previousCloseAt": "2026-09-25T19:59:00.000Z"
+      "previousCloseAt": "2026-09-25T19:59:00.000Z",
+      "retrievedAt": "2026-09-29T02:27:16.293Z"
     },
     {
       "id": "US10Y",
@@ -477,10 +527,11 @@
       "change": 7.2,
       "changeUnit": "bp",
       "approximate": false,
-      "source": "TradingView Official MCP · TVC:US10Y · 1-minute bars; Friday close and Monday 09:19 ET bar",
+      "source": "TradingView Official MCP · TVC:US10Y · Friday 15:59 ET close bar + Monday 09:19 ET one-minute bar",
       "asOf": "2026-09-28T13:19:00.000Z",
       "issue": "Provider delay notice: market data may be delayed 15+ minutes.",
-      "previousCloseAt": "2026-09-25T19:59:00.000Z"
+      "previousCloseAt": "2026-09-25T19:59:00.000Z",
+      "retrievedAt": "2026-09-29T02:27:16.293Z"
     }
   ],
   "keyLevels": [
