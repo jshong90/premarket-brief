@@ -352,3 +352,13 @@ h1,h2,h3{font-family:"Newsreader",Georgia,serif;font-optical-sizing:auto}
 .sources-list li:last-child{border-bottom:0}
 .sources-list a{width:max-content;max-width:100%;color:var(--foreground);font-size:13px;font-weight:600;text-decoration:underline;text-underline-offset:2px}
 .sources-list small{color:var(--muted-foreground);font-size:12px;line-height:1.5;overflow-wrap:anywhere}
+
+
+/* Snapshot history navigation */
+.topbar-leading{display:flex;align-items:center;gap:18px;min-width:0}
+.snapshot-nav-link{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:36px;padding:7px 10px;border:1px solid var(--border);border-radius:999px;color:var(--foreground);text-decoration:none;font-size:12px;font-weight:650;white-space:nowrap;transition:background .18s ease,border-color .18s ease}
+.snapshot-nav-link:hover{background:var(--secondary);border-color:var(--input)}
+.snapshot-nav-link:focus-visible{outline:2px solid var(--ring);outline-offset:3px}
+.snapshot-preview-banner{display:flex;align-items:baseline;gap:10px;max-width:1600px;margin:0 auto 18px;padding:12px 15px;border:1px solid var(--border);border-radius:var(--radius);background:var(--card);color:var(--foreground);font-size:13px;line-height:1.5}
+.snapshot-preview-banner strong{white-space:nowrap}
+@media(max-width:700px){.topbar-leading{gap:9px}.snapshot-nav-link{min-height:34px;padding:6px 8px}.snapshot-preview-banner{display:block;margin-bottom:14px}.snapshot-preview-banner strong{display:block;margin-bottom:3px}}
