@@ -1,4 +1,7 @@
-import type { Briefing, KeyLevel, Snapshot } from './lib/scanner';
+import type { Briefing, Snapshot } from './lib/scanner';
+
+type KeyLevel = { id: 'ES' | 'NQ' | 'YM' | 'RTY'; label: string; high: number | null; low: number | null; highTime?: string | null; lowTime?: string | null; asOf: string | null; retrievedAt?: string | null; source: string; issue?: string };
+type SnapshotKeyLevels = Snapshot & { keyLevels?: KeyLevel[] };
 
 const sections: { key: keyof Briefing | 'keyLevels'; title: string }[] = [
   { key: 'indices', title: 'Overnight movements on the indices' },
@@ -37,7 +40,8 @@ const formatET = (value?: string | null) => value
   : null;
 
 function KeyLevelsTable({ data }: { data: Snapshot }) {
-  const byId = new Map((data.keyLevels ?? []).map((row) => [row.id, row]));
+  const keyLevelData = data as SnapshotKeyLevels;
+  const byId = new Map((keyLevelData.keyLevels ?? []).map((row) => [row.id, row]));
   const date = new Date(`${data.sessionDate}T12:00:00Z`);
   const previousDate = new Date(date);
   previousDate.setUTCDate(previousDate.getUTCDate() - 1);
@@ -45,7 +49,7 @@ function KeyLevelsTable({ data }: { data: Snapshot }) {
     timeZone: 'America/New_York', weekday: 'short', month: 'short', day: 'numeric',
   }).format(value);
   const sessionLabel = `${formatDate(previousDate)} 6:00 PM–${formatDate(date)} 9:20 AM ET`;
-  const retrievedAt = data.keyLevels?.find((row) => row.retrievedAt)?.retrievedAt;
+  const retrievedAt = keyLevelData.keyLevels?.find((row) => row.retrievedAt)?.retrievedAt;
 
   return <>
     <div className="key-levels-wrap">
