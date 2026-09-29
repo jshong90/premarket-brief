@@ -217,3 +217,11 @@ html[data-theme="light"] body h1,html[data-theme="light"] body h2,html[data-them
 html[data-theme="dark"] body h1,html[data-theme="dark"] body h2,html[data-theme="dark"] body h3,html[data-theme="dark"] body p{color:var(--foreground)!important}
 /* Preserve intentional per-index line breaks in the briefing copy. */
 .briefing-note p{white-space:pre-line}
+/* Compact, scrollable price table inside the existing index briefing card. */
+.index-quotes-wrap{max-width:100%;overflow-x:auto;margin:0 0 16px}
+.index-quotes{border-collapse:collapse;width:100%;min-width:560px;font-size:14px;font-variant-numeric:tabular-nums}
+.index-quotes th,.index-quotes td{padding:9px 8px;border-bottom:1px solid var(--border);text-align:right;white-space:nowrap}
+.index-quotes thead th{font-size:12px;font-weight:600;color:var(--foreground)}
+.index-quotes th:first-child{text-align:left}
+.index-quotes tbody th{font-weight:500}
+.index-quotes tbody tr:last-child>*{border-bottom:0}
