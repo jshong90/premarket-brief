@@ -240,3 +240,16 @@ html[data-theme="dark"] body h1,html[data-theme="dark"] body h2,html[data-theme=
 .key-levels-table tbody td small{display:block;margin-top:3px;font:11px Arial,Helvetica,sans-serif;color:var(--muted-foreground);letter-spacing:0}
 .key-levels-table tbody tr:last-child>*{border-bottom:0}
 .key-levels-note{margin:12px 0 0;color:var(--muted-foreground);font-size:12px;line-height:1.6}
+/* Keep the bonds card compact so the adjacent key levels carry more visual weight. */
+.morning-sections>.briefing-section:nth-child(2) .briefing-section-head{padding:14px 19px 11px}
+.morning-sections>.briefing-section:nth-child(2) .briefing-section-head h2{font-size:19px}
+.morning-sections>.briefing-section:nth-child(2) .briefing-notes{padding:0 19px}
+.morning-sections>.briefing-section:nth-child(2) .briefing-note{padding:12px 0 13px}
+.morning-sections>.briefing-section:nth-child(2) .briefing-note h3{font-size:15px;margin-bottom:4px}
+.morning-sections>.briefing-section:nth-child(2) .briefing-note p{font-size:13px;line-height:1.55;margin-bottom:9px}
+.morning-sections>.briefing-section:nth-child(2) .briefing-source strong,
+.morning-sections>.briefing-section:nth-child(2) .briefing-source a{font-size:11px}
+@media(max-width:700px){
+  .morning-sections>.briefing-section:nth-child(2) .briefing-section-head{padding:14px 14px 11px}
+  .morning-sections>.briefing-section:nth-child(2) .briefing-notes{padding:0 14px}
+}
