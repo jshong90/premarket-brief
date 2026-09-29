@@ -263,8 +263,17 @@ main{max-width:1760px;padding-left:clamp(20px,2vw,36px);padding-right:clamp(20px
 .morning-bonds-section .briefing-notes,
 .morning-sections>section[aria-labelledby="brief-macro"] .briefing-notes,
 .morning-sections>section[aria-labelledby="brief-news"] .briefing-notes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:28px}
+.morning-bonds-section .briefing-note,
+.morning-sections>section[aria-labelledby="brief-macro"] .briefing-note,
+.morning-sections>section[aria-labelledby="brief-news"] .briefing-note{border-bottom:0}
+.morning-bonds-section .briefing-note:nth-child(even),
+.morning-sections>section[aria-labelledby="brief-macro"] .briefing-note:nth-child(even),
+.morning-sections>section[aria-labelledby="brief-news"] .briefing-note:nth-child(even){border-left:1px solid var(--border);padding-left:28px}
 @media(max-width:700px){
   .morning-bonds-section .briefing-notes,
   .morning-sections>section[aria-labelledby="brief-macro"] .briefing-notes,
   .morning-sections>section[aria-labelledby="brief-news"] .briefing-notes{grid-template-columns:1fr;column-gap:0}
+  .morning-bonds-section .briefing-note:nth-child(even),
+  .morning-sections>section[aria-labelledby="brief-macro"] .briefing-note:nth-child(even),
+  .morning-sections>section[aria-labelledby="brief-news"] .briefing-note:nth-child(even){border-left:0;padding-left:0}
 }
