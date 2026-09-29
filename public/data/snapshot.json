@@ -1,6 +1,6 @@
 {
   "sessionDate": "2026-09-28",
-  "fetchedAt": "2026-09-29T02:32:56.660Z",
+  "fetchedAt": "2026-09-29T02:37:45.894Z",
   "status": "partial",
   "universeCount": 12,
   "universeComplete": false,
@@ -9,7 +9,7 @@
     "massive": false
   },
   "messages": [
-    "Historical prices retrieved from TradingView on 2026-09-29T02:32:56Z. TradingView warns its market data may be delayed 15+ minutes.",
+    "Historical prices retrieved from TradingView on 2026-09-29T02:37:45Z. TradingView warns its market data may be delayed 15+ minutes.",
     "ES, NQ, YM, RTY, VIX, and the 10-year yield have valid 09:19 ET one-minute observations. The 09:20 ET bar is excluded.",
     "TradingView OHLCV provides Friday closes for the displayed stocks and 11 sector ETFs, but no 06:20 PT pre/post-market bars for them. Their scan prices and ranges remain blank; missing rows are not ranked.",
     "Only 12 stock rows are present and discovery is incomplete; this is not the full $50B+ US common-stock universe."
@@ -507,15 +507,15 @@
       "name": "Cboe Volatility Index",
       "kind": "volatility",
       "value": 16.01,
-      "previousClose": 14.84,
-      "change": 1.17,
+      "previousClose": 14.87,
+      "change": 1.14,
       "changeUnit": "pts",
       "approximate": false,
-      "source": "TradingView Official MCP · CBOE:VIX · Friday 15:59 ET close bar + Monday 09:19 ET one-minute bar",
+      "source": "TradingView Official MCP · CBOE:VIX · Friday 16:14 ET closing bar + Monday 09:19 ET one-minute bar",
       "asOf": "2026-09-28T13:19:00.000Z",
       "issue": "Provider delay notice: market data may be delayed 15+ minutes.",
-      "previousCloseAt": "2026-09-25T19:59:00.000Z",
-      "retrievedAt": "2026-09-29T02:27:16.293Z"
+      "previousCloseAt": "2026-09-25T20:14:00.000Z",
+      "retrievedAt": "2026-09-29T02:37:45.894Z"
     },
     {
       "id": "US10Y",
@@ -633,8 +633,8 @@
     "indices": [
       {
         "title": "Market snapshot — premarket futures",
-        "body": "VIX: 14.84 at Friday’s final 1-minute bar; 16.01 at the 09:19 ET bar (6:20 AM PT). Friday close is the 3:59–4:00 PM ET bar; the scan price is the last completed bar before 9:20 AM ET. Percentage changes are calculated from the displayed futures prices. The tape is responding well to NVIDIA buyback news and expectations that U.S.–Iran negotiations continue this week.",
-        "source": "TradingView Official MCP · 1-minute OHLCV · ES, NQ, YM, RTY and VIX · provider delay notice: 15+ minutes · retrieved 2026-09-29T02:27:16Z",
+        "body": "VIX: 14.87 at Friday’s 16:14 ET closing bar; 16.01 at the 09:19 ET bar (6:20 AM PT). Friday close is the 3:59–4:00 PM ET bar; the scan price is the last completed bar before 9:20 AM ET. Percentage changes are calculated from the displayed futures prices. The tape is responding well to NVIDIA buyback news and expectations that U.S.–Iran negotiations continue this week.",
+        "source": "TradingView Official MCP · 1-minute OHLCV · ES, NQ, YM, RTY and VIX · provider delay notice: 15+ minutes · retrieved 2026-09-29T02:37:45Z",
         "url": "https://www.tradingview.com/markets/futures/quotes/",
         "asOf": "2026-09-28T13:19:00.000Z",
         "indexQuotes": [
