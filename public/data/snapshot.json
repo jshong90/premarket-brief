@@ -24,7 +24,7 @@
       "previousClose": null,
       "volume": null,
       "marketCap": null,
-      "source": "Conversation snapshot · unverified",
+      "source": "Conversation snapshot \u00b7 unverified",
       "asOf": null
     },
     {
@@ -39,7 +39,7 @@
       "previousClose": null,
       "volume": null,
       "marketCap": null,
-      "source": "Conversation snapshot · unverified",
+      "source": "Conversation snapshot \u00b7 unverified",
       "asOf": null
     },
     {
@@ -54,7 +54,7 @@
       "previousClose": null,
       "volume": null,
       "marketCap": null,
-      "source": "Conversation snapshot · unverified",
+      "source": "Conversation snapshot \u00b7 unverified",
       "asOf": null
     },
     {
@@ -69,7 +69,7 @@
       "previousClose": null,
       "volume": null,
       "marketCap": null,
-      "source": "Conversation snapshot · unverified",
+      "source": "Conversation snapshot \u00b7 unverified",
       "asOf": null
     },
     {
@@ -84,7 +84,7 @@
       "previousClose": null,
       "volume": null,
       "marketCap": null,
-      "source": "Conversation snapshot · unverified",
+      "source": "Conversation snapshot \u00b7 unverified",
       "asOf": null
     },
     {
@@ -99,7 +99,7 @@
       "previousClose": null,
       "volume": null,
       "marketCap": null,
-      "source": "Conversation snapshot · unverified",
+      "source": "Conversation snapshot \u00b7 unverified",
       "asOf": null
     },
     {
@@ -114,7 +114,7 @@
       "previousClose": null,
       "volume": null,
       "marketCap": null,
-      "source": "Conversation snapshot · unverified",
+      "source": "Conversation snapshot \u00b7 unverified",
       "asOf": null
     },
     {
@@ -129,7 +129,7 @@
       "previousClose": null,
       "volume": null,
       "marketCap": null,
-      "source": "Conversation snapshot · unverified",
+      "source": "Conversation snapshot \u00b7 unverified",
       "asOf": null
     },
     {
@@ -144,12 +144,12 @@
       "previousClose": null,
       "volume": null,
       "marketCap": null,
-      "source": "Conversation snapshot · unverified",
+      "source": "Conversation snapshot \u00b7 unverified",
       "asOf": null
     },
     {
       "ticker": "MCD",
-      "name": "McDonald’s",
+      "name": "McDonald\u2019s",
       "sector": "Discretionary",
       "benchmark": "ES",
       "drawdown": 0.56,
@@ -159,7 +159,7 @@
       "previousClose": null,
       "volume": null,
       "marketCap": null,
-      "source": "Conversation snapshot · unverified",
+      "source": "Conversation snapshot \u00b7 unverified",
       "asOf": null
     },
     {
@@ -174,7 +174,7 @@
       "previousClose": null,
       "volume": null,
       "marketCap": null,
-      "source": "Conversation snapshot · unverified",
+      "source": "Conversation snapshot \u00b7 unverified",
       "asOf": null
     },
     {
@@ -189,7 +189,7 @@
       "previousClose": null,
       "volume": null,
       "marketCap": null,
-      "source": "Conversation snapshot · unverified",
+      "source": "Conversation snapshot \u00b7 unverified",
       "asOf": null
     }
   ],
@@ -366,7 +366,7 @@
       "high": 30920.75,
       "low": 30531,
       "drawdown": 1.26,
-      "source": "Prior scan · unverified",
+      "source": "Prior scan \u00b7 unverified",
       "asOf": null,
       "highTime": "2026-09-27T22:00:00Z",
       "lowTime": "2026-09-28T09:10:00Z"
@@ -376,7 +376,7 @@
       "high": 7803,
       "low": 7757,
       "drawdown": 0.59,
-      "source": "Prior scan · unverified",
+      "source": "Prior scan \u00b7 unverified",
       "asOf": null,
       "highTime": "2026-09-27T22:00:00Z",
       "lowTime": "2026-09-28T10:10:00Z"
@@ -433,7 +433,7 @@
       "change": 1.33,
       "changeUnit": "pts",
       "approximate": true,
-      "source": "User-provided briefing · VIX",
+      "source": "User-provided briefing \u00b7 VIX",
       "asOf": null,
       "issue": "Approximate morning note; observation timestamp not supplied."
     },
@@ -447,65 +447,111 @@
       "change": 3,
       "changeUnit": "bp",
       "approximate": true,
-      "source": "User-provided briefing · U.S. Treasury",
+      "source": "User-provided briefing \u00b7 U.S. Treasury",
       "asOf": null,
       "issue": "Approximate morning note; observation timestamp not supplied."
+    }
+  ],
+  "keyLevels": [
+    {
+      "id": "ES",
+      "label": "S&P 500 (ES)",
+      "high": 7803,
+      "low": 7757,
+      "highTime": "2026-09-27T22:00:00Z",
+      "lowTime": "2026-09-28T10:11:00Z",
+      "asOf": "2026-09-28T13:19:00Z",
+      "retrievedAt": "2026-09-29T00:43:45Z",
+      "source": "TradingView · CME_MINI:ES1! · 1-minute OHLCV"
+    },
+    {
+      "id": "NQ",
+      "label": "Nasdaq-100 (NQ)",
+      "high": 30920.75,
+      "low": 30531,
+      "highTime": "2026-09-27T22:00:00Z",
+      "lowTime": "2026-09-28T09:12:00Z",
+      "asOf": "2026-09-28T13:19:00Z",
+      "retrievedAt": "2026-09-29T00:43:45Z",
+      "source": "TradingView · CME_MINI:NQ1! · 1-minute OHLCV"
+    },
+    {
+      "id": "YM",
+      "label": "Dow (YM)",
+      "high": 52153,
+      "low": 51829,
+      "highTime": "2026-09-27T22:00:00Z",
+      "lowTime": "2026-09-28T12:01:00Z",
+      "asOf": "2026-09-28T13:19:00Z",
+      "retrievedAt": "2026-09-29T00:43:45Z",
+      "source": "TradingView · CBOT_MINI:YM1! · 1-minute OHLCV"
+    },
+    {
+      "id": "RTY",
+      "label": "Russell 2000 (RTY)",
+      "high": 2858.8,
+      "low": 2837.8,
+      "highTime": "2026-09-27T22:00:00Z",
+      "lowTime": "2026-09-28T10:11:00Z",
+      "asOf": "2026-09-28T13:19:00Z",
+      "retrievedAt": "2026-09-29T00:43:45Z",
+      "source": "TradingView · CME_MINI:RTY1! · 1-minute OHLCV"
     }
   ],
   "briefing": {
     "bonds": [
       {
-        "title": "Rates — 10Y remains a headwind",
+        "title": "Rates \u2014 10Y remains a headwind",
         "body": "10Y Treasury yield ~5.2% versus ~5.17% Friday close. Yields remain elevated and are still a headwind for growth and technology, even as the market trades near all-time highs.",
-        "source": "User-provided briefing · U.S. Treasury",
+        "source": "User-provided briefing \u00b7 U.S. Treasury",
         "url": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates"
       },
       {
-        "title": "Treasury auctions — mostly bills",
+        "title": "Treasury auctions \u2014 mostly bills",
         "body": "No major coupon auctions this week. Scheduled auctions are mostly short-term bills.",
-        "source": "User-provided briefing · TreasuryDirect",
+        "source": "User-provided briefing \u00b7 TreasuryDirect",
         "url": "https://www.treasurydirect.gov/auctions/upcoming/"
       }
     ],
     "macro": [
       {
-        "title": "Macro calendar — the week ahead",
+        "title": "Macro calendar \u2014 the week ahead",
         "body": "Tuesday: JOLTS. Wednesday: ADP, Q2 GDP, PCE / Core PCE. Thursday: Jobless Claims and ISM Manufacturing. Friday: Nonfarm Payrolls and Unemployment Rate.",
-        "source": "User-provided briefing · economic calendars",
+        "source": "User-provided briefing \u00b7 economic calendars",
         "url": "https://www.bls.gov/schedule/news_release/"
       },
       {
-        "title": "Trump announcement — 2:00 PM ET / 11:00 AM PT",
+        "title": "Trump announcement \u2014 2:00 PM ET / 11:00 AM PT",
         "body": "The White House schedule lists an announcement at 2:00 PM ET / 11:00 AM PT today, but does not specify the subject.",
-        "source": "User-provided briefing · White House schedule",
+        "source": "User-provided briefing \u00b7 White House schedule",
         "url": "https://www.whitehouse.gov/schedule/"
       }
     ],
     "news": [
       {
-        "title": "NVDA — another $150B buyback authorization",
+        "title": "NVDA \u2014 another $150B buyback authorization",
         "body": "NVIDIA added another $150B to its share-buyback authorization overnight.",
-        "source": "User-provided briefing · NVIDIA IR",
+        "source": "User-provided briefing \u00b7 NVIDIA IR",
         "url": "https://investor.nvidia.com/"
       },
       {
-        "title": "Headline risk — U.S.–Iran negotiations",
-        "body": "The tape is responding well to expectations that negotiations will continue this week. Any new U.S.–Iran headline can flow through oil, yields, and QQQ / semis.",
-        "source": "User-provided briefing · market headlines",
+        "title": "Headline risk \u2014 U.S.\u2013Iran negotiations",
+        "body": "The tape is responding well to expectations that negotiations will continue this week. Any new U.S.\u2013Iran headline can flow through oil, yields, and QQQ / semis.",
+        "source": "User-provided briefing \u00b7 market headlines",
         "url": "https://www.reuters.com/markets/"
       },
       {
-        "title": "Oil / Middle East — inverse to equities",
-        "body": "Oil is still trading inverse to equities. CL is following through on the selloff after negative U.S.–Iran news. Markets are now responding to expectations that negotiations will continue this week.",
-        "source": "User-provided briefing · crude oil reference",
+        "title": "Oil / Middle East \u2014 inverse to equities",
+        "body": "Oil is still trading inverse to equities. CL is following through on the selloff after negative U.S.\u2013Iran news. Markets are now responding to expectations that negotiations will continue this week.",
+        "source": "User-provided briefing \u00b7 crude oil reference",
         "url": "https://www.cmegroup.com/markets/energy/crude-oil/light-sweet-crude.quotes.html"
       }
     ],
     "indices": [
       {
-        "title": "Market snapshot — premarket futures",
-        "body": "VIX — Friday close: 14.87 · about 16.2 at 6:20 AM PT (user-provided estimate).\n\nFriday close is the 3:59–4:00 PM ET bar; the scan price is the 9:19–9:20 AM ET bar. Percentage changes are calculated from the displayed prices.\n\nThe tape is responding well to NVIDIA buyback news and expectations that U.S.–Iran negotiations continue this week.",
-        "source": "TradingView · continuous futures 1-minute bars · provider delay notice: 15+ minutes · retrieved 2026-09-28 5:16 PM PT",
+        "title": "Market snapshot \u2014 premarket futures",
+        "body": "VIX \u2014 Friday close: 14.87 \u00b7 about 16.2 at 6:20 AM PT (user-provided estimate).\n\nFriday close is the 3:59\u20134:00 PM ET bar; the scan price is the 9:19\u20139:20 AM ET bar. Percentage changes are calculated from the displayed prices.\n\nThe tape is responding well to NVIDIA buyback news and expectations that U.S.\u2013Iran negotiations continue this week.",
+        "source": "TradingView \u00b7 continuous futures 1-minute bars \u00b7 provider delay notice: 15+ minutes \u00b7 retrieved 2026-09-28 5:16 PM PT",
         "url": "https://www.tradingview.com/markets/futures/quotes/",
         "asOf": "2026-09-28T13:19:00Z",
         "indexQuotes": [
@@ -537,16 +583,16 @@
       },
       {
         "title": "Keep an eye on relative strength",
-        "body": "Watch oil, the 10Y yield, semiconductor relative strength, VIX, and any new U.S.–Iran headlines. The main setup remains: U.S.–Iran headlines → oil → yields → QQQ / semis.",
-        "source": "User-provided briefing · market watchlist",
+        "body": "Watch oil, the 10Y yield, semiconductor relative strength, VIX, and any new U.S.\u2013Iran headlines. The main setup remains: U.S.\u2013Iran headlines \u2192 oil \u2192 yields \u2192 QQQ / semis.",
+        "source": "User-provided briefing \u00b7 market watchlist",
         "url": "https://www.tradingview.com/"
       }
     ],
     "earnings": [
       {
-        "title": "Catalyst watch — MU after the close Wednesday",
+        "title": "Catalyst watch \u2014 MU after the close Wednesday",
         "body": "Micron is the key earnings report for the broader market this week because of its read-through to AI memory and semiconductors.",
-        "source": "User-provided briefing · Micron IR",
+        "source": "User-provided briefing \u00b7 Micron IR",
         "url": "https://investors.micron.com/events-and-presentations"
       }
     ]
