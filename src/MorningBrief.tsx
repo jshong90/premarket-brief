@@ -130,7 +130,7 @@ function SourcesCard({ data }: { data: Snapshot }) {
   </details>;
 }
 
-export default function MorningBrief({ data, error }: { data: Snapshot; error: string }) {
+export default function MorningBrief({ data, error, dateLabel }: { data: Snapshot; error: string; dateLabel?: string }) {
   const imported = data.status === 'imported';
   const renderSection = ({ key, title }: { key: keyof Briefing | 'keyLevels'; title: string }, sectionIndex: number) => key === 'keyLevels'
     ? <section className="briefing-section panel key-levels-section" key={key} aria-labelledby="brief-key-levels">
@@ -146,7 +146,7 @@ export default function MorningBrief({ data, error }: { data: Snapshot; error: s
   </section>;
   const sectionIndex = (key: keyof Briefing | 'keyLevels') => sections.findIndex((section) => section.key === key);
   return <section id="morning-brief" className="dashboard-section morning-section" aria-labelledby="brief-title" tabIndex={-1}>
-    <div className="page-heading"><div><div className="eyebrow">THE WARREN / THE MORNING READ</div><div className="section-heading-row"><h1 id="brief-title">Morning brief<span className="title-dot">.</span></h1><a className="primary-button section-jump" href="#relative-strength">Skip to relative strength ↓</a></div></div><div className="heading-meta"><span className="date-label">{new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeZone: 'UTC' }).format(new Date(data.sessionDate + 'T12:00:00Z'))}</span><span className="session-chip">{imported ? 'USER-PROVIDED NOTES' : '09:20 ET SNAPSHOT'}</span></div></div>
+    <div className="page-heading"><div><div className="eyebrow">THE WARREN / THE MORNING READ</div><div className="section-heading-row"><h1 id="brief-title">Morning brief<span className="title-dot">.</span></h1><a className="primary-button section-jump" href="#relative-strength">Skip to relative strength ↓</a></div></div><div className="heading-meta"><span className="date-label">{dateLabel || new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeZone: 'UTC' }).format(new Date(data.sessionDate + 'T12:00:00Z'))}</span><span className="session-chip">{dateLabel ? 'PREVIEW COPY · 9/28 DATA' : imported ? 'USER-PROVIDED NOTES' : '09:20 ET SNAPSHOT'}</span></div></div>
     <div className="source-notice"><div><strong>{imported ? 'Your morning briefing' : 'Morning snapshot'}</strong><span>{error || (imported ? 'Figures and headlines supplied by you; not independently verified.' : 'Source times and coverage are recorded with each note.')}</span></div></div>
     <div className="morning-sections">{sections.map((section, index) => renderSection(section, index))}<SourcesCard data={data}/></div>
   </section>;
