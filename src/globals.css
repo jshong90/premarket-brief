@@ -226,9 +226,8 @@ html[data-theme="dark"] .briefing-section-head{border-bottom-color:#e7e8e9}
 /* Ticker and company labels use the theme's main text color. */
 html[data-theme="light"] .company strong,html[data-theme="light"] .company small,
 html[data-theme="dark"] .company strong,html[data-theme="dark"] .company small{color:var(--foreground)}
-/* Keep headings and body copy on the same neutral text color in both themes. */
-html[data-theme="light"] body h1,html[data-theme="light"] body h2,html[data-theme="light"] body h3,html[data-theme="light"] body p,
-html[data-theme="dark"] body h1,html[data-theme="dark"] body h2,html[data-theme="dark"] body h3,html[data-theme="dark"] body p{color:var(--foreground)!important}
+/* Keep body copy on the main text token; the Design Lab can tune headers separately. */
+html[data-theme="light"] body p,html[data-theme="dark"] body p{color:var(--foreground)!important}
 /* Preserve intentional per-index line breaks in the briefing copy. */
 .briefing-note p{white-space:pre-line}
 /* Compact, scrollable price table inside the existing index briefing card. */
@@ -435,8 +434,8 @@ html[data-dev-lab="true"]{--dashboard-title-size:var(--lab-title-desktop,43px);-
 html[data-dev-lab="true"] body{font-size:var(--lab-interface-size,16px)}
 html[data-dev-lab="true"] .briefing-note p,html[data-dev-lab="true"] .briefing-section-head p{font-size:var(--lab-body-size,14px)!important}
 html[data-dev-lab="true"] .benchmark-number,html[data-dev-lab="true"] .premarket-benchmark-number,html[data-dev-lab="true"] .market-value b,html[data-dev-lab="true"] .market-chart-value{font-size:var(--lab-market-size,34px)!important}
-html[data-dev-lab="true"][data-theme="light"]{--background:var(--lab-light-background);--foreground:var(--lab-light-foreground);--text-primary:var(--lab-light-foreground);--text-secondary:var(--lab-light-secondaryText);--text-muted:var(--lab-light-secondaryText);--muted-foreground:var(--lab-light-secondaryText);--card:var(--lab-light-surface);--card-foreground:var(--lab-light-foreground);--popover:var(--lab-light-surface);--secondary:var(--lab-light-secondary);--secondary-foreground:var(--lab-light-foreground);--border:var(--lab-light-border);--input:var(--lab-light-divider);--green:var(--lab-light-up);--price-up:var(--lab-light-up);--red:var(--lab-light-down);--price-down:var(--lab-light-down)}
-html[data-dev-lab="true"][data-theme="dark"]{--background:var(--lab-dark-background);--foreground:var(--lab-dark-foreground);--text-primary:var(--lab-dark-foreground);--text-secondary:var(--lab-dark-secondaryText);--text-muted:var(--lab-dark-secondaryText);--muted-foreground:var(--lab-dark-secondaryText);--card:var(--lab-dark-surface);--card-foreground:var(--lab-dark-foreground);--popover:var(--lab-dark-surface);--secondary:var(--lab-dark-secondary);--secondary-foreground:var(--lab-dark-foreground);--border:var(--lab-dark-border);--input:var(--lab-dark-divider);--green:var(--lab-dark-up);--price-up:var(--lab-dark-up);--red:var(--lab-dark-down);--price-down:var(--lab-dark-down)}
+html[data-dev-lab="true"][data-theme="light"]{--background:var(--lab-light-background);--foreground:var(--lab-light-foreground);--header-text:var(--lab-light-header);--text-primary:var(--lab-light-foreground);--text-secondary:var(--lab-light-secondaryText);--text-muted:var(--lab-light-secondaryText);--muted-foreground:var(--lab-light-secondaryText);--card:var(--lab-light-surface);--card-foreground:var(--lab-light-foreground);--popover:var(--lab-light-surface);--secondary:var(--lab-light-secondary);--secondary-foreground:var(--lab-light-foreground);--border:var(--lab-light-border);--input:var(--lab-light-divider);--green:var(--lab-light-up);--price-up:var(--lab-light-up);--red:var(--lab-light-down);--price-down:var(--lab-light-down)}
+html[data-dev-lab="true"][data-theme="dark"]{--background:var(--lab-dark-background);--foreground:var(--lab-dark-foreground);--header-text:var(--lab-dark-header);--text-primary:var(--lab-dark-foreground);--text-secondary:var(--lab-dark-secondaryText);--text-muted:var(--lab-dark-secondaryText);--muted-foreground:var(--lab-dark-secondaryText);--card:var(--lab-dark-surface);--card-foreground:var(--lab-dark-foreground);--popover:var(--lab-dark-surface);--secondary:var(--lab-dark-secondary);--secondary-foreground:var(--lab-dark-foreground);--border:var(--lab-dark-border);--input:var(--lab-dark-divider);--green:var(--lab-dark-up);--price-up:var(--lab-dark-up);--red:var(--lab-dark-down);--price-down:var(--lab-dark-down)}
 html[data-dev-lab="true"][data-theme="light"] .market-strip{background:var(--lab-light-marketStrip)!important}
 html[data-dev-lab="true"][data-theme="dark"] .market-strip{background:var(--lab-dark-marketStrip)!important}
 html[data-dev-lab="true"]{--rs-exceptional:var(--lab-rs-exceptional);--rs-clear:var(--lab-rs-clear);--rs-moderate:var(--lab-rs-moderate);--rs-market:var(--lab-rs-market);--rs-laggard:var(--lab-rs-laggard)}
@@ -445,7 +444,8 @@ html[data-dev-lab="true"] .topbar,html[data-dev-lab="true"] .panel,html[data-dev
 html[data-dev-lab="true"] .benchmark-card{background:var(--card)!important}
 html[data-dev-lab="true"] .source-notice,html[data-dev-lab="true"] .inline-note,html[data-dev-lab="true"] .sector-note,html[data-dev-lab="true"] .formula-card,html[data-dev-lab="true"] .provider-card,html[data-dev-lab="true"] .briefing-footer,html[data-dev-lab="true"] .market-tile.is-missing{background:var(--secondary)!important;border-color:var(--border)!important;color:var(--foreground)}
 html[data-dev-lab="true"] .card-foot,html[data-dev-lab="true"] .briefing-section-head,html[data-dev-lab="true"] .briefing-note,html[data-dev-lab="true"] .sources-group+.sources-group,html[data-dev-lab="true"] .sources-list li,html[data-dev-lab="true"] .key-levels-table th,html[data-dev-lab="true"] .key-levels-table td{border-color:var(--input)!important}
-html[data-dev-lab="true"] .brand-mark,html[data-dev-lab="true"] .page-heading h1,html[data-dev-lab="true"] .section-title,html[data-dev-lab="true"] .panel-heading h2,html[data-dev-lab="true"] .briefing-section-head h2,html[data-dev-lab="true"] .briefing-note h3,html[data-dev-lab="true"] .sources-title{color:var(--foreground)}
+html[data-dev-lab="true"] body h1,html[data-dev-lab="true"] body h2,html[data-dev-lab="true"] body h3,html[data-dev-lab="true"] body h4,html[data-dev-lab="true"] body h5,html[data-dev-lab="true"] body h6,html[data-dev-lab="true"] .brand-mark,html[data-dev-lab="true"] .sources-title{color:var(--header-text)!important}
+html[data-dev-lab="true"] .topbar-date{color:var(--header-text)!important}
 html[data-dev-lab="true"] .market-strip,html[data-dev-lab="true"] .market-tile{border-color:var(--border)!important}
 html[data-dev-lab="true"][data-dev-reduced-motion="true"] *,html[data-dev-lab="true"][data-dev-reduced-motion="true"] *::before,html[data-dev-lab="true"][data-dev-reduced-motion="true"] *::after{animation-duration:.001ms!important;animation-delay:0ms!important;transition-duration:.001ms!important;scroll-behavior:auto!important}
 
@@ -481,6 +481,21 @@ html[data-dev-lab="true"][data-dev-reduced-motion="true"] *,html[data-dev-lab="t
 .lab-theme-tabs{align-items:center}.lab-theme-tabs button{flex:0 0 72px}.lab-theme-tabs span{margin-left:auto;color:var(--lab-ui-secondary);font-size:11px}
 .lab-color{display:grid;grid-template-columns:minmax(0,1fr) 36px 86px 26px;align-items:center;gap:7px;color:var(--lab-ui-control);font-size:12px}.lab-color>span{min-width:0}.lab-color input[type=color]{width:34px;height:26px;padding:2px;border:1px solid #58616a;border-radius:5px;background:#171b1f;cursor:pointer}.lab-hex{width:86px;min-width:0;height:27px;padding:4px 5px;border:1px solid #58616a;border-radius:5px;background:#171b1f;color:var(--lab-ui-bright);font:11px ui-monospace,monospace;text-align:center}.lab-hex::placeholder{color:var(--lab-ui-muted)}
 .lab-palette-preview{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin-top:12px}.lab-palette-preview>span{padding:5px 7px;border:1px solid #59616a;border-radius:5px;font-size:11px}.lab-footer{display:flex;align-items:center;justify-content:space-between;gap:8px;padding:10px 12px;border-top:1px solid #424950;background:#1b1f23}.lab-footer-note{color:var(--lab-ui-muted);font-size:11px}
+/* The Design Lab follows the active dashboard theme while its palette preview remains explicit. */
+html[data-dev-lab="true"] .design-lab{color:var(--foreground)}
+html[data-dev-lab="true"] .design-lab-trigger,html[data-dev-lab="true"] .design-lab-panel{background:var(--card);color:var(--foreground);border-color:var(--border)}
+html[data-dev-lab="true"] .lab-heading,html[data-dev-lab="true"] .lab-tabs,html[data-dev-lab="true"] .lab-theme-tabs,html[data-dev-lab="true"] .lab-group,html[data-dev-lab="true"] .lab-footer{border-color:var(--border)}
+html[data-dev-lab="true"] .lab-heading small,html[data-dev-lab="true"] .lab-intro,html[data-dev-lab="true"] .lab-theme-tabs span,html[data-dev-lab="true"] .lab-footer-note{color:var(--text-secondary)}
+html[data-dev-lab="true"] .lab-tabs button,html[data-dev-lab="true"] .lab-theme-tabs button{color:var(--text-secondary)}
+html[data-dev-lab="true"] .lab-tabs button.active,html[data-dev-lab="true"] .lab-theme-tabs button.active{background:var(--secondary);border-color:var(--border);color:var(--foreground)}
+html[data-dev-lab="true"] .lab-range>span,html[data-dev-lab="true"] .lab-color{color:var(--foreground)}
+html[data-dev-lab="true"] .lab-range>span b{color:var(--foreground)}
+html[data-dev-lab="true"] .lab-action,html[data-dev-lab="true"] .lab-copy,html[data-dev-lab="true"] .lab-reset{background:var(--secondary);border-color:var(--border);color:var(--foreground)}
+html[data-dev-lab="true"] .lab-number,html[data-dev-lab="true"] .lab-color input[type=color],html[data-dev-lab="true"] .lab-hex{background:var(--background);border-color:var(--border);color:var(--foreground)}
+html[data-dev-lab="true"] .lab-hex::placeholder{color:var(--text-secondary)}
+html[data-dev-lab="true"] .lab-type-preview,html[data-dev-lab="true"] .lab-footer{background:var(--secondary);border-color:var(--border);color:var(--foreground)}
+html[data-dev-lab="true"] .lab-type-preview i{color:var(--price-up)}
+html[data-dev-lab="true"] .lab-palette-preview>span{border-color:var(--border)}
 @media(max-width:600px){.design-lab{right:12px;bottom:12px;width:min(380px,calc(100vw - 24px))}.design-lab-panel{max-height:76vh}}
 .centered-heading .heading-center>p{text-align:center}
 @media(max-width:1250px){
