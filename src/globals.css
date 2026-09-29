@@ -300,3 +300,16 @@ h1,h2,h3{font-family:"Newsreader",Georgia,serif;font-optical-sizing:auto}
 .briefing-intro h2,.morning-sections .briefing-section-head h2{font-size:var(--dashboard-section-size)}
 .panel-heading h2,.morning-sections .briefing-note h3{font-size:var(--dashboard-card-title-size)}
 @media(max-width:700px){:root{--dashboard-title-size:29px}}
+
+
+/* Shared outer spacing and inset for the variable-height morning brief cards. */
+:root{--brief-card-inset:20px}
+.morning-sections{gap:16px}
+.morning-sections>.briefing-section{margin:0}
+.morning-sections .briefing-section-head{padding:18px var(--brief-card-inset) 14px}
+.morning-sections .briefing-notes{padding:0 var(--brief-card-inset)}
+@media(max-width:700px){
+  :root{--brief-card-inset:14px}
+  .morning-sections{gap:16px}
+  .morning-sections .briefing-section-head{padding:16px var(--brief-card-inset) 12px}
+}
