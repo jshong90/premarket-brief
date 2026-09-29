@@ -252,7 +252,13 @@ html[data-theme="dark"] body h1,html[data-theme="dark"] body h2,html[data-theme=
 .morning-bonds-section .briefing-source a{font-size:11px}
 @media(max-width:700px){
   .morning-sections{row-gap:16px}
-  .morning-column{gap:16px}
+  .morning-column{display:contents}
+  .morning-sections .briefing-section[aria-labelledby="brief-indices"]{order:1}
+  .morning-sections .briefing-section[aria-labelledby="brief-bonds"]{order:2}
+  .morning-sections .briefing-section[aria-labelledby="brief-key-levels"]{order:3}
+  .morning-sections .briefing-section[aria-labelledby="brief-macro"]{order:4}
+  .morning-sections .briefing-section[aria-labelledby="brief-earnings"]{order:5}
+  .morning-sections .briefing-section[aria-labelledby="brief-news"]{order:6}
   .morning-bonds-section .briefing-section-head{padding:14px 14px 11px}
   .morning-bonds-section .briefing-notes{padding:0 14px}
 }
