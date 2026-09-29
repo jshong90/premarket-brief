@@ -104,7 +104,7 @@ export default function Scanner() {
 
   return <div className="app-shell">
     <header className="topbar">
-      <div className="topbar-leading"><a className="snapshot-nav-link" href={isArchivePreview?'./index.html':'./index.html?date=2026-09-27'} aria-label={isArchivePreview?'Return to the latest snapshot':'View the September 27 snapshot preview'} title={isArchivePreview?'Latest snapshot':'Previous snapshot · September 27'}>{isArchivePreview?<ChevronRight size={18}/>:<ChevronLeft size={18}/>}<span>{isArchivePreview?'Latest':'9/27'}</span></a><a href="./index.html" className="brand" aria-label="The Warren home"><span className="brand-mark">W</span><span>THE WARREN<span className="brand-sub">MARKET DESK</span></span></a></div>
+      <div className="topbar-leading"><a className="snapshot-nav-link" href={isArchivePreview?'./index.html':'./index.html?date=2026-09-27'} aria-label={isArchivePreview?'Return to the latest snapshot':'View the September 27 snapshot preview'} title={isArchivePreview?'Latest snapshot':'Previous snapshot · September 27'}>{isArchivePreview?<ChevronRight size={18}/>:<ChevronLeft size={18}/>}<span>{isArchivePreview?'Latest':'9/27'}</span></a><a href="./index.html" className="brand" aria-label="The Warren home"><span className="brand-mark">W</span></a></div>
       
       <ThemeToggle/><button className="connection-button" onClick={()=>setDrawer('connections')}><Clock3 size={14}/><span>06:20 Pacific</span><ChevronRight size={15}/></button>
     </header>
