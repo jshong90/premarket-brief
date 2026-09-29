@@ -211,3 +211,7 @@ html[data-theme="dark"] .briefing-section-head{border-bottom-color:#e7e8e9}
 /* Ticker and company labels use the theme's main text color. */
 html[data-theme="light"] .company strong,html[data-theme="light"] .company small,
 html[data-theme="dark"] .company strong,html[data-theme="dark"] .company small{color:var(--foreground)}
+/* Keep headings and body copy on the same neutral text color in both themes. */
+html[data-theme="light"]{--foreground:#3e3026}
+html[data-theme="light"] body h1,html[data-theme="light"] body h2,html[data-theme="light"] body h3,html[data-theme="light"] body p,
+html[data-theme="dark"] body h1,html[data-theme="dark"] body h2,html[data-theme="dark"] body h3,html[data-theme="dark"] body p{color:var(--foreground)!important}
