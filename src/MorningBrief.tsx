@@ -1,4 +1,4 @@
-import type { Briefing, BriefingNote, Snapshot } from './lib/scanner';
+import type { Briefing, Snapshot } from './lib/scanner';
 
 type KeyLevel = { id: 'ES' | 'NQ' | 'YM' | 'RTY'; label: string; high: number | null; low: number | null; highTime?: string | null; lowTime?: string | null; asOf: string | null; retrievedAt?: string | null; source: string; issue?: string };
 type SnapshotKeyLevels = Snapshot & { keyLevels?: KeyLevel[] };
@@ -101,7 +101,7 @@ function SourcesCard({ data }: { data: Snapshot }) {
         <p className="sources-intro">Timestamped market data; provider delay may exceed 15 minutes.</p>
         <ul className="sources-list">
           {tradingViewRefs.map(({ section, note }) => {
-            const detail = note.source.replace(/^TradingView Official MCP\\s*·?\\s*/, '');
+            const detail = note.source.replace(/^TradingView Official MCP\s*·?\s*/, '');
             const observedAt = note.asOf || note.publishedAt;
             return <li key={section + note.title}>
               <a href={note.url} target="_blank" rel="noreferrer">{note.title} ↗</a>
