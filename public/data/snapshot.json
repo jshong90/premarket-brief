@@ -633,7 +633,7 @@
     "indices": [
       {
         "title": "Market snapshot — premarket futures",
-        "body": "VIX: 14.87 at Friday’s 16:14 ET closing bar; 16.01 at the 09:19 ET bar (6:20 AM PT). Friday close is the 3:59–4:00 PM ET bar; the scan price is the last completed bar before 9:20 AM ET. Percentage changes are calculated from the displayed futures prices. The tape is responding well to NVIDIA buyback news and expectations that U.S.–Iran negotiations continue this week.",
+        "body": "Percentage changes are calculated from the displayed futures prices. The tape is responding well to NVIDIA buyback news and expectations that U.S.–Iran negotiations continue this week.",
         "source": "TradingView Official MCP · 1-minute OHLCV · ES, NQ, YM, RTY and VIX · provider delay notice: 15+ minutes · retrieved 2026-09-29T02:37:45Z",
         "url": "https://www.tradingview.com/markets/futures/quotes/",
         "asOf": "2026-09-28T13:19:00.000Z",
@@ -668,6 +668,14 @@
             "scanPrice": 2842.8,
             "changePercent": -0.57,
             "fridayCloseBarAt": "2026-09-25T19:59:00.000Z",
+            "scanPriceBarAt": "2026-09-28T13:19:00.000Z"
+          },
+          {
+            "label": "VIX",
+            "fridayClose": 14.87,
+            "scanPrice": 16.01,
+            "changePercent": 7.67,
+            "fridayCloseBarAt": "2026-09-25T20:14:00.000Z",
             "scanPriceBarAt": "2026-09-28T13:19:00.000Z"
           }
         ]
