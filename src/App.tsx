@@ -39,6 +39,17 @@ export default function Scanner() {
     headings.forEach((heading)=>reveal.observe(heading));
     return()=>reveal.disconnect();
   },[]);
+  useEffect(()=>{
+    const panels=Array.from(document.querySelectorAll<HTMLElement>('.rankings, .sector-panel, .distribution'));
+    if(!('IntersectionObserver' in window)){panels.forEach(panel=>panel.classList.add('bars-visible'));return;}
+    const reveal=new IntersectionObserver(entries=>{
+      for(const entry of entries){
+        if(entry.isIntersecting){entry.target.classList.add('bars-visible');reveal.unobserve(entry.target);}
+      }
+    },{threshold:0.08,rootMargin:'0px 0px -32px 0px'});
+    panels.forEach(panel=>reveal.observe(panel));
+    return()=>reveal.disconnect();
+  },[]);
 
   const mode = data.status==='imported' ? 'imported' : 'snapshot';
   const [error,setError] = useState('');
@@ -126,7 +137,7 @@ export default function Scanner() {
           <div className="table-footer"><span>{rows.length} of {data.stocks.length} names <span className="divider">/</span> {benchmark==='auto'?'NQ / ES assigned per stock':`All stocks vs ${benchmark}`}</span><span>Click a company for details <ArrowUpRight size={12}/></span></div>
         </section>
         <aside className="right-rail">
-          <section className="sector-panel panel"><div className="panel-heading"><h2>Sector strength</h2><span className="small-tag">VS ES</span></div><p className="rail-description">Premarket range capture · Friday close by ETF</p><div className="sector-list">{sectors.map(s=><button key={s.ticker} className="sector-row" onClick={()=>setSelected(s)}><span className="sector-info"><strong>{s.ticker}</strong><small>{s.name}</small><small>Fri close {number(s.previousClose)}</small></span><span className="sector-track">{s.capture!==null&&<i style={{width:`${Math.min(s.capture/200*100,100)}%`}}/>}</span><span className="mono">{percent(s.capture,0)}</span></button>)}</div>{sectors.every(s=>s.capture===null)&&<div className="sector-note"><Info size={14}/><span>Session ranges needed.<br/>Daily change is not used as a substitute.</span></div>}</section>
+          <section className="sector-panel panel"><div className="panel-heading"><h2>Sector strength</h2><span className="small-tag">VS ES</span></div><p className="rail-description">Premarket range capture · Friday close by ETF</p><div className="sector-list">{sectors.map(s=><button key={s.ticker} className={`sector-row ${tone(s.band)}`} onClick={()=>setSelected(s)}><span className="sector-info"><strong>{s.ticker}</strong><small>{s.name}</small><small>Fri close {number(s.previousClose)}</small></span><span className="sector-track">{s.capture!==null&&<i style={{width:`${Math.min(s.capture/200*100,100)}%`}}/>}</span><span className="mono">{percent(s.capture,0)}</span></button>)}</div>{sectors.every(s=>s.capture===null)&&<div className="sector-note"><Info size={14}/><span>Session ranges needed.<br/>Daily change is not used as a substitute.</span></div>}</section>
           <section className="distribution panel"><div className="panel-heading"><h2>The resilience scale</h2></div><div className="distribution-bar" aria-label="Classification distribution">{['Exceptional RS','Clear RS','Moderate RS','Market-like','Laggard'].map(b=><span key={b} className={tone(b as Band)} style={{flex:1}}/>)}</div>{[['Exceptional RS',''],['Clear RS',''],['Moderate RS',''],['Market-like',''],['Laggard','']].map(([label,range])=><div className="scale-row" key={label}><span><i className={tone(label as Band)}/>{label}</span>{range&&<span className="mono">{range}</span>}</div>)}<button className="text-link" onClick={()=>setDrawer('method')}>About the scanner <ArrowUpRight size={13}/></button></section>
         </aside>
       </div>

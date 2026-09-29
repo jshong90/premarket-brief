@@ -362,3 +362,40 @@ h1,h2,h3{font-family:"Newsreader",Georgia,serif;font-optical-sizing:auto}
 .snapshot-preview-banner{display:flex;align-items:baseline;gap:10px;max-width:1600px;margin:0 auto 18px;padding:12px 15px;border:1px solid var(--border);border-radius:var(--radius);background:var(--card);color:var(--foreground);font-size:13px;line-height:1.5}
 .snapshot-preview-banner strong{white-space:nowrap}
 @media(max-width:700px){.topbar-leading{gap:9px}.snapshot-nav-link{min-height:34px;padding:6px 8px}.snapshot-preview-banner{display:block;margin-bottom:14px}.snapshot-preview-banner strong{display:block;margin-bottom:3px}}
+
+/* A restrained opening for the morning paper; the scanner heading keeps its scroll reveal. */
+.morning-section>.page-heading .section-heading-row{transition-duration:.65s;transition-timing-function:cubic-bezier(.18,.72,.24,1)}
+.paper-kicker,.paper-meta{animation:paper-settle .62s cubic-bezier(.18,.72,.24,1) both}
+.paper-meta{animation-delay:.12s}
+@keyframes paper-settle{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
+
+/* The jump cue moves once, then remains still. */
+.section-jump .jump-arrow{display:inline-block;animation:jump-cue .68s ease-out .9s both}
+@keyframes jump-cue{0%,100%{transform:translateY(0)}45%{transform:translateY(4px)}}
+
+/* Snapshot data retains its width; only the visual fill grows on entry. */
+.rankings .capture-track>span,.sector-panel .sector-track>i{transform:scaleX(0);transform-origin:left;transition:transform .68s cubic-bezier(.18,.72,.24,1)}
+.rankings.bars-visible .capture-track>span,.sector-panel.bars-visible .sector-track>i{transform:scaleX(1)}
+.distribution-bar>span{transform:scaleX(0);transform-origin:left;transition:transform .5s cubic-bezier(.18,.72,.24,1)}
+.distribution.bars-visible .distribution-bar>span{transform:scaleX(1)}
+.distribution-bar>span:nth-child(2){transition-delay:.08s}.distribution-bar>span:nth-child(3){transition-delay:.16s}.distribution-bar>span:nth-child(4){transition-delay:.24s}.distribution-bar>span:nth-child(5){transition-delay:.32s}
+.scanner-table tr.exceptional .capture-track>span{background:#c3f86b}
+.scanner-table tr.clear .capture-track>span{background:#89b861}
+.scanner-table tr.moderate .capture-track>span{background:#708c5d}
+.scanner-table tr.neutral .capture-track>span{background:#bea16e}
+.scanner-table tr.laggard .capture-track>span{background:#c5807a}
+.sector-row.exceptional .sector-track>i{background:#c3f86b}
+.sector-row.clear .sector-track>i{background:#89b861}
+.sector-row.moderate .sector-track>i{background:#708c5d}
+.sector-row.neutral .sector-track>i{background:#bea16e}
+.sector-row.laggard .sector-track>i{background:#c5807a}
+
+.brief-closing{grid-column:1/-1;display:flex;align-items:baseline;gap:8px 20px;padding:17px var(--card-inset);font-size:14px;line-height:1.55;color:var(--foreground)}
+.brief-closing strong{font-family:"Newsreader",Georgia,serif;font-size:20px;font-weight:500;white-space:nowrap}
+.brief-closing span{min-width:0}
+@media(max-width:700px){.brief-closing{display:block}.brief-closing strong{display:block;margin-bottom:5px}}
+@media(prefers-reduced-motion:reduce){
+  .paper-kicker,.paper-meta,.section-jump .jump-arrow{animation:none}
+  .morning-section>.page-heading .section-heading-row{transition:none}
+  .rankings .capture-track>span,.sector-panel .sector-track>i,.distribution-bar>span{transform:none;transition:none}
+}
