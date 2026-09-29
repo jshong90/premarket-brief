@@ -133,7 +133,7 @@ These are explicit component rules in `src/globals.css`; changing only a base to
 | --- | --- | --- |
 | General UI and controls | Source Sans 3 / normal | 16px body; controls vary below |
 | Morning brief and Relative strength titles | Newsreader / 700 | `--dashboard-title-size`: 43px, 35px at ≤700px |
-| Centered top-bar date | Newsreader / 600 | 32px; 15px at ≤540px |
+| Centered top-bar date | Newsreader / 700 | Same `--dashboard-title-size` token as the page titles |
 | Numbered morning sections | Newsreader / 700 | `--dashboard-section-size`: 24px |
 | Card and note titles | Newsreader / 500 | `--dashboard-card-title-size`: 16px |
 | Briefing paragraphs | Newsreader / 400 | 14px desktop, 13px at ≤640px; bonds copy 13px |
