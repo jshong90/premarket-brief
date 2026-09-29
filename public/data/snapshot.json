@@ -503,10 +503,11 @@
     ],
     "indices": [
       {
-        "title": "Market snapshot — a soft futures open",
-        "body": "S&P 500 futures — Friday close: — · 6:20 AM PT: — · overnight: about −0.2%\nNasdaq-100 futures — Friday close: — · 6:20 AM PT: — · overnight: roughly flat\nDow futures — Friday close: — · 6:20 AM PT: — · overnight: about −0.3%\nRussell 2000 futures — Friday close: — · 6:20 AM PT: — · overnight: about −0.4%\nVIX — Friday close: 14.87 · 6:20 AM PT: about 16.2\nFriday closing and 6:20 futures prices were not included in the supplied briefing.\nMarkets are responding well to NVIDIA buyback news and expectations that U.S.–Iran negotiations continue this week.",
-        "source": "User-provided briefing · futures reference",
-        "url": "https://www.tradingview.com/markets/futures/quotes/"
+        "title": "Market snapshot — premarket futures",
+        "body": "S&P 500 futures (ES, points): Friday 4:00 PM ET close 7,804.75 → 6:20 AM PT 7,774.75 (−0.38%)\nNasdaq-100 futures (NQ, points): Friday 4:00 PM ET close 30,891.50 → 6:20 AM PT 30,700.25 (−0.62%)\nDow futures (YM, points): Friday 4:00 PM ET close 52,171 → 6:20 AM PT 51,868 (−0.58%)\nRussell 2000 futures (RTY, points): Friday 4:00 PM ET close 2,859.20 → 6:20 AM PT 2,842.80 (−0.57%)\nVIX: Friday close 14.87 → about 16.2 at the scan (user-provided estimate).\nFutures scan prices are the close of the 09:19–09:20 ET one-minute bars. Friday reference prices are the close of the 15:59–16:00 ET bars. Changes are calculated from those prices; they differ from the earlier approximate estimates.\nTradingView historical bars were retrieved at 5:16 PM PT. TradingView reports the feed may be delayed 15+ minutes.\nThe tape is responding well to NVIDIA buyback news and expectations that U.S.–Iran negotiations continue this week.",
+        "source": "TradingView · continuous futures 1-minute bars · provider delay notice: 15+ minutes · retrieved 2026-09-28 5:16 PM PT",
+        "url": "https://www.tradingview.com/markets/futures/quotes/",
+        "asOf": "2026-09-28T13:19:00Z"
       },
       {
         "title": "Keep an eye on relative strength",
