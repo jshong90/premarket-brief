@@ -215,3 +215,5 @@ html[data-theme="dark"] .company strong,html[data-theme="dark"] .company small{c
 html[data-theme="light"]{--foreground:#3e3026}
 html[data-theme="light"] body h1,html[data-theme="light"] body h2,html[data-theme="light"] body h3,html[data-theme="light"] body p,
 html[data-theme="dark"] body h1,html[data-theme="dark"] body h2,html[data-theme="dark"] body h3,html[data-theme="dark"] body p{color:var(--foreground)!important}
+/* Preserve intentional per-index line breaks in the briefing copy. */
+.briefing-note p{white-space:pre-line}
