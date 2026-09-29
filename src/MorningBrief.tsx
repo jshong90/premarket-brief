@@ -1,4 +1,4 @@
-import type { Briefing, Snapshot } from './lib/scanner';
+import type { Briefing, BriefingNote, Snapshot } from './lib/scanner';
 
 type KeyLevel = { id: 'ES' | 'NQ' | 'YM' | 'RTY'; label: string; high: number | null; low: number | null; highTime?: string | null; lowTime?: string | null; asOf: string | null; retrievedAt?: string | null; source: string; issue?: string };
 type SnapshotKeyLevels = Snapshot & { keyLevels?: KeyLevel[] };
@@ -35,6 +35,25 @@ const formatPrice = (value: number | null | undefined) => value == null
 const formatChange = (value: number | null) => value === null
   ? '—'
   : `${value > 0 ? '+' : ''}${value.toFixed(2)}%`;
+
+const sourceSections: { key: keyof Briefing; label: string }[] = [
+  { key: 'indices', label: '01 · Overnight movements on the indices' },
+  { key: 'bonds', label: '02 · Overnight movements on bonds' },
+  { key: 'macro', label: '04 · Upcoming macro events' },
+  { key: 'earnings', label: '05 · Upcoming earnings' },
+  { key: 'news', label: '06 · Overnight news' },
+];
+
+function formatFuturesSession(sessionDate: string) {
+  const date = new Date(`${sessionDate}T12:00:00Z`);
+  const previousDate = new Date(date);
+  previousDate.setUTCDate(previousDate.getUTCDate() - 1);
+  const formatDate = (value: Date) => new Intl.DateTimeFormat('en-US', {
+    timeZone: 'America/New_York', weekday: 'short', month: 'short', day: 'numeric',
+  }).format(value);
+  return `${formatDate(previousDate)} 6:00 PM–${formatDate(date)} 9:20 AM ET`;
+}
+
 const formatET = (value?: string | null) => value
   ? new Date(value).toLocaleTimeString('en-US', { timeZone: 'America/New_York', hour: 'numeric', minute: '2-digit' })
   : null;
@@ -42,15 +61,6 @@ const formatET = (value?: string | null) => value
 function KeyLevelsTable({ data }: { data: Snapshot }) {
   const keyLevelData = data as SnapshotKeyLevels;
   const byId = new Map((keyLevelData.keyLevels ?? []).map((row) => [row.id, row]));
-  const date = new Date(`${data.sessionDate}T12:00:00Z`);
-  const previousDate = new Date(date);
-  previousDate.setUTCDate(previousDate.getUTCDate() - 1);
-  const formatDate = (value: Date) => new Intl.DateTimeFormat('en-US', {
-    timeZone: 'America/New_York', weekday: 'short', month: 'short', day: 'numeric',
-  }).format(value);
-  const sessionLabel = `${formatDate(previousDate)} 6:00 PM–${formatDate(date)} 9:20 AM ET`;
-  const retrievedAt = keyLevelData.keyLevels?.find((row) => row.retrievedAt)?.retrievedAt;
-
   return <>
     <div className="key-levels-wrap">
       <table className="key-levels-table">
@@ -67,10 +77,57 @@ function KeyLevelsTable({ data }: { data: Snapshot }) {
         })}</tbody>
       </table>
     </div>
-    <p className="key-levels-note">Futures session: {sessionLabel}; last complete one-minute bar ends at 9:19 AM ET. TradingView data may be delayed 15+ minutes.
-      {retrievedAt && <> Retrieved {new Date(retrievedAt).toLocaleString('en-US', { timeZone: 'America/Los_Angeles', dateStyle: 'short', timeStyle: 'short' })} PT.</>}
-    </p>
-  </>;
+ </>;
+}
+
+
+function SourcesCard({ data }: { data: Snapshot }) {
+  const references = sourceSections.flatMap((section) => (data.briefing?.[section.key] ?? [])
+    .filter((note) => note.source && note.url)
+    .map((note) => ({ section: section.label, note })));
+  const tradingViewRefs = references.filter(({ note }) => note.source.startsWith('TradingView Official MCP'));
+  const otherRefs = references.filter(({ note }) => !note.source.startsWith('TradingView Official MCP'));
+  const keyLevelData = data as SnapshotKeyLevels;
+  const keyLevels = keyLevelData.keyLevels ?? [];
+  const retrievedAt = keyLevels.find((row) => row.retrievedAt)?.retrievedAt;
+  const referenceCount = references.length + (keyLevels.length ? 1 : 0);
+  if (!referenceCount) return null;
+
+  return <details className="sources-card panel">
+    <summary><span className="sources-title">Sources</span><span className="sources-count">{referenceCount} references</span></summary>
+    <div className="sources-content">
+      {Boolean(tradingViewRefs.length || keyLevels.length) && <section className="sources-group">
+        <h3>TradingView Official MCP</h3>
+        <p className="sources-intro">Timestamped market data; provider delay may exceed 15 minutes.</p>
+        <ul className="sources-list">
+          {tradingViewRefs.map(({ section, note }) => {
+            const detail = note.source.replace(/^TradingView Official MCP\\s*·?\\s*/, '');
+            const observedAt = note.asOf || note.publishedAt;
+            return <li key={section + note.title}>
+              <a href={note.url} target="_blank" rel="noreferrer">{note.title} ↗</a>
+              <small>{section} · {detail}</small>
+              {observedAt && <small>Observed {new Date(observedAt).toLocaleString('en-US', { timeZone: 'America/New_York' })} ET.</small>}
+            </li>;
+          })}
+          {keyLevels.length > 0 && <li>
+            <a href="https://www.tradingview.com/markets/futures/quotes/" target="_blank" rel="noreferrer">Premarket key levels ↗</a>
+            <small>Futures session: {formatFuturesSession(data.sessionDate)}; last complete one-minute bar ends at 9:19 AM ET. Provider delay may exceed 15 minutes.</small>
+            {retrievedAt && <small>Retrieved {new Date(retrievedAt).toLocaleString('en-US', { timeZone: 'America/Los_Angeles', dateStyle: 'short', timeStyle: 'short' })} PT.</small>}
+          </li>}
+        </ul>
+      </section>}
+      {otherRefs.length > 0 && <section className="sources-group">
+        <h3>Other briefing sources</h3>
+        <ul className="sources-list">
+          {otherRefs.map(({ section, note }) => <li key={section + note.title}>
+            <a href={note.url} target="_blank" rel="noreferrer">{note.title} ↗</a>
+            <small>{section} · {note.source}</small>
+            {(note.publishedAt || note.asOf) && <small>Published or observed {new Date((note.publishedAt || note.asOf)!).toLocaleString('en-US', { timeZone: 'America/New_York' })} ET.</small>}
+          </li>)}
+        </ul>
+      </section>}
+    </div>
+  </details>;
 }
 
 export default function MorningBrief({ data, error }: { data: Snapshot; error: string }) {
@@ -84,13 +141,13 @@ export default function MorningBrief({ data, error }: { data: Snapshot; error: s
     <div className="briefing-section-head"><span className="brief-section-number">0{sectionIndex + 1}</span><h2 id={'brief-' + key}>{title}</h2></div>
     <div className="briefing-notes">{(data.briefing?.[key] || []).length ? data.briefing![key].map((note, index) => {
       const quotes = (note as typeof note & IndexQuoteNote).indexQuotes;
-      return <article className="briefing-note" key={index}><h3>{note.title}</h3>{quotes && quotes.length > 0 && <div className="index-quotes-wrap"><table className="index-quotes"><thead><tr><th scope="col">Market</th><th scope="col">Friday close</th><th scope="col">6:20 AM PT</th><th scope="col">Change</th></tr></thead><tbody>{quotes.map((row) => <tr key={row.label}><th scope="row">{row.label}</th><td className="mono">{formatPrice(row.fridayClose)}</td><td className="mono">{formatPrice(row.scanPrice)}</td><td className={`mono ${row.changePercent === null ? '' : row.changePercent < 0 ? 'negative' : row.changePercent > 0 ? 'positive' : ''}`}>{formatChange(row.changePercent)}</td></tr>)}</tbody></table></div>}<p>{note.body}</p><div className="briefing-source"><span><strong>{note.source}</strong>{(note.publishedAt || note.asOf) && <small>{new Date((note.publishedAt || note.asOf)!).toLocaleString('en-US', { timeZone: 'America/New_York' })} ET</small>}</span><a href={note.url} target="_blank" rel="noreferrer">{imported ? 'Reference' : 'Source'} ↗</a></div></article>;
+      return <article className="briefing-note" key={index}><h3>{note.title}</h3>{quotes && quotes.length > 0 && <div className="index-quotes-wrap"><table className="index-quotes"><thead><tr><th scope="col">Market</th><th scope="col">Friday close</th><th scope="col">6:20 AM PT</th><th scope="col">Change</th></tr></thead><tbody>{quotes.map((row) => <tr key={row.label}><th scope="row">{row.label}</th><td className="mono">{formatPrice(row.fridayClose)}</td><td className="mono">{formatPrice(row.scanPrice)}</td><td className={`mono ${row.changePercent === null ? '' : row.changePercent < 0 ? 'negative' : row.changePercent > 0 ? 'positive' : ''}`}>{formatChange(row.changePercent)}</td></tr>)}</tbody></table></div>}<p>{note.body}</p></article>;
     }) : <div className="briefing-empty">No notes supplied for this section.</div>}</div>
   </section>;
   const sectionIndex = (key: keyof Briefing | 'keyLevels') => sections.findIndex((section) => section.key === key);
   return <section id="morning-brief" className="dashboard-section morning-section" aria-labelledby="brief-title" tabIndex={-1}>
     <div className="page-heading"><div><div className="eyebrow">THE WARREN / THE MORNING READ</div><div className="section-heading-row"><h1 id="brief-title">Morning brief<span className="title-dot">.</span></h1><a className="primary-button section-jump" href="#relative-strength">Skip to relative strength ↓</a></div></div><div className="heading-meta"><span className="date-label">{new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeZone: 'UTC' }).format(new Date(data.sessionDate + 'T12:00:00Z'))}</span><span className="session-chip">{imported ? 'USER-PROVIDED NOTES' : '09:20 ET SNAPSHOT'}</span></div></div>
     <div className="source-notice"><div><strong>{imported ? 'Your morning briefing' : 'Morning snapshot'}</strong><span>{error || (imported ? 'Figures and headlines supplied by you; not independently verified.' : 'Source times and coverage are recorded with each note.')}</span></div></div>
-    <div className="morning-sections">{sections.map((section, index) => renderSection(section, index))}</div>
+    <div className="morning-sections">{sections.map((section, index) => renderSection(section, index))}<SourcesCard data={data}/></div>
   </section>;
 }
