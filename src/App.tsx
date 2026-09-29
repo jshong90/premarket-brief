@@ -82,7 +82,7 @@ export default function Scanner() {
   const changeTab=(t:string)=>{setTab(t);setSort({key:t==='recovery'?'recovery':'capture',asc:t!=='recovery'});};
   const dateLabel=data.sessionDate?new Intl.DateTimeFormat('en-US',{month:'short',day:'numeric',year:'numeric',timeZone:'UTC'}).format(new Date(data.sessionDate+'T12:00:00Z')):'Current session';
   const isArchivePreview=new URLSearchParams(window.location.search).get('date')==='2026-09-27';
-  const pageDateLabel=isArchivePreview?'Sep 27, 2026 (preview copy)':dateLabel;
+  const pageDateLabel=isArchivePreview?'Sep 27, 2026':dateLabel;
   const selectedMetrics=selected?metrics(selected,data.benchmarks.find(b=>b.id===(data.sectors.some(s=>s.ticker===selected.ticker)?'ES':benchmark==='auto'?selected.benchmark:benchmark))):null;
 
   const toolState=useRef({rows,mode,sector,benchmark,query,data});
@@ -111,13 +111,13 @@ export default function Scanner() {
     <main>
       <MarketStrip data={data}/>
       {isArchivePreview&&<div className="snapshot-preview-banner" role="note"><strong>September 27 preview copy</strong><span>Duplicated from the September 28 snapshot; prices and timestamps have not been verified for September 27.</span></div>}
-      <MorningBrief data={data} error={error} dateLabel={isArchivePreview?'September 27, 2026 · preview copy':undefined}/>
+      <MorningBrief data={data} error={error} dateLabel={isArchivePreview?'September 27, 2026':undefined}/>
 
       <section id="relative-strength" className="dashboard-section" aria-labelledby="scanner-title" tabIndex={-1}>
       <div className="page-heading centered-heading">
         <div className="heading-date date-label">{pageDateLabel} <span>· ET</span></div>
         <div className="heading-center"><div className="eyebrow">THE PREMARKET READ <span>/</span> RS SCANNER V1</div><div className="section-heading-row"><h2 id="scanner-title" className="section-title">Relative strength<span className="title-dot">.</span></h2><a className="primary-button section-jump" href="#morning-brief">Back to morning brief ↑</a></div><p>Who held up when the market sold off?</p></div>
-        <div className="heading-meta"><span className="session-chip"><LockKeyhole size={13}/>{mode==='imported'?'LEGACY EXAMPLE':'FROZEN SNAPSHOT'}</span></div>
+        <div className="heading-meta"><span className="session-chip"><LockKeyhole size={13}/>{isArchivePreview?'PREVIEW COPY':mode==='imported'?'LEGACY EXAMPLE':'FROZEN SNAPSHOT'}</span></div>
       </div>
       <div className={`source-notice ${mode==='imported'?'is-imported':''}`}>
         <Info size={16}/><div>{mode==='imported'?<><strong>Legacy example · cutoff unverified</strong><span>Earlier approximate drawdowns. The daily snapshot freezes at 06:20 Pacific.</span></>:<><strong>Frozen at 06:20 Pacific · {data.status==='partial'?'partial coverage':data.status==='unavailable'?'data unavailable':'daily snapshot'}</strong><span>{data.messages[0]||'Overnight ranges through 09:20 ET. Prices stay fixed for this session.'}</span></>}</div>

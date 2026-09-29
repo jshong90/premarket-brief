@@ -405,13 +405,14 @@ h1,h2,h3{font-family:"Newsreader",Georgia,serif;font-optical-sizing:auto}
 
 /* Keep the two page titles on the centerline, with dates occupying their old left edge. */
 .dashboard-section>.page-heading.centered-heading{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;gap:16px;text-align:center}
-.centered-heading .heading-date{grid-column:1;justify-self:start;text-align:left;font-family:"Newsreader",Georgia,serif;font-size:19px;font-weight:600;line-height:1.25}
+.centered-heading .heading-date{grid-column:1;justify-self:start;text-align:left;font-family:"Newsreader",Georgia,serif;font-size:var(--dashboard-title-size);font-weight:700;line-height:1.2;letter-spacing:-1px;color:var(--foreground)}
+.centered-heading .heading-date span{color:inherit}
 .centered-heading .heading-center{grid-column:2;min-width:0}
 .dashboard-section>.page-heading.centered-heading .section-heading-row{position:relative;justify-content:center}
 .centered-heading .section-jump{position:absolute;left:calc(100% + 20px)}
 .centered-heading .heading-meta{grid-column:3;justify-self:end}
 .centered-heading .heading-center>p{text-align:center}
-@media(max-width:1100px){
+@media(max-width:1250px){
   .dashboard-section>.page-heading.centered-heading{grid-template-columns:minmax(0,1fr) auto;gap:14px 16px}
   .centered-heading .heading-date{grid-column:1;grid-row:1}
   .centered-heading .heading-meta{grid-column:2;grid-row:1}
@@ -420,6 +421,9 @@ h1,h2,h3{font-family:"Newsreader",Georgia,serif;font-optical-sizing:auto}
   .dashboard-section>.page-heading.centered-heading .section-heading-row{flex-direction:column;gap:8px}
 }
 @media(max-width:540px){
-  .centered-heading .heading-date{font-size:16px}
+  .dashboard-section>.page-heading.centered-heading{grid-template-columns:minmax(0,1fr)}
+  .centered-heading .heading-date{grid-column:1;grid-row:1}
+  .centered-heading .heading-meta{grid-column:1;grid-row:2;justify-self:start;align-items:flex-start}
+  .centered-heading .heading-center{grid-column:1;grid-row:3}
   .centered-heading .session-chip{font-size:10px}
 }
