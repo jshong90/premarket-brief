@@ -79,8 +79,7 @@ html[data-theme="light"] .theme-toggle{border-color:#d19a6d;background:#fff5e8;c
 html{scroll-behavior:smooth;scroll-padding-top:var(--dashboard-offset,265px)}
 .dashboard-section:focus{outline:none}
 .morning-section{margin-bottom:48px}
-.morning-sections{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:16px;row-gap:16px;align-items:start}
-.morning-column{display:grid;align-content:start;gap:16px;min-width:0}
+.morning-sections{display:grid;grid-template-columns:minmax(0,1fr);gap:16px;align-items:start}
 .morning-sections>section:last-child{grid-column:1/-1}
 .morning-sections .briefing-section-head{justify-content:flex-start;align-items:baseline}
 .morning-sections .briefing-section-head h2{font-size:22px;line-height:1.3;margin:0;color:var(--foreground)}
@@ -252,13 +251,20 @@ html[data-theme="dark"] body h1,html[data-theme="dark"] body h2,html[data-theme=
 .morning-bonds-section .briefing-source a{font-size:11px}
 @media(max-width:700px){
   .morning-sections{row-gap:16px}
-  .morning-column{display:contents}
-  .morning-sections .briefing-section[aria-labelledby="brief-indices"]{order:1}
-  .morning-sections .briefing-section[aria-labelledby="brief-bonds"]{order:2}
-  .morning-sections .briefing-section[aria-labelledby="brief-key-levels"]{order:3}
-  .morning-sections .briefing-section[aria-labelledby="brief-macro"]{order:4}
-  .morning-sections .briefing-section[aria-labelledby="brief-earnings"]{order:5}
-  .morning-sections .briefing-section[aria-labelledby="brief-news"]{order:6}
   .morning-bonds-section .briefing-section-head{padding:14px 14px 11px}
   .morning-bonds-section .briefing-notes{padding:0 14px}
+}
+
+/* Give a one-column brief more room while keeping page gutters comfortable. */
+main{max-width:1760px;padding-left:clamp(20px,2vw,36px);padding-right:clamp(20px,2vw,36px)}
+@media(max-width:640px){main{padding-left:15px;padding-right:15px}}
+
+/* Multi-item sections use the wider card for a compact, responsive note grid. */
+.morning-bonds-section .briefing-notes,
+.morning-sections>section[aria-labelledby="brief-macro"] .briefing-notes,
+.morning-sections>section[aria-labelledby="brief-news"] .briefing-notes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:28px}
+@media(max-width:700px){
+  .morning-bonds-section .briefing-notes,
+  .morning-sections>section[aria-labelledby="brief-macro"] .briefing-notes,
+  .morning-sections>section[aria-labelledby="brief-news"] .briefing-notes{grid-template-columns:1fr;column-gap:0}
 }
