@@ -281,3 +281,6 @@ main{max-width:1760px;padding-left:clamp(20px,2vw,36px);padding-right:clamp(20px
 
 /* Newsreader headings */
 h1,h2,h3{font-family:"Newsreader",Georgia,serif;font-optical-sizing:auto}
+
+/* Set only morning brief body copy in Newsreader; controls and market data stay sans serif. */
+.briefing-note p{font-family:"Newsreader",Georgia,serif;font-optical-sizing:auto}
