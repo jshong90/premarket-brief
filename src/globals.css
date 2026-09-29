@@ -292,7 +292,3 @@ h1,h2,h3{font-family:"Newsreader",Georgia,serif;font-optical-sizing:auto}
 .dashboard-section>.page-heading .section-heading-row.is-revealed{opacity:1;transform:translateY(0)}
 @media(prefers-reduced-motion:reduce){.dashboard-section>.page-heading .section-heading-row{opacity:1;transform:none;transition:none}}
 
-
-/* Extend only the dashboard section title blocks into the page gutter. */
-.dashboard-section>.page-heading>div:first-child{margin-left:calc(-1 * clamp(20px,2vw,36px))}
-@media(max-width:640px){.dashboard-section>.page-heading>div:first-child{margin-left:-15px}}
