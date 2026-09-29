@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600;6..72,700&display=swap");
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "../vendor/shadcn-tailwind-4.13.0.css";
@@ -295,11 +295,11 @@ h1,h2,h3{font-family:"Newsreader",Georgia,serif;font-optical-sizing:auto}
 
 
 /* Shared type scale for dashboard headers: page, section, card. */
-:root{--dashboard-title-size:36px;--dashboard-section-size:20px;--dashboard-card-title-size:16px}
-.page-heading h1,.section-title{font-size:var(--dashboard-title-size)}
-.briefing-intro h2,.morning-sections .briefing-section-head h2{font-size:var(--dashboard-section-size)}
+:root{--dashboard-title-size:43px;--dashboard-section-size:24px;--dashboard-card-title-size:16px}
+.page-heading h1,.section-title{font-size:var(--dashboard-title-size);font-weight:700}
+.briefing-intro h2,.morning-sections .briefing-section-head h2{font-size:var(--dashboard-section-size);font-weight:700}
 .panel-heading h2,.morning-sections .briefing-note h3{font-size:var(--dashboard-card-title-size)}
-@media(max-width:700px){:root{--dashboard-title-size:29px}}
+@media(max-width:700px){:root{--dashboard-title-size:35px}}
 
 
 /* Shared outer spacing and inset for the variable-height morning brief cards. */
@@ -364,21 +364,21 @@ h1,h2,h3{font-family:"Newsreader",Georgia,serif;font-optical-sizing:auto}
 @media(max-width:700px){.topbar-leading{gap:9px}.snapshot-nav-link{min-height:34px;padding:6px 8px}.snapshot-preview-banner{display:block;margin-bottom:14px}.snapshot-preview-banner strong{display:block;margin-bottom:3px}}
 
 /* A restrained opening for the morning paper; the scanner heading keeps its scroll reveal. */
-.morning-section>.page-heading .section-heading-row{transition-duration:.65s;transition-timing-function:cubic-bezier(.18,.72,.24,1)}
-.paper-kicker,.paper-meta{animation:paper-settle .62s cubic-bezier(.18,.72,.24,1) both}
+.morning-section>.page-heading .section-heading-row{transition-duration:.98s;transition-timing-function:cubic-bezier(.18,.72,.24,1)}
+.paper-kicker,.paper-meta{animation:paper-settle .93s cubic-bezier(.18,.72,.24,1) both}
 .paper-meta{animation-delay:.12s}
 @keyframes paper-settle{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 
 /* The jump cue moves once, then remains still. */
-.section-jump .jump-arrow{display:inline-block;animation:jump-cue .68s ease-out .9s both}
+.section-jump .jump-arrow{display:inline-block;animation:jump-cue 1.02s ease-out .9s both}
 @keyframes jump-cue{0%,100%{transform:translateY(0)}45%{transform:translateY(4px)}}
 
 /* Snapshot data retains its width; only the visual fill grows on entry. */
-.rankings .capture-track>span,.sector-panel .sector-track>i{transform:scaleX(0);transform-origin:left;transition:transform .68s cubic-bezier(.18,.72,.24,1)}
+.rankings .capture-track>span,.sector-panel .sector-track>i{transform:scaleX(0);transform-origin:left;transition:transform .88s cubic-bezier(.18,.72,.24,1)}
 .rankings.bars-visible .capture-track>span,.sector-panel.bars-visible .sector-track>i{transform:scaleX(1)}
-.distribution-bar>span{transform:scaleX(0);transform-origin:left;transition:transform .5s cubic-bezier(.18,.72,.24,1)}
+.distribution-bar>span{transform:scaleX(0);transform-origin:left;transition:transform .65s cubic-bezier(.18,.72,.24,1)}
 .distribution.bars-visible .distribution-bar>span{transform:scaleX(1)}
-.distribution-bar>span:nth-child(2){transition-delay:.08s}.distribution-bar>span:nth-child(3){transition-delay:.16s}.distribution-bar>span:nth-child(4){transition-delay:.24s}.distribution-bar>span:nth-child(5){transition-delay:.32s}
+.distribution-bar>span:nth-child(2){transition-delay:.10s}.distribution-bar>span:nth-child(3){transition-delay:.21s}.distribution-bar>span:nth-child(4){transition-delay:.31s}.distribution-bar>span:nth-child(5){transition-delay:.42s}
 .scanner-table tr.exceptional .capture-track>span{background:#c3f86b}
 .scanner-table tr.clear .capture-track>span{background:#89b861}
 .scanner-table tr.moderate .capture-track>span{background:#708c5d}
