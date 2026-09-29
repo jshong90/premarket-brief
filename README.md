@@ -22,6 +22,14 @@ To publish a new snapshot, replace `public/data/snapshot.json` and commit the ch
 
 **Automatic snapshot publication to GitHub is not connected.** The website does not run a scheduler or inherit the ChatGPT TradingView connection. The scheduled task delivers its data file here but does not write it into this repository; commit the new packet at `public/data/snapshot.json` to publish it through Vercel. The current TradingView OHLCV tool supplies the futures bars but excludes equity extended-hours bars. Timestamped stock and sector ranges therefore need an alternate source. Data availability and latency depend on provider access. No credentials belong in the HTML or public repository.
 
+## Massive connection
+
+The Vercel Function at `api/massive-bars.js` reads `MASSIVE_API_KEY` on the server and requests one ticker's one-minute bars for the fixed 04:00–09:20 ET stock/ETF window. It excludes the 09:20 bar, returns each included bar timestamp plus the derived high, low, last, volume and drawdown, and records retrieval time. It never returns the API key. The dashboard's **Snapshot schedule** panel has a **Test Massive connection** button that checks AAPL for the displayed snapshot date.
+
+In Vercel, set the Environment Variable name to `MASSIVE_API_KEY`; store the Massive API key as its value for Production and Preview, then redeploy. The free plan is end-of-day, so a successful check validates historical minute-bar access only. It cannot populate a live 06:20 AM capture. The current endpoint is a per-ticker data connection check; it does not discover the complete $50B+ stock universe, fetch NQ/ES futures, generate a full snapshot, or publish a new `public/data/snapshot.json` automatically.
+
+After deployment, open **Snapshot schedule** and run the connection test. The request can also be checked directly at `/api/massive-bars?symbol=AAPL&date=YYYY-MM-DD`, replacing the date with a valid market date. Do not put the API key in a browser URL, frontend file, or GitHub commit.
+
 Run locally with `npm run dev`; use the Vercel preview or production URL for hosted access.
 
 ## Scanner description
@@ -57,7 +65,7 @@ npm run build
 
 The production build writes to `dist/`. Vercel uses the checked-in build configuration and publishes that directory. Direct dependencies are pinned; `package-lock.json` locks the full dependency tree.
 
-Validation covers TypeScript, snapshot structure, source metadata, date handling, cutoff handling and the legacy example.
+Validation covers TypeScript, snapshot structure, source metadata, date handling, cutoff handling, the legacy example, and the Massive route's ET daylight-saving windows, 09:20 exclusion, field provenance and server-only API-key use.
 
 ## Consolidated layout
 The morning brief has five sections: overnight indices, overnight bonds, upcoming macro events, upcoming earnings, and overnight news. The button beside the Morning brief heading skips to the scanner; the button beside the Relative strength heading returns to the brief. Both use same-page anchors and account for the sticky header.
