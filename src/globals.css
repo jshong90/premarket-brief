@@ -249,7 +249,10 @@ html[data-theme="dark"] body h1,html[data-theme="dark"] body h2,html[data-theme=
 .morning-sections>.briefing-section:nth-child(2) .briefing-note p{font-size:13px;line-height:1.55;margin-bottom:9px}
 .morning-sections>.briefing-section:nth-child(2) .briefing-source strong,
 .morning-sections>.briefing-section:nth-child(2) .briefing-source a{font-size:11px}
+.morning-sections{align-items:start}
+.key-levels-section{grid-column:2}
 @media(max-width:700px){
   .morning-sections>.briefing-section:nth-child(2) .briefing-section-head{padding:14px 14px 11px}
   .morning-sections>.briefing-section:nth-child(2) .briefing-notes{padding:0 14px}
+  .key-levels-section{grid-column:auto}
 }
