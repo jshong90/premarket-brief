@@ -504,10 +504,36 @@
     "indices": [
       {
         "title": "Market snapshot — premarket futures",
-        "body": "S&P 500 futures (ES, points): Friday 4:00 PM ET close 7,804.75 → 6:20 AM PT 7,774.75 (−0.38%)\nNasdaq-100 futures (NQ, points): Friday 4:00 PM ET close 30,891.50 → 6:20 AM PT 30,700.25 (−0.62%)\nDow futures (YM, points): Friday 4:00 PM ET close 52,171 → 6:20 AM PT 51,868 (−0.58%)\nRussell 2000 futures (RTY, points): Friday 4:00 PM ET close 2,859.20 → 6:20 AM PT 2,842.80 (−0.57%)\nVIX: Friday close 14.87 → about 16.2 at the scan (user-provided estimate).\nFutures scan prices are the close of the 09:19–09:20 ET one-minute bars. Friday reference prices are the close of the 15:59–16:00 ET bars. Changes are calculated from those prices; they differ from the earlier approximate estimates.\nTradingView historical bars were retrieved at 5:16 PM PT. TradingView reports the feed may be delayed 15+ minutes.\nThe tape is responding well to NVIDIA buyback news and expectations that U.S.–Iran negotiations continue this week.",
+        "body": "VIX — Friday close: 14.87 · about 16.2 at 6:20 AM PT (user-provided estimate).\n\nFriday close is the 3:59–4:00 PM ET bar; the scan price is the 9:19–9:20 AM ET bar. Percentage changes are calculated from the displayed prices.\n\nThe tape is responding well to NVIDIA buyback news and expectations that U.S.–Iran negotiations continue this week.",
         "source": "TradingView · continuous futures 1-minute bars · provider delay notice: 15+ minutes · retrieved 2026-09-28 5:16 PM PT",
         "url": "https://www.tradingview.com/markets/futures/quotes/",
-        "asOf": "2026-09-28T13:19:00Z"
+        "asOf": "2026-09-28T13:19:00Z",
+        "indexQuotes": [
+          {
+            "label": "S&P 500 (ES)",
+            "fridayClose": 7804.75,
+            "scanPrice": 7774.75,
+            "changePercent": -0.38
+          },
+          {
+            "label": "Nasdaq-100 (NQ)",
+            "fridayClose": 30891.5,
+            "scanPrice": 30700.25,
+            "changePercent": -0.62
+          },
+          {
+            "label": "Dow (YM)",
+            "fridayClose": 52171,
+            "scanPrice": 51868,
+            "changePercent": -0.58
+          },
+          {
+            "label": "Russell 2000 (RTY)",
+            "fridayClose": 2859.2,
+            "scanPrice": 2842.8,
+            "changePercent": -0.57
+          }
+        ]
       },
       {
         "title": "Keep an eye on relative strength",
