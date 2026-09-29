@@ -402,3 +402,24 @@ h1,h2,h3{font-family:"Newsreader",Georgia,serif;font-optical-sizing:auto}
   .morning-section>.page-heading .section-heading-row{transition:none}
   .rankings .capture-track>span,.rankings.bars-visible .capture-track>span,.sector-panel .sector-track>i,.sector-panel.bars-visible .sector-track>i,.distribution-bar>span,.distribution.bars-visible .distribution-bar>span{transform:none;transition:none}
 }
+
+/* Keep the two page titles on the centerline, with dates occupying their old left edge. */
+.dashboard-section>.page-heading.centered-heading{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;gap:16px;text-align:center}
+.centered-heading .heading-date{grid-column:1;justify-self:start;text-align:left;font-family:"Newsreader",Georgia,serif;font-size:19px;font-weight:600;line-height:1.25}
+.centered-heading .heading-center{grid-column:2;min-width:0}
+.dashboard-section>.page-heading.centered-heading .section-heading-row{position:relative;justify-content:center}
+.centered-heading .section-jump{position:absolute;left:calc(100% + 20px)}
+.centered-heading .heading-meta{grid-column:3;justify-self:end}
+.centered-heading .heading-center>p{text-align:center}
+@media(max-width:1100px){
+  .dashboard-section>.page-heading.centered-heading{grid-template-columns:minmax(0,1fr) auto;gap:14px 16px}
+  .centered-heading .heading-date{grid-column:1;grid-row:1}
+  .centered-heading .heading-meta{grid-column:2;grid-row:1}
+  .centered-heading .heading-center{grid-column:1/-1;grid-row:2;justify-self:center}
+  .centered-heading .section-jump{position:static}
+  .dashboard-section>.page-heading.centered-heading .section-heading-row{flex-direction:column;gap:8px}
+}
+@media(max-width:540px){
+  .centered-heading .heading-date{font-size:16px}
+  .centered-heading .session-chip{font-size:10px}
+}

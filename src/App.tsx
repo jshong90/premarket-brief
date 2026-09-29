@@ -114,7 +114,11 @@ export default function Scanner() {
       <MorningBrief data={data} error={error} dateLabel={isArchivePreview?'September 27, 2026 · preview copy':undefined}/>
 
       <section id="relative-strength" className="dashboard-section" aria-labelledby="scanner-title" tabIndex={-1}>
-      <div className="page-heading"><div><div className="eyebrow">THE PREMARKET READ <span>/</span> RS SCANNER V1</div><div className="section-heading-row"><h2 id="scanner-title" className="section-title">Relative strength<span className="title-dot">.</span></h2><a className="primary-button section-jump" href="#morning-brief">Back to morning brief ↑</a></div><p>Who held up when the market sold off?</p></div><div className="heading-meta"><span className="session-chip"><LockKeyhole size={13}/>{mode==='imported'?'LEGACY EXAMPLE':'FROZEN SNAPSHOT'}</span><span className="date-label">{pageDateLabel} <span>· ET</span></span></div></div>
+      <div className="page-heading centered-heading">
+        <div className="heading-date date-label">{pageDateLabel} <span>· ET</span></div>
+        <div className="heading-center"><div className="eyebrow">THE PREMARKET READ <span>/</span> RS SCANNER V1</div><div className="section-heading-row"><h2 id="scanner-title" className="section-title">Relative strength<span className="title-dot">.</span></h2><a className="primary-button section-jump" href="#morning-brief">Back to morning brief ↑</a></div><p>Who held up when the market sold off?</p></div>
+        <div className="heading-meta"><span className="session-chip"><LockKeyhole size={13}/>{mode==='imported'?'LEGACY EXAMPLE':'FROZEN SNAPSHOT'}</span></div>
+      </div>
       <div className={`source-notice ${mode==='imported'?'is-imported':''}`}>
         <Info size={16}/><div>{mode==='imported'?<><strong>Legacy example · cutoff unverified</strong><span>Earlier approximate drawdowns. The daily snapshot freezes at 06:20 Pacific.</span></>:<><strong>Frozen at 06:20 Pacific · {data.status==='partial'?'partial coverage':data.status==='unavailable'?'data unavailable':'daily snapshot'}</strong><span>{data.messages[0]||'Overnight ranges through 09:20 ET. Prices stay fixed for this session.'}</span></>}</div>
         
