@@ -350,7 +350,7 @@ h1,h2,h3{font-family:"Newsreader",Georgia,serif;font-optical-sizing:auto}
 .sources-card.is-open .sources-summary:after{transform:rotate(45deg)}
 .sources-title{font:500 20px Newsreader,Georgia,serif;color:var(--foreground)}
 .sources-count{color:var(--muted-foreground);font-size:12px}
-.sources-reveal{display:grid;grid-template-rows:0fr;opacity:0;transition:grid-template-rows var(--lab-sources-duration,.48s) cubic-bezier(.18,.72,.24,1),opacity calc(var(--lab-sources-duration,.48s)*.7) ease}
+.sources-reveal{display:grid;grid-template-rows:0fr;opacity:0;transition:grid-template-rows var(--lab-sources-duration,.48s) cubic-bezier(.18,.72,.24,1),opacity var(--lab-sources-opacity-duration,.34s) ease}
 .sources-card.is-open .sources-reveal{grid-template-rows:1fr;opacity:1}
 .sources-content{padding:0 var(--card-inset) 6px}
 .sources-reveal>.sources-content{min-height:0;overflow:hidden}
