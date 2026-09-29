@@ -317,3 +317,18 @@ h1,h2,h3{font-family:"Newsreader",Georgia,serif;font-optical-sizing:auto}
 
 /* Give the key-levels footer a consistent inset from the card's lower border. */
 .key-levels-section .briefing-notes{padding-bottom:14px}
+
+
+/* Shared card layout tokens for surfaces, spacing, and responsive content insets. */
+:root{--card-radius:8px;--card-gap:16px;--card-inset:20px;--card-compact-inset:10px;--brief-card-inset:var(--card-inset)}
+@media(max-width:1200px){:root{--card-inset:16px;--brief-card-inset:var(--card-inset)}}
+@media(max-width:640px){:root{--card-inset:14px;--card-compact-inset:9px;--brief-card-inset:var(--card-inset)}}
+.panel,.benchmark-card,.premarket-benchmark,.market-tile,.briefing-intro,.formula-card,.provider-card,.detail-score{border-radius:var(--card-radius)}
+.benchmark-grid,.work-grid,.right-rail,.morning-sections,.premarket-overview,.briefing-grid{gap:var(--card-gap)}
+.benchmark-grid,.premarket-overview,.briefing-grid{margin-bottom:var(--card-gap)}
+.benchmark-card,.premarket-benchmark{padding-inline:var(--card-inset)}
+.card-foot{margin-inline:calc(-1 * var(--card-inset));padding-inline:var(--card-inset)}
+.market-tile{padding-inline:var(--card-compact-inset)}
+.panel-heading,.briefing-section-head,.briefing-notes,.sector-list,.rail-description,.sector-note,.table-footer,.ranking-tabs,.filters,.panel-callout,.briefing-intro,.formula-card,.provider-card,.detail-score{padding-inline:var(--card-inset)}
+.distribution-bar,.scale-row{margin-inline:var(--card-inset)}
+.distribution .text-link{margin-left:var(--card-inset)}
