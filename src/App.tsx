@@ -52,6 +52,20 @@ export default function Scanner() {
     panels.forEach(panel=>reveal.observe(panel));
     return()=>reveal.disconnect();
   },[]);
+  useEffect(()=>{
+    const groups=['.morning-sections > .panel','.benchmark-grid > .benchmark-card','.work-grid .panel'];
+    const cards=groups.flatMap(selector=>Array.from(document.querySelectorAll<HTMLElement>(selector)).map((card,index)=>{
+      card.classList.add('viewport-card');
+      card.style.setProperty('--card-reveal-delay',`${Math.min(index,3)*70}ms`);
+      return card;
+    }));
+    if(!('IntersectionObserver' in window)){cards.forEach(card=>card.classList.add('is-in-view'));return;}
+    const reveal=new IntersectionObserver(entries=>{
+      for(const entry of entries)entry.target.classList.toggle('is-in-view',entry.isIntersecting);
+    },{threshold:0.12,rootMargin:'0px 0px -48px 0px'});
+    cards.forEach(card=>reveal.observe(card));
+    return()=>reveal.disconnect();
+  },[]);
 
   const mode = data.status==='imported' ? 'imported' : 'snapshot';
   const [error,setError] = useState('');

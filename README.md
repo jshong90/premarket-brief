@@ -93,7 +93,7 @@ The combined dashboard uses the theme blocks and semantic text roles in `src/glo
 | Error text | `--text-error` | `#934E45` | `#E2AFA7` |
 | Success text | `--text-success` | `#27824D` | `#62C982` |
 
-`--card-foreground`, `--popover-foreground`, `--secondary-foreground`, and `--accent-foreground` follow `--foreground`. The page title, left date, ticker/company name, and briefing body therefore change together. `npm test` rejects hard-coded CSS `color` declarations so future text changes keep using roles.
+`--card-foreground`, `--popover-foreground`, `--secondary-foreground`, and `--accent-foreground` follow `--foreground`. The page title, centered header date, ticker/company name, and briefing body therefore change together. `npm test` rejects hard-coded CSS `color` declarations so future text changes keep using roles.
 
 ### Resilience colors
 
@@ -145,6 +145,10 @@ These are explicit component rules in `src/globals.css`; changing only a base to
 | Benchmark headline number | Source Sans 3 / 500 | 34px base; 38px at ≥1450px, 29px at ≤1200px, 28px at ≤640px |
 
 Source Sans 3 and Newsreader load weights 400, 500, 600, and 700 from Google Fonts. Source Sans 3 uses Arial, Helvetica, then generic sans-serif as fallbacks; Newsreader uses Georgia. Numeric fields use `ui-monospace`, SFMono-Regular, Menlo, Consolas, then generic monospace. Shared layout sizes are `--card-radius: 8px`, `--card-gap: 16px`, and `--card-inset: 20px` (16px at ≤1200px; 14px at ≤640px). The active snapshot date is centered in the top bar; each page section keeps its own centered title and status.
+
+### Motion
+
+Section cards fade in while moving upward 12px over 650ms whenever they enter the viewport. Cards in the same group stagger by 70ms, capped after the fourth card. The Sources card expands over 480ms with a shorter opacity transition. All decorative motion is disabled when the user requests reduced motion.
 
 ## Consolidated layout
 

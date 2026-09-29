@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import type { Briefing, Snapshot } from './lib/scanner';
 
 type KeyLevel = { id: 'ES' | 'NQ' | 'YM' | 'RTY'; label: string; high: number | null; low: number | null; highTime?: string | null; lowTime?: string | null; asOf: string | null; retrievedAt?: string | null; source: string; issue?: string };
@@ -82,6 +83,7 @@ function KeyLevelsTable({ data }: { data: Snapshot }) {
 
 
 function SourcesCard({ data }: { data: Snapshot }) {
+  const [open, setOpen] = useState(false);
   const references = sourceSections.flatMap((section) => (data.briefing?.[section.key] ?? [])
     .filter((note) => note.source && note.url)
     .map((note) => ({ section: section.label, note })));
@@ -93,9 +95,10 @@ function SourcesCard({ data }: { data: Snapshot }) {
   const referenceCount = references.length + (keyLevels.length ? 1 : 0);
   if (!referenceCount) return null;
 
-  return <details className="sources-card panel">
-    <summary><span className="sources-title">Sources</span><span className="sources-count">{referenceCount} references</span></summary>
-    <div className="sources-content">
+  return <section className={`sources-card panel ${open ? 'is-open' : ''}`}>
+    <button className="sources-summary" type="button" aria-expanded={open} aria-controls="sources-content" onClick={() => setOpen((value) => !value)}><span className="sources-title">Sources</span><span className="sources-count">{referenceCount} references</span></button>
+    <div className="sources-reveal" aria-hidden={!open} inert={!open}>
+    <div className="sources-content" id="sources-content">
       {Boolean(tradingViewRefs.length || keyLevels.length) && <section className="sources-group">
         <h3>TradingView Official MCP</h3>
         <p className="sources-intro">Timestamped market data; provider delay may exceed 15 minutes.</p>
@@ -127,7 +130,8 @@ function SourcesCard({ data }: { data: Snapshot }) {
         </ul>
       </section>}
     </div>
-  </details>;
+    </div>
+  </section>;
 }
 
 export default function MorningBrief({ data, error, dateLabel }: { data: Snapshot; error: string; dateLabel?: string }) {

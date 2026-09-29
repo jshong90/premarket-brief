@@ -345,13 +345,15 @@ h1,h2,h3{font-family:"Newsreader",Georgia,serif;font-optical-sizing:auto}
 
 /* Collapsible source index: citations remain grouped by provider and briefing section. */
 .sources-card{overflow:hidden}
-.sources-card>summary{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px var(--card-inset);cursor:pointer;list-style:none}
-.sources-card>summary::-webkit-details-marker{display:none}
-.sources-card>summary:after{content:'+';color:var(--muted-foreground);font-size:18px;line-height:1}
-.sources-card[open]>summary:after{content:'−'}
+.sources-summary{display:flex;width:100%;align-items:center;justify-content:space-between;gap:12px;padding:16px var(--card-inset);cursor:pointer;text-align:left}
+.sources-summary:after{content:'+';color:var(--muted-foreground);font-size:18px;line-height:1;transition:transform .42s cubic-bezier(.18,.72,.24,1)}
+.sources-card.is-open .sources-summary:after{transform:rotate(45deg)}
 .sources-title{font:500 20px Newsreader,Georgia,serif;color:var(--foreground)}
 .sources-count{color:var(--muted-foreground);font-size:12px}
+.sources-reveal{display:grid;grid-template-rows:0fr;opacity:0;transition:grid-template-rows .48s cubic-bezier(.18,.72,.24,1),opacity .34s ease}
+.sources-card.is-open .sources-reveal{grid-template-rows:1fr;opacity:1}
 .sources-content{padding:0 var(--card-inset) 6px}
+.sources-reveal>.sources-content{min-height:0;overflow:hidden}
 .sources-group{padding:15px 0 16px}
 .sources-group+.sources-group{border-top:1px solid var(--border)}
 .sources-group h3{margin:0 0 8px;font:600 12px "Source Sans 3",Arial,Helvetica,sans-serif;color:var(--foreground);letter-spacing:.06em}
@@ -386,6 +388,10 @@ h1,h2,h3{font-family:"Newsreader",Georgia,serif;font-optical-sizing:auto}
 .section-heading-row.is-revealed .section-jump .jump-arrow{animation:jump-cue 1.02s ease-out .9s both}
 @keyframes jump-cue{0%,100%{transform:translateY(0)}45%{transform:translateY(4px)}}
 
+/* Cards settle into place each time they enter the viewport. */
+.viewport-card{opacity:0;transform:translateY(12px);transition:opacity .65s ease-out var(--card-reveal-delay,0ms),transform .65s cubic-bezier(.18,.72,.24,1) var(--card-reveal-delay,0ms);will-change:opacity,transform}
+.viewport-card.is-in-view{opacity:1;transform:translateY(0)}
+
 /* Snapshot data retains its width; only the visual fill grows on entry. */
 .rankings .capture-track>span,.sector-panel .sector-track>i{transform:scaleX(0);transform-origin:left}
 .rankings.bars-visible .capture-track>span,.sector-panel.bars-visible .sector-track>i{transform:scaleX(1);transition:transform .88s cubic-bezier(.18,.72,.24,1)}
@@ -412,6 +418,8 @@ h1,h2,h3{font-family:"Newsreader",Georgia,serif;font-optical-sizing:auto}
   .morning-section>.page-heading.is-revealed .paper-kicker,.morning-section>.page-heading.is-revealed .paper-meta,.section-heading-row.is-revealed .section-jump .jump-arrow{animation:none}
   .morning-section>.page-heading .section-heading-row{transition:none}
   .rankings .capture-track>span,.rankings.bars-visible .capture-track>span,.sector-panel .sector-track>i,.sector-panel.bars-visible .sector-track>i,.distribution-bar>span,.distribution.bars-visible .distribution-bar>span{transform:none;transition:none}
+  .viewport-card,.viewport-card.is-in-view{opacity:1;transform:none;transition:none;will-change:auto}
+  .sources-reveal,.sources-summary:after{transition:none}
 }
 
 /* Keep the two page titles on the centerline; the shared date now lives in the top bar. */
