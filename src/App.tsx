@@ -28,6 +28,17 @@ export default function Scanner() {
     for(const selector of ['.topbar','.market-strip']){const el=document.querySelector(selector);if(el)observer.observe(el);}
     update();return()=>observer.disconnect();
   },[]);
+  useEffect(()=>{
+    const headings=Array.from(document.querySelectorAll<HTMLElement>('.dashboard-section > .page-heading .section-heading-row'));
+    if(!('IntersectionObserver' in window)){headings.forEach((heading)=>heading.classList.add('is-revealed'));return;}
+    const reveal=new IntersectionObserver((entries)=>{
+      entries.forEach((entry)=>{
+        if(entry.isIntersecting){entry.target.classList.add('is-revealed');reveal.unobserve(entry.target);}
+      });
+    },{threshold:0.15,rootMargin:'0px 0px -48px 0px'});
+    headings.forEach((heading)=>reveal.observe(heading));
+    return()=>reveal.disconnect();
+  },[]);
 
   const mode = data.status==='imported' ? 'imported' : 'snapshot';
   const [error,setError] = useState('');
