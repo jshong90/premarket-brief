@@ -1,3 +1,4 @@
+@import url("https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&display=swap");
 @import "tailwindcss";
 @import "tw-animate-css";
 @import "../vendor/shadcn-tailwind-4.13.0.css";
@@ -277,3 +278,6 @@ main{max-width:1760px;padding-left:clamp(20px,2vw,36px);padding-right:clamp(20px
   .morning-sections>section[aria-labelledby="brief-macro"] .briefing-note:nth-child(even),
   .morning-sections>section[aria-labelledby="brief-news"] .briefing-note:nth-child(even){border-left:0;padding-left:0}
 }
+
+/* Newsreader headings */
+h1,h2,h3{font-family:"Newsreader",Georgia,serif;font-optical-sizing:auto}
