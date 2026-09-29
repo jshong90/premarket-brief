@@ -105,7 +105,7 @@ export default function Scanner() {
   return <div className="app-shell">
     <header className="topbar">
       <div className="topbar-leading"><a className="snapshot-nav-link" href={isArchivePreview?'./index.html':'./index.html?date=2026-09-27'} aria-label={isArchivePreview?'Return to the latest snapshot':'View the September 27 snapshot preview'} title={isArchivePreview?'Latest snapshot':'Previous snapshot · September 27'}>{isArchivePreview?<ChevronRight size={18}/>:<ChevronLeft size={18}/>}<span>{isArchivePreview?'Latest':'9/27'}</span></a><a href="./index.html" className="brand" aria-label="The Warren home"><span className="brand-mark">W</span></a></div>
-      
+      <time className="topbar-date" dateTime={isArchivePreview?'2026-09-27':data.sessionDate}>{pageDateLabel}</time>
       <ThemeToggle/><button className="connection-button" onClick={()=>setDrawer('connections')}><Clock3 size={14}/><span>06:20 Pacific</span><ChevronRight size={15}/></button>
     </header>
     <main>
@@ -115,7 +115,6 @@ export default function Scanner() {
 
       <section id="relative-strength" className="dashboard-section" aria-labelledby="scanner-title" tabIndex={-1}>
       <div className="page-heading centered-heading">
-        <div className="heading-date date-label">{pageDateLabel} <span>· ET</span></div>
         <div className="heading-center"><div className="eyebrow">THE PREMARKET READ <span>/</span> RS SCANNER V1</div><div className="section-heading-row"><h2 id="scanner-title" className="section-title">Relative strength<span className="title-dot">.</span></h2><a className="primary-button section-jump" href="#morning-brief">Back to morning brief ↑</a></div><p>Who held up when the market sold off?</p></div>
         <div className="heading-meta"><span className="session-chip"><LockKeyhole size={13}/>{isArchivePreview?'PREVIEW COPY':mode==='imported'?'LEGACY EXAMPLE':'FROZEN SNAPSHOT'}</span></div>
       </div>

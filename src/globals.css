@@ -364,7 +364,9 @@ h1,h2,h3{font-family:"Newsreader",Georgia,serif;font-optical-sizing:auto}
 
 
 /* Snapshot history navigation */
+.topbar{position:relative}
 .topbar-leading{display:flex;align-items:center;gap:18px;min-width:0}
+.topbar-date{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);color:var(--foreground);font-family:"Newsreader",Georgia,serif;font-size:18px;font-weight:600;line-height:1;letter-spacing:-.15px;white-space:nowrap}
 .snapshot-nav-link{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:36px;padding:7px 10px;border:1px solid var(--border);border-radius:999px;color:var(--foreground);text-decoration:none;font-size:12px;font-weight:650;white-space:nowrap;transition:background .18s ease,border-color .18s ease}
 .snapshot-nav-link:hover{background:var(--secondary);border-color:var(--input)}
 .snapshot-nav-link:focus-visible{outline:2px solid var(--ring);outline-offset:3px}
@@ -412,29 +414,23 @@ h1,h2,h3{font-family:"Newsreader",Georgia,serif;font-optical-sizing:auto}
   .rankings .capture-track>span,.rankings.bars-visible .capture-track>span,.sector-panel .sector-track>i,.sector-panel.bars-visible .sector-track>i,.distribution-bar>span,.distribution.bars-visible .distribution-bar>span{transform:none;transition:none}
 }
 
-/* Keep the two page titles on the centerline, with dates occupying their old left edge. */
+/* Keep the two page titles on the centerline; the shared date now lives in the top bar. */
 .dashboard-section>.page-heading.centered-heading{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;gap:16px;text-align:center}
-.centered-heading .heading-date{grid-column:1;justify-self:start;text-align:left;font-family:"Newsreader",Georgia,serif;font-size:var(--dashboard-title-size);font-weight:700;line-height:1.2;letter-spacing:-1px;color:var(--foreground)}
-.centered-heading .heading-date span{color:inherit}
 .centered-heading .heading-center{grid-column:2;min-width:0}
 .dashboard-section>.page-heading.centered-heading .section-heading-row{position:relative;justify-content:center}
 .centered-heading .section-jump{position:absolute;left:calc(100% + 20px)}
 .centered-heading .heading-meta{grid-column:3;justify-self:end}
 .centered-heading .heading-center>p{text-align:center}
 @media(max-width:1250px){
-  .dashboard-section>.page-heading.centered-heading{grid-template-columns:minmax(0,1fr) auto;gap:14px 16px}
-  .centered-heading .heading-date{grid-column:1;grid-row:1}
-  .centered-heading .heading-meta{grid-column:2;grid-row:1}
-  .centered-heading .heading-center{grid-column:1/-1;grid-row:2;justify-self:center}
+  .dashboard-section>.page-heading.centered-heading{grid-template-columns:minmax(0,1fr);gap:10px}
+  .centered-heading .heading-center{grid-column:1;grid-row:1;justify-self:center}
+  .centered-heading .heading-meta{grid-column:1;grid-row:2;justify-self:center;align-items:center}
   .centered-heading .section-jump{position:static}
   .dashboard-section>.page-heading.centered-heading .section-heading-row{flex-direction:column;gap:8px}
 }
 @media(max-width:540px){
-  .dashboard-section>.page-heading.centered-heading{grid-template-columns:minmax(0,1fr)}
-  .centered-heading .heading-date{grid-column:1;grid-row:1}
-  .centered-heading .heading-meta{grid-column:1;grid-row:2;justify-self:start;align-items:flex-start}
-  .centered-heading .heading-center{grid-column:1;grid-row:3}
-.centered-heading .session-chip{font-size:10px}
+  .topbar-date{font-size:15px}
+  .centered-heading .session-chip{font-size:10px}
 }
 
 /* Price direction and resilience retain their own tokens, even in legacy rows. */

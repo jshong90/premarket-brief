@@ -133,7 +133,7 @@ These are explicit component rules in `src/globals.css`; changing only a base to
 | --- | --- | --- |
 | General UI and controls | Source Sans 3 / normal | 16px body; controls vary below |
 | Morning brief and Relative strength titles | Newsreader / 700 | `--dashboard-title-size`: 43px, 35px at ≤700px |
-| Left date | Newsreader / 700 | Same title-size token |
+| Centered top-bar date | Newsreader / 600 | 18px; 15px at ≤540px |
 | Numbered morning sections | Newsreader / 700 | `--dashboard-section-size`: 24px |
 | Card and note titles | Newsreader / 500 | `--dashboard-card-title-size`: 16px |
 | Briefing paragraphs | Newsreader / 400 | 14px desktop, 13px at ≤640px; bonds copy 13px |
@@ -144,7 +144,7 @@ These are explicit component rules in `src/globals.css`; changing only a base to
 | Index quotes / key-level tables | Source Sans 3 with monospace numeric values | 14px / 13px body; 12px headings; 11px timestamps |
 | Benchmark headline number | Source Sans 3 / 500 | 34px base; 38px at ≥1450px, 29px at ≤1200px, 28px at ≤640px |
 
-Source Sans 3 and Newsreader load weights 400, 500, 600, and 700 from Google Fonts. Source Sans 3 uses Arial, Helvetica, then generic sans-serif as fallbacks; Newsreader uses Georgia. Numeric fields use `ui-monospace`, SFMono-Regular, Menlo, Consolas, then generic monospace. Shared layout sizes are `--card-radius: 8px`, `--card-gap: 16px`, and `--card-inset: 20px` (16px at ≤1200px; 14px at ≤640px). The centered page headings stack the date/status above the title at ≤1250px and put the status on its own row at ≤540px.
+Source Sans 3 and Newsreader load weights 400, 500, 600, and 700 from Google Fonts. Source Sans 3 uses Arial, Helvetica, then generic sans-serif as fallbacks; Newsreader uses Georgia. Numeric fields use `ui-monospace`, SFMono-Regular, Menlo, Consolas, then generic monospace. Shared layout sizes are `--card-radius: 8px`, `--card-gap: 16px`, and `--card-inset: 20px` (16px at ≤1200px; 14px at ≤640px). The active snapshot date is centered in the top bar; each page section keeps its own centered title and status.
 
 ## Consolidated layout
 
