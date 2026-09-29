@@ -13,6 +13,7 @@ import MarketStrip from './MarketStrip';
 import ThemeToggle from './ThemeToggle';
 import MorningBrief from './MorningBrief';
 import MassiveConnectionTest from './MassiveConnectionTest';
+import DesignLabs from './DesignLabs';
 
 const number = (v: number | null | undefined, digits=2) => v == null || !Number.isFinite(v) ? '—' : v.toLocaleString('en-US',{minimumFractionDigits:digits,maximumFractionDigits:digits});
 const percent = (v: number | null | undefined, digits=2) => v == null ? '—' : `${number(v,digits)}%`;
@@ -54,9 +55,10 @@ export default function Scanner() {
   },[]);
   useEffect(()=>{
     const groups=['.morning-sections > .panel','.benchmark-grid > .benchmark-card','.work-grid .panel'];
+    const configuredStagger=Number.parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--lab-card-stagger'))||70;
     const cards=groups.flatMap(selector=>Array.from(document.querySelectorAll<HTMLElement>(selector)).map((card,index)=>{
       card.classList.add('viewport-card');
-      card.style.setProperty('--card-reveal-delay',`${Math.min(index,3)*70}ms`);
+      card.style.setProperty('--card-reveal-delay',`${Math.min(index,3)*configuredStagger}ms`);
       return card;
     }));
     if(!('IntersectionObserver' in window)){cards.forEach(card=>card.classList.add('is-in-view'));return;}
@@ -65,7 +67,7 @@ export default function Scanner() {
     },{threshold:0.12,rootMargin:'0px 0px -48px 0px'});
     cards.forEach(card=>reveal.observe(card));
     return()=>reveal.disconnect();
-  },[]);
+  },[data]);
 
   const mode = data.status==='imported' ? 'imported' : 'snapshot';
   const [error,setError] = useState('');
@@ -96,6 +98,7 @@ export default function Scanner() {
   const changeTab=(t:string)=>{setTab(t);setSort({key:t==='recovery'?'recovery':'capture',asc:t!=='recovery'});};
   const dateLabel=data.sessionDate?new Intl.DateTimeFormat('en-US',{month:'short',day:'numeric',year:'numeric',timeZone:'UTC'}).format(new Date(data.sessionDate+'T12:00:00Z')):'Current session';
   const isArchivePreview=new URLSearchParams(window.location.search).get('date')==='2026-09-27';
+  const isDevelopmentMode=new URLSearchParams(window.location.search).get('dev')==='1';
   const pageDateLabel=isArchivePreview?'Sep 27, 2026':dateLabel;
   const selectedMetrics=selected?metrics(selected,data.benchmarks.find(b=>b.id===(data.sectors.some(s=>s.ticker===selected.ticker)?'ES':benchmark==='auto'?selected.benchmark:benchmark))):null;
 
@@ -167,5 +170,6 @@ export default function Scanner() {
       {drawer==='method'?<div className="drawer-body"><p>The scanner uses premarket price ranges and some comparison rules to calculate relative strength. Results are based on the best available data and are intended as an aid, not a signal.</p></div> :<div className="drawer-body"><div className="formula-card"><span>DAILY CAPTURE</span><strong>06:20 AM Pacific</strong><p>09:20 AM Eastern · ten minutes before the open. Follows daylight saving time.</p></div><h3>Overnight, then frozen</h3><p>Futures: prior-day 18:00 to 09:20 ET.<br/>Stocks and ETFs: 04:00 to 09:20 ET.</p><p>One data packet per market morning. Rankings, recovery prices, and sector ranges stay fixed. Search and benchmark comparisons still work on that same snapshot.</p><div className="provider-card"><div><strong>TradingView</strong><span className="provider-status">Primary source</span></div><p>Use its supported market fields and timestamped bars. Fill missing range fields from an alternate source only when needed. Every instrument retains its source and observation time.</p></div><MassiveConnectionTest sessionDate={data.sessionDate}/><h3>Visible data quality</h3><p>Late or delayed data must still match the 09:20 cutoff. Incomplete ranges stay blank. The original example has no verified capture time and is labeled separately.</p><div className="provider-note"><ShieldCheck size={17}/><p>The dashboard reads a published snapshot once when opened. Generating and publishing the next snapshot happens separately from this static prototype.</p></div><button className="primary-button" onClick={()=>setDrawer(null)}>Back to scanner<ChevronRight size={15}/></button></div>}
     </SheetContent></Sheet>
     <Sheet open={!!selected} onOpenChange={o=>!o&&setSelected(null)}><SheetContent className="detail-sheet"><SheetHeader><div className="eyebrow">INSTRUMENT DETAIL / {selected?.sector}</div><SheetTitle>{selected?.ticker} <span className="muted">{selected?.name}</span></SheetTitle><SheetDescription>{dateLabel} · {mode==='imported'?'Cutoff unverified':'04:00–09:20 ET'}</SheetDescription></SheetHeader>{selected&&selectedMetrics&&<div className="drawer-body"><div className={`detail-score ${tone(selectedMetrics.band)}`}><span>DOWNSIDE CAPTURE</span><strong>{percent(selectedMetrics.capture,1)}</strong><span>{selectedMetrics.band||'Awaiting data'}</span></div><dl className="detail-metrics">{[['Friday close',number(selected.previousClose)],['Premarket high',number(selected.high)],['Premarket low',number(selected.low)],['Price at 6:20 AM PT',number(selected.last)],['Range drawdown',percent(selected.drawdown)],['RS advantage',signed(selectedMetrics.advantage,' pp')],['Recovery from low',signed(selectedMetrics.recovery)],['Change vs Friday close',signed(selectedMetrics.absolute)],['Premarket volume',number(selected.volume,0)],['Market capitalization',selected.marketCap===null?'—':`$${number(selected.marketCap/1e9,1)}B`],['Last observation',selected.asOf?`${clock(selected.asOf)} ET`:'Not supplied']].map(([k,v])=><div key={k}><dt>{k}</dt><dd className="mono">{v}</dd></div>)}</dl><div className="inline-note"><Info size={16}/><p>{selected.source}{selected.issue?` · ${selected.issue}`:''}</p></div>{mode==='imported'&&<p className="muted">Only an approximate drawdown was supplied for this stock. Missing prices are left blank.</p>}</div>}</SheetContent></Sheet>
+    {isDevelopmentMode&&<DesignLabs/>}
   </div>;
 }
