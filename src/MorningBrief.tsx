@@ -91,10 +91,6 @@ export default function MorningBrief({ data, error }: { data: Snapshot; error: s
   return <section id="morning-brief" className="dashboard-section morning-section" aria-labelledby="brief-title" tabIndex={-1}>
     <div className="page-heading"><div><div className="eyebrow">THE WARREN / THE MORNING READ</div><div className="section-heading-row"><h1 id="brief-title">Morning brief<span className="title-dot">.</span></h1><a className="primary-button section-jump" href="#relative-strength">Skip to relative strength ↓</a></div></div><div className="heading-meta"><span className="date-label">{new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeZone: 'UTC' }).format(new Date(data.sessionDate + 'T12:00:00Z'))}</span><span className="session-chip">{imported ? 'USER-PROVIDED NOTES' : '09:20 ET SNAPSHOT'}</span></div></div>
     <div className="source-notice"><div><strong>{imported ? 'Your morning briefing' : 'Morning snapshot'}</strong><span>{error || (imported ? 'Figures and headlines supplied by you; not independently verified.' : 'Source times and coverage are recorded with each note.')}</span></div></div>
-    <div className="morning-sections">
-      <div className="morning-column">{(['indices', 'macro'] as const).map((key) => renderSection(sections[sectionIndex(key)], sectionIndex(key)))}</div>
-      <div className="morning-column">{(['bonds', 'keyLevels', 'earnings'] as const).map((key) => renderSection(sections[sectionIndex(key)], sectionIndex(key)))}</div>
-      {renderSection(sections[sectionIndex('news')], sectionIndex('news'))}
-    </div>
+    <div className="morning-sections">{sections.map((section, index) => renderSection(section, index))}</div>
   </section>;
 }
