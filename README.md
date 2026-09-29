@@ -67,20 +67,85 @@ The production build writes to `dist/`. Vercel uses the checked-in build configu
 
 Validation covers TypeScript, snapshot structure, source metadata, date handling, cutoff handling, the legacy example, and the Massive route's ET daylight-saving windows, 09:20 exclusion, field provenance and server-only API-key use.
 
-## Text color tokens
+## Design reference
 
-Edit the theme values in `src/globals.css`; component text colors reference semantic roles rather than literal hex values. `npm test` checks both CSS files for hard-coded `color` declarations.
+The combined dashboard uses the theme blocks and semantic text roles in `src/globals.css`. Change a theme token there to update every element that consumes it. Surface, border, and some component colors still have explicit rules; the component table below locates those exceptions. `src/MassiveConnectionTest.css` styles the connection result. The older CSS for the former separate Premarket layout is retained in `src/globals.css`, but both HTML entries now render the combined dashboard.
 
-| Role | Token | Light | Dark |
+### Theme colors
+
+| Role / affected elements | CSS token | Light | Dark |
 | --- | --- | --- | --- |
-| Main text, headings, dates | `--foreground` / `--text-primary` | `#000000` | `#E7E8E9` |
-| Supporting text | `--text-secondary` | `#555555` | `#C5C8CB` |
-| Muted text | `--text-muted` | `#6B6B6B` | `#AEB2B6` |
-| Text on primary buttons | `--text-inverse` | `#FFFFFF` | `#25282B` |
-| Price up / down | `--price-up` / `--price-down` | `#27824D` / `#C63E3E` | `#62C982` / `#F07878` |
+| Page canvas | `--background` | `#F4F1EB` | `#25282B` |
+| Main text, headings, dates, briefing paragraphs | `--foreground`, `--text-primary` | `#000000` | `#E7E8E9` |
+| Supporting labels and navigation | `--text-secondary` | `#555555` | `#C5C8CB` |
+| Muted captions, metadata, source details | `--muted-foreground`, `--text-muted` | `#6B6B6B` | `#AEB2B6` |
+| Cards and market tiles | `--card` | `#FBFAF8` | `#303438` |
+| Popovers | `--popover` | `#FBFAF8` | `#383C40` |
+| Secondary surfaces | `--secondary` | `#E8E5DF` | `#3A3E42` |
+| Muted surfaces | `--muted` | `#EEECE7` | `#34383C` |
+| Accent surfaces | `--accent` | `#E7E4DE` | `#44494E` |
+| Primary controls | `--primary` | `#555555` | `#D1D3D5` |
+| Text on primary controls | `--primary-foreground`, `--text-inverse` | `#FFFFFF` | `#25282B` |
+| Base border / input border | `--border` / `--input` | `#B7B3AC` / `#AAA69F` | `#666C72` / `#747A80` |
+| Focus ring | `--ring` | `#777777` | `#B7BBC0` |
+| Positive price | `--price-up` (from `--green`) | `#27824D` | `#62C982` |
+| Negative price / destructive | `--price-down` (from `--red`) | `#C63E3E` | `#F07878` |
 | Error text | `--text-error` | `#934E45` | `#E2AFA7` |
+| Success text | `--text-success` | `#27824D` | `#62C982` |
 
-Resilience text has five `--rs-*-text` roles, with theme-specific values. The five `--rs-*` spectrum fills are shared by both themes. This text palette does not govern surface and border colors.
+`--card-foreground`, `--popover-foreground`, `--secondary-foreground`, and `--accent-foreground` follow `--foreground`. The page title, left date, ticker/company name, and briefing body therefore change together. `npm test` rejects hard-coded CSS `color` declarations so future text changes keep using roles.
+
+### Resilience colors
+
+The spectrum fills are identical in both modes. Label colors vary by mode for legibility.
+
+| Classification | Fill token / both modes | Text token | Light text | Dark text |
+| --- | --- | --- | --- | --- |
+| Exceptional | `--rs-exceptional` `#C3F86B` | `--rs-exceptional-text` | `#A64F24` | `#C3F86B` |
+| Clear | `--rs-clear` `#89B861` | `--rs-clear-text` | `#A64F24` | `#A6D982` |
+| Moderate | `--rs-moderate` `#708C5D` | `--rs-moderate-text` | `#86694F` | `#A9B7A3` |
+| Market-like | `--rs-market` `#BEA16E` | `--rs-market-text` | `#806044` | `#C8B998` |
+| Laggard | `--rs-laggard` `#C5807A` | `--rs-laggard-text` | `#A34F45` | `#DEA19C` |
+
+These fills appear in the resilience scale, stock capture tracks, and sector bars. Price red/green is separate from the resilience scale.
+
+### Component color exceptions
+
+These are explicit component rules in `src/globals.css`; changing only a base token will not necessarily change them.
+
+| Element | Light | Dark |
+| --- | --- | --- |
+| Top bar background / border | `#FBFAF8` / `#D7D3CC` | `#292D31` / `#454A4F` |
+| Sticky market strip background / border | `rgba(251,250,248,.97)` / `#D7D3CC` | `rgba(41,45,49,.97)` / `#4A4F54` |
+| Card and market tile outer border | `#B7B3AC` | `#666C72` |
+| Inner dividers in panels, scanner, sector and scale rows | `#C3BFB8` | `#5D6369` |
+| Benchmark card gradient | `#FBFAF8` → `#F0EEE9` | `#34383C` → `#2C3034` |
+| Source notice surface / border | `#EEECE7` / `#D7D3CC` | `#34383C` / `#4A4F54` |
+| Status chip / theme toggle surface and border | `#EFEDE8` / `#D0CCC5` | `#35393D` / `#555B60` |
+| Primary button normal → hover | `#555555` → `#3E3E3E` | `#D1D3D5` → `#FFFFFF` |
+| Secondary button surface / border | `#EFEDE8` / `#D0CCC5` | `#3A3E42` / `#555B60` |
+| Capture/coverage/sector track background | `#E2DED7` | `#44494E` |
+| Connection result surface / border (`MassiveConnectionTest.css`) | `#FFF8EE` / `#D5C6B3` | `#20271C` / `#45533A` |
+
+### Typography and size
+
+| Element | Family / weight | Size |
+| --- | --- | --- |
+| General UI and controls | Arial, Helvetica, sans-serif / normal | 16px body; controls vary below |
+| Morning brief and Relative strength titles | Newsreader / 700 | `--dashboard-title-size`: 43px, 35px at ≤700px |
+| Left date | Newsreader / 700 | Same title-size token |
+| Numbered morning sections | Newsreader / 700 | `--dashboard-section-size`: 24px |
+| Card and note titles | Newsreader / 500 | `--dashboard-card-title-size`: 16px |
+| Briefing paragraphs | Newsreader / 400 | 14px desktop, 13px at ≤640px; bonds copy 13px |
+| Brief closing line | Newsreader label / 500; Arial detail / normal | 20px label, 14px detail |
+| Eyebrows, buttons, chips and metadata | Arial / 600 where emphasized | Mostly 12px; heading chip 10px at ≤540px |
+| Market-strip price | UI monospace / 500 | 20px |
+| Scanner table | UI monospace for numeric values, Arial for labels | 14px body, 12px headers/company secondary labels |
+| Index quotes / key-level tables | Arial with monospace numeric values | 14px / 13px body; 12px headings; 11px timestamps |
+| Benchmark headline number | Arial / 500 | 34px base; 38px at ≥1450px, 29px at ≤1200px, 28px at ≤640px |
+
+Newsreader loads weights 400, 500, 600, and 700 from Google Fonts, with Georgia as fallback. Numeric fields use `ui-monospace`, SFMono-Regular, Menlo, Consolas, then generic monospace. Shared layout sizes are `--card-radius: 8px`, `--card-gap: 16px`, and `--card-inset: 20px` (16px at ≤1200px; 14px at ≤640px). The centered page headings stack the date/status above the title at ≤1250px and put the status on its own row at ≤540px.
 
 ## Consolidated layout
+
 The morning brief has five sections: overnight indices, overnight bonds, upcoming macro events, upcoming earnings, and overnight news. The button beside the Morning brief heading skips to the scanner; the button beside the Relative strength heading returns to the brief. Both use same-page anchors and account for the sticky header.
