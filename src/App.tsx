@@ -98,7 +98,7 @@ export default function Scanner() {
     <main>
       <MarketStrip data={data}/>
       {isArchivePreview&&<div className="snapshot-preview-banner" role="note"><strong>September 27 preview copy</strong><span>Duplicated from the September 28 snapshot; prices and timestamps have not been verified for September 27.</span></div>}
-      <MorningBrief data={data} error={error}/>
+      <MorningBrief data={data} error={error} dateLabel={isArchivePreview?'September 27, 2026 · preview copy':undefined}/>
 
       <section id="relative-strength" className="dashboard-section" aria-labelledby="scanner-title" tabIndex={-1}>
       <div className="page-heading"><div><div className="eyebrow">THE PREMARKET READ <span>/</span> RS SCANNER V1</div><div className="section-heading-row"><h2 id="scanner-title" className="section-title">Relative strength<span className="title-dot">.</span></h2><a className="primary-button section-jump" href="#morning-brief">Back to morning brief ↑</a></div><p>Who held up when the market sold off?</p></div><div className="heading-meta"><span className="session-chip"><LockKeyhole size={13}/>{mode==='imported'?'LEGACY EXAMPLE':'FROZEN SNAPSHOT'}</span><span className="date-label">{pageDateLabel} <span>· ET</span></span></div></div>
