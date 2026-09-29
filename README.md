@@ -67,5 +67,20 @@ The production build writes to `dist/`. Vercel uses the checked-in build configu
 
 Validation covers TypeScript, snapshot structure, source metadata, date handling, cutoff handling, the legacy example, and the Massive route's ET daylight-saving windows, 09:20 exclusion, field provenance and server-only API-key use.
 
+## Text color tokens
+
+Edit the theme values in `src/globals.css`; component text colors reference semantic roles rather than literal hex values. `npm test` checks both CSS files for hard-coded `color` declarations.
+
+| Role | Token | Light | Dark |
+| --- | --- | --- | --- |
+| Main text, headings, dates | `--foreground` / `--text-primary` | `#3E3026` | `#E7E8E9` |
+| Supporting text | `--text-secondary` | `#555555` | `#C5C8CB` |
+| Muted text | `--text-muted` | `#6B6B6B` | `#AEB2B6` |
+| Text on primary buttons | `--text-inverse` | `#FFFFFF` | `#25282B` |
+| Price up / down | `--price-up` / `--price-down` | `#27824D` / `#C63E3E` | `#62C982` / `#F07878` |
+| Error text | `--text-error` | `#934E45` | `#E2AFA7` |
+
+Resilience text has five `--rs-*-text` roles, with theme-specific values. The five `--rs-*` spectrum fills are shared by both themes. This text palette does not govern surface and border colors.
+
 ## Consolidated layout
 The morning brief has five sections: overnight indices, overnight bonds, upcoming macro events, upcoming earnings, and overnight news. The button beside the Morning brief heading skips to the scanner; the button beside the Relative strength heading returns to the brief. Both use same-page anchors and account for the sticky header.
