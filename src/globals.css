@@ -407,6 +407,7 @@ h1,h2,h3{font-family:"Newsreader",Georgia,serif;font-optical-sizing:auto}
 .dashboard-section>.page-heading.centered-heading{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;gap:16px;text-align:center}
 .centered-heading .heading-date{grid-column:1;justify-self:start;text-align:left;font-family:"Newsreader",Georgia,serif;font-size:var(--dashboard-title-size);font-weight:700;line-height:1.2;letter-spacing:-1px;color:var(--foreground)}
 .centered-heading .heading-date span{color:inherit}
+html[data-theme="dark"] .centered-heading .heading-date{color:#FFFFFF}
 .centered-heading .heading-center{grid-column:2;min-width:0}
 .dashboard-section>.page-heading.centered-heading .section-heading-row{position:relative;justify-content:center}
 .centered-heading .section-jump{position:absolute;left:calc(100% + 20px)}
