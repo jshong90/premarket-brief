@@ -292,3 +292,11 @@ h1,h2,h3{font-family:"Newsreader",Georgia,serif;font-optical-sizing:auto}
 .dashboard-section>.page-heading .section-heading-row.is-revealed{opacity:1;transform:translateY(0)}
 @media(prefers-reduced-motion:reduce){.dashboard-section>.page-heading .section-heading-row{opacity:1;transform:none;transition:none}}
 
+
+
+/* Shared type scale for dashboard headers: page, section, card. */
+:root{--dashboard-title-size:36px;--dashboard-section-size:20px;--dashboard-card-title-size:16px}
+.page-heading h1,.section-title{font-size:var(--dashboard-title-size)}
+.briefing-intro h2,.morning-sections .briefing-section-head h2{font-size:var(--dashboard-section-size)}
+.panel-heading h2,.morning-sections .briefing-note h3{font-size:var(--dashboard-card-title-size)}
+@media(max-width:700px){:root{--dashboard-title-size:29px}}
