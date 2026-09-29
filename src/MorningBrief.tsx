@@ -75,21 +75,26 @@ function KeyLevelsTable({ data }: { data: Snapshot }) {
 
 export default function MorningBrief({ data, error }: { data: Snapshot; error: string }) {
   const imported = data.status === 'imported';
+  const renderSection = ({ key, title }: { key: keyof Briefing | 'keyLevels'; title: string }, sectionIndex: number) => key === 'keyLevels'
+    ? <section className="briefing-section panel key-levels-section" key={key} aria-labelledby="brief-key-levels">
+      <div className="briefing-section-head"><span className="brief-section-number">0{sectionIndex + 1}</span><h2 id="brief-key-levels">{title}</h2></div>
+      <div className="briefing-notes"><KeyLevelsTable data={data} /></div>
+    </section>
+    : <section className={`briefing-section panel ${key === 'bonds' ? 'morning-bonds-section' : ''}`} key={key} aria-labelledby={'brief-' + key}>
+    <div className="briefing-section-head"><span className="brief-section-number">0{sectionIndex + 1}</span><h2 id={'brief-' + key}>{title}</h2></div>
+    <div className="briefing-notes">{(data.briefing?.[key] || []).length ? data.briefing![key].map((note, index) => {
+      const quotes = (note as typeof note & IndexQuoteNote).indexQuotes;
+      return <article className="briefing-note" key={index}><h3>{note.title}</h3>{quotes && quotes.length > 0 && <div className="index-quotes-wrap"><table className="index-quotes"><thead><tr><th scope="col">Index futures</th><th scope="col">Friday close</th><th scope="col">6:20 AM PT</th><th scope="col">Change</th></tr></thead><tbody>{quotes.map((row) => <tr key={row.label}><th scope="row">{row.label}</th><td className="mono">{formatPrice(row.fridayClose)}</td><td className="mono">{formatPrice(row.scanPrice)}</td><td className={`mono ${row.changePercent === null ? '' : row.changePercent < 0 ? 'negative' : row.changePercent > 0 ? 'positive' : ''}`}>{formatChange(row.changePercent)}</td></tr>)}</tbody></table></div>}<p>{note.body}</p><div className="briefing-source"><span><strong>{note.source}</strong>{(note.publishedAt || note.asOf) && <small>{new Date((note.publishedAt || note.asOf)!).toLocaleString('en-US', { timeZone: 'America/New_York' })} ET</small>}</span><a href={note.url} target="_blank" rel="noreferrer">{imported ? 'Reference' : 'Source'} ↗</a></div></article>;
+    }) : <div className="briefing-empty">No notes supplied for this section.</div>}</div>
+  </section>;
+  const sectionIndex = (key: keyof Briefing | 'keyLevels') => sections.findIndex((section) => section.key === key);
   return <section id="morning-brief" className="dashboard-section morning-section" aria-labelledby="brief-title" tabIndex={-1}>
     <div className="page-heading"><div><div className="eyebrow">THE WARREN / THE MORNING READ</div><div className="section-heading-row"><h1 id="brief-title">Morning brief<span className="title-dot">.</span></h1><a className="primary-button section-jump" href="#relative-strength">Skip to relative strength ↓</a></div></div><div className="heading-meta"><span className="date-label">{new Intl.DateTimeFormat('en-US', { dateStyle: 'long', timeZone: 'UTC' }).format(new Date(data.sessionDate + 'T12:00:00Z'))}</span><span className="session-chip">{imported ? 'USER-PROVIDED NOTES' : '09:20 ET SNAPSHOT'}</span></div></div>
     <div className="source-notice"><div><strong>{imported ? 'Your morning briefing' : 'Morning snapshot'}</strong><span>{error || (imported ? 'Figures and headlines supplied by you; not independently verified.' : 'Source times and coverage are recorded with each note.')}</span></div></div>
-    <div className="morning-sections">{sections.map(({ key, title }, sectionIndex) => key === 'keyLevels'
-      ? <section className="briefing-section panel key-levels-section" key={key} aria-labelledby="brief-key-levels">
-        <div className="briefing-section-head"><span className="brief-section-number">0{sectionIndex + 1}</span><h2 id="brief-key-levels">{title}</h2></div>
-        <div className="briefing-notes"><KeyLevelsTable data={data} /></div>
-      </section>
-      : <section className="briefing-section panel" key={key} aria-labelledby={'brief-' + key}>
-      <div className="briefing-section-head"><span className="brief-section-number">0{sectionIndex + 1}</span><h2 id={'brief-' + key}>{title}</h2></div>
-      <div className="briefing-notes">{(data.briefing?.[key] || []).length ? data.briefing![key].map((note, index) => {
-        const quotes = (note as typeof note & IndexQuoteNote).indexQuotes;
-        return <article className="briefing-note" key={index}><h3>{note.title}</h3>{quotes && quotes.length > 0 && <div className="index-quotes-wrap"><table className="index-quotes"><thead><tr><th scope="col">Index futures</th><th scope="col">Friday close</th><th scope="col">6:20 AM PT</th><th scope="col">Change</th></tr></thead><tbody>{quotes.map((row) => <tr key={row.label}><th scope="row">{row.label}</th><td className="mono">{formatPrice(row.fridayClose)}</td><td className="mono">{formatPrice(row.scanPrice)}</td><td className={`mono ${row.changePercent === null ? '' : row.changePercent < 0 ? 'negative' : row.changePercent > 0 ? 'positive' : ''}`}>{formatChange(row.changePercent)}</td></tr>)}</tbody></table></div>}<p>{note.body}</p><div className="briefing-source"><span><strong>{note.source}</strong>{(note.publishedAt || note.asOf) && <small>{new Date((note.publishedAt || note.asOf)!).toLocaleString('en-US', { timeZone: 'America/New_York' })} ET</small>}</span><a href={note.url} target="_blank" rel="noreferrer">{imported ? 'Reference' : 'Source'} ↗</a></div></article>;
-      }) : <div className="briefing-empty">No notes supplied for this section.</div>}</div>
-    </section>)}
+    <div className="morning-sections">
+      <div className="morning-column">{(['indices', 'macro'] as const).map((key) => renderSection(sections[sectionIndex(key)], sectionIndex(key)))}</div>
+      <div className="morning-column">{(['bonds', 'keyLevels', 'earnings'] as const).map((key) => renderSection(sections[sectionIndex(key)], sectionIndex(key)))}</div>
+      {renderSection(sections[sectionIndex('news')], sectionIndex('news'))}
     </div>
   </section>;
 }
