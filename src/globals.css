@@ -332,3 +332,23 @@ h1,h2,h3{font-family:"Newsreader",Georgia,serif;font-optical-sizing:auto}
 .panel-heading,.briefing-section-head,.briefing-notes,.sector-list,.rail-description,.sector-note,.table-footer,.ranking-tabs,.filters,.panel-callout,.briefing-intro,.formula-card,.provider-card,.detail-score{padding-inline:var(--card-inset)}
 .distribution-bar,.scale-row{margin-inline:var(--card-inset)}
 .distribution .text-link{margin-left:var(--card-inset)}
+
+
+/* Collapsible source index: citations remain grouped by provider and briefing section. */
+.sources-card{overflow:hidden}
+.sources-card>summary{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px var(--card-inset);cursor:pointer;list-style:none}
+.sources-card>summary::-webkit-details-marker{display:none}
+.sources-card>summary:after{content:'+';color:var(--muted-foreground);font-size:18px;line-height:1}
+.sources-card[open]>summary:after{content:'−'}
+.sources-title{font:500 20px Newsreader,Georgia,serif;color:var(--foreground)}
+.sources-count{color:var(--muted-foreground);font-size:12px}
+.sources-content{padding:0 var(--card-inset) 6px}
+.sources-group{padding:15px 0 16px}
+.sources-group+.sources-group{border-top:1px solid var(--border)}
+.sources-group h3{margin:0 0 8px;font:600 12px Arial,Helvetica,sans-serif;color:var(--foreground);letter-spacing:.06em}
+.sources-intro{margin:0 0 6px;color:var(--muted-foreground);font-size:13px;line-height:1.55}
+.sources-list{margin:0;padding:0;list-style:none}
+.sources-list li{display:grid;gap:4px;padding:10px 0;border-bottom:1px solid var(--border)}
+.sources-list li:last-child{border-bottom:0}
+.sources-list a{width:max-content;max-width:100%;color:var(--foreground);font-size:13px;font-weight:600;text-decoration:underline;text-underline-offset:2px}
+.sources-list small{color:var(--muted-foreground);font-size:12px;line-height:1.5;overflow-wrap:anywhere}
