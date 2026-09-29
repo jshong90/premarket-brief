@@ -30,11 +30,13 @@ export default function Scanner() {
   },[]);
   useEffect(()=>{
     const headings=Array.from(document.querySelectorAll<HTMLElement>('.dashboard-section > .page-heading .section-heading-row'));
-    if(!('IntersectionObserver' in window)){headings.forEach((heading)=>heading.classList.add('is-revealed'));return;}
+    const setVisible=(heading:HTMLElement,visible:boolean)=>{
+      heading.classList.toggle('is-revealed',visible);
+      heading.closest('.page-heading')?.classList.toggle('is-revealed',visible);
+    };
+    if(!('IntersectionObserver' in window)){headings.forEach(heading=>setVisible(heading,true));return;}
     const reveal=new IntersectionObserver((entries)=>{
-      entries.forEach((entry)=>{
-        if(entry.isIntersecting){entry.target.classList.add('is-revealed');reveal.unobserve(entry.target);}
-      });
+      entries.forEach(entry=>setVisible(entry.target as HTMLElement,entry.intersectionRatio>=0.15));
     },{threshold:0.15,rootMargin:'0px 0px -48px 0px'});
     headings.forEach((heading)=>reveal.observe(heading));
     return()=>reveal.disconnect();
@@ -44,9 +46,9 @@ export default function Scanner() {
     if(!('IntersectionObserver' in window)){panels.forEach(panel=>panel.classList.add('bars-visible'));return;}
     const reveal=new IntersectionObserver(entries=>{
       for(const entry of entries){
-        if(entry.isIntersecting){entry.target.classList.add('bars-visible');reveal.unobserve(entry.target);}
+        entry.target.classList.toggle('bars-visible',entry.isIntersecting);
       }
-    },{threshold:0.08,rootMargin:'0px 0px -32px 0px'});
+    },{threshold:0,rootMargin:'0px 0px -32px 0px'});
     panels.forEach(panel=>reveal.observe(panel));
     return()=>reveal.disconnect();
   },[]);

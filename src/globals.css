@@ -365,19 +365,21 @@ h1,h2,h3{font-family:"Newsreader",Georgia,serif;font-optical-sizing:auto}
 
 /* A restrained opening for the morning paper; the scanner heading keeps its scroll reveal. */
 .morning-section>.page-heading .section-heading-row{transition-duration:.98s;transition-timing-function:cubic-bezier(.18,.72,.24,1)}
-.paper-kicker,.paper-meta{animation:paper-settle .93s cubic-bezier(.18,.72,.24,1) both}
-.paper-meta{animation-delay:.12s}
+.paper-kicker,.paper-meta{opacity:0;transform:translateY(8px)}
+.morning-section>.page-heading.is-revealed .paper-kicker,.morning-section>.page-heading.is-revealed .paper-meta{animation:paper-settle .93s cubic-bezier(.18,.72,.24,1) both}
+.morning-section>.page-heading.is-revealed .paper-meta{animation-delay:.12s}
 @keyframes paper-settle{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:translateY(0)}}
 
-/* The jump cue moves once, then remains still. */
-.section-jump .jump-arrow{display:inline-block;animation:jump-cue 1.02s ease-out .9s both}
+/* The jump cue replays when the heading comes back into view. */
+.section-jump .jump-arrow{display:inline-block}
+.section-heading-row.is-revealed .section-jump .jump-arrow{animation:jump-cue 1.02s ease-out .9s both}
 @keyframes jump-cue{0%,100%{transform:translateY(0)}45%{transform:translateY(4px)}}
 
 /* Snapshot data retains its width; only the visual fill grows on entry. */
-.rankings .capture-track>span,.sector-panel .sector-track>i{transform:scaleX(0);transform-origin:left;transition:transform .88s cubic-bezier(.18,.72,.24,1)}
-.rankings.bars-visible .capture-track>span,.sector-panel.bars-visible .sector-track>i{transform:scaleX(1)}
-.distribution-bar>span{transform:scaleX(0);transform-origin:left;transition:transform .65s cubic-bezier(.18,.72,.24,1)}
-.distribution.bars-visible .distribution-bar>span{transform:scaleX(1)}
+.rankings .capture-track>span,.sector-panel .sector-track>i{transform:scaleX(0);transform-origin:left}
+.rankings.bars-visible .capture-track>span,.sector-panel.bars-visible .sector-track>i{transform:scaleX(1);transition:transform .88s cubic-bezier(.18,.72,.24,1)}
+.distribution-bar>span{transform:scaleX(0);transform-origin:left}
+.distribution.bars-visible .distribution-bar>span{transform:scaleX(1);transition:transform .65s cubic-bezier(.18,.72,.24,1)}
 .distribution-bar>span:nth-child(2){transition-delay:.10s}.distribution-bar>span:nth-child(3){transition-delay:.21s}.distribution-bar>span:nth-child(4){transition-delay:.31s}.distribution-bar>span:nth-child(5){transition-delay:.42s}
 .scanner-table tr.exceptional .capture-track>span{background:#c3f86b}
 .scanner-table tr.clear .capture-track>span{background:#89b861}
@@ -395,7 +397,8 @@ h1,h2,h3{font-family:"Newsreader",Georgia,serif;font-optical-sizing:auto}
 .brief-closing span{min-width:0}
 @media(max-width:700px){.brief-closing{display:block}.brief-closing strong{display:block;margin-bottom:5px}}
 @media(prefers-reduced-motion:reduce){
-  .paper-kicker,.paper-meta,.section-jump .jump-arrow{animation:none}
+  .paper-kicker,.paper-meta{opacity:1;transform:none}
+  .morning-section>.page-heading.is-revealed .paper-kicker,.morning-section>.page-heading.is-revealed .paper-meta,.section-heading-row.is-revealed .section-jump .jump-arrow{animation:none}
   .morning-section>.page-heading .section-heading-row{transition:none}
-  .rankings .capture-track>span,.sector-panel .sector-track>i,.distribution-bar>span{transform:none;transition:none}
+  .rankings .capture-track>span,.rankings.bars-visible .capture-track>span,.sector-panel .sector-track>i,.sector-panel.bars-visible .sector-track>i,.distribution-bar>span,.distribution.bars-visible .distribution-bar>span{transform:none;transition:none}
 }
