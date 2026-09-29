@@ -73,7 +73,7 @@ Edit the theme values in `src/globals.css`; component text colors reference sema
 
 | Role | Token | Light | Dark |
 | --- | --- | --- | --- |
-| Main text, headings, dates | `--foreground` / `--text-primary` | `#3E3026` | `#E7E8E9` |
+| Main text, headings, dates | `--foreground` / `--text-primary` | `#000000` | `#E7E8E9` |
 | Supporting text | `--text-secondary` | `#555555` | `#C5C8CB` |
 | Muted text | `--text-muted` | `#6B6B6B` | `#AEB2B6` |
 | Text on primary buttons | `--text-inverse` | `#FFFFFF` | `#25282B` |

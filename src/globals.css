@@ -95,7 +95,7 @@ html{scroll-behavior:smooth;scroll-padding-top:var(--dashboard-offset,265px)}
 
 /* Neutral interface palette; red and green are reserved for price direction. */
 html[data-theme="light"]{
-  --background:#f4f1eb;--foreground:#3e3026;--card:#fbfaf8;--card-foreground:var(--foreground);
+  --background:#f4f1eb;--foreground:#000000;--card:#fbfaf8;--card-foreground:var(--foreground);
   --popover:#fbfaf8;--popover-foreground:var(--foreground);--primary:#555555;--primary-foreground:#ffffff;
   --secondary:#e8e5df;--secondary-foreground:var(--foreground);--muted:#eeece7;--muted-foreground:#6b6b6b;
   --accent:#e7e4de;--accent-foreground:var(--foreground);--border:#d7d3cc;--input:#c9c5be;--ring:#777777;
