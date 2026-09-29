@@ -2,7 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { flushSync } from 'react-dom';
-import { ArrowDown, ArrowDownUp, ArrowUpRight, ChevronRight, CircleHelp, Database, Info, Clock3, LockKeyhole, Search, ShieldCheck, SlidersHorizontal, Sunrise, X } from 'lucide-react';
+import { ArrowDown, ArrowDownUp, ArrowUpRight, ChevronLeft, ChevronRight, CircleHelp, Database, Info, Clock3, LockKeyhole, Search, ShieldCheck, SlidersHorizontal, Sunrise, X } from 'lucide-react';
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle } from '@/components/ui/sheet';
@@ -53,7 +53,9 @@ export default function Scanner() {
     // Read one published data packet per page load. Never poll market prices.
     if (window.location.protocol==='file:') return;
     const controller=new AbortController();
-    fetch(new URL('./data/snapshot.json',window.location.href),{cache:'no-store',signal:controller.signal})
+    const requestedDate=new URLSearchParams(window.location.search).get('date');
+    const snapshotFile=requestedDate==='2026-09-27'?'snapshot-2026-09-27.json':'snapshot.json';
+    fetch(new URL(`./data/${snapshotFile}`,window.location.href),{cache:'no-store',signal:controller.signal})
       .then(r=>{if(!r.ok)throw new Error(`Snapshot file unavailable (${r.status}).`);return r.json();})
       .then(packet=>setData(readSnapshot(packet)))
       .catch(e=>{if(e.name!=='AbortError')setError(`${e.message} Showing the unverified legacy example.`);});
@@ -66,6 +68,8 @@ export default function Scanner() {
   const changeSort=(key:SortKey)=>setSort(s=>({key,asc:s.key===key?!s.asc:key!=='advantage'&&key!=='recovery'}));
   const changeTab=(t:string)=>{setTab(t);setSort({key:t==='recovery'?'recovery':'capture',asc:t!=='recovery'});};
   const dateLabel=data.sessionDate?new Intl.DateTimeFormat('en-US',{month:'short',day:'numeric',year:'numeric',timeZone:'UTC'}).format(new Date(data.sessionDate+'T12:00:00Z')):'Current session';
+  const isArchivePreview=new URLSearchParams(window.location.search).get('date')==='2026-09-27';
+  const pageDateLabel=isArchivePreview?'Sep 27, 2026 (preview copy)':dateLabel;
   const selectedMetrics=selected?metrics(selected,data.benchmarks.find(b=>b.id===(data.sectors.some(s=>s.ticker===selected.ticker)?'ES':benchmark==='auto'?selected.benchmark:benchmark))):null;
 
   const toolState=useRef({rows,mode,sector,benchmark,query,data});
@@ -87,15 +91,17 @@ export default function Scanner() {
 
   return <div className="app-shell">
     <header className="topbar">
-      <a href="./index.html" className="brand" aria-label="The Warren home"><span className="brand-mark">W</span><span>THE WARREN<span className="brand-sub">MARKET DESK</span></span></a>
+      <div className="topbar-leading"><a className="snapshot-nav-link" href={isArchivePreview?'./index.html':'./index.html?date=2026-09-27'} aria-label={isArchivePreview?'Return to the latest snapshot':'View the September 27 snapshot preview'} title={isArchivePreview?'Latest snapshot':'Previous snapshot · September 27'}>{isArchivePreview?<ChevronRight size={18}/>:<ChevronLeft size={18}/>}<span>{isArchivePreview?'Latest':'9/27'}</span></a><a href="./index.html" className="brand" aria-label="The Warren home"><span className="brand-mark">W</span><span>THE WARREN<span className="brand-sub">MARKET DESK</span></span></a></div>
       
       <ThemeToggle/><button className="connection-button" onClick={()=>setDrawer('connections')}><Clock3 size={14}/><span>06:20 Pacific</span><ChevronRight size={15}/></button>
     </header>
     <main>
       <MarketStrip data={data}/>
+      {isArchivePreview&&<div className="snapshot-preview-banner" role="note"><strong>September 27 preview copy</strong><span>Duplicated from the September 28 snapshot; prices and timestamps have not been verified for September 27.</span></div>}
       <MorningBrief data={data} error={error}/>
+
       <section id="relative-strength" className="dashboard-section" aria-labelledby="scanner-title" tabIndex={-1}>
-      <div className="page-heading"><div><div className="eyebrow">THE PREMARKET READ <span>/</span> RS SCANNER V1</div><div className="section-heading-row"><h2 id="scanner-title" className="section-title">Relative strength<span className="title-dot">.</span></h2><a className="primary-button section-jump" href="#morning-brief">Back to morning brief ↑</a></div><p>Who held up when the market sold off?</p></div><div className="heading-meta"><span className="session-chip"><LockKeyhole size={13}/>{mode==='imported'?'LEGACY EXAMPLE':'FROZEN SNAPSHOT'}</span><span className="date-label">{dateLabel} <span>· ET</span></span></div></div>
+      <div className="page-heading"><div><div className="eyebrow">THE PREMARKET READ <span>/</span> RS SCANNER V1</div><div className="section-heading-row"><h2 id="scanner-title" className="section-title">Relative strength<span className="title-dot">.</span></h2><a className="primary-button section-jump" href="#morning-brief">Back to morning brief ↑</a></div><p>Who held up when the market sold off?</p></div><div className="heading-meta"><span className="session-chip"><LockKeyhole size={13}/>{mode==='imported'?'LEGACY EXAMPLE':'FROZEN SNAPSHOT'}</span><span className="date-label">{pageDateLabel} <span>· ET</span></span></div></div>
       <div className={`source-notice ${mode==='imported'?'is-imported':''}`}>
         <Info size={16}/><div>{mode==='imported'?<><strong>Legacy example · cutoff unverified</strong><span>Earlier approximate drawdowns. The daily snapshot freezes at 06:20 Pacific.</span></>:<><strong>Frozen at 06:20 Pacific · {data.status==='partial'?'partial coverage':data.status==='unavailable'?'data unavailable':'daily snapshot'}</strong><span>{data.messages[0]||'Overnight ranges through 09:20 ET. Prices stay fixed for this session.'}</span></>}</div>
         
