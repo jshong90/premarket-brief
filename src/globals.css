@@ -184,9 +184,13 @@ html[data-theme="light"] .classification.exceptional,html[data-theme="light"] .c
 html[data-theme="light"] .classification.moderate{background:#f0e2d1;border-color:#d7bea1;color:#86694f}
 html[data-theme="light"] .classification.neutral{background:#eee0cf;border-color:#d4bda3;color:#806044}
 html[data-theme="light"] .classification.laggard{background:#f1d8d1;border-color:#d6a399;color:#a34f45}
+.distribution-bar>.exceptional,.scale-row i.exceptional{background:#c3f86b}
+.distribution-bar>.clear,.scale-row i.clear{background:#89b861}
+.distribution-bar>.moderate,.scale-row i.moderate{background:#708c5d}
+.distribution-bar>.neutral,.scale-row i.neutral{background:#bea16e}
+.distribution-bar>.laggard,.scale-row i.laggard{background:#c5807a}
 
-
-/* Resilience spectrum colors are fixed across themes. */
+/* Resilience spectrum colors stay fixed across themes. */
 .distribution-bar>.exceptional,.scale-row i.exceptional{background:#c3f86b}
 .distribution-bar>.clear,.scale-row i.clear{background:#89b861}
 .distribution-bar>.moderate,.scale-row i.moderate{background:#708c5d}
@@ -225,3 +229,14 @@ html[data-theme="dark"] body h1,html[data-theme="dark"] body h2,html[data-theme=
 .index-quotes th:first-child{text-align:left}
 .index-quotes tbody th{font-weight:500}
 .index-quotes tbody tr:last-child>*{border-bottom:0}
+.key-levels-wrap{max-width:100%;overflow-x:auto}
+.key-levels-table{border-collapse:collapse;width:100%;min-width:430px;font-size:13px;font-variant-numeric:tabular-nums}
+.key-levels-table th,.key-levels-table td{padding:10px 8px;border-bottom:1px solid var(--border);text-align:right;white-space:nowrap}
+.key-levels-table thead th{font-size:12px;font-weight:600;color:var(--foreground)}
+.key-levels-table th:first-child{text-align:left}
+.key-levels-table tbody th{font-weight:500}
+.key-levels-table tbody th a{color:var(--foreground)}
+.key-levels-table tbody th a:hover{text-decoration:underline;text-underline-offset:3px}
+.key-levels-table tbody td small{display:block;margin-top:3px;font:11px Arial,Helvetica,sans-serif;color:var(--muted-foreground);letter-spacing:0}
+.key-levels-table tbody tr:last-child>*{border-bottom:0}
+.key-levels-note{margin:12px 0 0;color:var(--muted-foreground);font-size:12px;line-height:1.6}
