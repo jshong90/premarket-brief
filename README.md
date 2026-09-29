@@ -131,20 +131,20 @@ These are explicit component rules in `src/globals.css`; changing only a base to
 
 | Element | Family / weight | Size |
 | --- | --- | --- |
-| General UI and controls | Arial, Helvetica, sans-serif / normal | 16px body; controls vary below |
+| General UI and controls | Source Sans 3 / normal | 16px body; controls vary below |
 | Morning brief and Relative strength titles | Newsreader / 700 | `--dashboard-title-size`: 43px, 35px at ≤700px |
 | Left date | Newsreader / 700 | Same title-size token |
 | Numbered morning sections | Newsreader / 700 | `--dashboard-section-size`: 24px |
 | Card and note titles | Newsreader / 500 | `--dashboard-card-title-size`: 16px |
 | Briefing paragraphs | Newsreader / 400 | 14px desktop, 13px at ≤640px; bonds copy 13px |
-| Brief closing line | Newsreader label / 500; Arial detail / normal | 20px label, 14px detail |
-| Eyebrows, buttons, chips and metadata | Arial / 600 where emphasized | Mostly 12px; heading chip 10px at ≤540px |
+| Brief closing line | Newsreader label / 500; Source Sans 3 detail / normal | 20px label, 14px detail |
+| Eyebrows, buttons, chips and metadata | Source Sans 3 / 600 where emphasized | Mostly 12px; heading chip 10px at ≤540px |
 | Market-strip price | UI monospace / 500 | 20px |
-| Scanner table | UI monospace for numeric values, Arial for labels | 14px body, 12px headers/company secondary labels |
-| Index quotes / key-level tables | Arial with monospace numeric values | 14px / 13px body; 12px headings; 11px timestamps |
-| Benchmark headline number | Arial / 500 | 34px base; 38px at ≥1450px, 29px at ≤1200px, 28px at ≤640px |
+| Scanner table | UI monospace for numeric values, Source Sans 3 for labels | 14px body, 12px headers/company secondary labels |
+| Index quotes / key-level tables | Source Sans 3 with monospace numeric values | 14px / 13px body; 12px headings; 11px timestamps |
+| Benchmark headline number | Source Sans 3 / 500 | 34px base; 38px at ≥1450px, 29px at ≤1200px, 28px at ≤640px |
 
-Newsreader loads weights 400, 500, 600, and 700 from Google Fonts, with Georgia as fallback. Numeric fields use `ui-monospace`, SFMono-Regular, Menlo, Consolas, then generic monospace. Shared layout sizes are `--card-radius: 8px`, `--card-gap: 16px`, and `--card-inset: 20px` (16px at ≤1200px; 14px at ≤640px). The centered page headings stack the date/status above the title at ≤1250px and put the status on its own row at ≤540px.
+Source Sans 3 and Newsreader load weights 400, 500, 600, and 700 from Google Fonts. Source Sans 3 uses Arial, Helvetica, then generic sans-serif as fallbacks; Newsreader uses Georgia. Numeric fields use `ui-monospace`, SFMono-Regular, Menlo, Consolas, then generic monospace. Shared layout sizes are `--card-radius: 8px`, `--card-gap: 16px`, and `--card-inset: 20px` (16px at ≤1200px; 14px at ≤640px). The centered page headings stack the date/status above the title at ≤1250px and put the status on its own row at ≤540px.
 
 ## Consolidated layout
 
