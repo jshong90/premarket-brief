@@ -313,3 +313,7 @@ h1,h2,h3{font-family:"Newsreader",Georgia,serif;font-optical-sizing:auto}
   .morning-sections{gap:16px}
   .morning-sections .briefing-section-head{padding:16px var(--brief-card-inset) 12px}
 }
+
+
+/* Give the key-levels footer a consistent inset from the card's lower border. */
+.key-levels-section .briefing-notes{padding-bottom:14px}
