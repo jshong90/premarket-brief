@@ -562,3 +562,11 @@ html[data-theme="light"] .classification.clear{color:var(--rs-clear-text)}
 .snapshot-load-card p{margin:0;color:var(--text-secondary,var(--foreground));font-size:15px;line-height:1.5}
 .snapshot-load-card button{margin-top:20px;padding:9px 16px;border:1px solid var(--border);border-radius:6px;background:var(--secondary);color:var(--foreground);font:inherit;cursor:pointer}
 @media(prefers-reduced-motion:no-preference){.snapshot-load-mark{animation:snapshot-mark-in .42s ease-out both}@keyframes snapshot-mark-in{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}}
+
+
+/* A quiet trading-chart grid sits behind the dashboard in both themes. */
+body{position:relative;isolation:isolate}
+body::before{content:"";position:fixed;inset:-120px 0;z-index:-1;pointer-events:none;opacity:var(--lab-grid-opacity,38%);background-image:linear-gradient(to right,color-mix(in srgb,var(--foreground) 8%,transparent) 1px,transparent 1px),linear-gradient(to bottom,color-mix(in srgb,var(--foreground) 8%,transparent) 1px,transparent 1px),linear-gradient(to right,color-mix(in srgb,var(--foreground) 16%,transparent) 1px,transparent 1px),linear-gradient(to bottom,color-mix(in srgb,var(--foreground) 16%,transparent) 1px,transparent 1px);background-size:var(--lab-grid-spacing,48px) var(--lab-grid-spacing,48px),var(--lab-grid-spacing,48px) var(--lab-grid-spacing,48px),var(--lab-grid-major-spacing,240px) var(--lab-grid-major-spacing,240px),var(--lab-grid-major-spacing,240px) var(--lab-grid-major-spacing,240px);background-position:0 var(--warren-chart-grid-y,0px)}
+html[data-chart-grid="false"] body::before{display:none}
+.viewport-card[data-parallax-layer]{translate:0 var(--warren-parallax-y,0px);transition:translate 90ms linear,opacity var(--lab-card-duration,.65s) ease-out var(--card-reveal-delay,0ms),transform var(--lab-card-duration,.65s) cubic-bezier(.18,.72,.24,1) var(--card-reveal-delay,0ms);will-change:opacity,transform,translate}
+@media(prefers-reduced-motion:reduce){body::before{background-position:0 0!important}.viewport-card[data-parallax-layer]{translate:0 0!important}}

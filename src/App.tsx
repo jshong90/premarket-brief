@@ -70,6 +70,52 @@ export default function Scanner() {
     return()=>reveal.disconnect();
   },[data,snapshotLoaded]);
 
+  useEffect(()=>{
+    if(!snapshotLoaded)return;
+    const root=document.documentElement;
+    const briefCards=Array.from(document.querySelectorAll<HTMLElement>('.morning-sections > .panel'));
+    const scannerCards=Array.from(document.querySelectorAll<HTMLElement>('.benchmark-grid > .benchmark-card, .work-grid .panel, .sector-panel'));
+    briefCards.forEach(node=>node.dataset.parallaxLayer='brief');
+    scannerCards.forEach(node=>node.dataset.parallaxLayer='scanner');
+    const parallaxCards=[...new Set([...briefCards,...scannerCards])];
+    let frame=0;
+    const schedule=()=>{
+      if(frame)return;
+      frame=window.requestAnimationFrame(()=>{
+        frame=0;
+        const reduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches||root.dataset.devReducedMotion==='true';
+        const active=root.dataset.parallaxEnabled!=='false'&&!reduced;
+        const parsed=(value:string|undefined,fallback:number)=>{const n=Number(value);return Number.isFinite(n)?n:fallback;};
+        const speed=Math.max(0,Math.min(1,parsed(root.dataset.parallaxSpeed,0.22)));
+        const depth=Math.max(0,Math.min(120,parsed(root.dataset.parallaxDepth,28)));
+        const direction=root.dataset.parallaxDirection==='reverse'?-1:1;
+        const spacing=Math.max(12,parsed(root.dataset.chartGridSpacing,48));
+        const gridEnabled=root.dataset.chartGrid!=='false';
+        const gridMoves=root.dataset.parallaxGrid!=='false';
+        const shift=active&&gridEnabled&&gridMoves?(window.scrollY*speed*direction%spacing):0;
+        root.style.setProperty('--warren-chart-grid-y',String(shift)+'px');
+        const viewportHeight=Math.max(window.innerHeight,1);
+        const updates=parallaxCards.map(node=>{
+          const layer=node.dataset.parallaxLayer;
+          const layerEnabled=layer==='brief'?root.dataset.parallaxBrief!=='false':root.dataset.parallaxScanner!=='false';
+          const rect=node.getBoundingClientRect();
+          const progress=Math.max(-1,Math.min(1,(rect.top+rect.height/2-viewportHeight/2)/(viewportHeight/2)));
+          const y=active&&layerEnabled?progress*depth*speed*direction:0;
+          return[node,y] as const;
+        });
+        for(const [node,y] of updates)node.style.setProperty('--warren-parallax-y',String(y.toFixed(2))+'px');
+      });
+    };
+    const observer=new MutationObserver(schedule);
+    observer.observe(root,{attributes:true,attributeFilter:['data-parallax-enabled','data-parallax-speed','data-parallax-depth','data-parallax-direction','data-parallax-grid','data-parallax-brief','data-parallax-scanner','data-chart-grid','data-chart-grid-spacing','data-dev-reduced-motion']});
+    const motionPreference=window.matchMedia('(prefers-reduced-motion: reduce)');
+    window.addEventListener('scroll',schedule,{passive:true});
+    window.addEventListener('resize',schedule,{passive:true});
+    motionPreference.addEventListener('change',schedule);
+    schedule();
+    return()=>{observer.disconnect();window.removeEventListener('scroll',schedule);window.removeEventListener('resize',schedule);motionPreference.removeEventListener('change',schedule);if(frame)window.cancelAnimationFrame(frame);parallaxCards.forEach(node=>{delete node.dataset.parallaxLayer;node.style.removeProperty('--warren-parallax-y');});root.style.removeProperty('--warren-chart-grid-y');};
+  },[data,snapshotLoaded]);
+
   const mode = data.status==='imported' ? 'imported' : 'snapshot';
   const [error,setError] = useState('');
   const [tab,setTab] = useState('resilience');
