@@ -600,16 +600,16 @@
     "macro": [
       {
         "title": "Thursday, October 1",
-        "body": "8:30 a.m. ET — Initial jobless claims\n9:45 a.m. ET — S&P Global Manufacturing PMI\n10:00 a.m. ET — Construction spending\n10:00 a.m. ET — ISM Manufacturing (also on the calendar).",
-        "source": "U.S. macro calendar references",
-        "url": "https://www.newyorkfed.org/research/calendars/i-oct26.html",
+        "body": "8:30 a.m. ET — Initial Jobless Claims\n9:45 a.m. ET — S&P Global Manufacturing PMI (final)\n10:00 a.m. ET — Construction Spending MoM.",
+        "source": "Trading Economics calendar",
+        "url": "https://tradingeconomics.com/calendar",
         "asOf": null
       },
       {
         "title": "Friday, October 2",
-        "body": "8:30 a.m. ET — Employment Situation (September jobs report)\n10:00 a.m. ET — Manufacturers’ Shipments, Inventories, and Orders (factory orders).",
-        "source": "U.S. macro calendar references",
-        "url": "https://www.newyorkfed.org/research/calendars/i-oct26.html",
+        "body": "8:30 a.m. ET — U.S. Employment Situation (September jobs report)\n10:00 a.m. ET — Factory Orders MoM.",
+        "source": "Trading Economics calendar",
+        "url": "https://tradingeconomics.com/calendar",
         "asOf": null
       }
     ],
