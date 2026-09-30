@@ -77,16 +77,26 @@ function TreasuryYieldsTable({ data }: { data: Snapshot }) {
 }
 
 function MacroCalendarTable({ notes }: { notes: Briefing['macro'] }) {
-  const rows = notes.flatMap((note) => note.body.split('\n').flatMap((line) => {
-    const match = line.match(/^\s*(\d{1,2}:\d{2}\s*[ap]\.m\.\s*ET)\s*[—–-]\s*(.+?)\s*$/i);
-    return match ? [{ date: note.title, time: match[1], event: match[2], source: note.source, url: note.url }] : [];
-  }));
+  const rows = notes.flatMap((note) => {
+    const timed = note.body.split('\n').flatMap((line) => {
+      const match = line.match(/^\s*(\d{1,2}:\d{2}\s*[ap]\.m\.\s*ET)\s*[—–-]\s*(.+?)\s*$/i);
+      return match ? [{ date: note.title, time: match[1].replace(/\s*ET$/i, ''), event: match[2], source: note.source, url: note.url }] : [];
+    });
+    if (timed.length) return timed;
+
+    // Earlier snapshots store the week ahead as weekday prose without event times.
+    const weekdays = note.body.split(/(?=(?:Monday|Tuesday|Wednesday|Thursday|Friday):)/i).flatMap((segment) => {
+      const match = segment.match(/^\s*(Monday|Tuesday|Wednesday|Thursday|Friday):\s*(.+?)\s*$/i);
+      return match ? [{ date: match[1], time: '—', event: match[2].replace(/[.;]+$/, ''), source: note.source, url: note.url }] : [];
+    });
+    return weekdays.length ? weekdays : [{ date: note.title, time: '—', event: note.body, source: note.source, url: note.url }];
+  });
 
   if (!rows.length) return <div className="briefing-empty">No macro events supplied.</div>;
   return <div className="macro-calendar-wrap"><table className="macro-calendar">
     <thead><tr><th scope="col">Date</th><th scope="col">Time (ET)</th><th scope="col">Event</th><th scope="col">Source</th></tr></thead>
     <tbody>{rows.map((row, index) => <tr key={`${row.date}-${index}`}>
-      <td>{row.date.replace(/,\s*\d{4}$/, '')}</td><td className="mono">{row.time.replace(/\s*ET$/i, '')}</td><td>{row.event}</td>
+      <td>{row.date.replace(/,\s*\d{4}$/, '')}</td><td className="mono">{row.time}</td><td>{row.event}</td>
       <td><a href={row.url} target="_blank" rel="noreferrer">{row.source} ↗</a></td>
     </tr>)}</tbody>
   </table></div>;
