@@ -139,7 +139,7 @@ export default function Scanner() {
         <div className="heading-meta"><span className="session-chip"><LockKeyhole size={13}/>{isArchivePreview?'PREVIEW COPY':mode==='imported'?'LEGACY EXAMPLE':'FROZEN SNAPSHOT'}</span></div>
       </div>
       <div className={`source-notice ${mode==='imported'?'is-imported':''}`}>
-        <Info size={16}/><div>{mode==='imported'?<><strong>Legacy example · cutoff unverified</strong><span>Earlier approximate drawdowns. The daily snapshot freezes at 06:20 Pacific.</span></>:<><strong>Frozen at 06:20 Pacific · {data.status==='partial'?'partial coverage':data.status==='unavailable'?'data unavailable':'daily snapshot'}</strong><span>{data.messages[0]||'Overnight ranges through 09:20 ET. Prices stay fixed for this session.'}</span></>}</div>
+        <Info size={16}/><div>{mode==='imported'?<><strong>Legacy example · cutoff unverified</strong><span>Earlier approximate drawdowns. The daily snapshot freezes at 06:20 Pacific.</span></>:data.sessionDate==='2026-09-30'?<><strong>September 30 brief · scanner data is older</strong><span>{data.messages[0]||'Briefing notes are user supplied; the scanner remains the September 28 example.'}</span></>:<><strong>Frozen at 06:20 Pacific · {data.status==='partial'?'partial coverage':data.status==='unavailable'?'data unavailable':'daily snapshot'}</strong><span>{data.messages[0]||'Overnight ranges through 09:20 ET. Prices stay fixed for this session.'}</span></>}</div>
         
       </div>
       <section className="benchmark-grid" aria-label="Session overview">
