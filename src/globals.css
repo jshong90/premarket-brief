@@ -508,6 +508,17 @@ html[data-dev-lab="true"] .source-notice,html[data-dev-lab="true"] .inline-note,
 .lab-select-row{display:grid;grid-template-columns:minmax(0,1fr) minmax(105px,1.25fr) 26px;align-items:center;gap:7px;color:var(--foreground);font-size:12px}.lab-select-row select{width:100%;height:29px;padding:3px 6px;border:1px solid var(--border);border-radius:5px;background:var(--background);color:var(--foreground);font:12px "Source Sans 3",Arial,sans-serif}
 .lab-gradient-preview{height:48px;border:1px solid var(--border);border-radius:5px}
 @media(max-width:600px){.design-lab{right:12px;bottom:12px;width:min(380px,calc(100vw - 24px))}.design-lab-panel{max-height:76vh}}
+
+/* Keep the market context inside the single sticky page header. */
+.topbar{height:auto;min-height:0;padding:0;display:flex;flex-direction:column;align-items:stretch;gap:0}
+.topbar-main{height:80px;min-height:80px;position:relative;display:flex;align-items:center;padding:0 40px;gap:20px}
+.topbar-main .topbar-date{top:50%}
+.topbar>.market-strip{position:static;top:auto;z-index:auto;width:min(1520px,calc(100% - 80px));margin:0 auto 12px;padding:9px 11px 10px;border-radius:7px;box-shadow:none;backdrop-filter:none}
+.topbar>.market-strip .market-strip-heading{padding-bottom:6px}
+@media(max-width:1200px){.topbar-main{padding:0 25px}.topbar>.market-strip{width:calc(100% - 50px)}}
+@media(max-width:800px){.topbar>.market-strip{top:auto}}
+@media(max-width:700px){.topbar-main{height:64px;min-height:64px;padding:0 12px;gap:8px}.topbar>.market-strip{width:calc(100% - 24px);margin:0 auto 9px;padding:8px 8px 7px}.topbar>.market-strip .market-strip-heading{padding-bottom:5px}}
+@media(max-width:640px){.topbar{height:auto;padding:0}.topbar>.market-strip{margin:0 auto 9px;padding:8px 8px 7px;border-radius:6px}}
 .centered-heading .heading-center>p{text-align:center}
 @media(max-width:1250px){
   .dashboard-section>.page-heading.centered-heading{grid-template-columns:minmax(0,1fr);gap:10px}

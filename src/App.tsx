@@ -24,9 +24,9 @@ type SortKey='ticker'|'drawdown'|'capture'|'advantage'|'recovery';
 export default function Scanner() {
   const [data,setData] = useState<Snapshot>(IMPORTED);
   useEffect(()=>{
-    const update=()=>{const header=document.querySelector('.topbar');const strip=document.querySelector('.market-strip');document.documentElement.style.setProperty('--dashboard-offset',`${(header?.getBoundingClientRect().height||80)+(strip?.getBoundingClientRect().height||150)+24}px`);};
+    const update=()=>{const header=document.querySelector('.topbar');document.documentElement.style.setProperty('--dashboard-offset',`${(header?.getBoundingClientRect().height||180)+24}px`);};
     const observer=new ResizeObserver(update);
-    for(const selector of ['.topbar','.market-strip']){const el=document.querySelector(selector);if(el)observer.observe(el);}
+    const header=document.querySelector('.topbar');if(header)observer.observe(header);
     update();return()=>observer.disconnect();
   },[]);
   useEffect(()=>{
@@ -121,12 +121,14 @@ export default function Scanner() {
 
   return <div className="app-shell">
     <header className="topbar">
-      <div className="topbar-leading"><a className="snapshot-nav-link" href={isArchivePreview?'./index.html':'./index.html?date=2026-09-27'} aria-label={isArchivePreview?'Return to the latest snapshot':'View the September 27 snapshot preview'} title={isArchivePreview?'Latest snapshot':'Previous snapshot · September 27'}>{isArchivePreview?<ChevronRight size={18}/>:<ChevronLeft size={18}/>}<span>{isArchivePreview?'Latest':'9/27'}</span></a><a href="./index.html" className="brand" aria-label="The Warren home"><span className="brand-mark">W</span></a></div>
-      <time className="topbar-date" dateTime={isArchivePreview?'2026-09-27':data.sessionDate}>{pageDateLabel}</time>
-      <ThemeToggle/><button className="connection-button" onClick={()=>setDrawer('connections')}><Clock3 size={14}/><span>06:20 Pacific</span><ChevronRight size={15}/></button>
+      <div className="topbar-main">
+        <div className="topbar-leading"><a className="snapshot-nav-link" href={isArchivePreview?'./index.html':'./index.html?date=2026-09-27'} aria-label={isArchivePreview?'Return to the latest snapshot':'View the September 27 snapshot preview'} title={isArchivePreview?'Latest snapshot':'Previous snapshot · September 27'}>{isArchivePreview?<ChevronRight size={18}/>:<ChevronLeft size={18}/>}<span>{isArchivePreview?'Latest':'9/27'}</span></a><a href="./index.html" className="brand" aria-label="The Warren home"><span className="brand-mark">W</span></a></div>
+        <time className="topbar-date" dateTime={isArchivePreview?'2026-09-27':data.sessionDate}>{pageDateLabel}</time>
+        <ThemeToggle/><button className="connection-button" onClick={()=>setDrawer('connections')}><Clock3 size={14}/><span>06:20 Pacific</span><ChevronRight size={15}/></button>
+      </div>
+      <MarketStrip data={data}/>
     </header>
     <main>
-      <MarketStrip data={data}/>
       {isArchivePreview&&<div className="snapshot-preview-banner" role="note"><strong>September 27 preview copy</strong><span>Duplicated from the September 28 snapshot; prices and timestamps have not been verified for September 27.</span></div>}
       <MorningBrief data={data} error={error} dateLabel={isArchivePreview?'September 27, 2026':undefined}/>
 
