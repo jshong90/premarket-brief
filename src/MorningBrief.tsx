@@ -37,6 +37,40 @@ const formatChange = (value: number | null) => value === null
   ? '—'
   : `${value > 0 ? '+' : ''}${value.toFixed(2)}%`;
 
+function IndexOvernightTable({ data }: { data: Snapshot }) {
+  const quotes = (data.briefing?.indices ?? []).flatMap((note) => (note as typeof note & IndexQuoteNote).indexQuotes ?? []);
+  const briefingText = (data.briefing?.indices ?? []).map((note) => note.body).join('\n');
+  const suppliedChange = (pattern: RegExp) => {
+    const match = briefingText.match(pattern);
+    return match ? Number(match[1].replace(/\s/g, '').replace('−', '-')) : null;
+  };
+  const getQuote = (symbol: 'NQ' | 'ES') => quotes.find((row) =>
+    symbol === 'NQ' ? /nasdaq|\bNQ\b/i.test(row.label) : /s\s*&?p|\bES\b/i.test(row.label),
+  );
+  const vix = data.marketContext?.find((row) => row.id === 'VIX');
+  const rows = [
+    { id: 'NQ', label: 'NQ', previous: getQuote('NQ')?.fridayClose ?? null, current: getQuote('NQ')?.scanPrice ?? null, change: getQuote('NQ')?.changePercent ?? suppliedChange(/(?:Nasdaq(?:-100)?):\s*([+\-−]?\s*[\d.]+)\s*%/i), approximate: false },
+    { id: 'ES', label: 'ES', previous: getQuote('ES')?.fridayClose ?? null, current: getQuote('ES')?.scanPrice ?? null, change: getQuote('ES')?.changePercent ?? suppliedChange(/S\s*&?P\s*500:\s*([+\-−]?\s*[\d.]+)\s*%/i), approximate: false },
+    {
+      id: 'VIX', label: 'VIX', previous: vix?.previousClose ?? null, current: vix?.value ?? null,
+      change: vix?.value != null && vix.previousClose != null && vix.previousClose !== 0
+        ? (vix.value / vix.previousClose - 1) * 100
+        : suppliedChange(/VIX:\s*([+\-−]?\s*[\d.]+)\s*%/i),
+      approximate: vix?.approximate ?? false,
+    },
+  ];
+
+  return <div className="index-quotes-wrap"><table className="index-quotes">
+    <thead><tr><th scope="col">Market</th><th scope="col">Prev. Session Close</th><th scope="col">Premarket</th><th scope="col">Change (%)</th></tr></thead>
+    <tbody>{rows.map((row) => <tr key={row.id}>
+      <th scope="row">{row.label}</th>
+      <td className="mono">{row.previous == null ? '—' : `${row.approximate ? '~' : ''}${formatPrice(row.previous)}`}</td>
+      <td className="mono">{row.current == null ? '—' : `${row.approximate ? '~' : ''}${formatPrice(row.current)}`}</td>
+      <td className={`mono ${row.change == null ? '' : row.change < 0 ? 'negative' : row.change > 0 ? 'positive' : ''}`}>{row.change == null ? '—' : `${row.approximate ? '~' : ''}${formatChange(row.change)}`}</td>
+    </tr>)}</tbody>
+  </table></div>;
+}
+
 const treasuryTenors = ['2Y', '5Y', '10Y', '30Y'] as const;
 function TreasuryYieldsTable({ data }: { data: Snapshot }) {
   const yields = data.marketContext?.find((row) => row.id === 'US10Y');
@@ -233,10 +267,9 @@ export default function MorningBrief({ data, error, dateLabel }: { data: Snapsho
     </section>
     : <section className={`briefing-section panel ${key === 'bonds' ? 'morning-bonds-section' : ''}`} key={key} aria-labelledby={'brief-' + key}>
     <div className="briefing-section-head"><span className="brief-section-number">0{sectionIndex + 1}</span><h2 id={'brief-' + key}>{title}</h2></div>
-    <div className="briefing-notes">{key === 'macro' ? <MacroCalendarTable notes={data.briefing?.macro || []} /> : (data.briefing?.[key] || []).length ? data.briefing![key].map((note, index) => {
-      const quotes = (note as typeof note & IndexQuoteNote).indexQuotes;
+    <div className="briefing-notes">{key === 'indices' && <IndexOvernightTable data={data} />}{key === 'macro' ? <MacroCalendarTable notes={data.briefing?.macro || []} /> : (data.briefing?.[key] || []).length ? data.briefing![key].map((note, index) => {
       const isRatesNote = key === 'bonds' && index === 0;
-      return <article className="briefing-note" key={index}><h3>{note.title}</h3>{isRatesNote ? <TreasuryYieldsTable data={data} /> : <>{quotes && quotes.length > 0 && <div className="index-quotes-wrap"><table className="index-quotes"><thead><tr><th scope="col">Market</th><th scope="col">Friday close</th><th scope="col">6:20 AM PT</th><th scope="col">Change</th></tr></thead><tbody>{quotes.map((row) => <tr key={row.label}><th scope="row">{row.label}</th><td className="mono">{formatPrice(row.fridayClose)}</td><td className="mono">{formatPrice(row.scanPrice)}</td><td className={`mono ${row.changePercent === null ? '' : row.changePercent < 0 ? 'negative' : row.changePercent > 0 ? 'positive' : ''}`}>{formatChange(row.changePercent)}</td></tr>)}</tbody></table></div>}<p>{note.body}</p></>}</article>;
+      return <article className="briefing-note" key={index}><h3>{note.title}</h3>{isRatesNote ? <TreasuryYieldsTable data={data} /> : <p>{note.body}</p>}</article>;
     }) : <div className="briefing-empty">No notes supplied for this section.</div>}</div>
   </section>;
   const sectionIndex = (key: keyof Briefing | 'keyLevels') => sections.findIndex((section) => section.key === key);
