@@ -19,7 +19,7 @@ export type MarketContextRow = {
   high?: number | null; low?: number | null; highTime?: string; lowTime?: string;
   series?: MarketContextPoint[]; source: string; asOf: string | null; issue?: string;
 };
-export type TreasuryYield = { tenor: "2Y" | "5Y" | "10Y" | "30Y"; value: number | null; previousClose: number | null; asOf?: string | null; approximate?: boolean; source: string; url: string; retrievedAt?: string | null };
+export type TreasuryYield = { tenor: "2Y" | "5Y" | "10Y" | "30Y"; value: number | null; previousClose: number | null; asOf?: string | null; approximate?: boolean; source: string; url: string; retrievedAt?: string | null; previousCloseSource?: string; previousCloseUrl?: string };
 export type KeyLevel = { id: "ES" | "NQ" | "YM" | "RTY"; label: string; high: number | null; low: number | null; highTime?: string | null; lowTime?: string | null; asOf: string | null; retrievedAt?: string | null; source: string; issue?: string };
 export type Snapshot = { sessionDate: string; fetchedAt: string | null; cutoffAt?: string | null; status: "imported" | "frozen" | "partial" | "unavailable"; stocks: Instrument[]; sectors: Instrument[]; benchmarks: Benchmark[]; messages: string[]; universeCount: number; universeComplete: boolean; connected: { tradingview: boolean; massive: boolean }; marketContext?: MarketContextRow[]; treasuryYields?: TreasuryYield[]; keyLevels?: KeyLevel[]; briefing?: Briefing; };
 export const SECTORS = [["XLK", "Technology"], ["XLC", "Communication"], ["XLY", "Discretionary"], ["XLF", "Financials"], ["XLI", "Industrials"], ["XLV", "Health Care"], ["XLP", "Staples"], ["XLU", "Utilities"], ["XLRE", "Real Estate"], ["XLB", "Materials"], ["XLE", "Energy"]] as const;

@@ -51,11 +51,14 @@ function TreasuryYieldsTable({ data }: { data: Snapshot }) {
       approximate: supplied?.approximate ?? (tenor === '10Y' ? yields?.approximate : false),
     };
   });
-  const missing = rows.filter((row) => row.value === null || row.previousClose === null).map((row) => row.tenor);
+  const missing = rows.flatMap((row) => [
+    ...(row.previousClose === null ? [`${row.tenor} previous session close`] : []),
+    ...(row.value === null ? [`${row.tenor} premarket quote`] : []),
+  ]);
   return <>
     <div className="treasury-yields-wrap">
       <table className="treasury-yields-table">
-        <thead><tr><th scope="col">Treasury</th><th scope="col">Friday close</th><th scope="col">Premarket</th><th scope="col">Change</th></tr></thead>
+        <thead><tr><th scope="col">Treasury</th><th scope="col">Prev. Session Close</th><th scope="col">Premarket</th><th scope="col">Change</th></tr></thead>
         <tbody>{rows.map((row) => {
           const { tenor } = row;
           const current = row.value;
@@ -72,7 +75,7 @@ function TreasuryYieldsTable({ data }: { data: Snapshot }) {
         })}</tbody>
       </table>
     </div>
-    {missing.length > 0 && <p className="treasury-yields-note">Not supplied in this snapshot: {missing.join(', ')} yields. Missing values are left blank.</p>}
+    {missing.length > 0 && <p className="treasury-yields-note">Unavailable: {missing.join(', ')}. Blank values are not estimated.</p>}
   </>;
 }
 
@@ -152,13 +155,18 @@ function SourcesCard({ data }: { data: Snapshot }) {
   const references = sourceSections.flatMap((section) => (data.briefing?.[section.key] ?? [])
     .filter((note) => note.source && note.url)
     .map((note) => ({ section: section.label, note })));
-  const treasuryReferences = (data.treasuryYields ?? []).filter((row) => row.value !== null && row.source && row.url);
+  const treasuryReferences = (data.treasuryYields ?? []).filter((row) =>
+    row.previousClose !== null && row.previousCloseSource && row.previousCloseUrl
+      || row.value !== null && row.source && row.url);
+  const treasuryCitationCount = treasuryReferences.reduce((count, row) =>
+    count + Number(row.previousClose !== null && Boolean(row.previousCloseSource && row.previousCloseUrl))
+      + Number(row.value !== null && Boolean(row.source && row.url)), 0);
   const tradingViewRefs = references.filter(({ note }) => note.source.startsWith('TradingView Official MCP'));
   const otherRefs = references.filter(({ note }) => !note.source.startsWith('TradingView Official MCP'));
   const keyLevelData = data as SnapshotKeyLevels;
   const keyLevels = keyLevelData.keyLevels ?? [];
   const retrievedAt = keyLevels.find((row) => row.retrievedAt)?.retrievedAt;
-  const referenceCount = references.length + treasuryReferences.length + (keyLevels.length ? 1 : 0);
+  const referenceCount = references.length + treasuryCitationCount + (keyLevels.length ? 1 : 0);
   if (!referenceCount) return null;
 
   return <section className={`sources-card panel ${open ? 'is-open' : ''}`}>
@@ -197,11 +205,17 @@ function SourcesCard({ data }: { data: Snapshot }) {
       </section>}
       {treasuryReferences.length > 0 && <section className="sources-group">
         <h3>Treasury yield data</h3>
-        <ul className="sources-list">{treasuryReferences.map((row) => <li key={row.tenor}>
-          <a href={row.url} target="_blank" rel="noreferrer">{row.tenor} Treasury yield ↗</a>
-          <small>02 · Overnight movements on bonds · {row.source}</small>
-          {row.asOf && <small>Observed {new Date(row.asOf).toLocaleString('en-US', { timeZone: 'America/New_York' })} ET.</small>}
-          {row.retrievedAt && <small>Retrieved {new Date(row.retrievedAt).toLocaleString('en-US', { timeZone: 'America/Los_Angeles', dateStyle: 'short', timeStyle: 'short' })} PT.</small>}
+        <ul className="sources-list">{treasuryReferences.flatMap((row) => [
+          ...(row.previousClose !== null && row.previousCloseSource && row.previousCloseUrl ? [{
+            key: `${row.tenor}-previous`, label: `${row.tenor} previous session close`, source: row.previousCloseSource, url: row.previousCloseUrl, retrievedAt: row.retrievedAt,
+          }] : []),
+          ...(row.value !== null && row.source && row.url ? [{
+            key: `${row.tenor}-premarket`, label: `${row.tenor} premarket quote`, source: row.source, url: row.url, retrievedAt: row.retrievedAt,
+          }] : []),
+        ]).map((citation) => <li key={citation.key}>
+          <a href={citation.url} target="_blank" rel="noreferrer">{citation.label} ↗</a>
+          <small>02 · Overnight movements on bonds · {citation.source}</small>
+          {citation.retrievedAt && <small>Retrieved {new Date(citation.retrievedAt).toLocaleString('en-US', { timeZone: 'America/Los_Angeles', dateStyle: 'short', timeStyle: 'short' })} PT.</small>}
         </li>)}</ul>
       </section>}
     </div>
