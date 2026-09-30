@@ -96,10 +96,11 @@ export default function Scanner() {
   const validCount=Object.values(counts).reduce((a,b)=>a+b,0);
   const changeSort=(key:SortKey)=>setSort(s=>({key,asc:s.key===key?!s.asc:key!=='advantage'&&key!=='recovery'}));
   const changeTab=(t:string)=>{setTab(t);setSort({key:t==='recovery'?'recovery':'capture',asc:t!=='recovery'});};
-  const dateLabel=data.sessionDate?new Intl.DateTimeFormat('en-US',{month:'short',day:'numeric',year:'numeric',timeZone:'UTC'}).format(new Date(data.sessionDate+'T12:00:00Z')):'Current session';
+  const formatDateLabel=(date:string)=>new Intl.DateTimeFormat('en-US',{weekday:'long',month:'long',day:'numeric',year:'numeric',timeZone:'UTC'}).format(new Date(date+'T12:00:00Z'));
+  const dateLabel=data.sessionDate?formatDateLabel(data.sessionDate):'Current session';
   const isArchivePreview=new URLSearchParams(window.location.search).get('date')==='2026-09-27';
   const isDevelopmentMode=new URLSearchParams(window.location.search).get('dev')==='1';
-  const pageDateLabel=isArchivePreview?'Sep 27, 2026':dateLabel;
+  const pageDateLabel=isArchivePreview?formatDateLabel('2026-09-27'):dateLabel;
   const selectedMetrics=selected?metrics(selected,data.benchmarks.find(b=>b.id===(data.sectors.some(s=>s.ticker===selected.ticker)?'ES':benchmark==='auto'?selected.benchmark:benchmark))):null;
 
   const toolState=useRef({rows,mode,sector,benchmark,query,data});
