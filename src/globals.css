@@ -248,6 +248,7 @@ html[data-theme="light"] body p,html[data-theme="dark"] body p{color:var(--foreg
 .treasury-yields-table tbody td small{display:block;margin-top:2px;font:10px "Source Sans 3",Arial,Helvetica,sans-serif;color:var(--muted-foreground);letter-spacing:0}
 .treasury-yields-note{font-size:11px!important;line-height:1.4!important;color:var(--muted-foreground)!important;margin:7px 0 0!important}
 .macro-calendar-wrap{max-width:100%;overflow-x:auto;margin:0 0 8px}
+.morning-sections>section[aria-labelledby="brief-macro"] .macro-calendar-wrap{grid-column:1/-1;width:100%}
 .macro-calendar{border-collapse:collapse;width:100%;min-width:580px;font-size:13px;font-variant-numeric:tabular-nums}
 .macro-calendar th,.macro-calendar td{padding:9px 8px;border-bottom:1px solid var(--border);text-align:left;vertical-align:top}
 .macro-calendar thead th{font-size:11px;font-weight:600;color:var(--foreground);white-space:nowrap}
