@@ -29,7 +29,7 @@ export default function Scanner() {
     const observer=new ResizeObserver(update);
     const header=document.querySelector('.topbar');if(header)observer.observe(header);
     update();return()=>observer.disconnect();
-  },[]);
+  },[snapshotLoaded]);
   useEffect(()=>{
     const headings=Array.from(document.querySelectorAll<HTMLElement>('.dashboard-section > .page-heading .section-heading-row'));
     const setVisible=(heading:HTMLElement,visible:boolean)=>{
@@ -42,7 +42,7 @@ export default function Scanner() {
     },{threshold:0.15,rootMargin:'0px 0px -48px 0px'});
     headings.forEach((heading)=>reveal.observe(heading));
     return()=>reveal.disconnect();
-  },[]);
+  },[snapshotLoaded]);
   useEffect(()=>{
     const panels=Array.from(document.querySelectorAll<HTMLElement>('.rankings, .sector-panel, .distribution'));
     if(!('IntersectionObserver' in window)){panels.forEach(panel=>panel.classList.add('bars-visible'));return;}
@@ -53,7 +53,7 @@ export default function Scanner() {
     },{threshold:0,rootMargin:'0px 0px -32px 0px'});
     panels.forEach(panel=>reveal.observe(panel));
     return()=>reveal.disconnect();
-  },[]);
+  },[snapshotLoaded]);
   useEffect(()=>{
     const groups=['.morning-sections > .panel','.benchmark-grid > .benchmark-card','.work-grid .panel'];
     const configuredStagger=Number.parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--lab-card-stagger'))||70;
@@ -68,7 +68,7 @@ export default function Scanner() {
     },{threshold:0.12,rootMargin:'0px 0px -48px 0px'});
     cards.forEach(card=>reveal.observe(card));
     return()=>reveal.disconnect();
-  },[data]);
+  },[data,snapshotLoaded]);
 
   const mode = data.status==='imported' ? 'imported' : 'snapshot';
   const [error,setError] = useState('');
