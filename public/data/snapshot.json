@@ -11,7 +11,8 @@
   "messages": [
     "September 30 briefing text and estimates were supplied by the user and have not been independently verified. The relative-strength scanner data remains the September 28 legacy example; no September 30 scan is included.",
     "Overnight percentage changes, oil level, Treasury commentary, Polymarket odds, earnings implied move, and announcement timing below are reproduced as supplied, not verified market observations.",
-    "Treasury table: previous-session closes are the U.S. Treasury Sep 29 par curve (indicative quotes at or near 3:30 p.m. ET). Premarket quotes are asynchronous reports from Reuters and Barron's/Tradeweb; exact observation times are not stated. No verified premarket 5Y quote was found; it remains blank."
+    "Treasury table: previous-session closes are the U.S. Treasury Sep 29 par curve (indicative quotes at or near 3:30 p.m. ET). Premarket quotes are asynchronous reports from Reuters and Barron's/Tradeweb; exact observation times are not stated. No verified premarket 5Y quote was found; it remains blank.",
+    "The 2Y, 10Y and 30Y Treasury quote rows have no exact observation timestamp in their cited reports; the page preserves these source-reported values with that limitation disclosed."
   ],
   "stocks": [
     {
@@ -648,7 +649,8 @@
       "url": "https://www.reuters.com/world/china/global-markets-global-markets-2026-09-30/",
       "previousCloseSource": "U.S. Treasury daily par yield curve · Sep 29, 2026 · indicative quotes at/near 3:30 p.m. ET",
       "previousCloseUrl": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?field_tdr_date_value=2026&type=daily_treasury_yield_curve",
-      "retrievedAt": "2026-09-30T16:12:13.419Z"
+      "retrievedAt": "2026-09-30T16:12:13.419Z",
+      "issue": "The source reports a trading period but not an exact quote timestamp; displayed as a sourced premarket report, not a synchronized 9:20 ET observation."
     },
     {
       "tenor": "5Y",
@@ -668,7 +670,8 @@
       "url": "https://www.barrons.com/livecoverage/stock-market-news-today-093026/card/u-s-treasury-yields-fall-as-fed-speak-calms-rate-hike-expectations-y60hJylQKL0AGUxajebZ",
       "previousCloseSource": "U.S. Treasury daily par yield curve · Sep 29, 2026 · indicative quotes at/near 3:30 p.m. ET",
       "previousCloseUrl": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?field_tdr_date_value=2026&type=daily_treasury_yield_curve",
-      "retrievedAt": "2026-09-30T16:12:13.419Z"
+      "retrievedAt": "2026-09-30T16:12:13.419Z",
+      "issue": "The source reports a trading period but not an exact quote timestamp; displayed as a sourced premarket report, not a synchronized 9:20 ET observation."
     },
     {
       "tenor": "30Y",
@@ -678,7 +681,8 @@
       "url": "https://www.barrons.com/livecoverage/stock-market-news-today-093026/card/u-s-treasury-yields-fall-as-fed-speak-calms-rate-hike-expectations-y60hJylQKL0AGUxajebZ",
       "previousCloseSource": "U.S. Treasury daily par yield curve · Sep 29, 2026 · indicative quotes at/near 3:30 p.m. ET",
       "previousCloseUrl": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?field_tdr_date_value=2026&type=daily_treasury_yield_curve",
-      "retrievedAt": "2026-09-30T16:12:13.419Z"
+      "retrievedAt": "2026-09-30T16:12:13.419Z",
+      "issue": "The source reports a trading period but not an exact quote timestamp; displayed as a sourced premarket report, not a synchronized 9:20 ET observation."
     }
   ]
 }

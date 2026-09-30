@@ -24,7 +24,7 @@ export function readSnapshot(input: unknown): Snapshot {
   }
   if (s.treasuryYields!==undefined) {
     const tenors=['2Y','5Y','10Y','30Y'];
-    if (!Array.isArray(s.treasuryYields) || new Set(s.treasuryYields.map(row=>row?.tenor)).size!==s.treasuryYields.length || s.treasuryYields.some(row=>!row || !tenors.includes(row.tenor) || ![row.value,row.previousClose].every(validNumber) || typeof row.source!=='string' || typeof row.url!=='string' || !/^https:\/\//i.test(row.url) || row.asOf!==undefined && row.asOf!==null && (typeof row.asOf!=='string' || !Number.isFinite(Date.parse(row.asOf))) || row.value!==null && (row.asOf===undefined || row.asOf===null))) return fail('invalid treasury yield rows.');
+    if (!Array.isArray(s.treasuryYields) || new Set(s.treasuryYields.map(row=>row?.tenor)).size!==s.treasuryYields.length || s.treasuryYields.some(row=>!row || !tenors.includes(row.tenor) || ![row.value,row.previousClose].every(validNumber) || typeof row.source!=='string' || typeof row.url!=='string' || !/^https:\/\//i.test(row.url) || row.asOf!==undefined && row.asOf!==null && (typeof row.asOf!=='string' || !Number.isFinite(Date.parse(row.asOf))) || row.value!==null && (row.asOf===undefined || row.asOf===null) && typeof row.issue!=='string')) return fail('invalid treasury yield rows.');
   }
   if (s.briefing!==undefined) {
     if (!s.briefing || typeof s.briefing!=='object' || Array.isArray(s.briefing)) return fail('invalid briefing.');
