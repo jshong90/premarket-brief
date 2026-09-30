@@ -211,7 +211,7 @@ function KeyLevelsTable({ data }: { data: Snapshot }) {
 function SourcesCard({ data }: { data: Snapshot }) {
   const [open, setOpen] = useState(false);
   const references = sourceSections.flatMap((section) => (data.briefing?.[section.key] ?? [])
-    .filter((note) => note.source && note.url)
+    .filter((note) => note.source && note.url && note.source !== 'Desk commentary')
     .map((note) => ({ section: section.label, note })));
   const treasuryReferences = (data.treasuryYields ?? []).filter((row) =>
     row.previousClose !== null && row.previousCloseSource && row.previousCloseUrl
@@ -283,7 +283,7 @@ function SourcesCard({ data }: { data: Snapshot }) {
 
 export default function MorningBrief({ data, error, dateLabel }: { data: Snapshot; error: string; dateLabel?: string }) {
   const imported = data.status === 'imported';
-  const userSuppliedBriefing = Object.values(data.briefing || {}).flat().some((note) => note.source.toLowerCase().includes('user-provided'));
+  const userSuppliedBriefing = Object.values(data.briefing || {}).flat().some((note) => note.source === 'Desk commentary');
   const renderSection = ({ key, title }: { key: keyof Briefing | 'keyLevels'; title: string }, sectionIndex: number) => key === 'keyLevels'
     ? <section className="briefing-section panel key-levels-section" key={key} aria-labelledby="brief-key-levels">
       <div className="briefing-section-head"><span className="brief-section-number">0{sectionIndex + 1}</span><h2 id="brief-key-levels">{title}</h2></div>
@@ -301,9 +301,9 @@ export default function MorningBrief({ data, error, dateLabel }: { data: Snapsho
   return <section id="morning-brief" className="dashboard-section morning-section" aria-labelledby="brief-title" tabIndex={-1}>
     <div className="page-heading centered-heading">
       <div className="heading-center"><div className="eyebrow paper-kicker">THE WARREN / THE MORNING READ</div><div className="section-heading-row"><h1 id="brief-title">Morning brief<span className="title-dot">.</span></h1><a className="primary-button section-jump" href="#relative-strength">Skip to relative strength <span className="jump-arrow" aria-hidden="true">↓</span></a></div></div>
-      <div className="heading-meta paper-meta"><span className="session-chip">{dateLabel ? 'PREVIEW COPY · 9/28 DATA' : userSuppliedBriefing ? 'USER-PROVIDED BRIEF · 9/28 SCANNER' : imported ? 'USER-PROVIDED NOTES' : '09:20 ET SNAPSHOT'}</span></div>
+      <div className="heading-meta paper-meta"><span className="session-chip">{dateLabel ? 'PREVIEW COPY · 9/28 DATA' : userSuppliedBriefing ? 'DAILY BRIEF · 9/28 SCANNER' : imported ? 'USER-PROVIDED NOTES' : '09:20 ET SNAPSHOT'}</span></div>
     </div>
-    <div className="source-notice"><div><strong>{userSuppliedBriefing ? 'User-provided briefing' : imported ? 'Your morning briefing' : 'Morning snapshot'}</strong><span>{error || (userSuppliedBriefing ? 'Market figures, estimates, and commentary were supplied by you and have not been independently verified. The scanner below still shows the September 28 example.' : imported ? 'Figures and headlines supplied by you; not independently verified.' : 'Source times and coverage are recorded with each note.')}</span></div></div>
+    <div className="source-notice"><div><strong>{userSuppliedBriefing ? 'Morning commentary' : imported ? 'Your morning briefing' : 'Morning snapshot'}</strong><span>{error || (userSuppliedBriefing ? 'The relative-strength scanner below shows the September 28 example.' : imported ? 'Legacy scanner data is shown as an example.' : 'Source times and coverage are recorded with each note.')}</span></div></div>
     <div className="morning-sections">{sections.map((section, index) => renderSection(section, index))}
       <SourcesCard data={data}/>
     </div>

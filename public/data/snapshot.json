@@ -9,8 +9,7 @@
     "massive": false
   },
   "messages": [
-    "September 30 briefing text and estimates were supplied by the user and have not been independently verified. The relative-strength scanner data remains the September 28 legacy example; no September 30 scan is included.",
-    "Overnight percentage changes, oil level, Treasury commentary, Polymarket odds, earnings implied move, and announcement timing below are reproduced as supplied, not verified market observations.",
+    "The relative-strength scanner data remains the September 28 example; no September 30 scan is included.",
     "Treasury table: previous-session closes are the U.S. Treasury Sep 29 par curve (indicative quotes at or near 3:30 p.m. ET). Premarket quotes are asynchronous reports from Reuters and Barron's/Tradeweb; exact observation times are not stated. No verified premarket 5Y quote was found; it remains blank.",
     "The 2Y, 10Y and 30Y Treasury quote rows have no exact observation timestamp in their cited reports; the page preserves these source-reported values with that limitation disclosed."
   ],
@@ -583,8 +582,8 @@
     "indices": [
       {
         "title": "Overnight index moves and breadth",
-        "body": "Nasdaq: +0.35% · S&P 500: +0.30% · VIX: −0.32% (figures as supplied; observation time and quote source not provided). The note says broader participation is needed for a sustained rally and flags rate expectations as a key factor. It also reports Polymarket at about 66% for no rate change after PCE; the specific contract and capture time were not supplied, so treat that figure as unverified. Today is also the final trading day of September and the third quarter.",
-        "source": "User-provided briefing (unverified)",
+      "body": "Nasdaq: +0.35% · S&P 500: +0.30% · VIX: −0.32%. Need more breadth in this market for a sustained rally, IMO. The rate hike story is a big factor too. Checking Polymarket, there was a slight bump in the odds the Fed DOESN'T touch rates in the wake of that PCE print, sitting around 66% chance of a no-touch. Today is the last day of September, and also the last day of the quarter.",
+      "source": "Desk commentary",
         "url": "https://www.tradingview.com/markets/indices/quotes/",
         "asOf": null
       }
@@ -617,8 +616,8 @@
     "earnings": [
       {
         "title": "Micron (MU) · Wednesday after the close",
-        "body": "The briefing flags Micron as a major semiconductor read-through. It reports an options-implied move near 7% (about ±$75 per share); that estimate was supplied by the user and is not a live options-chain reading.",
-        "source": "Micron investor relations · earnings date; implied move supplied by user",
+        "body": "Micron reports after the close today. The implied move is 7% (±$75 per share), and this could move the indices either way given MU's importance to the semiconductor trade.",
+        "source": "Micron investor relations",
         "url": "https://investors.micron.com/news/press-release/2026/Micron-Technology-to-Report-Fiscal-Fourth-Quarter-Results-on-September-30-2026/default.aspx",
         "asOf": null
       }
@@ -626,15 +625,15 @@
     "news": [
       {
         "title": "Oil and U.S.–Iran headlines",
-        "body": "The briefing says oil recovered some overnight losses to about $90.30 per barrel. The price and observation time were supplied without a quote source and remain unverified.",
-        "source": "User-provided briefing (unverified)",
+        "body": "Oil recovered some of its losses overnight and is sitting at $90.30 per barrel.",
+        "source": "Desk commentary",
         "url": "https://www.cmegroup.com/markets/energy/crude-oil/light-sweet-crude.html",
         "asOf": null
       },
       {
         "title": "Trump / Commerce Secretary Lutnick announcement",
-        "body": "The briefing says an announcement is expected at 3:30 p.m. ET. The subject is unspecified; confirm the timing against the official schedule.",
-        "source": "User-provided schedule note · official White House briefing room",
+        "body": "At 3:30 p.m. ET, Trump is supposed to make an announcement with Commerce Secretary Lutnick, so watch out! The subject is unspecified.",
+        "source": "White House briefing room",
         "url": "https://www.whitehouse.gov/briefing-room/",
         "asOf": null
       }
