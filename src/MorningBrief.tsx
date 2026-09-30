@@ -156,7 +156,6 @@ export default function MorningBrief({ data, error, dateLabel }: { data: Snapsho
     </div>
     <div className="source-notice"><div><strong>{imported ? 'Your morning briefing' : 'Morning snapshot'}</strong><span>{error || (imported ? 'Figures and headlines supplied by you; not independently verified.' : 'Source times and coverage are recorded with each note.')}</span></div></div>
     <div className="morning-sections">{sections.map((section, index) => renderSection(section, index))}
-      <div className="brief-closing panel" role="note"><strong>Before the bell</strong><span>The headlines set the stage. See what held up in the scanner below.</span></div>
       <SourcesCard data={data}/>
     </div>
   </section>;

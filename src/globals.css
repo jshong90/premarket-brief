@@ -408,10 +408,6 @@ h1,h2,h3{font-family:"Newsreader",Georgia,serif;font-optical-sizing:auto}
 .sector-row.neutral .sector-track>i{background:var(--rs-market)}
 .sector-row.laggard .sector-track>i{background:var(--rs-laggard)}
 
-.brief-closing{grid-column:1/-1;display:flex;align-items:baseline;gap:8px 20px;padding:17px var(--card-inset);font-size:14px;line-height:1.55;color:var(--foreground)}
-.brief-closing strong{font-family:"Newsreader",Georgia,serif;font-size:20px;font-weight:500;white-space:nowrap}
-.brief-closing span{min-width:0}
-@media(max-width:700px){.brief-closing{display:block}.brief-closing strong{display:block;margin-bottom:5px}}
 @media(prefers-reduced-motion:reduce){
   .paper-kicker,.paper-meta{opacity:1;transform:none}
   .morning-section>.page-heading.is-revealed .paper-kicker,.morning-section>.page-heading.is-revealed .paper-meta,.section-heading-row.is-revealed .section-jump .jump-arrow{animation:none}
