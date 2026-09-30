@@ -247,6 +247,15 @@ html[data-theme="light"] body p,html[data-theme="dark"] body p{color:var(--foreg
 .treasury-yields-table tbody tr:last-child>*{border-bottom:0}
 .treasury-yields-table tbody td small{display:block;margin-top:2px;font:10px "Source Sans 3",Arial,Helvetica,sans-serif;color:var(--muted-foreground);letter-spacing:0}
 .treasury-yields-note{font-size:11px!important;line-height:1.4!important;color:var(--muted-foreground)!important;margin:7px 0 0!important}
+.macro-calendar-wrap{max-width:100%;overflow-x:auto;margin:0 0 8px}
+.macro-calendar{border-collapse:collapse;width:100%;min-width:580px;font-size:13px;font-variant-numeric:tabular-nums}
+.macro-calendar th,.macro-calendar td{padding:9px 8px;border-bottom:1px solid var(--border);text-align:left;vertical-align:top}
+.macro-calendar thead th{font-size:11px;font-weight:600;color:var(--foreground);white-space:nowrap}
+.macro-calendar tbody tr:last-child>*{border-bottom:0}
+.macro-calendar td:nth-child(2){white-space:nowrap}
+.macro-calendar td:last-child{font-size:11px;max-width:180px}
+.macro-calendar a{color:var(--foreground);text-decoration:underline;text-decoration-color:var(--border);text-underline-offset:2px}
+.macro-calendar a:hover{text-decoration-color:currentColor}
 .key-levels-wrap{max-width:100%;overflow-x:auto}
 .key-levels-table{border-collapse:collapse;width:100%;min-width:430px;font-size:13px;font-variant-numeric:tabular-nums}
 .key-levels-table th,.key-levels-table td{padding:10px 8px;border-bottom:1px solid var(--border);text-align:right;white-space:nowrap}

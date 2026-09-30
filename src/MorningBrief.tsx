@@ -76,6 +76,22 @@ function TreasuryYieldsTable({ data }: { data: Snapshot }) {
   </>;
 }
 
+function MacroCalendarTable({ notes }: { notes: Briefing['macro'] }) {
+  const rows = notes.flatMap((note) => note.body.split('\n').flatMap((line) => {
+    const match = line.match(/^\s*(\d{1,2}:\d{2}\s*[ap]\.m\.\s*ET)\s*[—–-]\s*(.+?)\s*$/i);
+    return match ? [{ date: note.title, time: match[1], event: match[2], source: note.source, url: note.url }] : [];
+  }));
+
+  if (!rows.length) return <div className="briefing-empty">No macro events supplied.</div>;
+  return <div className="macro-calendar-wrap"><table className="macro-calendar">
+    <thead><tr><th scope="col">Date</th><th scope="col">Time (ET)</th><th scope="col">Event</th><th scope="col">Source</th></tr></thead>
+    <tbody>{rows.map((row, index) => <tr key={`${row.date}-${index}`}>
+      <td>{row.date.replace(/,\s*\d{4}$/, '')}</td><td className="mono">{row.time.replace(/\s*ET$/i, '')}</td><td>{row.event}</td>
+      <td><a href={row.url} target="_blank" rel="noreferrer">{row.source} ↗</a></td>
+    </tr>)}</tbody>
+  </table></div>;
+}
+
 const sourceSections: { key: keyof Briefing; label: string }[] = [
   { key: 'indices', label: '01 · Overnight movements on the indices' },
   { key: 'bonds', label: '02 · Overnight movements on bonds' },
@@ -193,7 +209,7 @@ export default function MorningBrief({ data, error, dateLabel }: { data: Snapsho
     </section>
     : <section className={`briefing-section panel ${key === 'bonds' ? 'morning-bonds-section' : ''}`} key={key} aria-labelledby={'brief-' + key}>
     <div className="briefing-section-head"><span className="brief-section-number">0{sectionIndex + 1}</span><h2 id={'brief-' + key}>{title}</h2></div>
-    <div className="briefing-notes">{(data.briefing?.[key] || []).length ? data.briefing![key].map((note, index) => {
+    <div className="briefing-notes">{key === 'macro' ? <MacroCalendarTable notes={data.briefing?.macro || []} /> : (data.briefing?.[key] || []).length ? data.briefing![key].map((note, index) => {
       const quotes = (note as typeof note & IndexQuoteNote).indexQuotes;
       const isRatesNote = key === 'bonds' && index === 0;
       return <article className="briefing-note" key={index}><h3>{note.title}</h3>{isRatesNote ? <TreasuryYieldsTable data={data} /> : <>{quotes && quotes.length > 0 && <div className="index-quotes-wrap"><table className="index-quotes"><thead><tr><th scope="col">Market</th><th scope="col">Friday close</th><th scope="col">6:20 AM PT</th><th scope="col">Change</th></tr></thead><tbody>{quotes.map((row) => <tr key={row.label}><th scope="row">{row.label}</th><td className="mono">{formatPrice(row.fridayClose)}</td><td className="mono">{formatPrice(row.scanPrice)}</td><td className={`mono ${row.changePercent === null ? '' : row.changePercent < 0 ? 'negative' : row.changePercent > 0 ? 'positive' : ''}`}>{formatChange(row.changePercent)}</td></tr>)}</tbody></table></div>}<p>{note.body}</p></>}</article>;
