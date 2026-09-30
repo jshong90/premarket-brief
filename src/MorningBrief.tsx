@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import type { Briefing, Snapshot } from './lib/scanner';
+import type { Briefing, Snapshot, TreasuryYield } from './lib/scanner';
 
 type KeyLevel = { id: 'ES' | 'NQ' | 'YM' | 'RTY'; label: string; high: number | null; low: number | null; highTime?: string | null; lowTime?: string | null; asOf: string | null; retrievedAt?: string | null; source: string; issue?: string };
 type SnapshotKeyLevels = Snapshot & { keyLevels?: KeyLevel[] };
@@ -36,6 +36,45 @@ const formatPrice = (value: number | null | undefined) => value == null
 const formatChange = (value: number | null) => value === null
   ? '—'
   : `${value > 0 ? '+' : ''}${value.toFixed(2)}%`;
+
+const treasuryTenors = ['2Y', '5Y', '10Y', '30Y'] as const;
+function TreasuryYieldsTable({ data }: { data: Snapshot }) {
+  const yields = data.marketContext?.find((row) => row.id === 'US10Y');
+  const yieldRows = data.treasuryYields ?? [];
+  const rows = treasuryTenors.map((tenor) => {
+    const supplied = yieldRows.find((row) => row.tenor === tenor);
+    return {
+      tenor,
+      value: supplied?.value ?? (tenor === '10Y' ? yields?.value : null) ?? null,
+      previousClose: supplied?.previousClose ?? (tenor === '10Y' ? yields?.previousClose : null) ?? null,
+      asOf: supplied?.asOf ?? (tenor === '10Y' ? yields?.asOf : null),
+      approximate: supplied?.approximate ?? (tenor === '10Y' ? yields?.approximate : false),
+    };
+  });
+  const missing = rows.filter((row) => row.value === null || row.previousClose === null).map((row) => row.tenor);
+  return <>
+    <div className="treasury-yields-wrap">
+      <table className="treasury-yields-table">
+        <thead><tr><th scope="col">Treasury</th><th scope="col">Friday close</th><th scope="col">Premarket</th><th scope="col">Change</th></tr></thead>
+        <tbody>{rows.map((row) => {
+          const { tenor } = row;
+          const current = row.value;
+          const previous = row.previousClose;
+          const changeBps = current !== null && previous !== null ? (current - previous) * 100 : null;
+          const asOf = formatET(row.asOf);
+          const approximate = row.approximate;
+          return <tr key={tenor}>
+            <th scope="row">{tenor}</th>
+            <td className="mono">{previous === null ? '—' : `${approximate ? '~' : ''}${previous.toFixed(3)}%`}</td>
+            <td className="mono">{current === null ? '—' : <>{approximate ? '~' : ''}{current.toFixed(3)}%{asOf && <small>{asOf} ET</small>}</>}</td>
+            <td className={`mono ${changeBps === null ? '' : changeBps > 0 ? 'negative' : changeBps < 0 ? 'positive' : ''}`}>{changeBps === null ? '—' : `${changeBps > 0 ? '+' : ''}${changeBps.toFixed(1)} bp`}</td>
+          </tr>;
+        })}</tbody>
+      </table>
+    </div>
+    {missing.length > 0 && <p className="treasury-yields-note">Not supplied in this snapshot: {missing.join(', ')} yields. Missing values are left blank.</p>}
+  </>;
+}
 
 const sourceSections: { key: keyof Briefing; label: string }[] = [
   { key: 'indices', label: '01 · Overnight movements on the indices' },
@@ -87,12 +126,13 @@ function SourcesCard({ data }: { data: Snapshot }) {
   const references = sourceSections.flatMap((section) => (data.briefing?.[section.key] ?? [])
     .filter((note) => note.source && note.url)
     .map((note) => ({ section: section.label, note })));
+  const treasuryReferences = (data.treasuryYields ?? []).filter((row) => row.value !== null && row.source && row.url);
   const tradingViewRefs = references.filter(({ note }) => note.source.startsWith('TradingView Official MCP'));
   const otherRefs = references.filter(({ note }) => !note.source.startsWith('TradingView Official MCP'));
   const keyLevelData = data as SnapshotKeyLevels;
   const keyLevels = keyLevelData.keyLevels ?? [];
   const retrievedAt = keyLevels.find((row) => row.retrievedAt)?.retrievedAt;
-  const referenceCount = references.length + (keyLevels.length ? 1 : 0);
+  const referenceCount = references.length + treasuryReferences.length + (keyLevels.length ? 1 : 0);
   if (!referenceCount) return null;
 
   return <section className={`sources-card panel ${open ? 'is-open' : ''}`}>
@@ -129,6 +169,15 @@ function SourcesCard({ data }: { data: Snapshot }) {
           </li>)}
         </ul>
       </section>}
+      {treasuryReferences.length > 0 && <section className="sources-group">
+        <h3>Treasury yield data</h3>
+        <ul className="sources-list">{treasuryReferences.map((row) => <li key={row.tenor}>
+          <a href={row.url} target="_blank" rel="noreferrer">{row.tenor} Treasury yield ↗</a>
+          <small>02 · Overnight movements on bonds · {row.source}</small>
+          {row.asOf && <small>Observed {new Date(row.asOf).toLocaleString('en-US', { timeZone: 'America/New_York' })} ET.</small>}
+          {row.retrievedAt && <small>Retrieved {new Date(row.retrievedAt).toLocaleString('en-US', { timeZone: 'America/Los_Angeles', dateStyle: 'short', timeStyle: 'short' })} PT.</small>}
+        </li>)}</ul>
+      </section>}
     </div>
     </div>
   </section>;
@@ -145,7 +194,8 @@ export default function MorningBrief({ data, error, dateLabel }: { data: Snapsho
     <div className="briefing-section-head"><span className="brief-section-number">0{sectionIndex + 1}</span><h2 id={'brief-' + key}>{title}</h2></div>
     <div className="briefing-notes">{(data.briefing?.[key] || []).length ? data.briefing![key].map((note, index) => {
       const quotes = (note as typeof note & IndexQuoteNote).indexQuotes;
-      return <article className="briefing-note" key={index}><h3>{note.title}</h3>{quotes && quotes.length > 0 && <div className="index-quotes-wrap"><table className="index-quotes"><thead><tr><th scope="col">Market</th><th scope="col">Friday close</th><th scope="col">6:20 AM PT</th><th scope="col">Change</th></tr></thead><tbody>{quotes.map((row) => <tr key={row.label}><th scope="row">{row.label}</th><td className="mono">{formatPrice(row.fridayClose)}</td><td className="mono">{formatPrice(row.scanPrice)}</td><td className={`mono ${row.changePercent === null ? '' : row.changePercent < 0 ? 'negative' : row.changePercent > 0 ? 'positive' : ''}`}>{formatChange(row.changePercent)}</td></tr>)}</tbody></table></div>}<p>{note.body}</p></article>;
+      const isRatesNote = key === 'bonds' && index === 0;
+      return <article className="briefing-note" key={index}><h3>{note.title}</h3>{isRatesNote ? <TreasuryYieldsTable data={data} /> : <>{quotes && quotes.length > 0 && <div className="index-quotes-wrap"><table className="index-quotes"><thead><tr><th scope="col">Market</th><th scope="col">Friday close</th><th scope="col">6:20 AM PT</th><th scope="col">Change</th></tr></thead><tbody>{quotes.map((row) => <tr key={row.label}><th scope="row">{row.label}</th><td className="mono">{formatPrice(row.fridayClose)}</td><td className="mono">{formatPrice(row.scanPrice)}</td><td className={`mono ${row.changePercent === null ? '' : row.changePercent < 0 ? 'negative' : row.changePercent > 0 ? 'positive' : ''}`}>{formatChange(row.changePercent)}</td></tr>)}</tbody></table></div>}<p>{note.body}</p></>}</article>;
     }) : <div className="briefing-empty">No notes supplied for this section.</div>}</div>
   </section>;
   const sectionIndex = (key: keyof Briefing | 'keyLevels') => sections.findIndex((section) => section.key === key);
