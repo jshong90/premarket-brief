@@ -1,7 +1,7 @@
 {
   "sessionDate": "2026-09-30",
   "fetchedAt": "2026-09-29T02:37:45.894Z",
-  "status": "partial",
+  "status": "imported",
   "universeCount": 12,
   "universeComplete": false,
   "connected": {
@@ -452,7 +452,6 @@
       "lowTime": "2026-09-28T10:11:00.000Z"
     }
   ],
-  "cutoffAt": "2026-09-28T13:20:00.000Z",
   "marketContext": [
     {
       "id": "SPX",
