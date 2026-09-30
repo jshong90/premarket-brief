@@ -71,6 +71,30 @@ function IndexOvernightTable({ data }: { data: Snapshot }) {
   </table></div>;
 }
 
+function OvernightMovementsPanel({ data }: { data: Snapshot }) {
+  const indexNotes = data.briefing?.indices ?? [];
+  const bondNotes = data.briefing?.bonds ?? [];
+  return <section className="briefing-section panel overnight-combined-section" aria-labelledby="brief-overnight-movements">
+    <div className="briefing-section-head"><span className="brief-section-number">01–02</span><h2 id="brief-overnight-movements">Overnight movements</h2></div>
+    <div className="overnight-pair">
+      <section className="overnight-column" aria-labelledby="brief-indices">
+        <h3 id="brief-indices">Overnight movements on the indices</h3>
+        <IndexOvernightTable data={data} />
+        <div className="overnight-commentary">{indexNotes.length ? indexNotes.map((note, index) => <article key={index}>
+          <h4>{note.title}</h4><p>{note.body}</p>
+        </article>) : <p className="briefing-empty">No index commentary supplied.</p>}</div>
+      </section>
+      <section className="overnight-column" aria-labelledby="brief-bonds">
+        <h3 id="brief-bonds">Overnight movements on bonds</h3>
+        <TreasuryYieldsTable data={data} />
+        <div className="overnight-commentary">{bondNotes.length ? bondNotes.map((note, index) => <article key={index}>
+          <h4>{note.title}</h4><p>{note.body}</p>
+        </article>) : <p className="briefing-empty">No bond commentary supplied.</p>}</div>
+      </section>
+    </div>
+  </section>;
+}
+
 const treasuryTenors = ['2Y', '5Y', '10Y', '30Y'] as const;
 function TreasuryYieldsTable({ data }: { data: Snapshot }) {
   const yields = data.marketContext?.find((row) => row.id === 'US10Y');
@@ -265,11 +289,12 @@ export default function MorningBrief({ data, error, dateLabel }: { data: Snapsho
       <div className="briefing-section-head"><span className="brief-section-number">0{sectionIndex + 1}</span><h2 id="brief-key-levels">{title}</h2></div>
       <div className="briefing-notes"><KeyLevelsTable data={data} /></div>
     </section>
-    : <section className={`briefing-section panel ${key === 'bonds' ? 'morning-bonds-section' : ''}`} key={key} aria-labelledby={'brief-' + key}>
+    : key === 'indices' ? <OvernightMovementsPanel data={data} key="overnight-movements" />
+    : key === 'bonds' ? null
+    : <section className="briefing-section panel" key={key} aria-labelledby={'brief-' + key}>
     <div className="briefing-section-head"><span className="brief-section-number">0{sectionIndex + 1}</span><h2 id={'brief-' + key}>{title}</h2></div>
-    <div className="briefing-notes">{key === 'indices' && <IndexOvernightTable data={data} />}{key === 'macro' ? <MacroCalendarTable notes={data.briefing?.macro || []} /> : (data.briefing?.[key] || []).length ? data.briefing![key].map((note, index) => {
-      const isRatesNote = key === 'bonds' && index === 0;
-      return <article className="briefing-note" key={index}><h3>{note.title}</h3>{isRatesNote ? <TreasuryYieldsTable data={data} /> : <p>{note.body}</p>}</article>;
+    <div className="briefing-notes">{key === 'macro' ? <MacroCalendarTable notes={data.briefing?.macro || []} /> : (data.briefing?.[key] || []).length ? data.briefing![key].map((note, index) => {
+      return <article className="briefing-note" key={index}><h3>{note.title}</h3><p>{note.body}</p></article>;
     }) : <div className="briefing-empty">No notes supplied for this section.</div>}</div>
   </section>;
   const sectionIndex = (key: keyof Briefing | 'keyLevels') => sections.findIndex((section) => section.key === key);
