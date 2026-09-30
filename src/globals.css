@@ -552,3 +552,13 @@ html[data-theme="light"] .market-tile-meta .negative{color:var(--price-down)}
 .clear .capture-value{color:var(--rs-clear-text)}
 html[data-theme="light"] .classification.exceptional{color:var(--rs-exceptional-text)}
 html[data-theme="light"] .classification.clear{color:var(--rs-clear-text)}
+
+
+/* Do not expose the imported example while a published snapshot is loading or invalid. */
+.snapshot-load-state{min-height:100vh;display:grid;place-items:center;padding:24px;background:var(--background);color:var(--foreground);font-family:"Source Sans 3",Arial,sans-serif}
+.snapshot-load-card{width:min(480px,100%);padding:32px;border:1px solid var(--border);border-radius:12px;background:var(--card);text-align:center;box-shadow:var(--card-shadow,0 12px 36px rgba(0,0,0,.08))}
+.snapshot-load-mark{display:grid;place-items:center;width:42px;height:42px;margin:0 auto 18px;border:1px solid var(--border);border-radius:50%;font-family:Georgia,serif;font-size:22px}
+.snapshot-load-card h1{margin:0 0 8px;font-family:Georgia,serif;font-size:26px;font-weight:600}
+.snapshot-load-card p{margin:0;color:var(--text-secondary,var(--foreground));font-size:15px;line-height:1.5}
+.snapshot-load-card button{margin-top:20px;padding:9px 16px;border:1px solid var(--border);border-radius:6px;background:var(--secondary);color:var(--foreground);font:inherit;cursor:pointer}
+@media(prefers-reduced-motion:no-preference){.snapshot-load-mark{animation:snapshot-mark-in .42s ease-out both}@keyframes snapshot-mark-in{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:translateY(0)}}}

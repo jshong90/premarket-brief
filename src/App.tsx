@@ -23,6 +23,7 @@ const tone = (band: Band | null) => band === 'Exceptional RS' ? 'exceptional' : 
 type SortKey='ticker'|'drawdown'|'capture'|'advantage'|'recovery';
 export default function Scanner() {
   const [data,setData] = useState<Snapshot>(IMPORTED);
+  const [snapshotLoaded,setSnapshotLoaded] = useState(false);
   useEffect(()=>{
     const update=()=>{const header=document.querySelector('.topbar');document.documentElement.style.setProperty('--dashboard-offset',`${(header?.getBoundingClientRect().height||180)+24}px`);};
     const observer=new ResizeObserver(update);
@@ -80,14 +81,14 @@ export default function Scanner() {
   const [selected,setSelected] = useState<Instrument|null>(null);
   useEffect(()=>{
     // Read one published data packet per page load. Never poll market prices.
-    if (window.location.protocol==='file:') return;
+    if (window.location.protocol==='file:') { setError('Snapshot loading requires an HTTP or HTTPS deployment.'); return; }
     const controller=new AbortController();
     const requestedDate=new URLSearchParams(window.location.search).get('date');
     const snapshotFile=requestedDate==='2026-09-27'?'snapshot-2026-09-27.json':'snapshot.json';
     fetch(new URL(`./data/${snapshotFile}`,window.location.href),{cache:'no-store',signal:controller.signal})
       .then(r=>{if(!r.ok)throw new Error(`Snapshot file unavailable (${r.status}).`);return r.json();})
-      .then(packet=>setData(readSnapshot(packet)))
-      .catch(e=>{if(e.name!=='AbortError')setError(`${e.message} Showing the unverified legacy example.`);});
+      .then(packet=>{setData(readSnapshot(packet));setSnapshotLoaded(true);})
+      .catch(e=>{if(e.name!=='AbortError'){setError(e.message||'The snapshot could not be loaded.');setSnapshotLoaded(false);}});
     return()=>controller.abort();
   },[]);
   const rows=useMemo(()=>data.stocks.map(r=>{const b=benchmark==='auto'?r.benchmark:benchmark as BenchmarkId;return{...r,usedBenchmark:b,...metrics(r,data.benchmarks.find(x=>x.id===b))};}).filter(r=>(sector==='all'||r.sector===sector)&&`${r.ticker} ${r.name}`.toLowerCase().includes(query.toLowerCase())).sort((a,b)=>{const av=a[sort.key],bv=b[sort.key];if(av==null)return bv==null?a.ticker.localeCompare(b.ticker):1;if(bv==null)return-1;const result=typeof av==='string'?av.localeCompare(String(bv)):av-Number(bv);return(sort.asc?result:-result)||a.ticker.localeCompare(b.ticker);}),[data,benchmark,sector,query,sort]);
@@ -119,6 +120,8 @@ export default function Scanner() {
     for(const tool of tools){try{void Promise.resolve(context.registerTool(tool,{signal:lifecycle.signal})).catch(()=>{});}catch{}}
     return()=>lifecycle.abort();
   },[]);
+
+  if (!snapshotLoaded) return <main className="snapshot-load-state" role={error?'alert':'status'} aria-live="polite"><div className="snapshot-load-card"><span className="snapshot-load-mark">W</span><h1>{error?'Snapshot unavailable':'Loading morning snapshot'}</h1><p>{error||'Checking the published snapshot and its required fields…'}</p>{error&&<button type="button" onClick={()=>window.location.reload()}>Try again</button>}</div></main>;
 
   return <div className="app-shell">
     <header className="topbar">
