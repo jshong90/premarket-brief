@@ -246,7 +246,7 @@ html[data-theme="light"] body p,html[data-theme="dark"] body p{color:var(--foreg
 .overnight-commentary{border-top:1px solid var(--border);padding-top:12px;margin-top:12px}
 .overnight-commentary article+article{border-top:1px solid var(--border);margin-top:12px;padding-top:12px}
 .overnight-commentary h4{font-size:14px;font-weight:600;margin:0 0 5px;color:var(--foreground)}
-.overnight-commentary p{font-size:13px;line-height:1.6;margin:0;color:var(--foreground)}
+.overnight-commentary p{font-size:13px;line-height:1.6;margin:0;color:var(--foreground);white-space:pre-line}
 @media(max-width:900px){.overnight-pair{grid-template-columns:1fr}.overnight-column+.overnight-column{border-left:0;border-top:1px solid var(--border)}}
 .treasury-yields-wrap{max-width:100%;overflow-x:auto;margin:0 0 8px}
 .treasury-yields-table{border-collapse:collapse;width:100%;min-width:470px;font-size:13px;font-variant-numeric:tabular-nums}

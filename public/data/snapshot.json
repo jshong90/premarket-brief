@@ -333,20 +333,18 @@
   "briefing": {
     "indices": [
       {
-        "title": "Wednesday close: Nasdaq edged higher; S&P slipped",
-        "body": "The Nasdaq Composite gained 0.2% to 26,861.06, while the S&P 500 fell 0.3% to 7,651.54. The Dow lost 0.9% and the Russell 2000 fell 0.4%. Wednesday was month-end and quarter-end; market breadth remained weak.",
-        "source": "Associated Press",
-        "url": "https://apnews.com/article/1ee73f14dc23f6139eeb12c7397f543e",
-        "asOf": "2026-09-30"
+        "title": "Equity commentary",
+        "body": "MU had a strong report after the bell with revenue up 380% YoY, but is now trading flat, with the broader SMH ETF mirroring the NQ profile.\n\nAgain, the rate story and the potential for an Iran deal continues to dominate price action. Market had an extremely bearish close into the quarter. NQ has completely erased that move and is now trading in yesterday's RTH range after a strong rejection from the upper 5M Bollinger band, while ES lags.\n\nOil: Rallied from 88, and is now trading around 91.",
+        "source": "Desk commentary",
+        "url": ""
       }
     ],
     "bonds": [
       {
-        "title": "Treasury yields",
-        "body": "Yields remain elevated after a volatile month and quarter. The table carries September 30 closing levels for context alongside October 1 premarket readings captured on request.",
-        "source": "TradingView Official MCP · timestamped one-minute yield bars",
-        "url": "https://www.tradingview.com/markets/bonds/",
-        "asOf": "2026-10-01T12:45:00.000Z"
+        "title": "Bond commentary",
+        "body": "Treasury yields are still extremely elevated, and continue to create downward pressure on equities. Energy prices and concerns over government spending will be the key drivers.",
+        "source": "Desk commentary",
+        "url": ""
       }
     ],
     "macro": [
@@ -383,18 +381,10 @@
     ],
     "news": [
       {
-        "title": "Micron posts record quarter and raises its outlook",
-        "body": "Micron reported fiscal Q4 revenue of $54.23B and non-GAAP EPS of $33.42. Its fiscal Q1 outlook calls for revenue of $61.5B ± $1.5B and non-GAAP EPS of $38.15 ± $1.00.",
-        "source": "Micron Investor Relations",
-        "url": "https://investors.micron.com/news/press-release/2026/Micron-Technology-Inc--Reports-Record-Fiscal-Fourth-Quarter-and-Full-Year-2026-Results/default.aspx",
-        "publishedAt": "2026-09-30"
-      },
-      {
-        "title": "PCE comes in below expectations; growth revised higher",
-        "body": "August PCE inflation rose 3.4% year over year versus a 3.7% Reuters poll estimate, while final Q2 GDP was revised to 2.2%. Softer inflation and firmer growth leave the rate outlook in focus.",
-        "source": "Reuters",
-        "url": "https://www.reuters.com/business/us-stock-futures-inch-up-yields-ease-inflation-report-looms-2026-09-30/",
-        "asOf": "2026-09-30"
+        "title": "None",
+        "body": "",
+        "source": "Desk commentary",
+        "url": ""
       }
     ]
   },
