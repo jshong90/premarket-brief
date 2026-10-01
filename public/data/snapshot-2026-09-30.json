@@ -1,7 +1,7 @@
 {
-  "sessionDate": "2026-09-28",
+  "sessionDate": "2026-09-30",
   "fetchedAt": "2026-09-29T02:37:45.894Z",
-  "status": "partial",
+  "status": "imported",
   "universeCount": 12,
   "universeComplete": false,
   "connected": {
@@ -9,11 +9,10 @@
     "massive": false
   },
   "messages": [
-    "Historical prices retrieved from TradingView on 2026-09-29T02:37:45Z. TradingView warns its market data may be delayed 15+ minutes.",
-    "ES, NQ, YM, RTY, VIX, and the 10-year yield have valid 09:19 ET one-minute observations. The 09:20 ET bar is excluded.",
-    "TradingView OHLCV provides Friday closes for the displayed stocks and 11 sector ETFs, but no 06:20 PT pre/post-market bars for them. Their scan prices and ranges remain blank; missing rows are not ranked.",
-    "Only 12 stock rows are present and discovery is incomplete; this is not the full $50B+ US common-stock universe.",
-    "September 27 page is a navigation preview copied from the September 28 snapshot; prices and timestamps are not verified historical observations for September 27."
+    "The relative-strength scanner data remains the September 28 example; no September 30 scan is included.",
+    "Treasury table: previous-session closes are the U.S. Treasury Sep 29 par curve (indicative quotes at or near 3:30 p.m. ET). Premarket quotes are asynchronous reports from Reuters and Barron's/Tradeweb; exact observation times are not stated. No verified premarket 5Y quote was found; it remains blank.",
+    "The 2Y, 10Y and 30Y Treasury quote rows have no exact observation timestamp in their cited reports; the page preserves these source-reported values with that limitation disclosed.",
+    "Key levels refreshed for 2026-09-30 from TradingView timestamped 1-minute futures bars. Session window: prior day 18:00 ET through 09:19 ET; 09:20 bar excluded. TradingView reports market-data delay of 15+ minutes."
   ],
   "stocks": [
     {
@@ -455,7 +454,6 @@
       "lowTime": "2026-09-28T10:11:00.000Z"
     }
   ],
-  "cutoffAt": "2026-09-28T13:20:00.000Z",
   "marketContext": [
     {
       "id": "SPX",
@@ -463,12 +461,12 @@
       "name": "S&P 500 cash index",
       "kind": "index",
       "value": null,
-      "previousClose": 7742.32,
+      "previousClose": null,
       "change": null,
       "changeUnit": "%",
       "source": "TradingView Official MCP · SP:SPX · 1-minute Friday close bar; no 06:20 cash-index observation",
       "asOf": null,
-      "issue": "The cash index has no 06:20 PT observation; Friday close only.",
+      "issue": "No verified September 30 observation is available; prior snapshot values cleared.",
       "previousCloseAt": "2026-09-25T19:59:00.000Z",
       "retrievedAt": "2026-09-29T02:27:16.293Z"
     },
@@ -478,12 +476,12 @@
       "name": "SPDR S&P 500 ETF",
       "kind": "etf",
       "value": null,
-      "previousClose": 771.3,
+      "previousClose": null,
       "change": null,
       "changeUnit": "%",
       "source": "TradingView Official MCP · AMEX:SPY · 1-minute Friday close bar; feed omits pre/post-market bars",
       "asOf": null,
-      "issue": "Friday close only; the 06:20 PT premarket price is unavailable from this feed.",
+      "issue": "No verified September 30 observation is available; prior snapshot values cleared.",
       "previousCloseAt": "2026-09-25T19:59:00.000Z",
       "retrievedAt": "2026-09-29T02:27:16.293Z"
     },
@@ -493,12 +491,12 @@
       "name": "Invesco QQQ Trust",
       "kind": "etf",
       "value": null,
-      "previousClose": 744.45,
+      "previousClose": null,
       "change": null,
       "changeUnit": "%",
       "source": "TradingView Official MCP · NASDAQ:QQQ · 1-minute Friday close bar; feed omits pre/post-market bars",
       "asOf": null,
-      "issue": "Friday close only; the 06:20 PT premarket price is unavailable from this feed.",
+      "issue": "No verified September 30 observation is available; prior snapshot values cleared.",
       "previousCloseAt": "2026-09-25T19:59:00.000Z",
       "retrievedAt": "2026-09-29T02:27:16.293Z"
     },
@@ -507,14 +505,14 @@
       "label": "VIX",
       "name": "Cboe Volatility Index",
       "kind": "volatility",
-      "value": 16.01,
-      "previousClose": 14.87,
-      "change": 1.14,
+      "value": null,
+      "previousClose": null,
+      "change": null,
       "changeUnit": "pts",
       "approximate": false,
       "source": "TradingView Official MCP · CBOE:VIX · Friday 16:14 ET closing bar + Monday 09:19 ET one-minute bar",
-      "asOf": "2026-09-28T13:19:00.000Z",
-      "issue": "Provider delay notice: market data may be delayed 15+ minutes.",
+      "asOf": null,
+      "issue": "No verified September 30 observation is available; prior snapshot values cleared.",
       "previousCloseAt": "2026-09-25T20:14:00.000Z",
       "retrievedAt": "2026-09-29T02:37:45.894Z"
     },
@@ -523,14 +521,14 @@
       "label": "10Y",
       "name": "U.S. 10-year Treasury yield",
       "kind": "yield",
-      "value": 5.232,
-      "previousClose": 5.16,
-      "change": 7.2,
+      "value": null,
+      "previousClose": null,
+      "change": null,
       "changeUnit": "bp",
       "approximate": false,
       "source": "TradingView Official MCP · TVC:US10Y · Friday 15:59 ET close bar + Monday 09:19 ET one-minute bar",
-      "asOf": "2026-09-28T13:19:00.000Z",
-      "issue": "Provider delay notice: market data may be delayed 15+ minutes.",
+      "asOf": null,
+      "issue": "No verified September 30 observation is available; prior snapshot values cleared.",
       "previousCloseAt": "2026-09-25T19:59:00.000Z",
       "retrievedAt": "2026-09-29T02:27:16.293Z"
     }
@@ -539,162 +537,152 @@
     {
       "id": "ES",
       "label": "S&P 500 (ES)",
-      "high": 7803,
-      "low": 7757,
-      "highTime": "2026-09-27T22:00:00.000Z",
-      "lowTime": "2026-09-28T10:11:00.000Z",
-      "asOf": "2026-09-28T13:19:00.000Z",
-      "retrievedAt": "2026-09-29T02:25:29.375Z",
-      "source": "TradingView Official MCP · CME_MINI:ES1! · 1-minute OHLCV · delayed 15+ minutes"
+      "high": 7771.25,
+      "low": 7719.5,
+      "highTime": "2026-09-30T12:31:00.000Z",
+      "lowTime": "2026-09-30T11:20:00.000Z",
+      "asOf": "2026-09-30T13:19:00.000Z",
+      "retrievedAt": "2026-10-01T03:29:22.994Z",
+      "source": "TradingView Official MCP · CME_MINI:ES1! · timestamp-filtered 1-minute OHLCV for 2026-09-29 18:00 through 2026-09-30 09:19 ET · provider delay 15+ minutes"
     },
     {
       "id": "NQ",
       "label": "Nasdaq-100 (NQ)",
-      "high": 30920.75,
-      "low": 30531,
-      "highTime": "2026-09-27T22:00:00.000Z",
-      "lowTime": "2026-09-28T09:12:00.000Z",
-      "asOf": "2026-09-28T13:19:00.000Z",
-      "retrievedAt": "2026-09-29T02:25:29.375Z",
-      "source": "TradingView Official MCP · CME_MINI:NQ1! · 1-minute OHLCV · delayed 15+ minutes"
+      "high": 30779.5,
+      "low": 30512.25,
+      "highTime": "2026-09-30T12:32:00.000Z",
+      "lowTime": "2026-09-30T11:20:00.000Z",
+      "asOf": "2026-09-30T13:19:00.000Z",
+      "retrievedAt": "2026-10-01T03:29:22.994Z",
+      "source": "TradingView Official MCP · CME_MINI:NQ1! · timestamp-filtered 1-minute OHLCV for 2026-09-29 18:00 through 2026-09-30 09:19 ET · provider delay 15+ minutes"
     },
     {
       "id": "YM",
       "label": "Dow (YM)",
-      "high": 52153,
-      "low": 51829,
-      "highTime": "2026-09-27T22:00:00.000Z",
-      "lowTime": "2026-09-28T12:01:00.000Z",
-      "asOf": "2026-09-28T13:19:00.000Z",
-      "retrievedAt": "2026-09-29T02:25:29.375Z",
-      "source": "TradingView Official MCP · CBOT_MINI:YM1! · 1-minute OHLCV · delayed 15+ minutes"
+      "high": 51997,
+      "low": 51586,
+      "highTime": "2026-09-30T07:16:00.000Z",
+      "lowTime": "2026-09-30T11:11:00.000Z",
+      "asOf": "2026-09-30T13:19:00.000Z",
+      "retrievedAt": "2026-10-01T03:29:22.994Z",
+      "source": "TradingView Official MCP · CBOT_MINI:YM1! · timestamp-filtered 1-minute OHLCV for 2026-09-29 18:00 through 2026-09-30 09:19 ET · provider delay 15+ minutes"
     },
     {
       "id": "RTY",
       "label": "Russell 2000 (RTY)",
-      "high": 2858.8,
-      "low": 2837.8,
-      "highTime": "2026-09-27T22:00:00.000Z",
-      "lowTime": "2026-09-28T10:11:00.000Z",
-      "asOf": "2026-09-28T13:19:00.000Z",
-      "retrievedAt": "2026-09-29T02:25:29.375Z",
-      "source": "TradingView Official MCP · CME_MINI:RTY1! · 1-minute OHLCV · delayed 15+ minutes"
+      "high": 2853.8,
+      "low": 2819.7,
+      "highTime": "2026-09-30T12:31:00.000Z",
+      "lowTime": "2026-09-30T11:11:00.000Z",
+      "asOf": "2026-09-30T13:19:00.000Z",
+      "retrievedAt": "2026-10-01T03:29:22.994Z",
+      "source": "TradingView Official MCP · CME_MINI:RTY1! · timestamp-filtered 1-minute OHLCV for 2026-09-29 18:00 through 2026-09-30 09:19 ET · provider delay 15+ minutes"
     }
   ],
   "briefing": {
+    "indices": [
+      {
+        "title": "Overnight index moves and breadth",
+        "body": "Nasdaq: +0.35% · S&P 500: +0.30% · VIX: −0.32%. Need more breadth in this market for a sustained rally, IMO. The rate hike story is a big factor too. Checking Polymarket, there was a slight bump in the odds the Fed DOESN'T touch rates in the wake of that PCE print, sitting around 66% chance of a no-touch. Today is the last day of September, and also the last day of the quarter.",
+        "source": "Desk commentary",
+        "url": "https://www.tradingview.com/markets/indices/quotes/",
+        "asOf": null
+      }
+    ],
     "bonds": [
       {
-        "title": "Rates — 10Y remains a headwind",
-        "body": "10-year Treasury yield: 5.160% at Friday’s final 1-minute bar and 5.232% at the 09:19 ET bar (6:20 AM PT). The yield remained elevated and weighed on growth and technology shares, while the broader market traded near its highs.",
-        "source": "TradingView Official MCP · TVC:US10Y · 1-minute bars · 15+ minute provider delay notice · retrieved 2026-09-29T02:27:16Z",
-        "url": "https://www.tradingview.com/symbols/TVC-US10Y/",
-        "asOf": "2026-09-28T13:19:00.000Z"
-      },
-      {
-        "title": "Treasury auctions — mostly bills",
-        "body": "No major coupon auctions this week. Scheduled auctions are mostly short-term bills.",
-        "source": "User-provided briefing · TreasuryDirect",
-        "url": "https://www.treasurydirect.gov/auctions/upcoming/"
+        "title": "Treasury yields",
+        "body": "The table pairs the U.S. Treasury's Sep 29 par-curve closes with the latest sourced Sep 30 premarket quotes found. Reuters reported a 2Y quote from European hours; Barron's, citing Tradeweb, reported 10Y and 30Y quotes during Asian trading. Those are not synchronized cutoff observations. No verified premarket 5Y quote was found, so it remains blank.",
+        "source": "U.S. Treasury; Reuters; Barron's (Tradeweb)",
+        "url": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?field_tdr_date_value=2026&type=daily_treasury_yield_curve",
+        "asOf": null
       }
     ],
     "macro": [
       {
-        "title": "Macro calendar — the week ahead",
-        "body": "Tuesday: JOLTS. Wednesday: ADP, Q2 GDP, PCE / Core PCE. Thursday: Jobless Claims and ISM Manufacturing. Friday: Nonfarm Payrolls and Unemployment Rate.",
-        "source": "User-provided briefing · economic calendars",
-        "url": "https://www.bls.gov/schedule/news_release/"
+        "title": "Thursday, October 1",
+        "body": "8:30 a.m. ET — Initial Jobless Claims\n9:45 a.m. ET — S&P Global Manufacturing PMI (final)\n10:00 a.m. ET — Construction Spending MoM.",
+        "source": "Trading Economics calendar",
+        "url": "https://tradingeconomics.com/calendar",
+        "asOf": null
       },
       {
-        "title": "Trump announcement — 2:00 PM ET / 11:00 AM PT",
-        "body": "The White House schedule lists an announcement at 2:00 PM ET / 11:00 AM PT today, but does not specify the subject.",
-        "source": "User-provided briefing · White House schedule",
-        "url": "https://www.whitehouse.gov/schedule/"
-      }
-    ],
-    "news": [
-      {
-        "title": "NVDA — another $150B buyback authorization",
-        "body": "NVIDIA added another $150B to its share-buyback authorization overnight.",
-        "source": "User-provided briefing · NVIDIA IR",
-        "url": "https://investor.nvidia.com/"
-      },
-      {
-        "title": "Headline risk — U.S.–Iran negotiations",
-        "body": "The tape is responding well to expectations that negotiations will continue this week. Any new U.S.–Iran headline can flow through oil, yields, and QQQ / semis.",
-        "source": "User-provided briefing · market headlines",
-        "url": "https://www.reuters.com/markets/"
-      },
-      {
-        "title": "Oil / Middle East — inverse to equities",
-        "body": "Oil is still trading inverse to equities. CL is following through on the selloff after negative U.S.–Iran news. Markets are now responding to expectations that negotiations will continue this week.",
-        "source": "User-provided briefing · crude oil reference",
-        "url": "https://www.cmegroup.com/markets/energy/crude-oil/light-sweet-crude.quotes.html"
-      }
-    ],
-    "indices": [
-      {
-        "title": "Market snapshot — premarket futures",
-        "body": "Percentage changes are calculated from the displayed futures prices. The tape is responding well to NVIDIA buyback news and expectations that U.S.–Iran negotiations continue this week.",
-        "source": "TradingView Official MCP · 1-minute OHLCV · ES, NQ, YM, RTY and VIX · provider delay notice: 15+ minutes · retrieved 2026-09-29T02:37:45Z",
-        "url": "https://www.tradingview.com/markets/futures/quotes/",
-        "asOf": "2026-09-28T13:19:00.000Z",
-        "indexQuotes": [
-          {
-            "label": "S&P 500 (ES)",
-            "fridayClose": 7804.75,
-            "scanPrice": 7774.75,
-            "changePercent": -0.38,
-            "fridayCloseBarAt": "2026-09-25T19:59:00.000Z",
-            "scanPriceBarAt": "2026-09-28T13:19:00.000Z"
-          },
-          {
-            "label": "Nasdaq-100 (NQ)",
-            "fridayClose": 30891.5,
-            "scanPrice": 30700.25,
-            "changePercent": -0.62,
-            "fridayCloseBarAt": "2026-09-25T19:59:00.000Z",
-            "scanPriceBarAt": "2026-09-28T13:19:00.000Z"
-          },
-          {
-            "label": "Dow (YM)",
-            "fridayClose": 52171,
-            "scanPrice": 51868,
-            "changePercent": -0.58,
-            "fridayCloseBarAt": "2026-09-25T19:59:00.000Z",
-            "scanPriceBarAt": "2026-09-28T13:19:00.000Z"
-          },
-          {
-            "label": "Russell 2000 (RTY)",
-            "fridayClose": 2859.2,
-            "scanPrice": 2842.8,
-            "changePercent": -0.57,
-            "fridayCloseBarAt": "2026-09-25T19:59:00.000Z",
-            "scanPriceBarAt": "2026-09-28T13:19:00.000Z"
-          },
-          {
-            "label": "VIX",
-            "fridayClose": 14.87,
-            "scanPrice": 16.01,
-            "changePercent": 7.67,
-            "fridayCloseBarAt": "2026-09-25T20:14:00.000Z",
-            "scanPriceBarAt": "2026-09-28T13:19:00.000Z"
-          }
-        ]
-      },
-      {
-        "title": "Keep an eye on relative strength",
-        "body": "Watch oil, the 10Y yield, semiconductor relative strength, VIX, and any new U.S.–Iran headlines. The main setup remains: U.S.–Iran headlines → oil → yields → QQQ / semis.",
-        "source": "User-provided briefing · market watchlist",
-        "url": "https://www.tradingview.com/"
+        "title": "Friday, October 2",
+        "body": "8:30 a.m. ET — U.S. Employment Situation (September jobs report)\n10:00 a.m. ET — Factory Orders MoM.",
+        "source": "Trading Economics calendar",
+        "url": "https://tradingeconomics.com/calendar",
+        "asOf": null
       }
     ],
     "earnings": [
       {
-        "title": "Catalyst watch — MU after the close Wednesday",
-        "body": "Micron is the key earnings report for the broader market this week because of its read-through to AI memory and semiconductors.",
-        "source": "User-provided briefing · Micron IR",
-        "url": "https://investors.micron.com/events-and-presentations"
+        "title": "Micron (MU) · Wednesday after the close",
+        "body": "Micron reports after the close today. The implied move is 7% (±$75 per share), and this could move the indices either way given MU's importance to the semiconductor trade.",
+        "source": "Micron investor relations",
+        "url": "https://investors.micron.com/news/press-release/2026/Micron-Technology-to-Report-Fiscal-Fourth-Quarter-Results-on-September-30-2026/default.aspx",
+        "asOf": null
+      }
+    ],
+    "news": [
+      {
+        "title": "Oil and U.S.–Iran headlines",
+        "body": "Oil recovered some of its losses overnight and is sitting at $90.30 per barrel.",
+        "source": "Desk commentary",
+        "url": "https://www.cmegroup.com/markets/energy/crude-oil/light-sweet-crude.html",
+        "asOf": null
+      },
+      {
+        "title": "Trump / Commerce Secretary Lutnick announcement",
+        "body": "At 3:30 p.m. ET, Trump is supposed to make an announcement with Commerce Secretary Lutnick, so watch out! The subject is unspecified.",
+        "source": "White House briefing room",
+        "url": "https://www.whitehouse.gov/briefing-room/",
+        "asOf": null
       }
     ]
-  }
+  },
+  "treasuryYields": [
+    {
+      "tenor": "2Y",
+      "value": 4.8787,
+      "previousClose": 4.89,
+      "source": "Reuters · 2Y Treasury yield in European hours on Sep 30; story published 1:58 a.m. UTC (exact quote time not stated)",
+      "url": "https://www.reuters.com/world/china/global-markets-global-markets-2026-09-30/",
+      "previousCloseSource": "U.S. Treasury daily par yield curve · Sep 29, 2026 · indicative quotes at/near 3:30 p.m. ET",
+      "previousCloseUrl": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?field_tdr_date_value=2026&type=daily_treasury_yield_curve",
+      "retrievedAt": "2026-09-30T16:12:13.419Z",
+      "issue": "The source reports a trading period but not an exact quote timestamp; displayed as a sourced premarket report, not a synchronized 9:20 ET observation."
+    },
+    {
+      "tenor": "5Y",
+      "value": null,
+      "previousClose": 5.06,
+      "source": "No verified premarket 5Y quote found; left blank.",
+      "url": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?field_tdr_date_value=2026&type=daily_treasury_yield_curve",
+      "previousCloseSource": "U.S. Treasury daily par yield curve · Sep 29, 2026 · indicative quotes at/near 3:30 p.m. ET",
+      "previousCloseUrl": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?field_tdr_date_value=2026&type=daily_treasury_yield_curve",
+      "retrievedAt": "2026-09-30T16:12:13.419Z"
+    },
+    {
+      "tenor": "10Y",
+      "value": 5.233,
+      "previousClose": 5.26,
+      "source": "Barron's citing Tradeweb · Asian trading on Sep 30; exact observation time not stated",
+      "url": "https://www.barrons.com/livecoverage/stock-market-news-today-093026/card/u-s-treasury-yields-fall-as-fed-speak-calms-rate-hike-expectations-y60hJylQKL0AGUxajebZ",
+      "previousCloseSource": "U.S. Treasury daily par yield curve · Sep 29, 2026 · indicative quotes at/near 3:30 p.m. ET",
+      "previousCloseUrl": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?field_tdr_date_value=2026&type=daily_treasury_yield_curve",
+      "retrievedAt": "2026-09-30T16:12:13.419Z",
+      "issue": "The source reports a trading period but not an exact quote timestamp; displayed as a sourced premarket report, not a synchronized 9:20 ET observation."
+    },
+    {
+      "tenor": "30Y",
+      "value": 5.563,
+      "previousClose": 5.59,
+      "source": "Barron's citing Tradeweb · Asian trading on Sep 30; exact observation time not stated",
+      "url": "https://www.barrons.com/livecoverage/stock-market-news-today-093026/card/u-s-treasury-yields-fall-as-fed-speak-calms-rate-hike-expectations-y60hJylQKL0AGUxajebZ",
+      "previousCloseSource": "U.S. Treasury daily par yield curve · Sep 29, 2026 · indicative quotes at/near 3:30 p.m. ET",
+      "previousCloseUrl": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?field_tdr_date_value=2026&type=daily_treasury_yield_curve",
+      "retrievedAt": "2026-09-30T16:12:13.419Z",
+      "issue": "The source reports a trading period but not an exact quote timestamp; displayed as a sourced premarket report, not a synchronized 9:20 ET observation."
+    }
+  ]
 }

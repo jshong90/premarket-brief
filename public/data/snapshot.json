@@ -1,237 +1,21 @@
 {
-  "sessionDate": "2026-09-30",
-  "fetchedAt": "2026-09-29T02:37:45.894Z",
+  "sessionDate": "2026-10-01",
+  "fetchedAt": "2026-10-01T03:59:21.033Z",
   "status": "imported",
-  "universeCount": 12,
+  "universeCount": 0,
   "universeComplete": false,
   "connected": {
     "tradingview": true,
     "massive": false
   },
   "messages": [
-    "The relative-strength scanner data remains the September 28 example; no September 30 scan is included.",
-    "Treasury table: previous-session closes are the U.S. Treasury Sep 29 par curve (indicative quotes at or near 3:30 p.m. ET). Premarket quotes are asynchronous reports from Reuters and Barron's/Tradeweb; exact observation times are not stated. No verified premarket 5Y quote was found; it remains blank.",
-    "The 2Y, 10Y and 30Y Treasury quote rows have no exact observation timestamp in their cited reports; the page preserves these source-reported values with that limitation disclosed.",
-    "Key levels refreshed for 2026-09-30 from TradingView timestamped 1-minute futures bars. Session window: prior day 18:00 ET through 09:19 ET; 09:20 bar excluded. TradingView reports market-data delay of 15+ minutes."
+    "October 1 morning brief draft prepared on September 30; this is not a frozen premarket snapshot.",
+    "No October 1 premarket bars or prices have been captured yet. Values for the October 1 scan, key levels and market-context premarket readings are left blank; no resilience rows are ranked.",
+    "The 12-stock sample from September 28 is not carried into this draft. The $50B+ common-stock universe has not been discovered for October 1 (universeComplete=false).",
+    "Previous-session close values shown are from September 30. TradingView one-minute data may be delayed 15+ minutes; cutoff bars must be timestamp-checked before freezing.",
+    "The macro calendar includes only the events explicitly listed for October 1 and 2. Other calendar releases are omitted."
   ],
-  "stocks": [
-    {
-      "ticker": "AAPL",
-      "name": "Apple",
-      "sector": "Technology",
-      "benchmark": "NQ",
-      "drawdown": null,
-      "high": null,
-      "low": null,
-      "last": null,
-      "previousClose": 341.04,
-      "volume": null,
-      "marketCap": null,
-      "source": "TradingView Official MCP · NASDAQ:AAPL · Friday 15:59 ET 1-minute close bar; no pre/post-market bars",
-      "asOf": null,
-      "issue": "Friday close verified. No 06:20 PT premarket bar or timestamped premarket range is available from the connected feed; this row remains unranked.",
-      "previousCloseAt": "2026-09-25T19:59:00.000Z",
-      "retrievedAt": "2026-09-29T02:32:27.130Z"
-    },
-    {
-      "ticker": "CSCO",
-      "name": "Cisco Systems",
-      "sector": "Technology",
-      "benchmark": "NQ",
-      "drawdown": null,
-      "high": null,
-      "low": null,
-      "last": null,
-      "previousClose": 106.68,
-      "volume": null,
-      "marketCap": null,
-      "source": "TradingView Official MCP · NASDAQ:CSCO · Friday 15:59 ET 1-minute close bar; no pre/post-market bars",
-      "asOf": null,
-      "issue": "Friday close verified. No 06:20 PT premarket bar or timestamped premarket range is available from the connected feed; this row remains unranked.",
-      "previousCloseAt": "2026-09-25T19:59:00.000Z",
-      "retrievedAt": "2026-09-29T02:32:27.130Z"
-    },
-    {
-      "ticker": "TSLA",
-      "name": "Tesla",
-      "sector": "Discretionary",
-      "benchmark": "NQ",
-      "drawdown": null,
-      "high": null,
-      "low": null,
-      "last": null,
-      "previousClose": 372.01,
-      "volume": null,
-      "marketCap": null,
-      "source": "TradingView Official MCP · NASDAQ:TSLA · Friday 15:59 ET 1-minute close bar; no pre/post-market bars",
-      "asOf": null,
-      "issue": "Friday close verified. No 06:20 PT premarket bar or timestamped premarket range is available from the connected feed; this row remains unranked.",
-      "previousCloseAt": "2026-09-25T19:59:00.000Z",
-      "retrievedAt": "2026-09-29T02:32:27.130Z"
-    },
-    {
-      "ticker": "AMZN",
-      "name": "Amazon",
-      "sector": "Discretionary",
-      "benchmark": "NQ",
-      "drawdown": null,
-      "high": null,
-      "low": null,
-      "last": null,
-      "previousClose": 249.74,
-      "volume": null,
-      "marketCap": null,
-      "source": "TradingView Official MCP · NASDAQ:AMZN · Friday 15:59 ET 1-minute close bar; no pre/post-market bars",
-      "asOf": null,
-      "issue": "Friday close verified. No 06:20 PT premarket bar or timestamped premarket range is available from the connected feed; this row remains unranked.",
-      "previousCloseAt": "2026-09-25T19:59:00.000Z",
-      "retrievedAt": "2026-09-29T02:32:27.130Z"
-    },
-    {
-      "ticker": "QCOM",
-      "name": "Qualcomm",
-      "sector": "Technology",
-      "benchmark": "NQ",
-      "drawdown": null,
-      "high": null,
-      "low": null,
-      "last": null,
-      "previousClose": 201.92,
-      "volume": null,
-      "marketCap": null,
-      "source": "TradingView Official MCP · NASDAQ:QCOM · Friday 15:59 ET 1-minute close bar; no pre/post-market bars",
-      "asOf": null,
-      "issue": "Friday close verified. No 06:20 PT premarket bar or timestamped premarket range is available from the connected feed; this row remains unranked.",
-      "previousCloseAt": "2026-09-25T19:59:00.000Z",
-      "retrievedAt": "2026-09-29T02:32:27.130Z"
-    },
-    {
-      "ticker": "COST",
-      "name": "Costco",
-      "sector": "Staples",
-      "benchmark": "ES",
-      "drawdown": null,
-      "high": null,
-      "low": null,
-      "last": null,
-      "previousClose": 922.63,
-      "volume": null,
-      "marketCap": null,
-      "source": "TradingView Official MCP · NASDAQ:COST · Friday 15:59 ET 1-minute close bar; no pre/post-market bars",
-      "asOf": null,
-      "issue": "Friday close verified. No 06:20 PT premarket bar or timestamped premarket range is available from the connected feed; this row remains unranked.",
-      "previousCloseAt": "2026-09-25T19:59:00.000Z",
-      "retrievedAt": "2026-09-29T02:32:27.130Z"
-    },
-    {
-      "ticker": "MA",
-      "name": "Mastercard",
-      "sector": "Financials",
-      "benchmark": "ES",
-      "drawdown": null,
-      "high": null,
-      "low": null,
-      "last": null,
-      "previousClose": 567.67,
-      "volume": null,
-      "marketCap": null,
-      "source": "TradingView Official MCP · NYSE:MA · Friday 15:59 ET 1-minute close bar; no pre/post-market bars",
-      "asOf": null,
-      "issue": "Friday close verified. No 06:20 PT premarket bar or timestamped premarket range is available from the connected feed; this row remains unranked.",
-      "previousCloseAt": "2026-09-25T19:59:00.000Z",
-      "retrievedAt": "2026-09-29T02:32:27.130Z"
-    },
-    {
-      "ticker": "GOOGL",
-      "name": "Alphabet",
-      "sector": "Communication",
-      "benchmark": "NQ",
-      "drawdown": null,
-      "high": null,
-      "low": null,
-      "last": null,
-      "previousClose": 343.88,
-      "volume": null,
-      "marketCap": null,
-      "source": "TradingView Official MCP · NASDAQ:GOOGL · Friday 15:59 ET 1-minute close bar; no pre/post-market bars",
-      "asOf": null,
-      "issue": "Friday close verified. No 06:20 PT premarket bar or timestamped premarket range is available from the connected feed; this row remains unranked.",
-      "previousCloseAt": "2026-09-25T19:59:00.000Z",
-      "retrievedAt": "2026-09-29T02:32:27.130Z"
-    },
-    {
-      "ticker": "WMT",
-      "name": "Walmart",
-      "sector": "Staples",
-      "benchmark": "ES",
-      "drawdown": null,
-      "high": null,
-      "low": null,
-      "last": null,
-      "previousClose": 107.97,
-      "volume": null,
-      "marketCap": null,
-      "source": "TradingView Official MCP · NASDAQ:WMT · Friday 15:59 ET 1-minute close bar; no pre/post-market bars",
-      "asOf": null,
-      "issue": "Friday close verified. No 06:20 PT premarket bar or timestamped premarket range is available from the connected feed; this row remains unranked.",
-      "previousCloseAt": "2026-09-25T19:59:00.000Z",
-      "retrievedAt": "2026-09-29T02:32:27.130Z"
-    },
-    {
-      "ticker": "MCD",
-      "name": "McDonald’s",
-      "sector": "Discretionary",
-      "benchmark": "ES",
-      "drawdown": null,
-      "high": null,
-      "low": null,
-      "last": null,
-      "previousClose": 236.5,
-      "volume": null,
-      "marketCap": null,
-      "source": "TradingView Official MCP · NYSE:MCD · Friday 15:59 ET 1-minute close bar; no pre/post-market bars",
-      "asOf": null,
-      "issue": "Friday close verified. No 06:20 PT premarket bar or timestamped premarket range is available from the connected feed; this row remains unranked.",
-      "previousCloseAt": "2026-09-25T19:59:00.000Z",
-      "retrievedAt": "2026-09-29T02:32:27.130Z"
-    },
-    {
-      "ticker": "NVDA",
-      "name": "NVIDIA",
-      "sector": "Technology",
-      "benchmark": "NQ",
-      "drawdown": null,
-      "high": null,
-      "low": null,
-      "last": null,
-      "previousClose": 225.04,
-      "volume": null,
-      "marketCap": null,
-      "source": "TradingView Official MCP · NASDAQ:NVDA · Friday 15:59 ET 1-minute close bar; no pre/post-market bars",
-      "asOf": null,
-      "issue": "Friday close verified. No 06:20 PT premarket bar or timestamped premarket range is available from the connected feed; this row remains unranked.",
-      "previousCloseAt": "2026-09-25T19:59:00.000Z",
-      "retrievedAt": "2026-09-29T02:32:27.130Z"
-    },
-    {
-      "ticker": "APP",
-      "name": "AppLovin",
-      "sector": "Technology",
-      "benchmark": "NQ",
-      "drawdown": null,
-      "high": null,
-      "low": null,
-      "last": null,
-      "previousClose": 310.71,
-      "volume": null,
-      "marketCap": null,
-      "source": "TradingView Official MCP · NASDAQ:APP · Friday 15:59 ET 1-minute close bar; no pre/post-market bars",
-      "asOf": null,
-      "issue": "Friday close verified. No 06:20 PT premarket bar or timestamped premarket range is available from the connected feed; this row remains unranked.",
-      "previousCloseAt": "2026-09-25T19:59:00.000Z",
-      "retrievedAt": "2026-09-29T02:32:27.130Z"
-    }
-  ],
+  "stocks": [],
   "sectors": [
     {
       "ticker": "XLK",
@@ -241,15 +25,13 @@
       "high": null,
       "low": null,
       "last": null,
-      "previousClose": 196.26,
+      "previousClose": null,
       "drawdown": null,
       "volume": null,
       "marketCap": null,
-      "source": "TradingView Official MCP · AMEX:XLK · Friday 15:59 ET 1-minute close bar; no pre/post-market bars",
+      "source": "Awaiting October 1 premarket snapshot",
       "asOf": null,
-      "issue": "Friday close verified. No 06:20 PT premarket bar or timestamped premarket range is available from the connected feed; this row remains unranked.",
-      "previousCloseAt": "2026-09-25T19:59:00.000Z",
-      "retrievedAt": "2026-09-29T02:32:56.660Z"
+      "issue": "No October 1 timestamped input captured yet."
     },
     {
       "ticker": "XLC",
@@ -259,15 +41,13 @@
       "high": null,
       "low": null,
       "last": null,
-      "previousClose": 112.93,
+      "previousClose": null,
       "drawdown": null,
       "volume": null,
       "marketCap": null,
-      "source": "TradingView Official MCP · AMEX:XLC · Friday 15:59 ET 1-minute close bar; no pre/post-market bars",
+      "source": "Awaiting October 1 premarket snapshot",
       "asOf": null,
-      "issue": "Friday close verified. No 06:20 PT premarket bar or timestamped premarket range is available from the connected feed; this row remains unranked.",
-      "previousCloseAt": "2026-09-25T19:59:00.000Z",
-      "retrievedAt": "2026-09-29T02:32:56.660Z"
+      "issue": "No October 1 timestamped input captured yet."
     },
     {
       "ticker": "XLY",
@@ -277,15 +57,13 @@
       "high": null,
       "low": null,
       "last": null,
-      "previousClose": 110.54,
+      "previousClose": null,
       "drawdown": null,
       "volume": null,
       "marketCap": null,
-      "source": "TradingView Official MCP · AMEX:XLY · Friday 15:59 ET 1-minute close bar; no pre/post-market bars",
+      "source": "Awaiting October 1 premarket snapshot",
       "asOf": null,
-      "issue": "Friday close verified. No 06:20 PT premarket bar or timestamped premarket range is available from the connected feed; this row remains unranked.",
-      "previousCloseAt": "2026-09-25T19:59:00.000Z",
-      "retrievedAt": "2026-09-29T02:32:56.660Z"
+      "issue": "No October 1 timestamped input captured yet."
     },
     {
       "ticker": "XLF",
@@ -295,15 +73,13 @@
       "high": null,
       "low": null,
       "last": null,
-      "previousClose": 54.83,
+      "previousClose": null,
       "drawdown": null,
       "volume": null,
       "marketCap": null,
-      "source": "TradingView Official MCP · AMEX:XLF · Friday 15:59 ET 1-minute close bar; no pre/post-market bars",
+      "source": "Awaiting October 1 premarket snapshot",
       "asOf": null,
-      "issue": "Friday close verified. No 06:20 PT premarket bar or timestamped premarket range is available from the connected feed; this row remains unranked.",
-      "previousCloseAt": "2026-09-25T19:59:00.000Z",
-      "retrievedAt": "2026-09-29T02:32:56.660Z"
+      "issue": "No October 1 timestamped input captured yet."
     },
     {
       "ticker": "XLI",
@@ -313,15 +89,13 @@
       "high": null,
       "low": null,
       "last": null,
-      "previousClose": 170.42,
+      "previousClose": null,
       "drawdown": null,
       "volume": null,
       "marketCap": null,
-      "source": "TradingView Official MCP · AMEX:XLI · Friday 15:59 ET 1-minute close bar; no pre/post-market bars",
+      "source": "Awaiting October 1 premarket snapshot",
       "asOf": null,
-      "issue": "Friday close verified. No 06:20 PT premarket bar or timestamped premarket range is available from the connected feed; this row remains unranked.",
-      "previousCloseAt": "2026-09-25T19:59:00.000Z",
-      "retrievedAt": "2026-09-29T02:32:56.660Z"
+      "issue": "No October 1 timestamped input captured yet."
     },
     {
       "ticker": "XLV",
@@ -331,15 +105,13 @@
       "high": null,
       "low": null,
       "last": null,
-      "previousClose": 170.74,
+      "previousClose": null,
       "drawdown": null,
       "volume": null,
       "marketCap": null,
-      "source": "TradingView Official MCP · AMEX:XLV · Friday 15:59 ET 1-minute close bar; no pre/post-market bars",
+      "source": "Awaiting October 1 premarket snapshot",
       "asOf": null,
-      "issue": "Friday close verified. No 06:20 PT premarket bar or timestamped premarket range is available from the connected feed; this row remains unranked.",
-      "previousCloseAt": "2026-09-25T19:59:00.000Z",
-      "retrievedAt": "2026-09-29T02:32:56.660Z"
+      "issue": "No October 1 timestamped input captured yet."
     },
     {
       "ticker": "XLP",
@@ -349,15 +121,13 @@
       "high": null,
       "low": null,
       "last": null,
-      "previousClose": 82.08,
+      "previousClose": null,
       "drawdown": null,
       "volume": null,
       "marketCap": null,
-      "source": "TradingView Official MCP · AMEX:XLP · Friday 15:59 ET 1-minute close bar; no pre/post-market bars",
+      "source": "Awaiting October 1 premarket snapshot",
       "asOf": null,
-      "issue": "Friday close verified. No 06:20 PT premarket bar or timestamped premarket range is available from the connected feed; this row remains unranked.",
-      "previousCloseAt": "2026-09-25T19:59:00.000Z",
-      "retrievedAt": "2026-09-29T02:32:56.660Z"
+      "issue": "No October 1 timestamped input captured yet."
     },
     {
       "ticker": "XLU",
@@ -367,15 +137,13 @@
       "high": null,
       "low": null,
       "last": null,
-      "previousClose": 39.525,
+      "previousClose": null,
       "drawdown": null,
       "volume": null,
       "marketCap": null,
-      "source": "TradingView Official MCP · AMEX:XLU · Friday 15:59 ET 1-minute close bar; no pre/post-market bars",
+      "source": "Awaiting October 1 premarket snapshot",
       "asOf": null,
-      "issue": "Friday close verified. No 06:20 PT premarket bar or timestamped premarket range is available from the connected feed; this row remains unranked.",
-      "previousCloseAt": "2026-09-25T19:59:00.000Z",
-      "retrievedAt": "2026-09-29T02:32:56.660Z"
+      "issue": "No October 1 timestamped input captured yet."
     },
     {
       "ticker": "XLRE",
@@ -385,15 +153,13 @@
       "high": null,
       "low": null,
       "last": null,
-      "previousClose": 41.545,
+      "previousClose": null,
       "drawdown": null,
       "volume": null,
       "marketCap": null,
-      "source": "TradingView Official MCP · AMEX:XLRE · Friday 15:59 ET 1-minute close bar; no pre/post-market bars",
+      "source": "Awaiting October 1 premarket snapshot",
       "asOf": null,
-      "issue": "Friday close verified. No 06:20 PT premarket bar or timestamped premarket range is available from the connected feed; this row remains unranked.",
-      "previousCloseAt": "2026-09-25T19:59:00.000Z",
-      "retrievedAt": "2026-09-29T02:32:56.660Z"
+      "issue": "No October 1 timestamped input captured yet."
     },
     {
       "ticker": "XLB",
@@ -403,15 +169,13 @@
       "high": null,
       "low": null,
       "last": null,
-      "previousClose": 49.79,
+      "previousClose": null,
       "drawdown": null,
       "volume": null,
       "marketCap": null,
-      "source": "TradingView Official MCP · AMEX:XLB · Friday 15:59 ET 1-minute close bar; no pre/post-market bars",
+      "source": "Awaiting October 1 premarket snapshot",
       "asOf": null,
-      "issue": "Friday close verified. No 06:20 PT premarket bar or timestamped premarket range is available from the connected feed; this row remains unranked.",
-      "previousCloseAt": "2026-09-25T19:59:00.000Z",
-      "retrievedAt": "2026-09-29T02:32:56.660Z"
+      "issue": "No October 1 timestamped input captured yet."
     },
     {
       "ticker": "XLE",
@@ -421,37 +185,33 @@
       "high": null,
       "low": null,
       "last": null,
-      "previousClose": 62.05,
+      "previousClose": null,
       "drawdown": null,
       "volume": null,
       "marketCap": null,
-      "source": "TradingView Official MCP · AMEX:XLE · Friday 15:59 ET 1-minute close bar; no pre/post-market bars",
+      "source": "Awaiting October 1 premarket snapshot",
       "asOf": null,
-      "issue": "Friday close verified. No 06:20 PT premarket bar or timestamped premarket range is available from the connected feed; this row remains unranked.",
-      "previousCloseAt": "2026-09-25T19:59:00.000Z",
-      "retrievedAt": "2026-09-29T02:32:56.660Z"
+      "issue": "No October 1 timestamped input captured yet."
     }
   ],
   "benchmarks": [
     {
       "id": "NQ",
-      "high": 30920.75,
-      "low": 30531,
-      "drawdown": 1.2604804217232757,
-      "source": "TradingView Official MCP · CME_MINI:NQ1! · 1-minute OHLCV · delayed 15+ minutes",
-      "asOf": "2026-09-28T13:19:00.000Z",
-      "highTime": "2026-09-27T22:00:00.000Z",
-      "lowTime": "2026-09-28T09:12:00.000Z"
+      "high": null,
+      "low": null,
+      "drawdown": null,
+      "source": "TradingView Official MCP · CME_MINI:NQ1! · October 1 timestamp-filtered 1-minute bars pending",
+      "asOf": null,
+      "issue": "October 1 overnight range not captured yet."
     },
     {
       "id": "ES",
-      "high": 7803,
-      "low": 7757,
-      "drawdown": 0.5895168524926331,
-      "source": "TradingView Official MCP · CME_MINI:ES1! · 1-minute OHLCV · delayed 15+ minutes",
-      "asOf": "2026-09-28T13:19:00.000Z",
-      "highTime": "2026-09-27T22:00:00.000Z",
-      "lowTime": "2026-09-28T10:11:00.000Z"
+      "high": null,
+      "low": null,
+      "drawdown": null,
+      "source": "TradingView Official MCP · CME_MINI:ES1! · October 1 timestamp-filtered 1-minute bars pending",
+      "asOf": null,
+      "issue": "October 1 overnight range not captured yet."
     }
   ],
   "marketContext": [
@@ -461,14 +221,13 @@
       "name": "S&P 500 cash index",
       "kind": "index",
       "value": null,
-      "previousClose": null,
+      "previousClose": 7651.54,
+      "previousCloseAt": "2026-09-30T20:00:00.000Z",
       "change": null,
       "changeUnit": "%",
-      "source": "TradingView Official MCP · SP:SPX · 1-minute Friday close bar; no 06:20 cash-index observation",
+      "source": "Associated Press · Sep 30, 2026 cash close; no Oct 1 premarket cash-index value",
       "asOf": null,
-      "issue": "No verified September 30 observation is available; prior snapshot values cleared.",
-      "previousCloseAt": "2026-09-25T19:59:00.000Z",
-      "retrievedAt": "2026-09-29T02:27:16.293Z"
+      "issue": "October 1 premarket observation is pending; SPX is a cash index."
     },
     {
       "id": "SPY",
@@ -476,14 +235,13 @@
       "name": "SPDR S&P 500 ETF",
       "kind": "etf",
       "value": null,
-      "previousClose": null,
+      "previousClose": 762.41,
+      "previousCloseAt": "2026-09-30T19:59:00.000Z",
       "change": null,
       "changeUnit": "%",
-      "source": "TradingView Official MCP · AMEX:SPY · 1-minute Friday close bar; feed omits pre/post-market bars",
+      "source": "TradingView Official MCP · AMEX:SPY · Sep 30 15:59 ET 1-minute close bar",
       "asOf": null,
-      "issue": "No verified September 30 observation is available; prior snapshot values cleared.",
-      "previousCloseAt": "2026-09-25T19:59:00.000Z",
-      "retrievedAt": "2026-09-29T02:27:16.293Z"
+      "issue": "October 1 premarket value is pending."
     },
     {
       "id": "QQQ",
@@ -491,14 +249,13 @@
       "name": "Invesco QQQ Trust",
       "kind": "etf",
       "value": null,
-      "previousClose": null,
+      "previousClose": 739.77,
+      "previousCloseAt": "2026-09-30T19:59:00.000Z",
       "change": null,
       "changeUnit": "%",
-      "source": "TradingView Official MCP · NASDAQ:QQQ · 1-minute Friday close bar; feed omits pre/post-market bars",
+      "source": "TradingView Official MCP · NASDAQ:QQQ · Sep 30 15:59 ET 1-minute close bar",
       "asOf": null,
-      "issue": "No verified September 30 observation is available; prior snapshot values cleared.",
-      "previousCloseAt": "2026-09-25T19:59:00.000Z",
-      "retrievedAt": "2026-09-29T02:27:16.293Z"
+      "issue": "October 1 premarket value is pending."
     },
     {
       "id": "VIX",
@@ -506,15 +263,14 @@
       "name": "Cboe Volatility Index",
       "kind": "volatility",
       "value": null,
-      "previousClose": null,
+      "previousClose": 16.32,
+      "previousCloseAt": "2026-09-30T20:14:00.000Z",
       "change": null,
-      "changeUnit": "pts",
+      "changeUnit": "%",
       "approximate": false,
-      "source": "TradingView Official MCP · CBOE:VIX · Friday 16:14 ET closing bar + Monday 09:19 ET one-minute bar",
+      "source": "TradingView Official MCP · CBOE:VIX · Sep 30 16:14 ET closing bar",
       "asOf": null,
-      "issue": "No verified September 30 observation is available; prior snapshot values cleared.",
-      "previousCloseAt": "2026-09-25T20:14:00.000Z",
-      "retrievedAt": "2026-09-29T02:37:45.894Z"
+      "issue": "October 1 observation is pending."
     },
     {
       "id": "US10Y",
@@ -522,167 +278,188 @@
       "name": "U.S. 10-year Treasury yield",
       "kind": "yield",
       "value": null,
-      "previousClose": null,
+      "previousClose": 5.276,
+      "previousCloseAt": "2026-09-30T19:59:00.000Z",
       "change": null,
       "changeUnit": "bp",
       "approximate": false,
-      "source": "TradingView Official MCP · TVC:US10Y · Friday 15:59 ET close bar + Monday 09:19 ET one-minute bar",
+      "source": "TradingView Official MCP · TVC:US10Y · Sep 30 15:59 ET 1-minute close bar",
       "asOf": null,
-      "issue": "No verified September 30 observation is available; prior snapshot values cleared.",
-      "previousCloseAt": "2026-09-25T19:59:00.000Z",
-      "retrievedAt": "2026-09-29T02:27:16.293Z"
+      "issue": "October 1 observation is pending."
     }
   ],
   "keyLevels": [
     {
       "id": "ES",
       "label": "S&P 500 (ES)",
-      "high": 7771.25,
-      "low": 7719.5,
-      "highTime": "2026-09-30T12:31:00.000Z",
-      "lowTime": "2026-09-30T11:20:00.000Z",
-      "asOf": "2026-09-30T13:19:00.000Z",
-      "retrievedAt": "2026-10-01T03:29:22.994Z",
-      "source": "TradingView Official MCP · CME_MINI:ES1! · timestamp-filtered 1-minute OHLCV for 2026-09-29 18:00 through 2026-09-30 09:19 ET · provider delay 15+ minutes"
+      "high": null,
+      "low": null,
+      "asOf": null,
+      "retrievedAt": "2026-10-01T03:59:21.033Z",
+      "source": "TradingView Official MCP · cutoff-filtered 1-minute bars pending for Sep 30 18:00–Oct 1 09:19 ET",
+      "issue": "Awaiting the October 1 09:20 ET cutoff capture; values remain blank."
     },
     {
       "id": "NQ",
       "label": "Nasdaq-100 (NQ)",
-      "high": 30779.5,
-      "low": 30512.25,
-      "highTime": "2026-09-30T12:32:00.000Z",
-      "lowTime": "2026-09-30T11:20:00.000Z",
-      "asOf": "2026-09-30T13:19:00.000Z",
-      "retrievedAt": "2026-10-01T03:29:22.994Z",
-      "source": "TradingView Official MCP · CME_MINI:NQ1! · timestamp-filtered 1-minute OHLCV for 2026-09-29 18:00 through 2026-09-30 09:19 ET · provider delay 15+ minutes"
+      "high": null,
+      "low": null,
+      "asOf": null,
+      "retrievedAt": "2026-10-01T03:59:21.033Z",
+      "source": "TradingView Official MCP · cutoff-filtered 1-minute bars pending for Sep 30 18:00–Oct 1 09:19 ET",
+      "issue": "Awaiting the October 1 09:20 ET cutoff capture; values remain blank."
     },
     {
       "id": "YM",
       "label": "Dow (YM)",
-      "high": 51997,
-      "low": 51586,
-      "highTime": "2026-09-30T07:16:00.000Z",
-      "lowTime": "2026-09-30T11:11:00.000Z",
-      "asOf": "2026-09-30T13:19:00.000Z",
-      "retrievedAt": "2026-10-01T03:29:22.994Z",
-      "source": "TradingView Official MCP · CBOT_MINI:YM1! · timestamp-filtered 1-minute OHLCV for 2026-09-29 18:00 through 2026-09-30 09:19 ET · provider delay 15+ minutes"
+      "high": null,
+      "low": null,
+      "asOf": null,
+      "retrievedAt": "2026-10-01T03:59:21.033Z",
+      "source": "TradingView Official MCP · cutoff-filtered 1-minute bars pending for Sep 30 18:00–Oct 1 09:19 ET",
+      "issue": "Awaiting the October 1 09:20 ET cutoff capture; values remain blank."
     },
     {
       "id": "RTY",
       "label": "Russell 2000 (RTY)",
-      "high": 2853.8,
-      "low": 2819.7,
-      "highTime": "2026-09-30T12:31:00.000Z",
-      "lowTime": "2026-09-30T11:11:00.000Z",
-      "asOf": "2026-09-30T13:19:00.000Z",
-      "retrievedAt": "2026-10-01T03:29:22.994Z",
-      "source": "TradingView Official MCP · CME_MINI:RTY1! · timestamp-filtered 1-minute OHLCV for 2026-09-29 18:00 through 2026-09-30 09:19 ET · provider delay 15+ minutes"
+      "high": null,
+      "low": null,
+      "asOf": null,
+      "retrievedAt": "2026-10-01T03:59:21.033Z",
+      "source": "TradingView Official MCP · cutoff-filtered 1-minute bars pending for Sep 30 18:00–Oct 1 09:19 ET",
+      "issue": "Awaiting the October 1 09:20 ET cutoff capture; values remain blank."
     }
   ],
   "briefing": {
     "indices": [
       {
-        "title": "Overnight index moves and breadth",
-        "body": "Nasdaq: +0.35% · S&P 500: +0.30% · VIX: −0.32%. Need more breadth in this market for a sustained rally, IMO. The rate hike story is a big factor too. Checking Polymarket, there was a slight bump in the odds the Fed DOESN'T touch rates in the wake of that PCE print, sitting around 66% chance of a no-touch. Today is the last day of September, and also the last day of the quarter.",
-        "source": "Desk commentary",
-        "url": "https://www.tradingview.com/markets/indices/quotes/",
-        "asOf": null
+        "title": "Wednesday close: Nasdaq edged higher; S&P slipped",
+        "body": "The Nasdaq Composite gained 0.2% to 26,861.06, while the S&P 500 fell 0.3% to 7,651.54. The Dow lost 0.9% and the Russell 2000 fell 0.4%. Wednesday was month-end and quarter-end; market breadth remained weak.",
+        "source": "Associated Press",
+        "url": "https://apnews.com/article/1ee73f14dc23f6139eeb12c7397f543e",
+        "asOf": "2026-09-30",
+        "indexQuotes": [
+          {
+            "label": "Nasdaq-100 (NQ)",
+            "fridayClose": 30693.75,
+            "scanPrice": null,
+            "changePercent": null,
+            "fridayCloseAt": "2026-09-30T19:59:00.000Z",
+            "closeSource": "TradingView Official MCP · CME_MINI:NQ1!"
+          },
+          {
+            "label": "S&P 500 (ES)",
+            "fridayClose": 7712.75,
+            "scanPrice": null,
+            "changePercent": null,
+            "fridayCloseAt": "2026-09-30T19:59:00.000Z",
+            "closeSource": "TradingView Official MCP · CME_MINI:ES1!"
+          }
+        ]
       }
     ],
     "bonds": [
       {
         "title": "Treasury yields",
-        "body": "The table pairs the U.S. Treasury's Sep 29 par-curve closes with the latest sourced Sep 30 premarket quotes found. Reuters reported a 2Y quote from European hours; Barron's, citing Tradeweb, reported 10Y and 30Y quotes during Asian trading. Those are not synchronized cutoff observations. No verified premarket 5Y quote was found, so it remains blank.",
-        "source": "U.S. Treasury; Reuters; Barron's (Tradeweb)",
-        "url": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?field_tdr_date_value=2026&type=daily_treasury_yield_curve",
-        "asOf": null
+        "body": "Yields remain elevated after a volatile month and quarter. The table carries September 30 closing levels for context; October 1 premarket readings are pending.",
+        "source": "TradingView Official MCP · timestamped one-minute yield bars",
+        "url": "https://www.tradingview.com/markets/bonds/",
+        "asOf": "2026-09-30"
       }
     ],
     "macro": [
       {
         "title": "Thursday, October 1",
-        "body": "8:30 a.m. ET — Initial Jobless Claims\n9:45 a.m. ET — S&P Global Manufacturing PMI (final)\n10:00 a.m. ET — Construction Spending MoM.",
+        "body": "8:30 a.m. ET — Initial Jobless Claims\n9:45 a.m. ET — S&P Global Manufacturing PMI\n10:00 a.m. ET — Construction Spending",
         "source": "Trading Economics calendar",
         "url": "https://tradingeconomics.com/calendar",
-        "asOf": null
+        "asOf": "2026-09-30"
       },
       {
         "title": "Friday, October 2",
-        "body": "8:30 a.m. ET — U.S. Employment Situation (September jobs report)\n10:00 a.m. ET — Factory Orders MoM.",
+        "body": "8:30 a.m. ET — Employment Situation (September jobs report)\n10:00 a.m. ET — Manufacturers’ Shipments, Inventories, and Orders (factory orders)",
         "source": "Trading Economics calendar",
         "url": "https://tradingeconomics.com/calendar",
-        "asOf": null
+        "asOf": "2026-09-30"
       }
     ],
     "earnings": [
       {
-        "title": "Micron (MU) · Wednesday after the close",
-        "body": "Micron reports after the close today. The implied move is 7% (±$75 per share), and this could move the indices either way given MU's importance to the semiconductor trade.",
-        "source": "Micron investor relations",
-        "url": "https://investors.micron.com/news/press-release/2026/Micron-Technology-to-Report-Fiscal-Fourth-Quarter-Results-on-September-30-2026/default.aspx",
-        "asOf": null
+        "title": "Accenture (ACN) · before the open",
+        "body": "Accenture scheduled its Q4 and FY2026 results release before an 8:00 a.m. ET conference call on Thursday, October 1.",
+        "source": "Accenture Newsroom",
+        "url": "https://newsroom.accenture.com/news/2026/accenture-to-announce-fourth-quarter-and-full-year-fiscal-2026-results",
+        "publishedAt": "2026-09-15"
+      },
+      {
+        "title": "NIKE (NKE) · after the close",
+        "body": "NIKE plans to release fiscal Q1 2027 results at approximately 4:15 p.m. ET on Thursday, October 1; its call is scheduled for 5:00 p.m. ET.",
+        "source": "NIKE Investor Relations",
+        "url": "https://investors.nike.com/investors/news-events-and-reports/investor-news/investor-news-details/2026/NIKE-Inc--Announces-First-Quarter-Fiscal-2027-Earnings-and-Conference-Call/default.aspx",
+        "publishedAt": "2026-08-28"
       }
     ],
     "news": [
       {
-        "title": "Oil and U.S.–Iran headlines",
-        "body": "Oil recovered some of its losses overnight and is sitting at $90.30 per barrel.",
-        "source": "Desk commentary",
-        "url": "https://www.cmegroup.com/markets/energy/crude-oil/light-sweet-crude.html",
-        "asOf": null
+        "title": "Micron posts record quarter and raises its outlook",
+        "body": "Micron reported fiscal Q4 revenue of $54.23B and non-GAAP EPS of $33.42. Its fiscal Q1 outlook calls for revenue of $61.5B ± $1.5B and non-GAAP EPS of $38.15 ± $1.00.",
+        "source": "Micron Investor Relations",
+        "url": "https://investors.micron.com/news/press-release/2026/Micron-Technology-Inc--Reports-Record-Fiscal-Fourth-Quarter-and-Full-Year-2026-Results/default.aspx",
+        "publishedAt": "2026-09-30"
       },
       {
-        "title": "Trump / Commerce Secretary Lutnick announcement",
-        "body": "At 3:30 p.m. ET, Trump is supposed to make an announcement with Commerce Secretary Lutnick, so watch out! The subject is unspecified.",
-        "source": "White House briefing room",
-        "url": "https://www.whitehouse.gov/briefing-room/",
-        "asOf": null
+        "title": "PCE comes in below expectations; growth revised higher",
+        "body": "August PCE inflation rose 3.4% year over year versus a 3.7% Reuters poll estimate, while final Q2 GDP was revised to 2.2%. Softer inflation and firmer growth leave the rate outlook in focus.",
+        "source": "Reuters",
+        "url": "https://www.reuters.com/business/us-stock-futures-inch-up-yields-ease-inflation-report-looms-2026-09-30/",
+        "asOf": "2026-09-30"
       }
     ]
   },
   "treasuryYields": [
     {
       "tenor": "2Y",
-      "value": 4.8787,
-      "previousClose": 4.89,
-      "source": "Reuters · 2Y Treasury yield in European hours on Sep 30; story published 1:58 a.m. UTC (exact quote time not stated)",
-      "url": "https://www.reuters.com/world/china/global-markets-global-markets-2026-09-30/",
-      "previousCloseSource": "U.S. Treasury daily par yield curve · Sep 29, 2026 · indicative quotes at/near 3:30 p.m. ET",
-      "previousCloseUrl": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?field_tdr_date_value=2026&type=daily_treasury_yield_curve",
-      "retrievedAt": "2026-09-30T16:12:13.419Z",
-      "issue": "The source reports a trading period but not an exact quote timestamp; displayed as a sourced premarket report, not a synchronized 9:20 ET observation."
+      "value": null,
+      "previousClose": 4.874,
+      "previousCloseSource": "TradingView Official MCP · TVC:US02Y · Sep 30 15:59 ET 1-minute close bar",
+      "previousCloseUrl": "https://www.tradingview.com/symbols/TVC-US02Y/",
+      "source": "October 1 premarket quote pending.",
+      "url": "https://www.tradingview.com/symbols/TVC-US02Y/",
+      "retrievedAt": "2026-10-01T03:59:21.033Z",
+      "issue": "No October 1 premarket quote captured yet; previous-session close is shown for context."
     },
     {
       "tenor": "5Y",
       "value": null,
-      "previousClose": 5.06,
-      "source": "No verified premarket 5Y quote found; left blank.",
-      "url": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?field_tdr_date_value=2026&type=daily_treasury_yield_curve",
-      "previousCloseSource": "U.S. Treasury daily par yield curve · Sep 29, 2026 · indicative quotes at/near 3:30 p.m. ET",
-      "previousCloseUrl": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?field_tdr_date_value=2026&type=daily_treasury_yield_curve",
-      "retrievedAt": "2026-09-30T16:12:13.419Z"
+      "previousClose": 5.072,
+      "previousCloseSource": "TradingView Official MCP · TVC:US05Y · Sep 30 15:59 ET 1-minute close bar",
+      "previousCloseUrl": "https://www.tradingview.com/symbols/TVC-US05Y/",
+      "source": "October 1 premarket quote pending.",
+      "url": "https://www.tradingview.com/symbols/TVC-US05Y/",
+      "retrievedAt": "2026-10-01T03:59:21.033Z",
+      "issue": "No October 1 premarket quote captured yet; previous-session close is shown for context."
     },
     {
       "tenor": "10Y",
-      "value": 5.233,
-      "previousClose": 5.26,
-      "source": "Barron's citing Tradeweb · Asian trading on Sep 30; exact observation time not stated",
-      "url": "https://www.barrons.com/livecoverage/stock-market-news-today-093026/card/u-s-treasury-yields-fall-as-fed-speak-calms-rate-hike-expectations-y60hJylQKL0AGUxajebZ",
-      "previousCloseSource": "U.S. Treasury daily par yield curve · Sep 29, 2026 · indicative quotes at/near 3:30 p.m. ET",
-      "previousCloseUrl": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?field_tdr_date_value=2026&type=daily_treasury_yield_curve",
-      "retrievedAt": "2026-09-30T16:12:13.419Z",
-      "issue": "The source reports a trading period but not an exact quote timestamp; displayed as a sourced premarket report, not a synchronized 9:20 ET observation."
+      "value": null,
+      "previousClose": 5.276,
+      "previousCloseSource": "TradingView Official MCP · TVC:US10Y · Sep 30 15:59 ET 1-minute close bar",
+      "previousCloseUrl": "https://www.tradingview.com/symbols/TVC-US10Y/",
+      "source": "October 1 premarket quote pending.",
+      "url": "https://www.tradingview.com/symbols/TVC-US10Y/",
+      "retrievedAt": "2026-10-01T03:59:21.033Z",
+      "issue": "No October 1 premarket quote captured yet; previous-session close is shown for context."
     },
     {
       "tenor": "30Y",
-      "value": 5.563,
-      "previousClose": 5.59,
-      "source": "Barron's citing Tradeweb · Asian trading on Sep 30; exact observation time not stated",
-      "url": "https://www.barrons.com/livecoverage/stock-market-news-today-093026/card/u-s-treasury-yields-fall-as-fed-speak-calms-rate-hike-expectations-y60hJylQKL0AGUxajebZ",
-      "previousCloseSource": "U.S. Treasury daily par yield curve · Sep 29, 2026 · indicative quotes at/near 3:30 p.m. ET",
-      "previousCloseUrl": "https://home.treasury.gov/resource-center/data-chart-center/interest-rates/TextView?field_tdr_date_value=2026&type=daily_treasury_yield_curve",
-      "retrievedAt": "2026-09-30T16:12:13.419Z",
-      "issue": "The source reports a trading period but not an exact quote timestamp; displayed as a sourced premarket report, not a synchronized 9:20 ET observation."
+      "value": null,
+      "previousClose": 5.624,
+      "previousCloseSource": "TradingView Official MCP · TVC:US30Y · Sep 30 15:59 ET 1-minute close bar",
+      "previousCloseUrl": "https://www.tradingview.com/symbols/TVC-US30Y/",
+      "source": "October 1 premarket quote pending.",
+      "url": "https://www.tradingview.com/symbols/TVC-US30Y/",
+      "retrievedAt": "2026-10-01T03:59:21.033Z",
+      "issue": "No October 1 premarket quote captured yet; previous-session close is shown for context."
     }
   ]
 }
