@@ -181,7 +181,6 @@ export default function Scanner() {
       <MarketStrip data={data} draft={isDraftBrief}/>
     </header>
     <main>
-      {isArchivePreview&&<div className="snapshot-preview-banner" role="note"><strong>{dateLabel} archive</strong><span>{data.messages[0]||'Archived brief and snapshot.'}</span></div>}
       <MorningBrief data={data} error={error} archived={isArchivePreview}/>
 
       <section id="relative-strength" className="dashboard-section" aria-labelledby="scanner-title" tabIndex={-1}>
