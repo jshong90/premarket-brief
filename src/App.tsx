@@ -150,6 +150,8 @@ export default function Scanner() {
   const isDevelopmentMode=new URLSearchParams(window.location.search).get('dev')==='1';
   const pageDateLabel=dateLabel;
   const archiveDate=data.previousArchiveDate;
+  const latestHref=isDevelopmentMode?'./index.html?dev=1':'./index.html';
+  const archiveHref=archiveDate?`./index.html?date=${archiveDate}${isDevelopmentMode?'&dev=1':''}`:latestHref;
   const selectedMetrics=selected?metrics(selected,data.benchmarks.find(b=>b.id===(data.sectors.some(s=>s.ticker===selected.ticker)?'ES':benchmark==='auto'?selected.benchmark:benchmark))):null;
 
   const toolState=useRef({rows,mode,sector,benchmark,query,data});
@@ -174,7 +176,7 @@ export default function Scanner() {
   return <div className="app-shell">
     <header className="topbar">
       <div className="topbar-main">
-        <div className="topbar-leading">{(isArchivePreview||archiveDate)&&<a className="snapshot-nav-link" href={isArchivePreview?'./index.html':`./index.html?date=${archiveDate}`} aria-label={isArchivePreview?'Return to the latest snapshot':`View the ${formatDateLabel(archiveDate!)} archive`} title={isArchivePreview?'Latest snapshot':`Previous snapshot · ${formatDateLabel(archiveDate!)}`}>{isArchivePreview?<ChevronRight size={18}/>:<ChevronLeft size={18}/>}<span>{isArchivePreview?'Latest':archiveDate!.slice(5).replace('-', '/')}</span></a>}<a href="./index.html" className="brand" aria-label="The Warren home"><span className="brand-mark">W</span></a></div>
+        <div className="topbar-leading">{(isArchivePreview||archiveDate)&&<a className="snapshot-nav-link" href={isArchivePreview?latestHref:archiveHref} aria-label={isArchivePreview?'Return to the latest snapshot':`View the ${formatDateLabel(archiveDate!)} archive`} title={isArchivePreview?'Latest snapshot':`Previous snapshot · ${formatDateLabel(archiveDate!)}`}>{isArchivePreview?<ChevronRight size={18}/>:<ChevronLeft size={18}/>}<span>{isArchivePreview?'Latest':archiveDate!.slice(5).replace('-', '/')}</span></a>}<a href={latestHref} className="brand" aria-label="The Warren home"><span className="brand-mark">W</span></a></div>
         <time className="topbar-date" dateTime={data.sessionDate}>{pageDateLabel}</time>
         <ThemeToggle/><button className="connection-button" onClick={()=>setDrawer('connections')}><Clock3 size={14}/><span>06:20 Pacific</span><ChevronRight size={15}/></button>
       </div>
