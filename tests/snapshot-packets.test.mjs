@@ -13,7 +13,10 @@ const { readSnapshot } = await import(compile(fs.readFileSync('src/lib/snapshot.
 
 const current = JSON.parse(fs.readFileSync('public/data/snapshot.json', 'utf8'));
 const archive = JSON.parse(fs.readFileSync('public/data/snapshot-2026-09-30.json', 'utf8'));
-assert.equal(readSnapshot(current).status, 'draft');
+assert.equal(readSnapshot(current).status, 'partial');
+assert.equal(current.cutoffAt, '2026-10-01T13:20:00.000Z');
+assert.equal(current.stocks.length, 312);
+assert.equal(readSnapshot(current).stocks.filter(row => row.drawdown !== null).length, 143);
 assert.equal(readSnapshot(archive).status, 'imported');
 assert.equal(current.previousArchiveDate, archive.sessionDate);
 assert.equal(current.indexQuotes.length, 2);
@@ -28,8 +31,8 @@ assert.throws(() => readSnapshot(changed(s => { s.indexQuotes[0].value = 100; s.
 assert.throws(() => readSnapshot(changed(s => { s.keyLevels[0].high = 100; s.keyLevels[0].low = 200; })), /key level/);
 assert.throws(() => readSnapshot(changed(s => { Object.assign(s.keyLevels[0], { high: 200, low: 100, asOf: '2026-10-01T13:20:00Z', highTime: '2026-10-01T13:19:00Z', lowTime: '2026-10-01T13:19:00Z' }); })), /key level/);
 assert.throws(() => readSnapshot(changed(s => { s.previousArchiveDate = '2026-10-01'; })), /archive date/);
-assert.throws(() => readSnapshot(changed(s => { s.cutoffAt = '2026-10-01T13:20:00Z'; })), /drafts/);
-assert.equal(readSnapshot(changed(s => { s.briefing.indices.push({ title: 'My note', body: 'Exact wording.', source: 'Desk commentary', url: '' }); })).status, 'draft');
+assert.throws(() => readSnapshot(changed(s => { s.status = 'draft'; })), /drafts/);
+assert.equal(readSnapshot(changed(s => { s.briefing.indices.push({ title: 'My note', body: 'Exact wording.', source: 'Desk commentary', url: '' }); })).status, 'partial');
 assert.throws(() => readSnapshot(changed(s => { s.briefing.indices.push({ title: 'External claim', body: 'News', source: 'Other', url: '' }); })), /HTTPS/);
 
-console.log('PASS: published packets, negative changes, quote and key-level validation, manual draft capture, archive link, and user-authored commentary.');
+console.log('PASS: published packets, partial scanner coverage, negative changes, quote and key-level validation, archive link, and user-authored commentary.');

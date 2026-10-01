@@ -42,12 +42,12 @@ function MarketTile({ row }: { row: MarketContextRow }) {
   </article>;
 }
 
-export default function MarketStrip({ data, draft = false }: { data: Snapshot; draft?: boolean }) {
+export default function MarketStrip({ data }: { data: Snapshot }) {
   const rows = data.marketContext || [];
   const byId = new Map(rows.map(row => [row.id, row]));
-  const cutoff = data.status === 'imported' ? 'Snapshot inputs · unverified' : '06:20 PT / 09:20 ET';
+  const contextLabel = data.quotesRefreshedAt ? 'Quotes captured on request · no live refresh' : data.status === 'imported' ? 'Snapshot inputs · unverified' : 'Quotes not captured';
   return <section className="market-strip" aria-label="Market context">
-    <div className="market-strip-heading"><span className="eyebrow">MARKET CONTEXT</span><span>{draft?'Draft · capture pending':cutoff}</span></div>
+    <div className="market-strip-heading"><span className="eyebrow">MARKET CONTEXT</span><span>{contextLabel}</span></div>
     <div className="market-strip-items">{ORDER.map(id => <MarketTile key={id} row={byId.get(id) || {id,label:id,name:'Not supplied',kind:id==='VIX'?'volatility':id==='US10Y'?'yield':id==='SPX'?'index':'etf',value:null,previousClose:null,change:null,changeUnit:'%',source:'Not supplied in this snapshot',asOf:null,issue:'No market-context row supplied.'}} />)}</div>
   </section>;
 }
