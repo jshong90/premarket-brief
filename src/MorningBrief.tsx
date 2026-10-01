@@ -75,7 +75,7 @@ function OvernightMovementsPanel({ data }: { data: Snapshot }) {
   const indexNotes = data.briefing?.indices ?? [];
   const bondNotes = data.briefing?.bonds ?? [];
   return <section className="briefing-section panel overnight-combined-section" aria-labelledby="brief-overnight-movements">
-    <div className="briefing-section-head"><span className="brief-section-number">01–02</span><h2 id="brief-overnight-movements">Overnight movements</h2></div>
+    <div className="briefing-section-head"><span className="brief-section-number">01</span><h2 id="brief-overnight-movements">Overnight movements</h2></div>
     <div className="overnight-pair">
       <section className="overnight-column" aria-labelledby="brief-indices">
         <h3 id="brief-indices">Overnight movements on the indices</h3>
@@ -165,10 +165,10 @@ function MacroCalendarTable({ notes }: { notes: Briefing['macro'] }) {
 
 const sourceSections: { key: keyof Briefing; label: string }[] = [
   { key: 'indices', label: '01 · Overnight movements on the indices' },
-  { key: 'bonds', label: '02 · Overnight movements on bonds' },
-  { key: 'macro', label: '04 · Upcoming macro events' },
-  { key: 'earnings', label: '05 · Upcoming earnings' },
-  { key: 'news', label: '06 · Overnight news' },
+  { key: 'bonds', label: '01 · Overnight movements on bonds' },
+  { key: 'macro', label: '03 · Upcoming macro events' },
+  { key: 'earnings', label: '04 · Upcoming earnings' },
+  { key: 'news', label: '05 · Overnight news' },
 ];
 
 function formatFuturesSession(sessionDate: string) {
@@ -272,7 +272,7 @@ function SourcesCard({ data }: { data: Snapshot }) {
           }] : []),
         ]).map((citation) => <li key={citation.key}>
           <a href={citation.url} target="_blank" rel="noreferrer">{citation.label} ↗</a>
-          <small>02 · Overnight movements on bonds · {citation.source}</small>
+          <small>01 · Overnight movements on bonds · {citation.source}</small>
           {citation.retrievedAt && <small>Retrieved {new Date(citation.retrievedAt).toLocaleString('en-US', { timeZone: 'America/Los_Angeles', dateStyle: 'short', timeStyle: 'short' })} PT.</small>}
         </li>)}</ul>
       </section>}
@@ -286,13 +286,13 @@ export default function MorningBrief({ data, error, dateLabel }: { data: Snapsho
   const userSuppliedBriefing = Object.values(data.briefing || {}).flat().some((note) => note.source === 'Desk commentary');
   const renderSection = ({ key, title }: { key: keyof Briefing | 'keyLevels'; title: string }, sectionIndex: number) => key === 'keyLevels'
     ? <section className="briefing-section panel key-levels-section" key={key} aria-labelledby="brief-key-levels">
-      <div className="briefing-section-head"><span className="brief-section-number">0{sectionIndex + 1}</span><h2 id="brief-key-levels">{title}</h2></div>
+      <div className="briefing-section-head"><span className="brief-section-number">0{sectionIndex}</span><h2 id="brief-key-levels">{title}</h2></div>
       <div className="briefing-notes"><KeyLevelsTable data={data} /></div>
     </section>
     : key === 'indices' ? <OvernightMovementsPanel data={data} key="overnight-movements" />
     : key === 'bonds' ? null
     : <section className="briefing-section panel" key={key} aria-labelledby={'brief-' + key}>
-    <div className="briefing-section-head"><span className="brief-section-number">0{sectionIndex + 1}</span><h2 id={'brief-' + key}>{title}</h2></div>
+    <div className="briefing-section-head"><span className="brief-section-number">0{sectionIndex}</span><h2 id={'brief-' + key}>{title}</h2></div>
     <div className="briefing-notes">{key === 'macro' ? <MacroCalendarTable notes={data.briefing?.macro || []} /> : (data.briefing?.[key] || []).length ? data.briefing![key].map((note, index) => {
       return <article className="briefing-note" key={index}><h3>{note.title}</h3><p>{note.body}</p></article>;
     }) : <div className="briefing-empty">No notes supplied for this section.</div>}</div>
