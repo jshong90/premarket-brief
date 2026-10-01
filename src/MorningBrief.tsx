@@ -100,7 +100,7 @@ function OvernightMovementsPanel({ data }: { data: Snapshot }) {
   </section>;
 }
 
-const treasuryTenors = ['2Y', '5Y', '10Y', '30Y'] as const;
+const treasuryTenors = ['5Y', '10Y', '30Y'] as const;
 function TreasuryYieldsTable({ data }: { data: Snapshot }) {
   const yields = data.marketContext?.find((row) => row.id === 'US10Y');
   const yieldRows = data.treasuryYields ?? [];
