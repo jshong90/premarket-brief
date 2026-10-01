@@ -10,7 +10,7 @@
   },
   "messages": [
     "October 1 morning brief draft prepared on September 30; this is not a frozen premarket snapshot.",
-    "No October 1 premarket bars or prices have been captured yet. Values for the October 1 scan, key levels and market-context premarket readings are left blank; no resilience rows are ranked.",
+    "October 1 premarket quotes were captured on request. Scanner ranges and rankings remain pending the 09:20 ET cutoff; key levels are not yet frozen.",
     "The 12-stock sample from September 28 is not carried into this draft. The $50B+ common-stock universe has not been discovered for October 1 (universeComplete=false).",
     "Previous-session close values shown are from September 30. TradingView one-minute data may be delayed 15+ minutes; cutoff bars must be timestamp-checked before freezing.",
     "The macro calendar includes only the events explicitly listed for October 1 and 2. Other calendar releases are omitted."
@@ -225,67 +225,71 @@
       "previousCloseAt": "2026-09-30T20:00:00.000Z",
       "change": null,
       "changeUnit": "%",
-      "source": "Associated Press · Sep 30, 2026 cash close; no Oct 1 premarket cash-index value",
+      "source": "Robinhood MCP · SPX cash index prior-session close",
       "asOf": null,
-      "issue": "October 1 premarket observation is pending; SPX is a cash index."
+      "issue": "SPX is a cash index; September 30 close is shown for context, without a premarket value."
     },
     {
       "id": "SPY",
       "label": "SPY",
       "name": "SPDR S&P 500 ETF",
       "kind": "etf",
-      "value": null,
-      "previousClose": 762.41,
-      "previousCloseAt": "2026-09-30T19:59:00.000Z",
-      "change": null,
+      "value": 765.42,
+      "previousClose": 762.63,
+      "previousCloseAt": "2026-09-30T20:00:00.000Z",
+      "change": 0.3658392667479582,
       "changeUnit": "%",
-      "source": "TradingView Official MCP · AMEX:SPY · Sep 30 15:59 ET 1-minute close bar",
-      "asOf": null,
-      "issue": "October 1 premarket value is pending."
+      "source": "Robinhood MCP · SPY · premarket trade; official Sep 30 SIP close",
+      "asOf": "2026-10-01T12:45:08.322Z",
+      "issue": "Premarket last trade; not a continuous live feed.",
+      "retrievedAt": "2026-10-01T12:49:01.665Z"
     },
     {
       "id": "QQQ",
       "label": "QQQ",
       "name": "Invesco QQQ Trust",
       "kind": "etf",
-      "value": null,
+      "value": 743.66,
       "previousClose": 739.77,
-      "previousCloseAt": "2026-09-30T19:59:00.000Z",
-      "change": null,
+      "previousCloseAt": "2026-09-30T20:00:00.000Z",
+      "change": 0.5258391121564898,
       "changeUnit": "%",
-      "source": "TradingView Official MCP · NASDAQ:QQQ · Sep 30 15:59 ET 1-minute close bar",
-      "asOf": null,
-      "issue": "October 1 premarket value is pending."
+      "source": "Robinhood MCP · QQQ · premarket trade; official Sep 30 SIP close",
+      "asOf": "2026-10-01T12:45:07.438Z",
+      "issue": "Premarket last trade; not a continuous live feed.",
+      "retrievedAt": "2026-10-01T12:49:01.665Z"
     },
     {
       "id": "VIX",
       "label": "VIX",
       "name": "Cboe Volatility Index",
       "kind": "volatility",
-      "value": null,
+      "value": 16.3,
       "previousClose": 16.32,
       "previousCloseAt": "2026-09-30T20:14:00.000Z",
-      "change": null,
+      "change": -0.1225490196078427,
       "changeUnit": "%",
       "approximate": false,
-      "source": "TradingView Official MCP · CBOE:VIX · Sep 30 16:14 ET closing bar",
-      "asOf": null,
-      "issue": "October 1 observation is pending."
+      "source": "Robinhood MCP · VIX index quote; TradingView Sep 30 close",
+      "asOf": "2026-10-01T12:45:16.409Z",
+      "issue": "Robinhood index timestamp; value may differ from delayed chart feeds.",
+      "retrievedAt": "2026-10-01T12:49:01.665Z"
     },
     {
       "id": "US10Y",
       "label": "10Y",
       "name": "U.S. 10-year Treasury yield",
       "kind": "yield",
-      "value": null,
+      "value": 5.293,
       "previousClose": 5.276,
       "previousCloseAt": "2026-09-30T19:59:00.000Z",
-      "change": null,
+      "change": 1.7000000000000348,
       "changeUnit": "bp",
       "approximate": false,
-      "source": "TradingView Official MCP · TVC:US10Y · Sep 30 15:59 ET 1-minute close bar",
-      "asOf": null,
-      "issue": "October 1 observation is pending."
+      "source": "TradingView Official MCP · TVC:US10Y · timestamped 1-minute bar",
+      "asOf": "2026-10-01T12:45:00.000Z",
+      "issue": "TradingView yield bar as observed; not synchronized with ETF/index quotes.",
+      "retrievedAt": "2026-10-01T12:49:01.665Z"
     }
   ],
   "keyLevels": [
@@ -408,36 +412,39 @@
     },
     {
       "tenor": "5Y",
-      "value": null,
+      "value": 5.072,
       "previousClose": 5.072,
       "previousCloseSource": "TradingView Official MCP · TVC:US05Y · Sep 30 15:59 ET 1-minute close bar",
       "previousCloseUrl": "https://www.tradingview.com/symbols/TVC-US05Y/",
-      "source": "October 1 premarket quote pending.",
+      "source": "TradingView Official MCP · TVC:US05Y · timestamped 1-minute bar",
       "url": "https://www.tradingview.com/symbols/TVC-US05Y/",
-      "retrievedAt": "2026-10-01T03:59:21.033Z",
-      "issue": "No October 1 premarket quote captured yet; previous-session close is shown for context."
+      "retrievedAt": "2026-10-01T12:49:01.665Z",
+      "issue": "Timestamped TradingView yield bar; observation times differ by tenor.",
+      "asOf": "2026-10-01T12:46:00.000Z"
     },
     {
       "tenor": "10Y",
-      "value": null,
+      "value": 5.293,
       "previousClose": 5.276,
       "previousCloseSource": "TradingView Official MCP · TVC:US10Y · Sep 30 15:59 ET 1-minute close bar",
       "previousCloseUrl": "https://www.tradingview.com/symbols/TVC-US10Y/",
-      "source": "October 1 premarket quote pending.",
+      "source": "TradingView Official MCP · TVC:US10Y · timestamped 1-minute bar",
       "url": "https://www.tradingview.com/symbols/TVC-US10Y/",
-      "retrievedAt": "2026-10-01T03:59:21.033Z",
-      "issue": "No October 1 premarket quote captured yet; previous-session close is shown for context."
+      "retrievedAt": "2026-10-01T12:49:01.665Z",
+      "issue": "Timestamped TradingView yield bar; observation times differ by tenor.",
+      "asOf": "2026-10-01T12:45:00.000Z"
     },
     {
       "tenor": "30Y",
-      "value": null,
+      "value": 5.651,
       "previousClose": 5.624,
       "previousCloseSource": "TradingView Official MCP · TVC:US30Y · Sep 30 15:59 ET 1-minute close bar",
       "previousCloseUrl": "https://www.tradingview.com/symbols/TVC-US30Y/",
-      "source": "October 1 premarket quote pending.",
+      "source": "TradingView Official MCP · TVC:US30Y · timestamped 1-minute bar",
       "url": "https://www.tradingview.com/symbols/TVC-US30Y/",
-      "retrievedAt": "2026-10-01T03:59:21.033Z",
-      "issue": "No October 1 premarket quote captured yet; previous-session close is shown for context."
+      "retrievedAt": "2026-10-01T12:49:01.665Z",
+      "issue": "Timestamped TradingView yield bar; observation times differ by tenor.",
+      "asOf": "2026-10-01T12:45:00.000Z"
     }
   ],
   "previousArchiveDate": "2026-09-30",
@@ -445,20 +452,25 @@
     {
       "id": "NQ",
       "previousClose": 30693.75,
-      "value": null,
+      "value": 30877,
       "previousCloseAt": "2026-09-30T19:59:00.000Z",
-      "asOf": null,
-      "source": "TradingView Official MCP · CME_MINI:NQ1!",
-      "issue": "October 1 premarket quote not captured yet."
+      "asOf": "2026-10-01T12:36:00.000Z",
+      "source": "TradingView Official MCP · CME_MINI:NQ1! · 08:36 ET 1-minute bar",
+      "issue": "Timestamped 1-minute bar; TradingView futures data may be delayed 15 minutes or more.",
+      "retrievedAt": "2026-10-01T12:49:01.665Z",
+      "url": "https://www.tradingview.com/chart/?symbol=CME_MINI%3ANQ1!"
     },
     {
       "id": "ES",
       "previousClose": 7712.75,
-      "value": null,
+      "value": 7748.25,
       "previousCloseAt": "2026-09-30T19:59:00.000Z",
-      "asOf": null,
-      "source": "TradingView Official MCP · CME_MINI:ES1!",
-      "issue": "October 1 premarket quote not captured yet."
+      "asOf": "2026-10-01T12:36:00.000Z",
+      "source": "TradingView Official MCP · CME_MINI:ES1! · 08:36 ET 1-minute bar",
+      "issue": "Timestamped 1-minute bar; TradingView futures data may be delayed 15 minutes or more.",
+      "retrievedAt": "2026-10-01T12:49:01.665Z",
+      "url": "https://www.tradingview.com/chart/?symbol=CME_MINI%3AES1!"
     }
-  ]
+  ],
+  "quotesRefreshedAt": "2026-10-01T12:49:01.665Z"
 }
