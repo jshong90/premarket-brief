@@ -10,7 +10,7 @@ This repository is the editable React + TypeScript + Vite project. `index.html` 
 
 Stocks and ETFs: 04:00 to 09:20 ET. NQ and ES futures: prior calendar day 18:00 to 09:20 ET. The end is exclusive: the 09:19 one-minute bar is the last eligible bar, and the 09:20 bar is excluded. If collection runs late, request historical bars bounded by the same cutoff; do not use later live range fields.
 
-The hosted dashboard reads `data/snapshot.json` once when opened and keeps it fixed. Both HTML entries show the same combined page. There is no polling or live refresh. Search, sorting, benchmark comparisons, resilience and recovery views use that same packet. Reloading the page reads the latest published packet. The `?dev=1` query enables design controls whose changes are local to that browser; it does not publish market data or design choices.
+The hosted dashboard reads `data/snapshot.json` once when opened and keeps it fixed. Both HTML entries show the same combined page. There is no polling or live refresh. The stock table shows only the 25 rankable names with the lowest downside capture for the selected benchmark (ticker breaks ties). Search and sector filters narrow that set; column sorting and the recovery tab reorder it without changing membership or RS rank. Coverage and classification counts still use the whole packet. Reloading the page reads the latest published packet. The `?dev=1` query enables design controls whose changes are local to that browser; it does not publish market data or design choices.
 
 ## Data status and publishing
 

@@ -43,6 +43,12 @@ export function metrics(row: Instrument, benchmark: Benchmark | undefined) {
   const absolute = row.last !== null && row.previousClose !== null && row.previousClose > 0 ? (row.last / row.previousClose - 1) * 100 : null;
   return { capture, advantage: dd !== null && bdd != null && bdd > 0 ? bdd - dd : null, recovery, absolute, band: capture !== null ? classify(Math.round(capture*1e8)/1e8) : null };
 }
+export function topRelativeStrength<T extends { ticker: string; capture: number | null }>(rows: T[], limit=25): (T & { rsRank: number })[] {
+  return rows.filter(r=>r.capture!==null && Number.isFinite(r.capture))
+    .sort((a,b)=>a.capture!-b.capture! || a.ticker.localeCompare(b.ticker))
+    .slice(0,limit)
+    .map((row,index)=>({...row,rsRank:index+1}));
+}
 export function etParts(date: Date) {
   const parts = new Intl.DateTimeFormat("en-US", {timeZone:"America/New_York",year:"numeric",month:"2-digit",day:"2-digit",hour:"2-digit",minute:"2-digit",hourCycle:"h23",weekday:"short"}).formatToParts(date);
   const p = Object.fromEntries(parts.map(x=>[x.type,x.value]));

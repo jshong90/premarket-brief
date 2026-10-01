@@ -31,6 +31,12 @@ assert.equal(ranges.aggregate(bars,w.end+1,w.end+60000),null);
 const reversed=ranges.aggregate([{t,h:100,l:90,c:95,v:100},{t:t+60000,h:110,l:99,c:110,v:100}],t,t+120000);near(reversed.drawdown,100*(1-90/110)); // range, not chronological maximum drawdown
 assert.equal(core.marketSession(new Date('2026-09-28T08:00Z')).active,true);assert.equal(core.marketSession(new Date('2026-09-28T13:30Z')).active,false);assert.equal(core.marketSession(new Date('2026-09-27T12:00Z')).active,false);
 const sorted=core.IMPORTED.stocks.map(r=>({ticker:r.ticker,...core.metrics(r,core.IMPORTED.benchmarks.find(b=>b.id===r.benchmark))})).sort((a,b)=>a.capture-b.capture||a.ticker.localeCompare(b.ticker));assert.deepEqual(sorted.slice(0,3).map(r=>r.ticker),['AAPL','CSCO','TSLA']);
+const candidateRows=Array.from({length:30},(_,i)=>({ticker:`T${String(i).padStart(2,'0')}`,capture:30-i}));
+candidateRows.push({ticker:'NO_RANGE',capture:null},{ticker:'INVALID',capture:Infinity});
+const top=core.topRelativeStrength(candidateRows);
+assert.equal(top.length,25);assert.deepEqual(top.slice(0,2).map(r=>[r.ticker,r.rsRank]),[['T29',1],['T28',2]]);
+assert.equal(top.at(-1).ticker,'T05');assert.equal(candidateRows[0].ticker,'T00');
+assert.deepEqual(core.topRelativeStrength([{ticker:'B',capture:10},{ticker:'A',capture:10}],2).map(r=>r.ticker),['A','B']);
 assert.equal(new Date(ranges.windows('2026-01-12').end).toISOString(),'2026-01-12T14:20:00.000Z');
 assert.equal(snapshot.readSnapshot(core.IMPORTED).status,'imported');
 const briefingPacket=structuredClone(core.IMPORTED);briefingPacket.briefing={indices:[{title:'Overnight tape',body:'Benchmark range held below the prior close.',source:'TradingView',url:'https://www.tradingview.com/chart/',publishedAt:'2026-09-28T12:00:00Z'}],bonds:[],macro:[],earnings:[],news:[]};assert.equal(snapshot.readSnapshot(briefingPacket).briefing.indices[0].source,'TradingView');
@@ -43,4 +49,4 @@ assert.throws(()=>snapshot.readSnapshot({...packet,fetchedAt:'2026-09-28T13:19:5
 const contaminated=structuredClone(packet);contaminated.stocks[0].asOf='2026-09-28T13:20:00Z';assert.throws(()=>snapshot.readSnapshot(contaminated),/outside/);
 const incomplete=structuredClone(packet);delete incomplete.stocks[0].highTime;assert.equal(snapshot.readSnapshot(incomplete).stocks[0].drawdown,null);assert.equal(snapshot.readSnapshot(incomplete).status,'partial');
 const illiquid=structuredClone(packet);illiquid.stocks[0].volume=0;assert.equal(snapshot.readSnapshot(illiquid).stocks[0].drawdown,null);
-console.log('PASS: fixed 06:20 Pacific cutoff, snapshot validation,  drawdowns, thresholds, zero/missing data, benchmark mapping, recovery, DST, session isolation, range ordering, and imported ranking.');
+console.log('PASS: fixed 06:20 Pacific cutoff, snapshot validation, drawdowns, thresholds, missing data, benchmark mapping, recovery, DST, session isolation, range ordering, and top-25 ranking.');
