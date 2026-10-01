@@ -343,10 +343,10 @@
     "bonds": [
       {
         "title": "Treasury yields",
-        "body": "Yields remain elevated after a volatile month and quarter. The table carries September 30 closing levels for context; October 1 premarket readings are pending.",
+        "body": "Yields remain elevated after a volatile month and quarter. The table carries September 30 closing levels for context alongside October 1 premarket readings captured on request.",
         "source": "TradingView Official MCP · timestamped one-minute yield bars",
         "url": "https://www.tradingview.com/markets/bonds/",
-        "asOf": "2026-09-30"
+        "asOf": "2026-10-01T12:45:00.000Z"
       }
     ],
     "macro": [
