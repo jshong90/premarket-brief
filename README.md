@@ -14,21 +14,42 @@ The hosted dashboard reads `data/snapshot.json` once when opened and keeps it fi
 
 ## Data status and publishing
 
-The scanner rows in the included packet are the **legacy September 28, 2026 example**, with approximate drawdowns from the earlier conversation. Its cutoff is unknown and its inputs are unverified. It is labeled accordingly; it is not a verified 06:20 capture or a complete $50B+ scan. The page carries the user-provided September 28 morning briefing in five sections: overnight indices, overnight bonds, upcoming macro events, upcoming earnings and overnight news. Missing recovery, raw stock prices, market caps and sector ranges remain blank.
+The current packet, `public/data/snapshot.json`, is an **October 1, 2026 draft**. It includes September 30 previous-session context, but no October 1 premarket bars, key levels, individual-stock universe, or relative-strength rankings have been captured. Those values remain null or absent. The archived `public/data/snapshot-2026-09-30.json` is the September 30 brief; its scanner rows are explicitly a September 28 legacy example.
 
-A ChatGPT task is scheduled to produce the daily snapshot JSON at 06:20 Pacific. It uses TradingView first and alternate sources only for required fields TradingView cannot supply. It retains source, observation time, cutoff and collection time, and reports missing coverage.
+The dashboard does not fetch market data or create snapshots at runtime. It reads `data/snapshot.json` once when opened and keeps that packet fixed. To publish a new session, replace `public/data/snapshot.json` and commit it. Vercel rebuilds the app and publishes the packet. Keep dated archives separately.
 
-To publish a new snapshot, replace `public/data/snapshot.json` and commit the change. Vercel rebuilds the dashboard and deploys it from that packet. Keep dated archives separately if desired.
+Automatic snapshot publication to GitHub is not connected. A scheduled or manual collection process must explicitly produce and commit the JSON packet; the website does not inherit ChatGPT's TradingView connection or run a market-data scheduler. Data sources and availability are described below. No credentials belong in the HTML or public repository.
 
-**Automatic snapshot publication to GitHub is not connected.** The website does not run a scheduler or inherit the ChatGPT TradingView connection. The scheduled task delivers its data file here but does not write it into this repository; commit the new packet at `public/data/snapshot.json` to publish it through Vercel. The current TradingView OHLCV tool supplies the futures bars but excludes equity extended-hours bars. Timestamped stock and sector ranges therefore need an alternate source. Data availability and latency depend on provider access. No credentials belong in the HTML or public repository.
+## Data sources by section
 
-## Massive connection
+The section contracts are stable; providers are replaceable. The dashboard consumes normalized snapshot fields and does not call any market-data provider from the browser. If a source is reliable and supplies the required fields with valid timestamps, keep using it. Change a source only when it fails on coverage, timestamp quality, latency, or required fields. A provider swap should usually update the packet's `source` and URL metadata, not the section's rendering or calculations.
 
-The Vercel Function at `api/massive-bars.js` reads `MASSIVE_API_KEY` on the server and requests one ticker's one-minute bars for the fixed 04:00–09:20 ET stock/ETF window. It excludes the 09:20 bar, returns each included bar timestamp plus the derived high, low, last, volume and drawdown, and records retrieval time. It never returns the API key. The dashboard's **Snapshot schedule** panel has a **Test Massive connection** button that checks AAPL for the displayed snapshot date.
+| Dashboard area | Current source assignment | Required handling |
+| --- | --- | --- |
+| Market context strip | Associated Press for the SPX cash-index previous close. TradingView Official MCP for SPY, QQQ, VIX, and US10Y previous-session bars. | Cash SPX is not a premarket instrument. Keep unsupported or uncaptured current values null; never silently substitute ES for SPX. Include the actual source and observation timestamp. |
+| 01 · Overnight movements — indices | TradingView Official MCP one-minute bars for NQ and ES previous-session closes and VIX close. AP provides the broad cash-index close context. | Premarket and percentage change remain blank until backed by eligible timestamped observations. The table values and narrative context are separate inputs. |
+| 01 · Overnight movements — bonds | TradingView Official MCP yield symbols for 2Y, 5Y, 10Y, and 30Y. | Keep the previous-session close separate from a premarket reading. Do not estimate missing yields or imply that unsynchronized observations are a single cutoff snapshot. |
+| 02 · Key Levels | TradingView Official MCP timestamped one-minute futures bars for ES, NQ, YM, and RTY. | Futures window is prior-day 18:00 ET through, but not including, 09:20 ET. Derive highs and lows only from eligible bars; preserve the bar timestamps. The October 1 draft has no captured levels yet. |
+| 03 · Upcoming macro events | Trading Economics calendar. | Include only events explicitly specified for the brief. Store the event time, date, source, and direct HTTPS link; do not silently add other calendar releases. |
+| 04 · Upcoming earnings | Company investor-relations announcements, such as Accenture Newsroom and NIKE Investor Relations. | Prefer the company's own schedule for release date and timing. Keep the announcement's publication date when available. |
+| 05 · Overnight news | Issuer investor-relations releases for company results; Reuters for macro/economic reporting; Associated Press for broad market-close summaries. | Link each factual item to its source and preserve its actual publication or observation date. User-authored notes/commentary are exempt from outside sourcing. |
+| Relative-strength scanner | TradingView Official MCP is primary. Massive is an alternate only for required fields TradingView cannot provide, when Massive supplies valid timestamped bars. | Keep the proprietary calculation behind the existing scanner contract. Missing data remains null and unranked; disclose incomplete universe discovery. Massive is not connected in the current October 1 draft. |
 
-In Vercel, set the Environment Variable name to `MASSIVE_API_KEY`; store the Massive API key as its value for Production and Preview, then redeploy. The free plan is end-of-day, so a successful check validates historical minute-bar access only. It cannot populate a live 06:20 AM capture. The current endpoint is a per-ticker data connection check; it does not discover the complete $50B+ stock universe, fetch NQ/ES futures, generate a full snapshot, or publish a new `public/data/snapshot.json` automatically.
+### Provenance rules and current gaps
 
-After deployment, open **Snapshot schedule** and run the connection test. The request can also be checked directly at `/api/massive-bars?symbol=AAPL&date=YYYY-MM-DD`, replacing the date with a valid market date. Do not put the API key in a browser URL, frontend file, or GitHub commit.
+- Provider data must retain source, direct URL where applicable, actual bar/observation time, retrieval time, and any delay or coverage issue. Keep provider-specific details in the snapshot metadata so the page remains source-independent.
+- The expandable Sources card currently lists briefing-note links and Treasury-yield references. It does not yet expose links for Market Context rows or the NQ/ES close metadata stored with index quotes.
+- The October 1 draft's Key Levels rows are placeholders. Their highs and lows are null; a draft-preparation timestamp is not a market-data retrieval time. Omit `retrievedAt` until bars are actually fetched, and show a Key Levels source citation as retrieved only when there are observed bars to support it.
+- The TradingView connection can report a delay of 15 minutes or more. A late collection must still use bars bounded by the original cutoff, and the delay must remain visible.
+- Changing a provider does not change the section contract. Change the provider assignment in this README only when the source is deliberately replaced; the packet must continue to meet the same field, timestamp, coverage, and null-handling rules.
+
+## Massive connection (alternate source)
+
+The Vercel Function at `api/massive-bars.js` reads `MASSIVE_API_KEY` server-side and requests one ticker's one-minute bars for the 04:00–09:20 ET stock/ETF window. It excludes the 09:20 bar, returns timestamps plus derived high, low, last, volume, and drawdown, and records retrieval time. It never returns the API key.
+
+Massive is not the dashboard's default market-data connection. Use it only to fill required fields TradingView cannot provide, and only when the returned bars cover the intended session with usable timestamps. A successful endpoint test is not a full scanner run: it does not discover the $50B+ universe, fetch NQ/ES futures, generate a complete snapshot, or publish `public/data/snapshot.json`. The free plan is end-of-day, so it cannot supply a live 06:20 AM capture.
+
+In Vercel, set the Environment Variable name to `MASSIVE_API_KEY`; store the Massive API key as its value for Production and Preview, then redeploy. Use the **Data connections** drawer's **Test Massive connection** control to check AAPL for the displayed snapshot date. The endpoint can also be checked at `/api/massive-bars?symbol=AAPL&date=YYYY-MM-DD`, replacing the date with a valid market date. Do not put the API key in a browser URL, frontend file, or GitHub commit.
 
 Run locally with `npm run dev`; use the Vercel preview or production URL for hosted access.
 
