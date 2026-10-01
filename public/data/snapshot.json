@@ -11,7 +11,8 @@
   "messages": [
     "The relative-strength scanner data remains the September 28 example; no September 30 scan is included.",
     "Treasury table: previous-session closes are the U.S. Treasury Sep 29 par curve (indicative quotes at or near 3:30 p.m. ET). Premarket quotes are asynchronous reports from Reuters and Barron's/Tradeweb; exact observation times are not stated. No verified premarket 5Y quote was found; it remains blank.",
-    "The 2Y, 10Y and 30Y Treasury quote rows have no exact observation timestamp in their cited reports; the page preserves these source-reported values with that limitation disclosed."
+    "The 2Y, 10Y and 30Y Treasury quote rows have no exact observation timestamp in their cited reports; the page preserves these source-reported values with that limitation disclosed.",
+    "Key levels refreshed for 2026-09-30 from TradingView timestamped 1-minute futures bars. Session window: prior day 18:00 ET through 09:19 ET; 09:20 bar excluded. TradingView reports market-data delay of 15+ minutes."
   ],
   "stocks": [
     {
@@ -536,54 +537,54 @@
     {
       "id": "ES",
       "label": "S&P 500 (ES)",
-      "high": 7803,
-      "low": 7757,
-      "highTime": "2026-09-27T22:00:00.000Z",
-      "lowTime": "2026-09-28T10:11:00.000Z",
-      "asOf": "2026-09-28T13:19:00.000Z",
-      "retrievedAt": "2026-09-29T02:25:29.375Z",
-      "source": "TradingView Official MCP · CME_MINI:ES1! · 1-minute OHLCV · delayed 15+ minutes"
+      "high": 7771.25,
+      "low": 7719.5,
+      "highTime": "2026-09-30T12:31:00.000Z",
+      "lowTime": "2026-09-30T11:20:00.000Z",
+      "asOf": "2026-09-30T13:19:00.000Z",
+      "retrievedAt": "2026-10-01T03:29:22.994Z",
+      "source": "TradingView Official MCP · CME_MINI:ES1! · timestamp-filtered 1-minute OHLCV for 2026-09-29 18:00 through 2026-09-30 09:19 ET · provider delay 15+ minutes"
     },
     {
       "id": "NQ",
       "label": "Nasdaq-100 (NQ)",
-      "high": 30920.75,
-      "low": 30531,
-      "highTime": "2026-09-27T22:00:00.000Z",
-      "lowTime": "2026-09-28T09:12:00.000Z",
-      "asOf": "2026-09-28T13:19:00.000Z",
-      "retrievedAt": "2026-09-29T02:25:29.375Z",
-      "source": "TradingView Official MCP · CME_MINI:NQ1! · 1-minute OHLCV · delayed 15+ minutes"
+      "high": 30779.5,
+      "low": 30512.25,
+      "highTime": "2026-09-30T12:32:00.000Z",
+      "lowTime": "2026-09-30T11:20:00.000Z",
+      "asOf": "2026-09-30T13:19:00.000Z",
+      "retrievedAt": "2026-10-01T03:29:22.994Z",
+      "source": "TradingView Official MCP · CME_MINI:NQ1! · timestamp-filtered 1-minute OHLCV for 2026-09-29 18:00 through 2026-09-30 09:19 ET · provider delay 15+ minutes"
     },
     {
       "id": "YM",
       "label": "Dow (YM)",
-      "high": 52153,
-      "low": 51829,
-      "highTime": "2026-09-27T22:00:00.000Z",
-      "lowTime": "2026-09-28T12:01:00.000Z",
-      "asOf": "2026-09-28T13:19:00.000Z",
-      "retrievedAt": "2026-09-29T02:25:29.375Z",
-      "source": "TradingView Official MCP · CBOT_MINI:YM1! · 1-minute OHLCV · delayed 15+ minutes"
+      "high": 51997,
+      "low": 51586,
+      "highTime": "2026-09-30T07:16:00.000Z",
+      "lowTime": "2026-09-30T11:11:00.000Z",
+      "asOf": "2026-09-30T13:19:00.000Z",
+      "retrievedAt": "2026-10-01T03:29:22.994Z",
+      "source": "TradingView Official MCP · CBOT_MINI:YM1! · timestamp-filtered 1-minute OHLCV for 2026-09-29 18:00 through 2026-09-30 09:19 ET · provider delay 15+ minutes"
     },
     {
       "id": "RTY",
       "label": "Russell 2000 (RTY)",
-      "high": 2858.8,
-      "low": 2837.8,
-      "highTime": "2026-09-27T22:00:00.000Z",
-      "lowTime": "2026-09-28T10:11:00.000Z",
-      "asOf": "2026-09-28T13:19:00.000Z",
-      "retrievedAt": "2026-09-29T02:25:29.375Z",
-      "source": "TradingView Official MCP · CME_MINI:RTY1! · 1-minute OHLCV · delayed 15+ minutes"
+      "high": 2853.8,
+      "low": 2819.7,
+      "highTime": "2026-09-30T12:31:00.000Z",
+      "lowTime": "2026-09-30T11:11:00.000Z",
+      "asOf": "2026-09-30T13:19:00.000Z",
+      "retrievedAt": "2026-10-01T03:29:22.994Z",
+      "source": "TradingView Official MCP · CME_MINI:RTY1! · timestamp-filtered 1-minute OHLCV for 2026-09-29 18:00 through 2026-09-30 09:19 ET · provider delay 15+ minutes"
     }
   ],
   "briefing": {
     "indices": [
       {
         "title": "Overnight index moves and breadth",
-      "body": "Nasdaq: +0.35% · S&P 500: +0.30% · VIX: −0.32%. Need more breadth in this market for a sustained rally, IMO. The rate hike story is a big factor too. Checking Polymarket, there was a slight bump in the odds the Fed DOESN'T touch rates in the wake of that PCE print, sitting around 66% chance of a no-touch. Today is the last day of September, and also the last day of the quarter.",
-      "source": "Desk commentary",
+        "body": "Nasdaq: +0.35% · S&P 500: +0.30% · VIX: −0.32%. Need more breadth in this market for a sustained rally, IMO. The rate hike story is a big factor too. Checking Polymarket, there was a slight bump in the odds the Fed DOESN'T touch rates in the wake of that PCE print, sitting around 66% chance of a no-touch. Today is the last day of September, and also the last day of the quarter.",
+        "source": "Desk commentary",
         "url": "https://www.tradingview.com/markets/indices/quotes/",
         "asOf": null
       }
