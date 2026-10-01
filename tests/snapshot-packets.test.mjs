@@ -12,11 +12,24 @@ const { readSnapshot } = await import(compile(fs.readFileSync('src/lib/snapshot.
   .replace("'./ranges'", JSON.stringify(rangesUrl))));
 
 const current = JSON.parse(fs.readFileSync('public/data/snapshot.json', 'utf8'));
+const opening = JSON.parse(fs.readFileSync('public/data/snapshot-opening-0635.json', 'utf8'));
 const archive = JSON.parse(fs.readFileSync('public/data/snapshot-2026-09-30.json', 'utf8'));
 assert.equal(readSnapshot(current).status, 'partial');
 assert.equal(current.cutoffAt, '2026-10-01T13:20:00.000Z');
 assert.equal(current.stocks.length, 312);
 assert.equal(readSnapshot(current).stocks.filter(row => row.drawdown !== null).length, 143);
+assert.equal(readSnapshot(opening).status, 'partial');
+assert.equal(opening.scanVariant, 'opening-0635');
+assert.equal(opening.cutoffAt, '2026-10-01T13:35:00.000Z');
+assert.equal(readSnapshot(opening).stocks.filter(row => row.drawdown !== null).length, 189);
+assert.equal(readSnapshot(opening).sectors.filter(row => row.drawdown !== null).length, 6);
+assert.equal(readSnapshot(opening).sectors.find(row => row.ticker === 'XLV').drawdown !== null, true);
+assert.deepEqual(opening.briefing, current.briefing);
+assert.deepEqual(opening.indexQuotes, current.indexQuotes);
+assert.deepEqual(opening.treasuryYields, current.treasuryYields);
+assert.deepEqual(opening.keyLevels, current.keyLevels);
+assert.throws(() => readSnapshot({...opening,cutoffAt:current.cutoffAt}), /cutoff/);
+assert.throws(() => readSnapshot({...opening,stocks:opening.stocks.map((row,index)=>index?row:{...row,asOf:opening.cutoffAt})}), /outside/);
 assert.equal(readSnapshot(archive).status, 'imported');
 assert.equal(current.previousArchiveDate, archive.sessionDate);
 assert.equal(current.indexQuotes.length, 2);

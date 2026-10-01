@@ -11,7 +11,8 @@ export function readSnapshot(input: unknown): Snapshot {
   const validTime = (value: unknown) => typeof value==='string' && /T.*(?:Z|[+-]\d{2}:\d{2})$/.test(value) && Number.isFinite(Date.parse(value));
   const optionalTime = (value: unknown) => value===undefined || value===null || validTime(value);
   if (!/^\d{4}-\d{2}-\d{2}$/.test(s.sessionDate) || !Number.isFinite(Date.parse(s.sessionDate)) || new Date(s.sessionDate).toISOString().slice(0,10) !== s.sessionDate) return fail('invalid session date.');
-  const w = windows(s.sessionDate);
+  if (s.scanVariant!==undefined && s.scanVariant!=='opening-0635') return fail('unknown scanner variant.');
+  const w = windows(s.sessionDate,s.scanVariant==='opening-0635'?35:20);
   if (!['draft','imported','frozen','partial','unavailable'].includes(s.status)) return fail('unknown status.');
   if (![s.stocks,s.sectors,s.benchmarks,s.messages].every(Array.isArray) || s.messages.some(x=>typeof x!=='string')) return fail('missing arrays.');
   if (s.previousArchiveDate!==undefined && (!/^\d{4}-\d{2}-\d{2}$/.test(s.previousArchiveDate) || !Number.isFinite(Date.parse(s.previousArchiveDate)) || new Date(s.previousArchiveDate).toISOString().slice(0,10)!==s.previousArchiveDate || s.previousArchiveDate>=s.sessionDate)) return fail('invalid archive date.');
@@ -39,10 +40,11 @@ export function readSnapshot(input: unknown): Snapshot {
     if (!Array.isArray(s.treasuryYields) || new Set(s.treasuryYields.map(row=>row?.tenor)).size!==s.treasuryYields.length || s.treasuryYields.some(row=>!row || !tenors.includes(row.tenor) || ![row.value,row.previousClose].every(validNumber) || typeof row.source!=='string' || typeof row.url!=='string' || !/^https:\/\//i.test(row.url) || !optionalTime(row.asOf) || !optionalTime(row.retrievedAt) || row.value!==null && (row.asOf===undefined || row.asOf===null) && typeof row.issue!=='string')) return fail('invalid treasury yield rows.');
   }
   if (s.keyLevels!==undefined) {
+    const keyWindow=windows(s.sessionDate); // Key Levels remain the 06:20 premarket capture in both views.
     const ids=['ES','NQ','YM','RTY'];
     if (!Array.isArray(s.keyLevels) || s.keyLevels.length!==4 || new Set(s.keyLevels.map(row=>row?.id)).size!==4 || ids.some(id=>!s.keyLevels!.some(row=>row?.id===id))) return fail('keyLevels must contain ES, NQ, YM and RTY exactly once.');
     for (const row of s.keyLevels) {
-      if (!row || typeof row.label!=='string' || typeof row.source!=='string' || ![row.high,row.low].every(validNumber) || (row.high===null)!==(row.low===null) || row.high!==null && row.low!==null && row.high<row.low || !(row.asOf===null || validTime(row.asOf)) || !optionalTime(row.highTime) || !optionalTime(row.lowTime) || !optionalTime(row.retrievedAt) || row.high!==null && (!row.highTime || !row.lowTime || !row.asOf || [row.highTime,row.lowTime,row.asOf].some(time=>Date.parse(time!)<w.futuresStart || Date.parse(time!)>=w.end))) return fail('invalid key level.');
+      if (!row || typeof row.label!=='string' || typeof row.source!=='string' || ![row.high,row.low].every(validNumber) || (row.high===null)!==(row.low===null) || row.high!==null && row.low!==null && row.high<row.low || !(row.asOf===null || validTime(row.asOf)) || !optionalTime(row.highTime) || !optionalTime(row.lowTime) || !optionalTime(row.retrievedAt) || row.high!==null && (!row.highTime || !row.lowTime || !row.asOf || [row.highTime,row.lowTime,row.asOf].some(time=>Date.parse(time!)<keyWindow.futuresStart || Date.parse(time!)>=keyWindow.end))) return fail('invalid key level.');
     }
   }
   if (s.briefing!==undefined) {
@@ -64,7 +66,8 @@ export function readSnapshot(input: unknown): Snapshot {
   const draft = s.status === 'draft';
   if ((imported || draft) && s.cutoffAt) return fail('drafts and legacy imports cannot claim a verified scanner cutoff.');
   if (draft && !validTime(s.fetchedAt)) return fail('draft needs a preparation time.');
-  if (!imported && !draft && (Date.parse(s.cutoffAt || '') !== w.end || !validTime(s.fetchedAt) || Date.parse(s.fetchedAt!) < w.end)) return fail('expected a frozen 06:20 Pacific cutoff and a collection time at or after it.');
+  if ((imported || draft) && s.scanVariant) return fail('an opening variant needs a captured snapshot.');
+  if (!imported && !draft && (Date.parse(s.cutoffAt || '') !== w.end || !validTime(s.fetchedAt) || Date.parse(s.fetchedAt!) < w.end)) return fail('expected the declared scanner cutoff and a collection time at or after it.');
   const within = (value: unknown, start: number) => typeof value==='string' && Date.parse(value)>=start && Date.parse(value)<w.end;
   const clean = <T extends Snapshot['benchmarks'][number] | Snapshot['stocks'][number]>(row: T, start: number): T => {
     if (!row || typeof row !== 'object' || typeof row.source !== 'string' || ![row.high,row.low,row.drawdown].every(validNumber) || !(row.asOf===null || typeof row.asOf==='string' && Number.isFinite(Date.parse(row.asOf)))) return fail('invalid price or source fields.');
