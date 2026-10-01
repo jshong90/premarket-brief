@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc --noEmit && vite build",
-    "test": "node tests/text-tokens.test.mjs && node tests/scanner.test.mjs && node tests/massive-api.test.mjs"
+    "test": "node tests/text-tokens.test.mjs && node tests/scanner.test.mjs && node tests/snapshot-packets.test.mjs && node tests/massive-api.test.mjs"
   },
   "dependencies": {
     "react": "19.2.6",

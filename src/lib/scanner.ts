@@ -9,6 +9,7 @@ export type Instrument = {
 export type Benchmark = { id: BenchmarkId; high: number | null; low: number | null; drawdown: number | null; source: string; asOf: string | null; highTime?: string; lowTime?: string; issue?: string };
 export type BriefingNote = { title: string; body: string; source: string; url: string; publishedAt?: string | null; asOf?: string | null };
 export type Briefing = { indices: BriefingNote[]; bonds: BriefingNote[]; macro: BriefingNote[]; earnings: BriefingNote[]; news: BriefingNote[] };
+export type IndexQuote = { id: BenchmarkId; previousClose: number | null; value: number | null; previousCloseAt?: string | null; asOf: string | null; source: string; url?: string; retrievedAt?: string | null; issue?: string };
 export type MarketContextId = "SPX" | "SPY" | "QQQ" | "VIX" | "US10Y";
 export type MarketContextKind = "index" | "etf" | "volatility" | "yield";
 export type MarketContextPoint = { time: string; value: number };
@@ -21,7 +22,7 @@ export type MarketContextRow = {
 };
 export type TreasuryYield = { tenor: "2Y" | "5Y" | "10Y" | "30Y"; value: number | null; previousClose: number | null; asOf?: string | null; approximate?: boolean; source: string; url: string; retrievedAt?: string | null; previousCloseSource?: string; previousCloseUrl?: string; issue?: string };
 export type KeyLevel = { id: "ES" | "NQ" | "YM" | "RTY"; label: string; high: number | null; low: number | null; highTime?: string | null; lowTime?: string | null; asOf: string | null; retrievedAt?: string | null; source: string; issue?: string };
-export type Snapshot = { sessionDate: string; fetchedAt: string | null; cutoffAt?: string | null; status: "imported" | "frozen" | "partial" | "unavailable"; stocks: Instrument[]; sectors: Instrument[]; benchmarks: Benchmark[]; messages: string[]; universeCount: number; universeComplete: boolean; connected: { tradingview: boolean; massive: boolean }; marketContext?: MarketContextRow[]; treasuryYields?: TreasuryYield[]; keyLevels?: KeyLevel[]; briefing?: Briefing; };
+export type Snapshot = { sessionDate: string; fetchedAt: string | null; cutoffAt?: string | null; status: "draft" | "imported" | "frozen" | "partial" | "unavailable"; previousArchiveDate?: string; quotesRefreshedAt?: string | null; stocks: Instrument[]; sectors: Instrument[]; benchmarks: Benchmark[]; messages: string[]; universeCount: number; universeComplete: boolean; connected: { tradingview: boolean; massive: boolean }; marketContext?: MarketContextRow[]; indexQuotes?: IndexQuote[]; treasuryYields?: TreasuryYield[]; keyLevels?: KeyLevel[]; briefing?: Briefing; };
 export const SECTORS = [["XLK", "Technology"], ["XLC", "Communication"], ["XLY", "Discretionary"], ["XLF", "Financials"], ["XLI", "Industrials"], ["XLV", "Health Care"], ["XLP", "Staples"], ["XLU", "Utilities"], ["XLRE", "Real Estate"], ["XLB", "Materials"], ["XLE", "Energy"]] as const;
 export const BENCHMARK_MAP: Record<string, BenchmarkId> = { AAPL:"NQ", CSCO:"NQ", TSLA:"NQ", AMZN:"NQ", QCOM:"NQ", GOOGL:"NQ", GOOG:"NQ", NVDA:"NQ", APP:"NQ", MSFT:"NQ", META:"NQ", AVGO:"NQ", AMD:"NQ", MU:"NQ", ORCL:"NQ", INTC:"NQ", NFLX:"NQ", COST:"ES", MA:"ES", WMT:"ES", MCD:"ES" };
 export function benchmarkFor(ticker: string, sector: string): BenchmarkId { return BENCHMARK_MAP[ticker] ?? (/technology|electronic|communication/i.test(sector) ? "NQ" : "ES"); }

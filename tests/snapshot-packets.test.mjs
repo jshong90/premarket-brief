@@ -1,0 +1,35 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import ts from 'typescript';
+
+const compile = source => 'data:text/javascript;base64,' + Buffer.from(ts.transpileModule(source, {
+  compilerOptions: { target: ts.ScriptTarget.ES2022, module: ts.ModuleKind.ESNext },
+}).outputText).toString('base64');
+const scannerUrl = compile(fs.readFileSync('src/lib/scanner.ts', 'utf8'));
+const rangesUrl = compile(fs.readFileSync('src/lib/ranges.ts', 'utf8').replace("'./scanner'", JSON.stringify(scannerUrl)));
+const { readSnapshot } = await import(compile(fs.readFileSync('src/lib/snapshot.ts', 'utf8')
+  .replace("'./scanner'", JSON.stringify(scannerUrl))
+  .replace("'./ranges'", JSON.stringify(rangesUrl))));
+
+const current = JSON.parse(fs.readFileSync('public/data/snapshot.json', 'utf8'));
+const archive = JSON.parse(fs.readFileSync('public/data/snapshot-2026-09-30.json', 'utf8'));
+assert.equal(readSnapshot(current).status, 'draft');
+assert.equal(readSnapshot(archive).status, 'imported');
+assert.equal(current.previousArchiveDate, archive.sessionDate);
+assert.equal(current.indexQuotes.length, 2);
+assert.ok(current.briefing.indices.every(note => !('indexQuotes' in note)));
+
+const changed = edit => { const snapshot = structuredClone(current); edit(snapshot); return snapshot; };
+assert.equal(readSnapshot(changed(s => { s.marketContext.find(row => row.id === 'SPY').change = -0.5; })).marketContext.find(row => row.id === 'SPY').change, -0.5);
+assert.equal(readSnapshot(changed(s => { s.indexQuotes[0].value = 30_600; s.indexQuotes[0].asOf = '2026-10-01T06:12:00Z'; s.quotesRefreshedAt = '2026-10-01T06:13:00Z'; })).indexQuotes[0].value, 30_600);
+assert.throws(() => readSnapshot(changed(s => { s.marketContext[0].change = 'down'; })), /marketContext/);
+assert.throws(() => readSnapshot(changed(s => { s.indexQuotes[0].value = 'bad'; })), /index quote/);
+assert.throws(() => readSnapshot(changed(s => { s.indexQuotes[0].value = 100; })), /index quote/);
+assert.throws(() => readSnapshot(changed(s => { s.keyLevels[0].high = 100; s.keyLevels[0].low = 200; })), /key level/);
+assert.throws(() => readSnapshot(changed(s => { Object.assign(s.keyLevels[0], { high: 200, low: 100, asOf: '2026-10-01T13:20:00Z', highTime: '2026-10-01T13:19:00Z', lowTime: '2026-10-01T13:19:00Z' }); })), /key level/);
+assert.throws(() => readSnapshot(changed(s => { s.previousArchiveDate = '2026-10-01'; })), /archive date/);
+assert.throws(() => readSnapshot(changed(s => { s.cutoffAt = '2026-10-01T13:20:00Z'; })), /drafts/);
+assert.equal(readSnapshot(changed(s => { s.briefing.indices.push({ title: 'My note', body: 'Exact wording.', source: 'Desk commentary', url: '' }); })).status, 'draft');
+assert.throws(() => readSnapshot(changed(s => { s.briefing.indices.push({ title: 'External claim', body: 'News', source: 'Other', url: '' }); })), /HTTPS/);
+
+console.log('PASS: published packets, negative changes, quote and key-level validation, manual draft capture, archive link, and user-authored commentary.');

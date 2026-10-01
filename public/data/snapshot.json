@@ -1,7 +1,7 @@
 {
   "sessionDate": "2026-10-01",
   "fetchedAt": "2026-10-01T03:59:21.033Z",
-  "status": "imported",
+  "status": "draft",
   "universeCount": 0,
   "universeComplete": false,
   "connected": {
@@ -295,7 +295,6 @@
       "high": null,
       "low": null,
       "asOf": null,
-      "retrievedAt": "2026-10-01T03:59:21.033Z",
       "source": "TradingView Official MCP · cutoff-filtered 1-minute bars pending for Sep 30 18:00–Oct 1 09:19 ET",
       "issue": "Awaiting the October 1 09:20 ET cutoff capture; values remain blank."
     },
@@ -305,7 +304,6 @@
       "high": null,
       "low": null,
       "asOf": null,
-      "retrievedAt": "2026-10-01T03:59:21.033Z",
       "source": "TradingView Official MCP · cutoff-filtered 1-minute bars pending for Sep 30 18:00–Oct 1 09:19 ET",
       "issue": "Awaiting the October 1 09:20 ET cutoff capture; values remain blank."
     },
@@ -315,7 +313,6 @@
       "high": null,
       "low": null,
       "asOf": null,
-      "retrievedAt": "2026-10-01T03:59:21.033Z",
       "source": "TradingView Official MCP · cutoff-filtered 1-minute bars pending for Sep 30 18:00–Oct 1 09:19 ET",
       "issue": "Awaiting the October 1 09:20 ET cutoff capture; values remain blank."
     },
@@ -325,7 +322,6 @@
       "high": null,
       "low": null,
       "asOf": null,
-      "retrievedAt": "2026-10-01T03:59:21.033Z",
       "source": "TradingView Official MCP · cutoff-filtered 1-minute bars pending for Sep 30 18:00–Oct 1 09:19 ET",
       "issue": "Awaiting the October 1 09:20 ET cutoff capture; values remain blank."
     }
@@ -337,25 +333,7 @@
         "body": "The Nasdaq Composite gained 0.2% to 26,861.06, while the S&P 500 fell 0.3% to 7,651.54. The Dow lost 0.9% and the Russell 2000 fell 0.4%. Wednesday was month-end and quarter-end; market breadth remained weak.",
         "source": "Associated Press",
         "url": "https://apnews.com/article/1ee73f14dc23f6139eeb12c7397f543e",
-        "asOf": "2026-09-30",
-        "indexQuotes": [
-          {
-            "label": "Nasdaq-100 (NQ)",
-            "fridayClose": 30693.75,
-            "scanPrice": null,
-            "changePercent": null,
-            "fridayCloseAt": "2026-09-30T19:59:00.000Z",
-            "closeSource": "TradingView Official MCP · CME_MINI:NQ1!"
-          },
-          {
-            "label": "S&P 500 (ES)",
-            "fridayClose": 7712.75,
-            "scanPrice": null,
-            "changePercent": null,
-            "fridayCloseAt": "2026-09-30T19:59:00.000Z",
-            "closeSource": "TradingView Official MCP · CME_MINI:ES1!"
-          }
-        ]
+        "asOf": "2026-09-30"
       }
     ],
     "bonds": [
@@ -460,6 +438,27 @@
       "url": "https://www.tradingview.com/symbols/TVC-US30Y/",
       "retrievedAt": "2026-10-01T03:59:21.033Z",
       "issue": "No October 1 premarket quote captured yet; previous-session close is shown for context."
+    }
+  ],
+  "previousArchiveDate": "2026-09-30",
+  "indexQuotes": [
+    {
+      "id": "NQ",
+      "previousClose": 30693.75,
+      "value": null,
+      "previousCloseAt": "2026-09-30T19:59:00.000Z",
+      "asOf": null,
+      "source": "TradingView Official MCP · CME_MINI:NQ1!",
+      "issue": "October 1 premarket quote not captured yet."
+    },
+    {
+      "id": "ES",
+      "previousClose": 7712.75,
+      "value": null,
+      "previousCloseAt": "2026-09-30T19:59:00.000Z",
+      "asOf": null,
+      "source": "TradingView Official MCP · CME_MINI:ES1!",
+      "issue": "October 1 premarket quote not captured yet."
     }
   ]
 }

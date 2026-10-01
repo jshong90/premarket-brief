@@ -38,25 +38,30 @@ const formatChange = (value: number | null) => value === null
   : `${value > 0 ? '+' : ''}${value.toFixed(2)}%`;
 
 function IndexOvernightTable({ data }: { data: Snapshot }) {
-  const quotes = (data.briefing?.indices ?? []).flatMap((note) => (note as typeof note & IndexQuoteNote).indexQuotes ?? []);
-  const briefingText = (data.briefing?.indices ?? []).map((note) => note.body).join('\n');
-  const suppliedChange = (pattern: RegExp) => {
-    const match = briefingText.match(pattern);
-    return match ? Number(match[1].replace(/\s/g, '').replace('−', '-')) : null;
-  };
-  const getQuote = (symbol: 'NQ' | 'ES') => quotes.find((row) =>
+  const legacyQuotes = (data.briefing?.indices ?? []).flatMap((note) => (note as typeof note & IndexQuoteNote).indexQuotes ?? []);
+  const getLegacyQuote = (symbol: 'NQ' | 'ES') => legacyQuotes.find((row) =>
     symbol === 'NQ' ? /nasdaq|\bNQ\b/i.test(row.label) : /s\s*&?p|\bES\b/i.test(row.label),
   );
+  const quoteFor = (symbol: 'NQ' | 'ES') => {
+    const quote = data.indexQuotes?.find((row) => row.id === symbol);
+    const legacy = getLegacyQuote(symbol);
+    const previous = quote ? quote.previousClose : legacy?.fridayClose ?? null;
+    const current = quote ? quote.value : legacy?.scanPrice ?? null;
+    return { id: symbol, label: symbol, previous, current,
+      change: previous !== null && current !== null && previous > 0 ? (current / previous - 1) * 100 : quote ? null : legacy?.changePercent ?? null,
+      approximate: false, asOf: quote?.asOf ?? null };
+  };
   const vix = data.marketContext?.find((row) => row.id === 'VIX');
   const rows = [
-    { id: 'NQ', label: 'NQ', previous: getQuote('NQ')?.fridayClose ?? null, current: getQuote('NQ')?.scanPrice ?? null, change: getQuote('NQ')?.changePercent ?? suppliedChange(/(?:Nasdaq(?:-100)?):\s*([+\-−]?\s*[\d.]+)\s*%/i), approximate: false },
-    { id: 'ES', label: 'ES', previous: getQuote('ES')?.fridayClose ?? null, current: getQuote('ES')?.scanPrice ?? null, change: getQuote('ES')?.changePercent ?? suppliedChange(/S\s*&?P\s*500:\s*([+\-−]?\s*[\d.]+)\s*%/i), approximate: false },
+    quoteFor('NQ'),
+    quoteFor('ES'),
     {
       id: 'VIX', label: 'VIX', previous: vix?.previousClose ?? null, current: vix?.value ?? null,
       change: vix?.value != null && vix.previousClose != null && vix.previousClose !== 0
         ? (vix.value / vix.previousClose - 1) * 100
-        : suppliedChange(/VIX:\s*([+\-−]?\s*[\d.]+)\s*%/i),
+        : null,
       approximate: vix?.approximate ?? false,
+      asOf: vix?.asOf ?? null,
     },
   ];
 
@@ -65,7 +70,7 @@ function IndexOvernightTable({ data }: { data: Snapshot }) {
     <tbody>{rows.map((row) => <tr key={row.id}>
       <th scope="row">{row.label}</th>
       <td className="mono">{row.previous == null ? '—' : `${row.approximate ? '~' : ''}${formatPrice(row.previous)}`}</td>
-      <td className="mono">{row.current == null ? '—' : `${row.approximate ? '~' : ''}${formatPrice(row.current)}`}</td>
+      <td className="mono">{row.current == null ? '—' : <>{row.approximate ? '~' : ''}{formatPrice(row.current)}{row.asOf && <small>{formatET(row.asOf)} ET</small>}</>}</td>
       <td className={`mono ${row.change == null ? '' : row.change < 0 ? 'negative' : row.change > 0 ? 'positive' : ''}`}>{row.change == null ? '—' : `${row.approximate ? '~' : ''}${formatChange(row.change)}`}</td>
     </tr>)}</tbody>
   </table></div>;
@@ -216,6 +221,7 @@ function SourcesCard({ data }: { data: Snapshot }) {
   const treasuryReferences = (data.treasuryYields ?? []).filter((row) =>
     row.previousClose !== null && row.previousCloseSource && row.previousCloseUrl
       || row.value !== null && row.source && row.url);
+  const indexQuoteReferences = (data.indexQuotes ?? []).filter((row) => row.url && (row.previousClose!==null || row.value!==null));
   const treasuryCitationCount = treasuryReferences.reduce((count, row) =>
     count + Number(row.previousClose !== null && Boolean(row.previousCloseSource && row.previousCloseUrl))
       + Number(row.value !== null && Boolean(row.source && row.url)), 0);
@@ -223,15 +229,16 @@ function SourcesCard({ data }: { data: Snapshot }) {
   const otherRefs = references.filter(({ note }) => !note.source.startsWith('TradingView Official MCP'));
   const keyLevelData = data as SnapshotKeyLevels;
   const keyLevels = keyLevelData.keyLevels ?? [];
-  const retrievedAt = keyLevels.find((row) => row.retrievedAt)?.retrievedAt;
-  const referenceCount = references.length + treasuryCitationCount + (keyLevels.length ? 1 : 0);
+  const capturedKeyLevels = keyLevels.filter((row) => row.high!==null && row.low!==null);
+  const retrievedAt = capturedKeyLevels.find((row) => row.retrievedAt)?.retrievedAt;
+  const referenceCount = references.length + treasuryCitationCount + indexQuoteReferences.length + (capturedKeyLevels.length ? 1 : 0);
   if (!referenceCount) return null;
 
   return <section className={`sources-card panel ${open ? 'is-open' : ''}`}>
     <button className="sources-summary" type="button" aria-expanded={open} aria-controls="sources-content" onClick={() => setOpen((value) => !value)}><span className="sources-title">Sources</span><span className="sources-count">{referenceCount} references</span></button>
     <div className="sources-reveal" aria-hidden={!open} inert={!open}>
     <div className="sources-content" id="sources-content">
-      {Boolean(tradingViewRefs.length || keyLevels.length) && <section className="sources-group">
+      {Boolean(tradingViewRefs.length || capturedKeyLevels.length) && <section className="sources-group">
         <h3>TradingView Official MCP</h3>
         <p className="sources-intro">Timestamped market data; provider delay may exceed 15 minutes.</p>
         <ul className="sources-list">
@@ -244,12 +251,21 @@ function SourcesCard({ data }: { data: Snapshot }) {
               {observedAt && <small>Observed {new Date(observedAt).toLocaleString('en-US', { timeZone: 'America/New_York' })} ET.</small>}
             </li>;
           })}
-          {keyLevels.length > 0 && <li>
+          {capturedKeyLevels.length > 0 && <li>
             <a href="https://www.tradingview.com/markets/futures/quotes/" target="_blank" rel="noreferrer">Premarket key levels ↗</a>
             <small>Futures session: {formatFuturesSession(data.sessionDate)}; last complete one-minute bar ends at 9:19 AM ET. Provider delay may exceed 15 minutes.</small>
             {retrievedAt && <small>Retrieved {new Date(retrievedAt).toLocaleString('en-US', { timeZone: 'America/Los_Angeles', dateStyle: 'short', timeStyle: 'short' })} PT.</small>}
           </li>}
         </ul>
+      </section>}
+      {indexQuoteReferences.length > 0 && <section className="sources-group">
+        <h3>Index quote data</h3>
+        <ul className="sources-list">{indexQuoteReferences.map((row) => <li key={row.id}>
+          <a href={row.url} target="_blank" rel="noreferrer">{row.id} {row.value!==null?'quote':'previous close'} ↗</a>
+          <small>01 · Overnight movements on the indices · {row.source}</small>
+          {row.asOf && <small>Observed {new Date(row.asOf).toLocaleString('en-US', { timeZone: 'America/New_York' })} ET.</small>}
+          {row.retrievedAt && <small>Retrieved {new Date(row.retrievedAt).toLocaleString('en-US', { timeZone: 'America/Los_Angeles', dateStyle: 'short', timeStyle: 'short' })} PT.</small>}
+        </li>)}</ul>
       </section>}
       {otherRefs.length > 0 && <section className="sources-group">
         <h3>Other briefing sources</h3>
@@ -281,7 +297,7 @@ function SourcesCard({ data }: { data: Snapshot }) {
   </section>;
 }
 
-export default function MorningBrief({ data, error, dateLabel }: { data: Snapshot; error: string; dateLabel?: string }) {
+export default function MorningBrief({ data, error, archived = false }: { data: Snapshot; error: string; archived?: boolean }) {
   const imported = data.status === 'imported';
   const userSuppliedBriefing = Object.values(data.briefing || {}).flat().some((note) => note.source === 'Desk commentary');
   const renderSection = ({ key, title }: { key: keyof Briefing | 'keyLevels'; title: string }, sectionIndex: number) => key === 'keyLevels'
@@ -301,9 +317,9 @@ export default function MorningBrief({ data, error, dateLabel }: { data: Snapsho
   return <section id="morning-brief" className="dashboard-section morning-section" aria-labelledby="brief-title" tabIndex={-1}>
     <div className="page-heading centered-heading">
       <div className="heading-center"><div className="section-heading-row"><h1 id="brief-title">Your Morning Brief<span className="title-dot">.</span></h1><a className="primary-button section-jump" href="#relative-strength">Skip to relative strength <span className="jump-arrow" aria-hidden="true">↓</span></a></div></div>
-      <div className="heading-meta paper-meta"><span className="session-chip">{dateLabel ? 'PREVIEW COPY · 9/28 DATA' : userSuppliedBriefing ? 'DAILY BRIEF · 9/28 SCANNER' : imported ? 'USER-PROVIDED NOTES' : '09:20 ET SNAPSHOT'}</span></div>
+      <div className="heading-meta paper-meta"><span className="session-chip">{archived ? 'ARCHIVE COPY' : data.status==='draft' ? 'DRAFT BRIEF' : imported ? 'LEGACY EXAMPLE' : 'DAILY BRIEF'}</span></div>
     </div>
-    <div className="source-notice"><div><strong>{userSuppliedBriefing ? 'Morning commentary' : imported ? 'Your morning briefing' : 'Morning snapshot'}</strong><span>{error || (userSuppliedBriefing ? 'The relative-strength scanner below shows the September 28 example.' : imported ? 'Legacy scanner data is shown as an example.' : 'Source times and coverage are recorded with each note.')}</span></div></div>
+    <div className="source-notice"><div><strong>{userSuppliedBriefing ? 'Morning commentary' : imported ? 'Your morning briefing' : 'Morning snapshot'}</strong><span>{error || data.messages[0] || 'Source times and coverage are recorded with each note.'}</span></div></div>
     <div className="morning-sections">{sections.map((section, index) => renderSection(section, index))}
       <SourcesCard data={data}/>
     </div>
