@@ -10,10 +10,10 @@
   },
   "messages": [
     "October 1 morning brief draft prepared on September 30; this is not a frozen premarket snapshot.",
-    "October 1 premarket quotes were captured on request. Scanner ranges and rankings remain pending the 09:20 ET cutoff; key levels are not yet frozen.",
+    "October 1 premarket quotes were captured on request; ES, NQ, YM, and RTY key levels were captured separately through the 09:19 ET bar. Scanner ranges and rankings remain pending.",
     "The 12-stock sample from September 28 is not carried into this draft. The $50B+ common-stock universe has not been discovered for October 1 (universeComplete=false).",
-    "Previous-session close values shown are from September 30. TradingView one-minute data may be delayed 15+ minutes; cutoff bars must be timestamp-checked before freezing.",
-    "The macro calendar includes only the events explicitly listed for October 1 and 2. Other calendar releases are omitted."
+    "Previous-session close values shown are from September 30. TradingView historical bars may be delayed or revised; YM and RTY each have eight absent one-minute buckets in the overnight range.",
+    "The macro calendar includes the requested October 1–2 economic releases and scheduled Federal Reserve Board appearances."
   ],
   "stocks": [],
   "sectors": [
@@ -296,38 +296,54 @@
     {
       "id": "ES",
       "label": "S&P 500 (ES)",
-      "high": null,
-      "low": null,
-      "asOf": null,
-      "source": "TradingView Official MCP · cutoff-filtered 1-minute bars pending for Sep 30 18:00–Oct 1 09:19 ET",
-      "issue": "Awaiting the October 1 09:20 ET cutoff capture; values remain blank."
+      "high": 7767.75,
+      "low": 7705,
+      "asOf": "2026-10-01T13:19:00.000Z",
+      "source": "TradingView Official MCP · CME_MINI:ES1! · timestamp-filtered 1-minute bars, Sep 30 18:00–Oct 1 09:19 ET",
+      "issue": "Observed high/low from all 920 eligible minute bars. TradingView warns historical bars can be delayed or revised.",
+      "highTime": "2026-10-01T06:00:00.000Z",
+      "lowTime": "2026-10-01T08:32:00.000Z",
+      "retrievedAt": "2026-10-01T13:29:38.451Z",
+      "url": "https://www.tradingview.com/chart/?symbol=CME_MINI%3AES1%21"
     },
     {
       "id": "NQ",
       "label": "Nasdaq-100 (NQ)",
-      "high": null,
-      "low": null,
-      "asOf": null,
-      "source": "TradingView Official MCP · cutoff-filtered 1-minute bars pending for Sep 30 18:00–Oct 1 09:19 ET",
-      "issue": "Awaiting the October 1 09:20 ET cutoff capture; values remain blank."
+      "high": 31151.5,
+      "low": 30684.5,
+      "asOf": "2026-10-01T13:19:00.000Z",
+      "source": "TradingView Official MCP · CME_MINI:NQ1! · timestamp-filtered 1-minute bars, Sep 30 18:00–Oct 1 09:19 ET",
+      "issue": "Observed high/low from all 920 eligible minute bars. TradingView warns historical bars can be delayed or revised.",
+      "highTime": "2026-10-01T06:10:00.000Z",
+      "lowTime": "2026-09-30T22:01:00.000Z",
+      "retrievedAt": "2026-10-01T13:29:38.451Z",
+      "url": "https://www.tradingview.com/chart/?symbol=CME_MINI%3ANQ1%21"
     },
     {
       "id": "YM",
       "label": "Dow (YM)",
-      "high": null,
-      "low": null,
-      "asOf": null,
-      "source": "TradingView Official MCP · cutoff-filtered 1-minute bars pending for Sep 30 18:00–Oct 1 09:19 ET",
-      "issue": "Awaiting the October 1 09:20 ET cutoff capture; values remain blank."
+      "high": 51517,
+      "low": 50936,
+      "asOf": "2026-10-01T13:19:00.000Z",
+      "source": "TradingView Official MCP · CBOT_MINI:YM1! · timestamp-filtered 1-minute bars, Sep 30 18:00–Oct 1 09:19 ET",
+      "issue": "Observed high/low from 912 bars; 8 one-minute buckets absent in the 920-minute window. TradingView warns historical bars can be delayed or revised.",
+      "highTime": "2026-10-01T12:36:00.000Z",
+      "lowTime": "2026-10-01T08:32:00.000Z",
+      "retrievedAt": "2026-10-01T13:29:38.451Z",
+      "url": "https://www.tradingview.com/chart/?symbol=CBOT_MINI%3AYM1%21"
     },
     {
       "id": "RTY",
       "label": "Russell 2000 (RTY)",
-      "high": null,
-      "low": null,
-      "asOf": null,
-      "source": "TradingView Official MCP · cutoff-filtered 1-minute bars pending for Sep 30 18:00–Oct 1 09:19 ET",
-      "issue": "Awaiting the October 1 09:20 ET cutoff capture; values remain blank."
+      "high": 2835.2,
+      "low": 2797.9,
+      "asOf": "2026-10-01T13:19:00.000Z",
+      "source": "TradingView Official MCP · CME_MINI:RTY1! · timestamp-filtered 1-minute bars, Sep 30 18:00–Oct 1 09:19 ET",
+      "issue": "Observed high/low from 912 bars; 8 one-minute buckets absent in the 920-minute window. TradingView warns historical bars can be delayed or revised.",
+      "highTime": "2026-10-01T05:06:00.000Z",
+      "lowTime": "2026-10-01T08:31:00.000Z",
+      "retrievedAt": "2026-10-01T13:29:38.451Z",
+      "url": "https://www.tradingview.com/chart/?symbol=CME_MINI%3ARTY1%21"
     }
   ],
   "briefing": {
