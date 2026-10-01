@@ -5939,7 +5939,11 @@
       "previousCloseAt": "2026-09-30T20:00:00.000Z",
       "highTime": "2026-10-01T08:00:00Z",
       "lowTime": "2026-10-01T08:22:00Z",
-      "issue": "22 actual traded minutes; no actual trade in the 09:19 ET bar, so the cutoff price is blank."
+      "issue": "22 actual traded minutes; no actual trade in the 09:19 ET bar, so the cutoff price is blank.",
+      "quote": 197.65,
+      "quoteAsOf": "2026-10-01T18:23:00.000Z",
+      "quoteSource": "TradingView Official MCP · AMEX 1-minute regular-session bar close; 15+ minute delay possible",
+      "quoteRetrievedAt": "2026-10-01T18:30:22.414Z"
     },
     {
       "ticker": "XLC",
@@ -5957,7 +5961,11 @@
       "asOf": "2026-10-01T08:01:00Z",
       "retrievedAt": "2026-10-01T13:48:34.631Z",
       "previousCloseAt": "2026-09-30T20:00:00.000Z",
-      "issue": "Only 1 actual traded minute; fewer than the 10-minute source-quality minimum, so the range is unranked."
+      "issue": "Only 1 actual traded minute; fewer than the 10-minute source-quality minimum, so the range is unranked.",
+      "quote": 110.11,
+      "quoteAsOf": "2026-10-01T18:23:00.000Z",
+      "quoteSource": "TradingView Official MCP · AMEX 1-minute regular-session bar close; 15+ minute delay possible",
+      "quoteRetrievedAt": "2026-10-01T18:30:22.414Z"
     },
     {
       "ticker": "XLY",
@@ -5975,7 +5983,11 @@
       "asOf": "2026-10-01T10:26:00Z",
       "retrievedAt": "2026-10-01T13:48:34.631Z",
       "previousCloseAt": "2026-09-30T20:00:00.000Z",
-      "issue": "Only 2 actual traded minutes; fewer than the 10-minute source-quality minimum, so the range is unranked."
+      "issue": "Only 2 actual traded minutes; fewer than the 10-minute source-quality minimum, so the range is unranked.",
+      "quote": 109.04,
+      "quoteAsOf": "2026-10-01T18:23:00.000Z",
+      "quoteSource": "TradingView Official MCP · AMEX 1-minute regular-session bar close; 15+ minute delay possible",
+      "quoteRetrievedAt": "2026-10-01T18:30:22.414Z"
     },
     {
       "ticker": "XLF",
@@ -5995,7 +6007,11 @@
       "previousCloseAt": "2026-09-30T20:00:00.000Z",
       "highTime": "2026-10-01T08:00:00Z",
       "lowTime": "2026-10-01T08:31:00Z",
-      "issue": "46 actual traded minutes; cutoff bar observed."
+      "issue": "46 actual traded minutes; cutoff bar observed.",
+      "quote": 53.285,
+      "quoteAsOf": "2026-10-01T18:23:00.000Z",
+      "quoteSource": "TradingView Official MCP · AMEX 1-minute regular-session bar close; 15+ minute delay possible",
+      "quoteRetrievedAt": "2026-10-01T18:30:22.414Z"
     },
     {
       "ticker": "XLI",
@@ -6013,7 +6029,11 @@
       "asOf": null,
       "retrievedAt": "2026-10-01T13:48:34.631Z",
       "previousCloseAt": "2026-09-30T20:00:00.000Z",
-      "issue": "No actual premarket trades in Robinhood's 04:00–09:19 ET minute bars; interpolated bars ignored."
+      "issue": "No actual premarket trades in Robinhood's 04:00–09:19 ET minute bars; interpolated bars ignored.",
+      "quote": 168.255,
+      "quoteAsOf": "2026-10-01T18:23:00.000Z",
+      "quoteSource": "TradingView Official MCP · AMEX 1-minute regular-session bar close; 15+ minute delay possible",
+      "quoteRetrievedAt": "2026-10-01T18:30:22.414Z"
     },
     {
       "ticker": "XLV",
@@ -6031,7 +6051,11 @@
       "asOf": "2026-10-01T12:39:00Z",
       "retrievedAt": "2026-10-01T13:48:34.631Z",
       "previousCloseAt": "2026-09-30T20:00:00.000Z",
-      "issue": "Only 6 actual traded minutes; fewer than the 10-minute source-quality minimum, so the range is unranked."
+      "issue": "Only 6 actual traded minutes; fewer than the 10-minute source-quality minimum, so the range is unranked.",
+      "quote": 166.51,
+      "quoteAsOf": "2026-10-01T18:23:00.000Z",
+      "quoteSource": "TradingView Official MCP · AMEX 1-minute regular-session bar close; 15+ minute delay possible",
+      "quoteRetrievedAt": "2026-10-01T18:30:22.414Z"
     },
     {
       "ticker": "XLP",
@@ -6051,7 +6075,11 @@
       "previousCloseAt": "2026-09-30T20:00:00.000Z",
       "highTime": "2026-10-01T12:05:00Z",
       "lowTime": "2026-10-01T10:07:00Z",
-      "issue": "11 actual traded minutes; no actual trade in the 09:19 ET bar, so the cutoff price is blank."
+      "issue": "11 actual traded minutes; no actual trade in the 09:19 ET bar, so the cutoff price is blank.",
+      "quote": 80.53,
+      "quoteAsOf": "2026-10-01T18:23:00.000Z",
+      "quoteSource": "TradingView Official MCP · AMEX 1-minute regular-session bar close; 15+ minute delay possible",
+      "quoteRetrievedAt": "2026-10-01T18:30:22.414Z"
     },
     {
       "ticker": "XLU",
@@ -6071,7 +6099,11 @@
       "previousCloseAt": "2026-09-30T20:00:00.000Z",
       "highTime": "2026-10-01T11:58:00Z",
       "lowTime": "2026-10-01T08:34:00Z",
-      "issue": "48 actual traded minutes; cutoff bar observed."
+      "issue": "48 actual traded minutes; cutoff bar observed.",
+      "quote": 39.65,
+      "quoteAsOf": "2026-10-01T18:23:00.000Z",
+      "quoteSource": "TradingView Official MCP · AMEX 1-minute regular-session bar close; 15+ minute delay possible",
+      "quoteRetrievedAt": "2026-10-01T18:30:22.414Z"
     },
     {
       "ticker": "XLRE",
@@ -6089,7 +6121,11 @@
       "asOf": null,
       "retrievedAt": "2026-10-01T13:48:34.631Z",
       "previousCloseAt": "2026-09-30T20:00:00.000Z",
-      "issue": "No actual premarket trades in Robinhood's 04:00–09:19 ET minute bars; interpolated bars ignored."
+      "issue": "No actual premarket trades in Robinhood's 04:00–09:19 ET minute bars; interpolated bars ignored.",
+      "quote": 40.67,
+      "quoteAsOf": "2026-10-01T18:23:00.000Z",
+      "quoteSource": "TradingView Official MCP · AMEX 1-minute regular-session bar close; 15+ minute delay possible",
+      "quoteRetrievedAt": "2026-10-01T18:30:22.414Z"
     },
     {
       "ticker": "XLB",
@@ -6107,7 +6143,11 @@
       "asOf": "2026-10-01T11:00:00Z",
       "retrievedAt": "2026-10-01T13:48:34.631Z",
       "previousCloseAt": "2026-09-30T20:00:00.000Z",
-      "issue": "Only 3 actual traded minutes; fewer than the 10-minute source-quality minimum, so the range is unranked."
+      "issue": "Only 3 actual traded minutes; fewer than the 10-minute source-quality minimum, so the range is unranked.",
+      "quote": 48.54,
+      "quoteAsOf": "2026-10-01T18:23:00.000Z",
+      "quoteSource": "TradingView Official MCP · AMEX 1-minute regular-session bar close; 15+ minute delay possible",
+      "quoteRetrievedAt": "2026-10-01T18:30:22.414Z"
     },
     {
       "ticker": "XLE",
@@ -6127,7 +6167,11 @@
       "previousCloseAt": "2026-09-30T20:00:00.000Z",
       "highTime": "2026-10-01T12:26:00Z",
       "lowTime": "2026-10-01T08:05:00Z",
-      "issue": "59 actual traded minutes; no actual trade in the 09:19 ET bar, so the cutoff price is blank."
+      "issue": "59 actual traded minutes; no actual trade in the 09:19 ET bar, so the cutoff price is blank.",
+      "quote": 62.5,
+      "quoteAsOf": "2026-10-01T18:23:00.000Z",
+      "quoteSource": "TradingView Official MCP · AMEX 1-minute regular-session bar close; 15+ minute delay possible",
+      "quoteRetrievedAt": "2026-10-01T18:30:22.414Z"
     }
   ],
   "benchmarks": [
@@ -6426,5 +6470,6 @@
     }
   ],
   "quotesRefreshedAt": "2026-10-01T12:49:01.665Z",
-  "cutoffAt": "2026-10-01T13:20:00.000Z"
+  "cutoffAt": "2026-10-01T13:20:00.000Z",
+  "sectorQuotesRefreshedAt": "2026-10-01T18:30:22.414Z"
 }

@@ -17,6 +17,7 @@ export function readSnapshot(input: unknown): Snapshot {
   if (![s.stocks,s.sectors,s.benchmarks,s.messages].every(Array.isArray) || s.messages.some(x=>typeof x!=='string')) return fail('missing arrays.');
   if (s.previousArchiveDate!==undefined && (!/^\d{4}-\d{2}-\d{2}$/.test(s.previousArchiveDate) || !Number.isFinite(Date.parse(s.previousArchiveDate)) || new Date(s.previousArchiveDate).toISOString().slice(0,10)!==s.previousArchiveDate || s.previousArchiveDate>=s.sessionDate)) return fail('invalid archive date.');
   if (!optionalTime(s.quotesRefreshedAt)) return fail('invalid quote refresh time.');
+  if (!optionalTime(s.sectorQuotesRefreshedAt)) return fail('invalid sector quote refresh time.');
   if (s.marketContext!==undefined) {
     if (!Array.isArray(s.marketContext)) return fail('marketContext must be an array.');
     const ids=['SPX','SPY','QQQ','VIX','US10Y'];
@@ -83,6 +84,9 @@ export function readSnapshot(input: unknown): Snapshot {
   };
   const stocks = s.stocks.map(r=>clean(r,w.equityStart));
   const sectors = s.sectors.map(r=>clean(r,w.equityStart));
+  for (const row of sectors) {
+    if (row.quote!==undefined && (!validNumber(row.quote) || row.quote===null || row.quote<=0 || typeof row.quoteSource!=='string' || !validTime(row.quoteAsOf) || !validTime(row.quoteRetrievedAt))) return fail('invalid sector quote fields.');
+  }
   if (new Set(stocks.map(r=>r.ticker)).size !== stocks.length || new Set(sectors.map(r=>r.ticker)).size !== sectors.length || sectors.some(r=>r.benchmark!=='ES')) return fail('duplicate tickers or invalid sector benchmark.');
   const benchmarks = s.benchmarks.map(r=>clean(r,w.futuresStart));
   const partial = !s.universeComplete || !stocks.length || sectors.length!==11 || [...stocks,...sectors,...benchmarks].some(r=>r.drawdown===null);
