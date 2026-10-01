@@ -65,7 +65,9 @@ export default function Scanner() {
     if(!('IntersectionObserver' in window)){cards.forEach(card=>card.classList.add('is-in-view'));return;}
     const reveal=new IntersectionObserver(entries=>{
       for(const entry of entries)entry.target.classList.toggle('is-in-view',entry.isIntersecting);
-    },{threshold:0.12,rootMargin:'0px 0px -48px 0px'});
+    // A full stock table can be much taller than the viewport; a percentage
+    // threshold would leave the entire panel permanently transparent.
+    },{threshold:0,rootMargin:'0px 0px -48px 0px'});
     cards.forEach(card=>reveal.observe(card));
     return()=>reveal.disconnect();
   },[data,snapshotLoaded]);
