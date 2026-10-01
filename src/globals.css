@@ -411,7 +411,7 @@ h1,h2,h3{font-family:"Newsreader",Georgia,serif;font-optical-sizing:auto}
 
 /* The jump cue replays when the heading comes back into view. */
 .section-jump .jump-arrow{display:inline-block}
-.section-heading-row.is-revealed .section-jump .jump-arrow{animation:jump-cue var(--lab-jump-duration,1.02s) ease-out var(--lab-jump-delay,.9s) both}
+.page-heading.is-revealed .section-jump .jump-arrow{animation:jump-cue var(--lab-jump-duration,1.02s) ease-out var(--lab-jump-delay,.9s) both}
 @keyframes jump-cue{0%,100%{transform:translateY(0)}45%{transform:translateY(var(--lab-jump-distance,4px))}}
 
 /* Cards settle into place each time they enter the viewport. */
@@ -437,7 +437,7 @@ h1,h2,h3{font-family:"Newsreader",Georgia,serif;font-optical-sizing:auto}
 
 @media(prefers-reduced-motion:reduce){
   .paper-kicker,.paper-meta{opacity:1;transform:none}
-  .morning-section>.page-heading.is-revealed .paper-kicker,.morning-section>.page-heading.is-revealed .paper-meta,.section-heading-row.is-revealed .section-jump .jump-arrow{animation:none}
+  .morning-section>.page-heading.is-revealed .paper-kicker,.morning-section>.page-heading.is-revealed .paper-meta,.page-heading.is-revealed .section-jump .jump-arrow{animation:none}
   .morning-section>.page-heading .section-heading-row{transition:none}
   .rankings .capture-track>span,.rankings.bars-visible .capture-track>span,.sector-panel .sector-track>i,.sector-panel.bars-visible .sector-track>i,.distribution-bar>span,.distribution.bars-visible .distribution-bar>span{transform:none;transition:none}
   .viewport-card,.viewport-card.is-in-view{opacity:1;transform:none;transition:none;will-change:auto}
@@ -447,8 +447,8 @@ h1,h2,h3{font-family:"Newsreader",Georgia,serif;font-optical-sizing:auto}
 /* Keep the two page titles on the centerline; the shared date now lives in the top bar. */
 .dashboard-section>.page-heading.centered-heading{display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);align-items:center;gap:16px;text-align:center}
 .centered-heading .heading-center{grid-column:2;min-width:0}
-.dashboard-section>.page-heading.centered-heading .section-heading-row{position:relative;justify-content:center}
-.centered-heading .section-jump{position:absolute;left:calc(100% + 20px)}
+.dashboard-section>.page-heading.centered-heading .section-heading-row{justify-content:center}
+.centered-heading .section-jump{grid-column:1;grid-row:1;justify-self:start}
 .centered-heading .heading-meta{grid-column:3;justify-self:end}
 
 /* Development-only design labs. Every control maps to the live dashboard tokens above. */
@@ -546,12 +546,12 @@ html[data-dev-lab="true"] .source-notice,html[data-dev-lab="true"] .inline-note,
 @media(max-width:1250px){
   .dashboard-section>.page-heading.centered-heading{grid-template-columns:minmax(0,1fr);gap:10px}
   .centered-heading .heading-center{grid-column:1;grid-row:1;justify-self:center}
-  .centered-heading .heading-meta{grid-column:1;grid-row:2;justify-self:center;align-items:center}
-  .centered-heading .section-jump{position:static}
-  .dashboard-section>.page-heading.centered-heading .section-heading-row{flex-direction:column;gap:8px}
+  .centered-heading .heading-meta{grid-column:1;grid-row:2;justify-self:end;align-items:flex-end}
+  .centered-heading .section-jump{grid-column:1;grid-row:2}
 }
 @media(max-width:540px){
   .centered-heading .session-chip{font-size:10px}
+  .centered-heading .heading-meta{grid-row:3}
 }
 
 /* Price direction and resilience retain their own tokens, even in legacy rows. */
