@@ -10,7 +10,7 @@
     "robinhood": true
   },
   "messages": [
-    "DRAFT ONLY — copied from the October 1 page. All prices, ranges, levels, event listings, and notes still reflect October 1; no October 2 market data or briefing updates have been added.",
+    "DRAFT ONLY — Oct. 2 desk commentary has been added. Market-context quotes, key levels, Treasury table, macro/earnings/news notes, and scanner rows still reflect October 1; those values are not today's capture.",
     "October 1 scanner: 143 of 312 discovered $50B+ Robinhood stock rows have at least 10 actual traded premarket minutes and a rankable range; 169 remain unranked. Sector ETF coverage: 5/11.",
     "The 09:20 ET cutoff is fixed. Robinhood minute bars are filtered to 04:00–09:19 ET; synthetic interpolated bars are ignored. NQ/ES benchmarks reuse TradingView's captured Sep 30 18:00–Oct 1 09:19 ET futures range.",
     "Robinhood's market-cap universe was discovered after the cutoff; membership at 09:20 ET cannot be fully verified, so universeComplete=false. The scan is partial.",
@@ -6331,7 +6331,7 @@
     "indices": [
       {
         "title": "Equity commentary",
-        "body": "MU had a strong report after the bell with revenue up 380% YoY, but is now trading flat, with the broader SMH ETF mirroring the NQ profile.\n\nAgain, the rate story and the potential for an Iran deal continues to dominate price action. Market had an extremely bearish close into the quarter. NQ has completely erased that move and is now trading in yesterday's RTH range after a strong rejection from the upper 5M Bollinger band, while ES lags.\n\nOil: Rallied from 88, and is now trading around 91.",
+        "body": "Equities are up overnight, with the Nasdaq up 1.06% and SPY up .84%.\n\nVIX has retreated to 15.6.\n\nThe market made a strong bid from the lows of the Thursday session. If NQ holds above the QQQ 740 pivot, good chance of continuation. Breadth is still poor and I'm looking to see if the other sectors finally catch up or current leaders roll over for a more directional move.\n\nBrent crude has given up yesterday's gains, selling from 91 to 89 amid speculation the EU may release its diesel reserves. The just-released jobs report showed a cool print for the labor market, with Polymarket odds showing near-certainty on a no-touch Fed in October (88%).\n\nTreasury yields are showing signs of cooling off.",
         "source": "Desk commentary",
         "url": ""
       }
