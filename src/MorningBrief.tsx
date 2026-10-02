@@ -192,7 +192,9 @@ const formatET = (value?: string | null) => value
 
 function KeyLevelsTable({ data }: { data: Snapshot }) {
   const keyLevelData = data as SnapshotKeyLevels;
-  const byId = new Map((keyLevelData.keyLevels ?? []).map((row) => [row.id, row]));
+  const keyLevels = keyLevelData.keyLevels ?? [];
+  const byId = new Map(keyLevels.map((row) => [row.id, row]));
+  const coverageIssues = keyLevels.filter((row) => row.issue);
   return <>
     <div className="key-levels-wrap">
       <table className="key-levels-table">
@@ -209,7 +211,8 @@ function KeyLevelsTable({ data }: { data: Snapshot }) {
         })}</tbody>
       </table>
     </div>
- </>;
+    <p className="key-levels-note">Window: {formatFuturesSession(data.sessionDate)}; the 9:20 AM ET bar is excluded. {coverageIssues.length > 0 ? coverageIssues.map((row) => `${row.id}: ${row.issue}`).join(' ') : 'All four rows have complete returned-bar coverage.'}</p>
+  </>;
 }
 
 
