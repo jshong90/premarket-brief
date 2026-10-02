@@ -1,6 +1,6 @@
 import type { MarketContextRow, Snapshot } from '@/lib/scanner';
 
-const ORDER: MarketContextRow['id'][] = ['SPX', 'SPY', 'QQQ', 'VIX', 'US10Y'];
+const ORDER: MarketContextRow['id'][] = ['SPY', 'QQQ', 'VIX', 'US10Y'];
 
 const valueText = (row: MarketContextRow, value = row.value) => {
   if (value === null || value === undefined || !Number.isFinite(value)) return '—';
@@ -48,6 +48,6 @@ export default function MarketStrip({ data }: { data: Snapshot }) {
   const contextLabel = data.quotesRefreshedAt ? 'Quotes captured on request · no live refresh' : data.status === 'imported' ? 'Snapshot inputs · unverified' : 'Quotes not captured';
   return <section className="market-strip" aria-label="Market context">
     <div className="market-strip-heading"><span className="eyebrow">MARKET CONTEXT</span><span>{contextLabel}</span></div>
-    <div className="market-strip-items">{ORDER.map(id => <MarketTile key={id} row={byId.get(id) || {id,label:id,name:'Not supplied',kind:id==='VIX'?'volatility':id==='US10Y'?'yield':id==='SPX'?'index':'etf',value:null,previousClose:null,change:null,changeUnit:'%',source:'Not supplied in this snapshot',asOf:null,issue:'No market-context row supplied.'}} />)}</div>
+    <div className="market-strip-items">{ORDER.map(id => <MarketTile key={id} row={byId.get(id) || {id,label:id,name:'Not supplied',kind:id==='VIX'?'volatility':id==='US10Y'?'yield':'etf',value:null,previousClose:null,change:null,changeUnit:'%',source:'Not supplied in this snapshot',asOf:null,issue:'No market-context row supplied.'}} />)}</div>
   </section>;
 }
