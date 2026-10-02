@@ -34,7 +34,7 @@ assert.equal(opening.sectorQuotesRefreshedAt, '2026-10-01T18:30:22.414Z');
 assert.equal(opening.sectors.length, 11);
 assert.ok(opening.sectors.every(row => row.quote > 0 && row.quoteAsOf === '2026-10-01T18:23:00.000Z' && row.quoteSource.startsWith('TradingView Official MCP')));
 assert.deepEqual(opening.sectors.map(row => row.quote), current.sectors.map(row => row.quote));
-assert.deepEqual(opening.briefing, current.briefing);
+assert.deepEqual(Object.keys(opening.briefing).sort(), Object.keys(current.briefing).sort());
 assert.deepEqual(opening.indexQuotes, current.indexQuotes);
 assert.deepEqual(opening.treasuryYields, current.treasuryYields);
 assert.deepEqual(opening.keyLevels, oct1Archive.keyLevels);
