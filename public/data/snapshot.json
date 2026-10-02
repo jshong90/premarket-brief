@@ -1,7 +1,7 @@
 {
-  "sessionDate": "2026-10-01",
-  "fetchedAt": "2026-10-01T13:48:34.631Z",
-  "status": "partial",
+  "sessionDate": "2026-10-02",
+  "fetchedAt": "2026-10-02T05:32:03.942Z",
+  "status": "draft",
   "universeCount": 312,
   "universeComplete": false,
   "connected": {
@@ -10,6 +10,7 @@
     "robinhood": true
   },
   "messages": [
+    "DRAFT ONLY — copied from the October 1 page. All prices, ranges, levels, event listings, and notes still reflect October 1; no October 2 market data or briefing updates have been added.",
     "October 1 scanner: 143 of 312 discovered $50B+ Robinhood stock rows have at least 10 actual traded premarket minutes and a rankable range; 169 remain unranked. Sector ETF coverage: 5/11.",
     "The 09:20 ET cutoff is fixed. Robinhood minute bars are filtered to 04:00–09:19 ET; synthetic interpolated bars are ignored. NQ/ES benchmarks reuse TradingView's captured Sep 30 18:00–Oct 1 09:19 ET futures range.",
     "Robinhood's market-cap universe was discovered after the cutoff; membership at 09:20 ET cannot be fully verified, so universeComplete=false. The scan is partial.",
@@ -6444,7 +6445,7 @@
       "asOf": "2026-10-01T12:45:00.000Z"
     }
   ],
-  "previousArchiveDate": "2026-09-30",
+  "previousArchiveDate": "2026-10-01",
   "indexQuotes": [
     {
       "id": "NQ",
@@ -6470,6 +6471,5 @@
     }
   ],
   "quotesRefreshedAt": "2026-10-01T12:49:01.665Z",
-  "cutoffAt": "2026-10-01T13:20:00.000Z",
   "sectorQuotesRefreshedAt": "2026-10-01T18:30:22.414Z"
 }
