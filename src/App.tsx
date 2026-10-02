@@ -45,7 +45,7 @@ export default function Scanner() {
     return()=>reveal.disconnect();
   },[snapshotLoaded]);
   useEffect(()=>{
-    const panels=Array.from(document.querySelectorAll<HTMLElement>('.rankings, .sector-panel, .distribution'));
+    const panels=Array.from(document.querySelectorAll<HTMLElement>('.rankings, .distribution'));
     if(!('IntersectionObserver' in window)){panels.forEach(panel=>panel.classList.add('bars-visible'));return;}
     const reveal=new IntersectionObserver(entries=>{
       for(const entry of entries){
@@ -77,7 +77,7 @@ export default function Scanner() {
     if(!snapshotLoaded)return;
     const root=document.documentElement;
     const briefCards=Array.from(document.querySelectorAll<HTMLElement>('.morning-sections > .panel'));
-    const scannerCards=Array.from(document.querySelectorAll<HTMLElement>('.benchmark-grid > .benchmark-card, .work-grid .panel, .sector-panel'));
+    const scannerCards=Array.from(document.querySelectorAll<HTMLElement>('.benchmark-grid > .benchmark-card, .work-grid .panel'));
     briefCards.forEach(node=>node.dataset.parallaxLayer='brief');
     scannerCards.forEach(node=>node.dataset.parallaxLayer='scanner');
     const parallaxCards=[...new Set([...briefCards,...scannerCards])];
@@ -143,7 +143,6 @@ export default function Scanner() {
   },[]);
   const topStocks=useMemo(()=>topRelativeStrength(data.stocks.map(r=>{const b=benchmark==='auto'?r.benchmark:benchmark as BenchmarkId;return{...r,usedBenchmark:b,...metrics(r,data.benchmarks.find(x=>x.id===b))};})),[data,benchmark]);
   const rows=useMemo(()=>topStocks.filter(r=>(sector==='all'||r.sector===sector)&&`${r.ticker} ${r.name}`.toLowerCase().includes(query.toLowerCase())).sort((a,b)=>{const av=a[sort.key],bv=b[sort.key];if(av==null)return bv==null?a.rsRank-b.rsRank:1;if(bv==null)return-1;const result=typeof av==='string'?av.localeCompare(String(bv)):av-Number(bv);return(sort.asc?result:-result)||a.rsRank-b.rsRank;}),[topStocks,sector,query,sort]);
-  const sectors=useMemo(()=>data.sectors.map(r=>({...r,...metrics(r,data.benchmarks.find(x=>x.id==='ES'))})).sort((a,b)=>(a.capture??Infinity)-(b.capture??Infinity)),[data]);
   const leaders=useMemo(()=>data.stocks.map(row=>({row,capture:metrics(row,data.benchmarks.find(b=>b.id===(benchmark==='auto'?row.benchmark:benchmark))).capture})).filter(({capture})=>capture!==null&&capture<70).sort((a,b)=>a.capture!-b.capture!||a.row.ticker.localeCompare(b.row.ticker)).slice(0,5).map(({row})=>row),[data,benchmark]);
   const counts=useMemo(()=>{const c:Record<string,number>={};for(const r of data.stocks){const b=benchmark==='auto'?r.benchmark:benchmark;const band=metrics(r,data.benchmarks.find(x=>x.id===b)).band;if(band)c[band]=(c[band]||0)+1;}return c;},[data,benchmark]);
   const validCount=Object.values(counts).reduce((a,b)=>a+b,0);
@@ -161,7 +160,7 @@ export default function Scanner() {
   const archiveDate=data.previousArchiveDate;
   const latestHref=isDevelopmentMode?'./index.html?dev=1':'./index.html';
   const archiveHref=archiveDate?`./index.html?date=${archiveDate}${isDevelopmentMode?'&dev=1':''}`:latestHref;
-  const selectedMetrics=selected?metrics(selected,data.benchmarks.find(b=>b.id===(data.sectors.some(s=>s.ticker===selected.ticker)?'ES':benchmark==='auto'?selected.benchmark:benchmark))):null;
+  const selectedMetrics=selected?metrics(selected,data.benchmarks.find(b=>b.id===(benchmark==='auto'?selected.benchmark:benchmark))):null;
 
   const toolState=useRef({rows,topStocks,mode,sector,benchmark,query,data});
   useEffect(()=>{toolState.current={rows,topStocks,mode,sector,benchmark,query,data};},[rows,topStocks,mode,sector,benchmark,query,data]);
@@ -224,7 +223,7 @@ export default function Scanner() {
           <div className="table-footer"><span>{rows.length} of {topStocks.length} top RS names <span className="divider">/</span> {benchmark==='auto'?'NQ / ES assigned per stock':`All stocks vs ${benchmark}`}</span><span>Click a company for details <ArrowUpRight size={12}/></span></div>
         </section>
         <aside className="right-rail">
-          <section className="sector-panel panel"><div className="panel-heading"><h2>Sector strength</h2><span className="small-tag">VS ES</span></div><p className="rail-description">{isOpening?'Range through 09:34 ET · includes the open':'Premarket range capture'} · previous close by ETF</p><p className="rail-description">TradingView last 1-minute close · {clock(sectors.find(s=>s.quoteAsOf)?.quoteAsOf)} ET · may be delayed 15+ minutes</p><div className="sector-list">{sectors.map(s=><button key={s.ticker} className={`sector-row ${tone(s.band)}`} onClick={()=>setSelected(s)}><span className="sector-info"><strong>{s.ticker}</strong><small>{s.name}</small><small>Prev. close {number(s.previousClose)}</small><small>Last {quotePrice(s.quote)}</small></span><span className="sector-track">{s.capture!==null&&<i style={{width:`${Math.min(s.capture/200*100,100)}%`}}/>}</span><span className="mono">{percent(s.capture,0)}</span></button>)}</div>{sectors.every(s=>s.capture===null)&&<div className="sector-note"><Info size={14}/><span>Session ranges needed.<br/>Daily change is not used as a substitute.</span></div>}</section>
+
           <section className="distribution panel"><div className="panel-heading"><h2>The resilience scale</h2></div><div className="distribution-bar" aria-label="Classification distribution">{['Exceptional RS','Clear RS','Moderate RS','Market-like','Laggard'].map(b=><span key={b} className={tone(b as Band)} style={{flex:1}}/>)}</div>{[['Exceptional RS',''],['Clear RS',''],['Moderate RS',''],['Market-like',''],['Laggard','']].map(([label,range])=><div className="scale-row" key={label}><span><i className={tone(label as Band)}/>{label}</span>{range&&<span className="mono">{range}</span>}</div>)}<button className="text-link" onClick={()=>setDrawer('method')}>About the scanner <ArrowUpRight size={13}/></button></section>
         </aside>
       </div>
