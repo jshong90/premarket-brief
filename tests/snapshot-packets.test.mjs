@@ -21,7 +21,16 @@ assert.equal(current.cutoffAt, undefined);
 assert.equal(oct1Archive.sessionDate, '2026-10-01');
 assert.equal(readSnapshot(oct1Archive).status, 'partial');
 assert.equal(oct1Archive.cutoffAt, '2026-10-01T13:20:00.000Z');
-assert.ok(current.keyLevels.every(row => row.high === null && row.low === null));
+assert.deepEqual(current.keyLevels.map(row => row.id), ['ES', 'NQ', 'YM', 'RTY']);
+assert.ok(current.keyLevels.every(row => Number.isFinite(row.high) && Number.isFinite(row.low)
+  && row.high > row.low && row.highTime && row.lowTime && row.asOf === '2026-10-02T13:19:00.000Z'
+  && row.retrievedAt && row.source.startsWith('TradingView Official MCP')));
+assert.equal(current.keyLevels.find(row => row.id === 'ES').high, 7802.75);
+assert.equal(current.keyLevels.find(row => row.id === 'ES').low, 7723.25);
+assert.equal(current.keyLevels.find(row => row.id === 'NQ').high, 31222.25);
+assert.equal(current.keyLevels.find(row => row.id === 'NQ').low, 30760.25);
+assert.match(current.keyLevels.find(row => row.id === 'YM').issue, /895 of 920/);
+assert.match(current.keyLevels.find(row => row.id === 'RTY').issue, /907 of 920/);
 assert.equal(current.stocks.length, 312);
 assert.equal(readSnapshot(current).stocks.filter(row => row.drawdown !== null).length, 143);
 assert.equal(readSnapshot(opening).status, 'partial');
