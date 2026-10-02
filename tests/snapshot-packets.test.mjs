@@ -14,8 +14,14 @@ const { readSnapshot } = await import(compile(fs.readFileSync('src/lib/snapshot.
 const current = JSON.parse(fs.readFileSync('public/data/snapshot.json', 'utf8'));
 const opening = JSON.parse(fs.readFileSync('public/data/snapshot-opening-0635.json', 'utf8'));
 const archive = JSON.parse(fs.readFileSync('public/data/snapshot-2026-09-30.json', 'utf8'));
-assert.equal(readSnapshot(current).status, 'partial');
-assert.equal(current.cutoffAt, '2026-10-01T13:20:00.000Z');
+const oct1Archive = JSON.parse(fs.readFileSync('public/data/snapshot-2026-10-01.json', 'utf8'));
+assert.equal(readSnapshot(current).status, 'draft');
+assert.equal(current.sessionDate, '2026-10-02');
+assert.equal(current.cutoffAt, undefined);
+assert.equal(oct1Archive.sessionDate, '2026-10-01');
+assert.equal(readSnapshot(oct1Archive).status, 'partial');
+assert.equal(oct1Archive.cutoffAt, '2026-10-01T13:20:00.000Z');
+assert.ok(current.keyLevels.every(row => row.high === null && row.low === null));
 assert.equal(current.stocks.length, 312);
 assert.equal(readSnapshot(current).stocks.filter(row => row.drawdown !== null).length, 143);
 assert.equal(readSnapshot(opening).status, 'partial');
@@ -31,11 +37,12 @@ assert.deepEqual(opening.sectors.map(row => row.quote), current.sectors.map(row 
 assert.deepEqual(opening.briefing, current.briefing);
 assert.deepEqual(opening.indexQuotes, current.indexQuotes);
 assert.deepEqual(opening.treasuryYields, current.treasuryYields);
-assert.deepEqual(opening.keyLevels, current.keyLevels);
+assert.deepEqual(opening.keyLevels, oct1Archive.keyLevels);
 assert.throws(() => readSnapshot({...opening,cutoffAt:current.cutoffAt}), /cutoff/);
 assert.throws(() => readSnapshot({...opening,stocks:opening.stocks.map((row,index)=>index?row:{...row,asOf:opening.cutoffAt})}), /outside/);
 assert.equal(readSnapshot(archive).status, 'imported');
-assert.equal(current.previousArchiveDate, archive.sessionDate);
+assert.equal(oct1Archive.previousArchiveDate, archive.sessionDate);
+assert.equal(current.previousArchiveDate, oct1Archive.sessionDate);
 assert.equal(current.indexQuotes.length, 2);
 assert.ok(current.briefing.indices.every(note => !('indexQuotes' in note)));
 
@@ -47,9 +54,9 @@ assert.throws(() => readSnapshot(changed(s => { s.indexQuotes[0].value = 'bad'; 
 assert.throws(() => readSnapshot(changed(s => { s.indexQuotes[0].value = 100; s.indexQuotes[0].asOf = null; })), /index quote/);
 assert.throws(() => readSnapshot(changed(s => { s.keyLevels[0].high = 100; s.keyLevels[0].low = 200; })), /key level/);
 assert.throws(() => readSnapshot(changed(s => { Object.assign(s.keyLevels[0], { high: 200, low: 100, asOf: '2026-10-01T13:20:00Z', highTime: '2026-10-01T13:19:00Z', lowTime: '2026-10-01T13:19:00Z' }); })), /key level/);
-assert.throws(() => readSnapshot(changed(s => { s.previousArchiveDate = '2026-10-01'; })), /archive date/);
-assert.throws(() => readSnapshot(changed(s => { s.status = 'draft'; })), /drafts/);
-assert.equal(readSnapshot(changed(s => { s.briefing.indices.push({ title: 'My note', body: 'Exact wording.', source: 'Desk commentary', url: '' }); })).status, 'partial');
+assert.throws(() => readSnapshot(changed(s => { s.previousArchiveDate = '2026-10-02'; })), /archive date/);
+assert.throws(() => readSnapshot({...structuredClone(oct1Archive), status:'draft'}), /drafts/);
+assert.equal(readSnapshot(changed(s => { s.briefing.indices.push({ title: 'My note', body: 'Exact wording.', source: 'Desk commentary', url: '' }); })).status, 'draft');
 assert.throws(() => readSnapshot(changed(s => { s.briefing.indices.push({ title: 'External claim', body: 'News', source: 'Other', url: '' }); })), /HTTPS/);
 
 console.log('PASS: published packets, partial scanner coverage, negative changes, quote and key-level validation, archive link, and user-authored commentary.');

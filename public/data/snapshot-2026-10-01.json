@@ -1,7 +1,7 @@
 {
-  "sessionDate": "2026-10-02",
-  "fetchedAt": "2026-10-02T05:32:03.942Z",
-  "status": "draft",
+  "sessionDate": "2026-10-01",
+  "fetchedAt": "2026-10-01T13:48:34.631Z",
+  "status": "partial",
   "universeCount": 312,
   "universeComplete": false,
   "connected": {
@@ -10,7 +10,6 @@
     "robinhood": true
   },
   "messages": [
-    "DRAFT ONLY — copied from the October 1 page. All prices, ranges, levels, event listings, and notes still reflect October 1; no October 2 market data or briefing updates have been added.",
     "October 1 scanner: 143 of 312 discovered $50B+ Robinhood stock rows have at least 10 actual traded premarket minutes and a rankable range; 169 remain unranked. Sector ETF coverage: 5/11.",
     "The 09:20 ET cutoff is fixed. Robinhood minute bars are filtered to 04:00–09:19 ET; synthetic interpolated bars are ignored. NQ/ES benchmarks reuse TradingView's captured Sep 30 18:00–Oct 1 09:19 ET futures range.",
     "Robinhood's market-cap universe was discovered after the cutoff; membership at 09:20 ET cannot be fully verified, so universeComplete=false. The scan is partial.",
@@ -6281,49 +6280,53 @@
     {
       "id": "ES",
       "label": "S&P 500 (ES)",
-      "high": null,
-      "low": null,
-      "asOf": null,
-      "source": "Not yet captured for the October 2 draft",
-      "issue": "October 1 key levels were cleared so they are not presented as October 2 values.",
-      "highTime": null,
-      "lowTime": null,
+      "high": 7767.75,
+      "low": 7705,
+      "asOf": "2026-10-01T13:19:00.000Z",
+      "source": "TradingView Official MCP · CME_MINI:ES1! · timestamp-filtered 1-minute bars, Sep 30 18:00–Oct 1 09:19 ET",
+      "issue": "Observed high/low from all 920 eligible minute bars. TradingView warns historical bars can be delayed or revised.",
+      "highTime": "2026-10-01T06:00:00.000Z",
+      "lowTime": "2026-10-01T08:32:00.000Z",
+      "retrievedAt": "2026-10-01T13:29:38.451Z",
       "url": "https://www.tradingview.com/chart/?symbol=CME_MINI%3AES1%21"
     },
     {
       "id": "NQ",
       "label": "Nasdaq-100 (NQ)",
-      "high": null,
-      "low": null,
-      "asOf": null,
-      "source": "Not yet captured for the October 2 draft",
-      "issue": "October 1 key levels were cleared so they are not presented as October 2 values.",
-      "highTime": null,
-      "lowTime": null,
+      "high": 31151.5,
+      "low": 30684.5,
+      "asOf": "2026-10-01T13:19:00.000Z",
+      "source": "TradingView Official MCP · CME_MINI:NQ1! · timestamp-filtered 1-minute bars, Sep 30 18:00–Oct 1 09:19 ET",
+      "issue": "Observed high/low from all 920 eligible minute bars. TradingView warns historical bars can be delayed or revised.",
+      "highTime": "2026-10-01T06:10:00.000Z",
+      "lowTime": "2026-09-30T22:01:00.000Z",
+      "retrievedAt": "2026-10-01T13:29:38.451Z",
       "url": "https://www.tradingview.com/chart/?symbol=CME_MINI%3ANQ1%21"
     },
     {
       "id": "YM",
       "label": "Dow (YM)",
-      "high": null,
-      "low": null,
-      "asOf": null,
-      "source": "Not yet captured for the October 2 draft",
-      "issue": "October 1 key levels were cleared so they are not presented as October 2 values.",
-      "highTime": null,
-      "lowTime": null,
+      "high": 51517,
+      "low": 50936,
+      "asOf": "2026-10-01T13:19:00.000Z",
+      "source": "TradingView Official MCP · CBOT_MINI:YM1! · timestamp-filtered 1-minute bars, Sep 30 18:00–Oct 1 09:19 ET",
+      "issue": "Observed high/low from 912 bars; 8 one-minute buckets absent in the 920-minute window. TradingView warns historical bars can be delayed or revised.",
+      "highTime": "2026-10-01T12:36:00.000Z",
+      "lowTime": "2026-10-01T08:32:00.000Z",
+      "retrievedAt": "2026-10-01T13:29:38.451Z",
       "url": "https://www.tradingview.com/chart/?symbol=CBOT_MINI%3AYM1%21"
     },
     {
       "id": "RTY",
       "label": "Russell 2000 (RTY)",
-      "high": null,
-      "low": null,
-      "asOf": null,
-      "source": "Not yet captured for the October 2 draft",
-      "issue": "October 1 key levels were cleared so they are not presented as October 2 values.",
-      "highTime": null,
-      "lowTime": null,
+      "high": 2835.2,
+      "low": 2797.9,
+      "asOf": "2026-10-01T13:19:00.000Z",
+      "source": "TradingView Official MCP · CME_MINI:RTY1! · timestamp-filtered 1-minute bars, Sep 30 18:00–Oct 1 09:19 ET",
+      "issue": "Observed high/low from 912 bars; 8 one-minute buckets absent in the 920-minute window. TradingView warns historical bars can be delayed or revised.",
+      "highTime": "2026-10-01T05:06:00.000Z",
+      "lowTime": "2026-10-01T08:31:00.000Z",
+      "retrievedAt": "2026-10-01T13:29:38.451Z",
       "url": "https://www.tradingview.com/chart/?symbol=CME_MINI%3ARTY1%21"
     }
   ],
@@ -6441,7 +6444,7 @@
       "asOf": "2026-10-01T12:45:00.000Z"
     }
   ],
-  "previousArchiveDate": "2026-10-01",
+  "previousArchiveDate": "2026-09-30",
   "indexQuotes": [
     {
       "id": "NQ",
@@ -6467,5 +6470,6 @@
     }
   ],
   "quotesRefreshedAt": "2026-10-01T12:49:01.665Z",
+  "cutoffAt": "2026-10-01T13:20:00.000Z",
   "sectorQuotesRefreshedAt": "2026-10-01T18:30:22.414Z"
 }
