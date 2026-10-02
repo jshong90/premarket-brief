@@ -250,9 +250,9 @@ html[data-theme="light"] body p,html[data-theme="dark"] body p{color:var(--foreg
 .overnight-commentary p{font-size:13px;line-height:1.6;margin:0;color:var(--foreground);white-space:pre-line}
 @media(max-width:900px){.overnight-pair{grid-template-columns:1fr}.overnight-column+.overnight-column{border-left:0;border-top:1px solid var(--border)}}
 .treasury-yields-wrap{max-width:100%;overflow-x:auto;margin:0 0 8px}
-.treasury-yields-table{border-collapse:collapse;width:100%;min-width:470px;font-size:13px;font-variant-numeric:tabular-nums}
-.treasury-yields-table th,.treasury-yields-table td{padding:8px 7px;border-bottom:1px solid var(--border);text-align:right;white-space:nowrap}
-.treasury-yields-table thead th{font-size:11px;font-weight:600;color:var(--foreground)}
+.treasury-yields-table{border-collapse:collapse;width:100%;min-width:470px;font-size:14px;font-variant-numeric:tabular-nums}
+.treasury-yields-table th,.treasury-yields-table td{padding:9px 8px;border-bottom:1px solid var(--border);text-align:right;white-space:nowrap}
+.treasury-yields-table thead th{font-size:12px;font-weight:600;color:var(--foreground)}
 .treasury-yields-table th:first-child{text-align:left}
 .treasury-yields-table tbody th{font-weight:500}
 .treasury-yields-table tbody tr:last-child>*{border-bottom:0}
