@@ -11,11 +11,19 @@ const { readSnapshot } = await import(compile(fs.readFileSync('src/lib/snapshot.
   .replace("'./scanner'", JSON.stringify(scannerUrl))
   .replace("'./ranges'", JSON.stringify(rangesUrl))));
 
-const current = JSON.parse(fs.readFileSync('public/data/snapshot.json', 'utf8'));
+const draft = JSON.parse(fs.readFileSync('public/data/snapshot.json', 'utf8'));
+assert.equal(readSnapshot(draft).status, 'draft');
+assert.equal(draft.sessionDate, '2026-10-05');
+assert.equal(draft.previousArchiveDate, '2026-10-02');
+assert.equal(draft.stocks.length, 0);
+assert.ok(draft.marketContext.every(row => row.value === null && row.previousClose === null));
+assert.ok(draft.keyLevels.every(row => row.high === null && row.low === null));
+assert.ok(Object.values(draft.briefing).every(notes => notes.length === 0));
+const current = JSON.parse(fs.readFileSync('public/data/snapshot-2026-10-02.json', 'utf8'));
 const opening = JSON.parse(fs.readFileSync('public/data/snapshot-opening-0635.json', 'utf8'));
 const archive = JSON.parse(fs.readFileSync('public/data/snapshot-2026-09-30.json', 'utf8'));
 const oct1Archive = JSON.parse(fs.readFileSync('public/data/snapshot-2026-10-01.json', 'utf8'));
-assert.equal(readSnapshot(current).status, 'draft');
+assert.equal(readSnapshot(current).status, 'archived');
 assert.equal(current.sessionDate, '2026-10-02');
 assert.equal(current.cutoffAt, undefined);
 assert.equal(oct1Archive.sessionDate, '2026-10-01');
@@ -65,7 +73,8 @@ assert.throws(() => readSnapshot(changed(s => { s.keyLevels[0].high = 100; s.key
 assert.throws(() => readSnapshot(changed(s => { Object.assign(s.keyLevels[0], { high: 200, low: 100, asOf: '2026-10-01T13:20:00Z', highTime: '2026-10-01T13:19:00Z', lowTime: '2026-10-01T13:19:00Z' }); })), /key level/);
 assert.throws(() => readSnapshot(changed(s => { s.previousArchiveDate = '2026-10-02'; })), /archive date/);
 assert.throws(() => readSnapshot({...structuredClone(oct1Archive), status:'draft'}), /drafts/);
-assert.equal(readSnapshot(changed(s => { s.briefing.indices.push({ title: 'My note', body: 'Exact wording.', source: 'Desk commentary', url: '' }); })).status, 'draft');
+assert.equal(readSnapshot(changed(s => { s.briefing.indices.push({ title: 'My note', body: 'Exact wording.', source: 'Desk commentary', url: '' }); })).status, 'archived');
 assert.throws(() => readSnapshot(changed(s => { s.briefing.indices.push({ title: 'External claim', body: 'News', source: 'Other', url: '' }); })), /HTTPS/);
 
 console.log('PASS: published packets, partial scanner coverage, negative changes, quote and key-level validation, archive link, and user-authored commentary.');
+

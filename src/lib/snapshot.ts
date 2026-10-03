@@ -13,7 +13,7 @@ export function readSnapshot(input: unknown): Snapshot {
   if (!/^\d{4}-\d{2}-\d{2}$/.test(s.sessionDate) || !Number.isFinite(Date.parse(s.sessionDate)) || new Date(s.sessionDate).toISOString().slice(0,10) !== s.sessionDate) return fail('invalid session date.');
   if (s.scanVariant!==undefined && s.scanVariant!=='opening-0635') return fail('unknown scanner variant.');
   const w = windows(s.sessionDate,s.scanVariant==='opening-0635'?35:20);
-  if (!['draft','imported','frozen','partial','unavailable'].includes(s.status)) return fail('unknown status.');
+  if (!['archived','draft','imported','frozen','partial','unavailable'].includes(s.status)) return fail('unknown status.');
   if (![s.stocks,s.sectors,s.benchmarks,s.messages].every(Array.isArray) || s.messages.some(x=>typeof x!=='string')) return fail('missing arrays.');
   if (s.previousArchiveDate!==undefined && (!/^\d{4}-\d{2}-\d{2}$/.test(s.previousArchiveDate) || !Number.isFinite(Date.parse(s.previousArchiveDate)) || new Date(s.previousArchiveDate).toISOString().slice(0,10)!==s.previousArchiveDate || s.previousArchiveDate>=s.sessionDate)) return fail('invalid archive date.');
   if (!optionalTime(s.quotesRefreshedAt)) return fail('invalid quote refresh time.');
@@ -65,16 +65,17 @@ export function readSnapshot(input: unknown): Snapshot {
   if (s.benchmarks.length !== 2 || !['NQ','ES'].every(id=>s.benchmarks.filter(b=>b.id===id).length===1)) return fail('NQ and ES benchmarks are required.');
   const imported = s.status === 'imported';
   const draft = s.status === 'draft';
+  const archived = s.status === 'archived';
   if ((imported || draft) && s.cutoffAt) return fail('drafts and legacy imports cannot claim a verified scanner cutoff.');
   if (draft && !validTime(s.fetchedAt)) return fail('draft needs a preparation time.');
   if ((imported || draft) && s.scanVariant) return fail('an opening variant needs a captured snapshot.');
-  if (!imported && !draft && (Date.parse(s.cutoffAt || '') !== w.end || !validTime(s.fetchedAt) || Date.parse(s.fetchedAt!) < w.end)) return fail('expected the declared scanner cutoff and a collection time at or after it.');
+  if (!imported && !draft && !archived && (Date.parse(s.cutoffAt || '') !== w.end || !validTime(s.fetchedAt) || Date.parse(s.fetchedAt!) < w.end)) return fail('expected the declared scanner cutoff and a collection time at or after it.');
   const within = (value: unknown, start: number) => typeof value==='string' && Date.parse(value)>=start && Date.parse(value)<w.end;
   const clean = <T extends Snapshot['benchmarks'][number] | Snapshot['stocks'][number]>(row: T, start: number): T => {
     if (!row || typeof row !== 'object' || typeof row.source !== 'string' || ![row.high,row.low,row.drawdown].every(validNumber) || !(row.asOf===null || typeof row.asOf==='string' && Number.isFinite(Date.parse(row.asOf)))) return fail('invalid price or source fields.');
     const instrument = 'ticker' in row;
     if (instrument && (typeof row.ticker!=='string' || typeof row.name!=='string' || typeof row.sector!=='string' || !['NQ','ES'].includes(row.benchmark) || ![row.last,row.previousClose,row.volume,row.marketCap].every(validNumber))) return fail('invalid instrument fields.');
-    if (imported || draft) return row;
+    if (imported || draft || archived) return row;
     if (row.asOf && !within(row.asOf,start) || row.highTime && !within(row.highTime,start) || row.lowTime && !within(row.lowTime,start)) return fail('an observation is outside the snapshot window.');
     const dd = rangeDrawdown(row.high,row.low);
     const missing = dd===null || !within(row.asOf,start) || !within(row.highTime,start) || !within(row.lowTime,start) || instrument && (row.volume===null || row.volume<=0);
@@ -92,3 +93,4 @@ export function readSnapshot(input: unknown): Snapshot {
   const partial = !s.universeComplete || !stocks.length || sectors.length!==11 || [...stocks,...sectors,...benchmarks].some(r=>r.drawdown===null);
   return {...s,stocks,sectors,benchmarks,status:s.status==='frozen'&&partial?'partial':s.status};
 }
+
