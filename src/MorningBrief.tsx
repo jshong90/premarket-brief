@@ -144,30 +144,33 @@ function TreasuryYieldsTable({ data }: { data: Snapshot }) {
 
 function MacroCalendarTable({ notes }: { notes: Briefing['macro'] }) {
   const rows = notes.flatMap((note) => {
+    const sources = [
+      { source: note.source, url: note.url },
+      ...(note.relatedSources ?? []),
+    ].filter((item) => item.source && item.url);
     const timed = note.body.split('\n').flatMap((line) => {
       const match = line.match(/^\s*(\d{1,2}:\d{2}\s*[ap]\.m\.\s*ET)\s*[—–-]\s*(.+?)\s*$/i);
-      return match ? [{ date: note.title, time: match[1].replace(/\s*ET$/i, ''), event: match[2], source: note.source, url: note.url }] : [];
+      return match ? [{ date: note.title, time: match[1].replace(/\s*ET$/i, ''), event: match[2], sources }] : [];
     });
     if (timed.length) return timed;
 
     // Earlier snapshots store the week ahead as weekday prose without event times.
     const weekdays = note.body.split(/(?=(?:Monday|Tuesday|Wednesday|Thursday|Friday):)/i).flatMap((segment) => {
       const match = segment.match(/^\s*(Monday|Tuesday|Wednesday|Thursday|Friday):\s*(.+?)\s*$/i);
-      return match ? [{ date: match[1], time: '—', event: match[2].replace(/[.;]+$/, ''), source: note.source, url: note.url }] : [];
+      return match ? [{ date: match[1], time: '—', event: match[2].replace(/[.;]+$/, ''), sources }] : [];
     });
-    return weekdays.length ? weekdays : [{ date: note.title, time: '—', event: note.body, source: note.source, url: note.url }];
+    return weekdays.length ? weekdays : [{ date: note.title, time: '—', event: note.body, sources }];
   });
 
   if (!rows.length) return <div className="briefing-empty">No macro events supplied.</div>;
   return <div className="macro-calendar-wrap"><table className="macro-calendar">
     <thead><tr><th scope="col">Date</th><th scope="col">Time (ET)</th><th scope="col">Event</th><th scope="col">Source</th></tr></thead>
-    <tbody>{rows.map((row, index) => <tr key={`${row.date}-${index}`}>
+    <tbody>{rows.map((row, index) => <tr key={row.date + '-' + index}>
       <td>{row.date.replace(/,\s*\d{4}$/, '')}</td><td className="mono">{row.time}</td><td>{row.event}</td>
-      <td><a href={row.url} target="_blank" rel="noreferrer">{row.source} ↗</a></td>
+      <td>{row.sources.map((source, sourceIndex) => <span key={source.url + '-' + sourceIndex}>{sourceIndex > 0 && ' · '}<a href={source.url} target="_blank" rel="noreferrer">{source.source} ↗</a></span>)}</td>
     </tr>)}</tbody>
   </table></div>;
 }
-
 const sourceSections: { key: keyof Briefing; label: string }[] = [
   { key: 'indices', label: '01 · Overnight movements on the indices' },
   { key: 'bonds', label: '01 · Overnight movements on bonds' },
@@ -218,9 +221,13 @@ function KeyLevelsTable({ data }: { data: Snapshot }) {
 
 function SourcesCard({ data }: { data: Snapshot }) {
   const [open, setOpen] = useState(false);
-  const references = sourceSections.flatMap((section) => (data.briefing?.[section.key] ?? [])
-    .filter((note) => note.source && note.url && note.source !== 'Desk commentary')
-    .map((note) => ({ section: section.label, note })));
+  const references = sourceSections.flatMap((section) => (data.briefing?.[section.key] ?? []).flatMap((note) => [
+    ...(note.source && note.url && note.source !== 'Desk commentary'
+      ? [{ section: section.label, note, source: note.source, url: note.url }]
+      : []),
+    ...(note.relatedSources ?? []).filter((item) => item.source && item.url)
+      .map((item) => ({ section: section.label, note, source: item.source, url: item.url })),
+  ]));
   const treasuryReferences = (data.treasuryYields ?? []).filter((row) =>
     row.previousClose !== null && row.previousCloseSource && row.previousCloseUrl
       || row.value !== null && row.source && row.url);
@@ -228,8 +235,8 @@ function SourcesCard({ data }: { data: Snapshot }) {
   const treasuryCitationCount = treasuryReferences.reduce((count, row) =>
     count + Number(row.previousClose !== null && Boolean(row.previousCloseSource && row.previousCloseUrl))
       + Number(row.value !== null && Boolean(row.source && row.url)), 0);
-  const tradingViewRefs = references.filter(({ note }) => note.source.startsWith('TradingView Official MCP'));
-  const otherRefs = references.filter(({ note }) => !note.source.startsWith('TradingView Official MCP'));
+  const tradingViewRefs = references.filter(({ source }) => source.startsWith('TradingView Official MCP'));
+  const otherRefs = references.filter(({ source }) => !source.startsWith('TradingView Official MCP'));
   const keyLevelData = data as SnapshotKeyLevels;
   const keyLevels = keyLevelData.keyLevels ?? [];
   const capturedKeyLevels = keyLevels.filter((row) => row.high!==null && row.low!==null);
@@ -245,11 +252,11 @@ function SourcesCard({ data }: { data: Snapshot }) {
         <h3>TradingView Official MCP</h3>
         <p className="sources-intro">Timestamped market data; provider delay may exceed 15 minutes.</p>
         <ul className="sources-list">
-          {tradingViewRefs.map(({ section, note }) => {
-            const detail = note.source.replace(/^TradingView Official MCP\s*·?\s*/, '');
+          {tradingViewRefs.map(({ section, note, source, url }) => {
+            const detail = source.replace(/^TradingView Official MCP\s*·?\s*/, '');
             const observedAt = note.asOf || note.publishedAt;
-            return <li key={section + note.title}>
-              <a href={note.url} target="_blank" rel="noreferrer">{note.title} ↗</a>
+            return <li key={section + note.title + source}>
+              <a href={url} target="_blank" rel="noreferrer">{note.title} ↗</a>
               <small>{section} · {detail}</small>
               {observedAt && <small>Observed {new Date(observedAt).toLocaleString('en-US', { timeZone: 'America/New_York' })} ET.</small>}
             </li>;
@@ -273,9 +280,9 @@ function SourcesCard({ data }: { data: Snapshot }) {
       {otherRefs.length > 0 && <section className="sources-group">
         <h3>Other briefing sources</h3>
         <ul className="sources-list">
-          {otherRefs.map(({ section, note }) => <li key={section + note.title}>
-            <a href={note.url} target="_blank" rel="noreferrer">{note.title} ↗</a>
-            <small>{section} · {note.source}</small>
+          {otherRefs.map(({ section, note, source, url }) => <li key={section + note.title + source}>
+            <a href={url} target="_blank" rel="noreferrer">{note.title} ↗</a>
+            <small>{section} · {source}</small>
             {(note.publishedAt || note.asOf) && <small>Published or observed {new Date((note.publishedAt || note.asOf)!).toLocaleString('en-US', { timeZone: 'America/New_York' })} ET.</small>}
           </li>)}
         </ul>

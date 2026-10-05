@@ -19,18 +19,29 @@ assert.equal(draft.stocks.length, 0);
 assert.ok(draft.marketContext.every(row => row.value === null && row.previousClose === null));
 assert.ok(draft.keyLevels.every(row => row.high === null && row.low === null));
 assert.ok(draft.briefing.indices.length === 0 && draft.briefing.bonds.length === 0 && draft.briefing.earnings.length === 0 && draft.briefing.news.length === 0);
-assert.equal(draft.briefing.macro.length, 8);
-assert.deepEqual(draft.briefing.macro.slice(0, 5).map(note => note.title), [
-  'Monday, October 5', 'Tuesday, October 6', 'Wednesday, October 7',
-  'Thursday, October 8', 'Friday, October 9',
+assert.equal(draft.briefing.macro.length, 21);
+const macroDayOrder = new Map([
+  ['Monday, October 5', 0], ['Tuesday, October 6', 1], ['Wednesday, October 7', 2],
+  ['Thursday, October 8', 3], ['Friday, October 9', 4],
 ]);
-assert.ok(draft.briefing.macro.slice(0, 5).every(note => note.source === 'Trading Economics' && note.url.startsWith('https://')));
-assert.equal(draft.briefing.macro[5].source, 'Federal Reserve Board · October 2026 calendar');
-assert.equal(draft.briefing.macro[5].url, 'https://www.federalreserve.gov/newsevents/2026-october.htm');
-assert.equal(draft.briefing.macro[6].source, 'U.S. Treasury · Tentative Auction Schedule');
-assert.equal(draft.briefing.macro[6].url, 'https://home.treasury.gov/system/files/221/Tentative-Auction-Schedule.pdf');
-assert.match(draft.briefing.macro[7].source, /FinancialJuice/);
-assert.equal(draft.briefing.macro[7].url, 'https://www.financialjuice.com/News/9787779/US-Treasury-Auctions-Summary.aspx');
+let previousMacroMinute = -1;
+for (const note of draft.briefing.macro) {
+  assert.ok(note.source && note.url.startsWith('https://'));
+  const time = note.body.match(/^(\\d{1,2}):(\\d{2})\\s*([ap])\\.m\\. ET — /i);
+  assert.ok(time, `expected timestamped calendar event: ${note.body}`);
+  assert.ok(macroDayOrder.has(note.title), `unexpected event date: ${note.title}`);
+  const hour = Number(time[1]) % 12 + (time[3].toLowerCase() === 'p' ? 12 : 0);
+  const absoluteMinute = macroDayOrder.get(note.title) * 1440 + hour * 60 + Number(time[2]);
+  assert.ok(absoluteMinute >= previousMacroMinute, `macro events are out of chronological order at ${note.body}`);
+  previousMacroMinute = absoluteMinute;
+  assert.ok((note.relatedSources ?? []).every(source => source.source && source.url.startsWith('https://')));
+}
+assert.equal(draft.briefing.macro.filter(note => note.body.includes('FED ·')).length, 6);
+assert.ok(draft.briefing.macro.some(note => note.body.includes('FOMC minutes')));
+assert.ok(draft.briefing.macro.some(note => note.body.includes('$39B reopened 10-year notes')
+  && note.relatedSources.some(source => /FinancialJuice/.test(source.source))));
+assert.ok(draft.briefing.macro.some(note => note.body.includes('$22B reopened 30-year bonds')
+  && note.relatedSources.some(source => /U.S. Treasury/.test(source.source))));
 assert.equal(draft.indexQuotes.find(row => row.id === 'NQ').value, null);
 assert.equal(draft.indexQuotes.find(row => row.id === 'ES').value, 7775.25);
 assert.equal(draft.indexQuotes.find(row => row.id === 'ES').previousClose, 7779);

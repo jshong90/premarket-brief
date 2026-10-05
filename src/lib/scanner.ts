@@ -8,7 +8,7 @@ export type Instrument = {
   quote?: number | null; quoteAsOf?: string | null; quoteSource?: string; quoteRetrievedAt?: string;
 };
 export type Benchmark = { id: BenchmarkId; high: number | null; low: number | null; drawdown: number | null; source: string; asOf: string | null; highTime?: string; lowTime?: string; issue?: string };
-export type BriefingNote = { title: string; body: string; source: string; url: string; publishedAt?: string | null; asOf?: string | null };
+export type BriefingNote = { title: string; body: string; source: string; url: string; relatedSources?: { source: string; url: string }[]; publishedAt?: string | null; asOf?: string | null };
 export type Briefing = { indices: BriefingNote[]; bonds: BriefingNote[]; macro: BriefingNote[]; earnings: BriefingNote[]; news: BriefingNote[] };
 export type IndexQuote = { id: BenchmarkId; previousClose: number | null; value: number | null; previousCloseAt?: string | null; asOf: string | null; source: string; url?: string; retrievedAt?: string | null; issue?: string };
 export type MarketContextId = "SPX" | "SPY" | "QQQ" | "VIX" | "US10Y";
