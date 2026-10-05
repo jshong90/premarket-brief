@@ -19,7 +19,7 @@ assert.equal(draft.stocks.length, 0);
 assert.ok(draft.marketContext.every(row => row.value === null && row.previousClose === null));
 assert.ok(draft.keyLevels.every(row => row.high === null && row.low === null));
 assert.ok(draft.briefing.indices.length === 0 && draft.briefing.bonds.length === 0 && draft.briefing.earnings.length === 0 && draft.briefing.news.length === 0);
-assert.equal(draft.briefing.macro.length, 21);
+assert.equal(draft.briefing.macro.length, 20);
 const macroDayOrder = new Map([
   ['Monday, October 5', 0], ['Tuesday, October 6', 1], ['Wednesday, October 7', 2],
   ['Thursday, October 8', 3], ['Friday, October 9', 4],
@@ -33,10 +33,12 @@ for (const note of draft.briefing.macro) {
   const hour = Number(time[1]) % 12 + (time[3].toLowerCase() === 'p' ? 12 : 0);
   const absoluteMinute = macroDayOrder.get(note.title) * 1440 + hour * 60 + Number(time[2]);
   assert.ok(absoluteMinute >= previousMacroMinute, `macro events are out of chronological order at ${note.body}`);
+  assert.ok(hour * 60 + Number(time[2]) < 16 * 60, `event is after the 4:00 p.m. ET close: ${note.body}`);
   previousMacroMinute = absoluteMinute;
   assert.ok((note.relatedSources ?? []).every(source => source.source && source.url.startsWith('https://')));
 }
-assert.equal(draft.briefing.macro.filter(note => note.body.includes('FED ·') && note.body.includes('speaks')).length, 6);
+assert.equal(draft.briefing.macro.filter(note => note.body.includes('FED ·') && note.body.includes('speaks')).length, 5);
+assert.ok(!draft.briefing.macro.some(note => /Lorie Logan speaks/.test(note.body)));
 assert.ok(draft.briefing.macro.some(note => note.body.includes('FOMC minutes')));
 assert.ok(draft.briefing.macro.some(note => note.body.includes('$39B reopened 10-year notes')
   && note.relatedSources.some(source => /FinancialJuice/.test(source.source))));
