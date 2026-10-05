@@ -11,7 +11,7 @@
     "robinhood": false
   },
   "messages": [
-    "October 5 brief remains a draft. ES, NQ, YM and RTY key levels and the VIX reading use timestamped TradingView one-minute bars through 09:19 ET. Treasury quotes, user commentary and the relative-strength scanner remain pending.",
+    "October 5 brief remains a draft. ES, NQ, YM and RTY key levels and the VIX reading use timestamped TradingView one-minute bars through 09:19 ET. Treasury quotes and the relative-strength scanner remain pending.",
     "ES and NQ have 920 of 920 eligible futures minute bars; YM has 907 and RTY has 914. Missing minute buckets limit the YM and RTY observed ranges.",
     "VIX has 239 published one-minute bars from 04:00 through 09:19 ET; its high and low use observed bars only. TradingView warns that historical bars may be delayed 15+ minutes.",
     "OpenMarket CME prices cannot be shared with the agent under its exchange license. Hyperliquid index proxies were not used for these canonical futures levels."
@@ -39,8 +39,22 @@
     }
   ],
   "briefing": {
-    "indices": [],
-    "bonds": [],
+    "indices": [
+      {
+        "title": "Equities",
+        "body": "Oil is trading at around $90, above the $88 key technical level. While oil exports have rebounded strongly since the start of the war, higher freight costs and risk premium have kept prices stubbornly elevated.\n\nThe market continues to spike into new ATHs and with volatile follow-through. Breadth is still poor, with tech noticeably strong. Industrials and consumer discretionary remain the only non-tech sectors where roughly at least 30% of member stocks trade over the 20DMA. The rate story, uncertainty around midterms and the potential for an Iran deal continue to be primary drivers of price action.",
+        "source": "Desk commentary",
+        "url": ""
+      }
+    ],
+    "bonds": [
+      {
+        "title": "Bonds",
+        "body": "Personally I'm of the opinion that Treasury yields will chill out in the short term and will prove to be a weak headwind against equities.\n\nOverseas, there have been rising concerns about France's national debt - with French bond yields the highest in 24 years.",
+        "source": "Desk commentary",
+        "url": ""
+      }
+    ],
     "macro": [
       {
         "title": "Monday, October 5",
