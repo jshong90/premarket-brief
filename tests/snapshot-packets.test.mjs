@@ -17,9 +17,14 @@ assert.equal(readSnapshot(draft).status, 'draft');
 assert.equal(draft.sessionDate, '2026-10-05');
 assert.equal(draft.previousArchiveDate, '2026-10-02');
 assert.equal(draft.stocks.length, 0);
-assert.ok(draft.marketContext.filter(row => row.id !== 'VIX').every(row => row.value === null && row.previousClose === null));
+assert.equal(draft.marketContext.find(row => row.id === 'SPY').value, 769.33);
+assert.equal(draft.marketContext.find(row => row.id === 'SPY').asOf, '2026-10-05T13:19:00.000Z');
+assert.equal(draft.marketContext.find(row => row.id === 'QQQ').value, 748.45);
+assert.equal(draft.marketContext.find(row => row.id === 'QQQ').previousClose, 749.58);
+assert.equal(draft.marketContext.find(row => row.id === 'US10Y').value, 5.296);
 assert.equal(draft.marketContext.find(row => row.id === 'VIX').value, 16.02);
 assert.equal(draft.marketContext.find(row => row.id === 'VIX').asOf, '2026-10-05T13:19:00.000Z');
+assert.ok(draft.treasuryYields.every(row => row.value !== null && row.previousClose !== null && row.asOf === '2026-10-05T13:19:00.000Z' && row.previousCloseAt === '2026-10-02T20:59:00.000Z'));
 assert.deepEqual(draft.keyLevels.map(row => row.id), ['ES', 'NQ', 'YM', 'RTY']);
 assert.ok(draft.keyLevels.every(row => row.high > row.low && row.highTime && row.lowTime
   && row.asOf === '2026-10-05T13:19:00.000Z' && row.source.startsWith('TradingView Official MCP')));
@@ -79,7 +84,7 @@ assert.equal(draft.indexQuotes.find(row => row.id === 'NQ').asOf, '2026-10-05T13
 assert.equal(draft.indexQuotes.find(row => row.id === 'ES').value, 7775);
 assert.equal(draft.indexQuotes.find(row => row.id === 'ES').previousClose, 7779);
 assert.equal(draft.indexQuotes.find(row => row.id === 'ES').asOf, '2026-10-05T13:19:00.000Z');
-assert.equal(draft.quotesRefreshedAt, '2026-10-05T15:47:03.978Z');
+assert.equal(draft.quotesRefreshedAt, '2026-10-05T16:25:49.953Z');
 const current = JSON.parse(fs.readFileSync('public/data/snapshot-2026-10-02.json', 'utf8'));
 const opening = JSON.parse(fs.readFileSync('public/data/snapshot-opening-0635.json', 'utf8'));
 const archive = JSON.parse(fs.readFileSync('public/data/snapshot-2026-09-30.json', 'utf8'));

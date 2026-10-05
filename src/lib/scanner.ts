@@ -21,7 +21,7 @@ export type MarketContextRow = {
   high?: number | null; low?: number | null; highTime?: string; lowTime?: string;
   series?: MarketContextPoint[]; source: string; asOf: string | null; issue?: string;
 };
-export type TreasuryYield = { tenor: "2Y" | "5Y" | "10Y" | "30Y"; value: number | null; previousClose: number | null; asOf?: string | null; approximate?: boolean; source: string; url: string; retrievedAt?: string | null; previousCloseSource?: string; previousCloseUrl?: string; issue?: string };
+export type TreasuryYield = { tenor: "2Y" | "5Y" | "10Y" | "30Y"; value: number | null; previousClose: number | null; asOf?: string | null; previousCloseAt?: string | null; approximate?: boolean; source: string; url: string; retrievedAt?: string | null; previousCloseSource?: string; previousCloseUrl?: string; issue?: string };
 export type KeyLevel = { id: "ES" | "NQ" | "YM" | "RTY"; label: string; high: number | null; low: number | null; highTime?: string | null; lowTime?: string | null; asOf: string | null; retrievedAt?: string | null; source: string; issue?: string };
 export type Snapshot = { sessionDate: string; fetchedAt: string | null; cutoffAt?: string | null; scanVariant?: "opening-0635"; status: "archived" | "draft" | "imported" | "frozen" | "partial" | "unavailable"; previousArchiveDate?: string; quotesRefreshedAt?: string | null; sectorQuotesRefreshedAt?: string | null; stocks: Instrument[]; sectors: Instrument[]; benchmarks: Benchmark[]; messages: string[]; universeCount: number; universeComplete: boolean; connected: { tradingview: boolean; massive: boolean; robinhood?: boolean }; marketContext?: MarketContextRow[]; indexQuotes?: IndexQuote[]; treasuryYields?: TreasuryYield[]; keyLevels?: KeyLevel[]; briefing?: Briefing; };
 export const SECTORS = [["XLK", "Technology"], ["XLC", "Communication"], ["XLY", "Discretionary"], ["XLF", "Financials"], ["XLI", "Industrials"], ["XLV", "Health Care"], ["XLP", "Staples"], ["XLU", "Utilities"], ["XLRE", "Real Estate"], ["XLB", "Materials"], ["XLE", "Energy"]] as const;
@@ -154,4 +154,3 @@ export const IMPORTED: Snapshot = {
   sectors:SECTORS.map(([ticker,name])=>({ticker,name,sector:name,benchmark:"ES",high:null,low:null,last:null,previousClose:null,drawdown:null,volume:null,marketCap:null,source:"Awaiting session ranges",asOf:null})),
   benchmarks:[{id:"NQ",high:30920.75,low:30531,drawdown:1.26,source:"Prior scan · unverified",asOf:null,highTime:"2026-09-27T22:00:00Z",lowTime:"2026-09-28T09:10:00Z"},{id:"ES",high:7803,low:7757,drawdown:0.59,source:"Prior scan · unverified",asOf:null,highTime:"2026-09-27T22:00:00Z",lowTime:"2026-09-28T10:10:00Z"}],
 };
-

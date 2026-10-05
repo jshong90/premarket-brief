@@ -38,7 +38,7 @@ export function readSnapshot(input: unknown): Snapshot {
   }
   if (s.treasuryYields!==undefined) {
     const tenors=['2Y','5Y','10Y','30Y'];
-    if (!Array.isArray(s.treasuryYields) || new Set(s.treasuryYields.map(row=>row?.tenor)).size!==s.treasuryYields.length || s.treasuryYields.some(row=>!row || !tenors.includes(row.tenor) || ![row.value,row.previousClose].every(validNumber) || typeof row.source!=='string' || typeof row.url!=='string' || !/^https:\/\//i.test(row.url) || !optionalTime(row.asOf) || !optionalTime(row.retrievedAt) || row.value!==null && (row.asOf===undefined || row.asOf===null) && typeof row.issue!=='string')) return fail('invalid treasury yield rows.');
+    if (!Array.isArray(s.treasuryYields) || new Set(s.treasuryYields.map(row=>row?.tenor)).size!==s.treasuryYields.length || s.treasuryYields.some(row=>!row || !tenors.includes(row.tenor) || ![row.value,row.previousClose].every(validNumber) || typeof row.source!=='string' || typeof row.url!=='string' || !/^https:\/\//i.test(row.url) || !optionalTime(row.asOf) || !optionalTime(row.previousCloseAt) || !optionalTime(row.retrievedAt) || row.value!==null && (row.asOf===undefined || row.asOf===null) && typeof row.issue!=='string')) return fail('invalid treasury yield rows.');
   }
   if (s.keyLevels!==undefined) {
     const keyWindow=windows(s.sessionDate); // Key Levels remain the 06:20 premarket capture in both views.
@@ -93,4 +93,3 @@ export function readSnapshot(input: unknown): Snapshot {
   const partial = !s.universeComplete || !stocks.length || sectors.length!==11 || [...stocks,...sectors,...benchmarks].some(r=>r.drawdown===null);
   return {...s,stocks,sectors,benchmarks,status:s.status==='frozen'&&partial?'partial':s.status};
 }
-
