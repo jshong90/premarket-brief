@@ -25,6 +25,22 @@ type SortKey='ticker'|'drawdown'|'capture'|'advantage'|'recovery';
 export default function Scanner() {
   const [data,setData] = useState<Snapshot>(IMPORTED);
   const [snapshotLoaded,setSnapshotLoaded] = useState(false);
+  const [compactHeader,setCompactHeader] = useState(false);
+  useEffect(()=>{
+    const mobile=window.matchMedia('(max-width: 640px)');
+    let frame=0;
+    const update=()=>{
+      if(frame)return;
+      frame=window.requestAnimationFrame(()=>{
+        setCompactHeader(mobile.matches&&window.scrollY>40);
+        frame=0;
+      });
+    };
+    window.addEventListener('scroll',update,{passive:true});
+    mobile.addEventListener('change',update);
+    update();
+    return()=>{window.removeEventListener('scroll',update);mobile.removeEventListener('change',update);if(frame)window.cancelAnimationFrame(frame);};
+  },[]);
   useEffect(()=>{
     const update=()=>{const header=document.querySelector('.topbar');document.documentElement.style.setProperty('--dashboard-offset',`${(header?.getBoundingClientRect().height||180)+24}px`);};
     const observer=new ResizeObserver(update);
@@ -182,7 +198,7 @@ export default function Scanner() {
   if (!snapshotLoaded) return <main className="snapshot-load-state" role={error?'alert':'status'} aria-live="polite"><div className="snapshot-load-card"><span className="snapshot-load-mark">W</span><h1>{error?'Snapshot unavailable':'Loading morning snapshot'}</h1><p>{error||'Checking the published snapshot and its required fields…'}</p>{error&&<button type="button" onClick={()=>window.location.reload()}>Try again</button>}</div></main>;
 
   return <div className="app-shell">
-    <header className="topbar">
+    <header className={`topbar${compactHeader?' is-compact':''}`}>
       <div className="topbar-main">
         <div className="topbar-leading">{(isArchivePreview||archiveDate)&&<a className="snapshot-nav-link" href={isArchivePreview?latestHref:archiveHref} aria-label={isArchivePreview?'Return to the latest snapshot':`View the ${formatDateLabel(archiveDate!)} archive`} title={isArchivePreview?'Latest snapshot':`Previous snapshot · ${formatDateLabel(archiveDate!)}`}>{isArchivePreview?<ChevronRight size={18}/>:<ChevronLeft size={18}/>}<span>{isArchivePreview?'Latest':archiveDate!.slice(5).replace('-', '/')}</span></a>}<a href={latestHref} className="brand" aria-label="The Warren home"><span className="brand-mark">W</span></a></div>
         <time className="topbar-date" dateTime={data.sessionDate}>{pageDateLabel}</time>

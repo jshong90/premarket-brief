@@ -585,3 +585,22 @@ body::before{content:"";position:fixed;inset:-120px 0;z-index:-1;pointer-events:
 html[data-chart-grid="false"] body::before{display:none}
 .viewport-card[data-parallax-layer]{translate:0 var(--warren-parallax-y,0px);transition:translate 90ms linear,opacity var(--lab-card-duration,.65s) ease-out var(--card-reveal-delay,0ms),transform var(--lab-card-duration,.65s) cubic-bezier(.18,.72,.24,1) var(--card-reveal-delay,0ms);will-change:opacity,transform,translate}
 @media(prefers-reduced-motion:reduce){body::before{background-position:0 0!important}.viewport-card[data-parallax-layer]{translate:0 0!important}}
+
+@media(max-width:640px){
+  .topbar>.market-strip{transition:padding .22s ease,margin .22s ease}
+  .topbar .market-strip-heading{max-height:32px;overflow:hidden;transition:max-height .2s ease,opacity .16s ease,padding .2s ease}
+  .topbar .market-tile{transition:min-width .22s ease,min-height .22s ease,height .22s ease,padding .22s ease,gap .22s ease}
+  .topbar.is-compact>.market-strip{margin-bottom:7px;padding:6px 8px 7px}
+  .topbar.is-compact .market-strip-heading{max-height:0;opacity:0;padding-bottom:0}
+  .topbar.is-compact .market-strip-items{gap:6px;padding-bottom:0}
+  .topbar.is-compact .market-tile{display:grid;grid-template-columns:auto minmax(0,1fr);grid-template-rows:auto auto;align-content:center;gap:2px 8px;min-width:116px;min-height:48px;height:48px;padding:5px 8px}
+  .topbar.is-compact .market-tile-label{grid-column:1;grid-row:1;align-self:center}
+  .topbar.is-compact .market-tile-label strong{font-size:11px}
+  .topbar.is-compact .market-value,.topbar.is-compact .market-chart-wrap{grid-column:2;grid-row:1;justify-content:flex-end;gap:0;margin:0}
+  .topbar.is-compact .market-value b,.topbar.is-compact .market-chart-value{font-size:14px}
+  .topbar.is-compact .market-value span,.topbar.is-compact .market-chart{display:none}
+  .topbar.is-compact .market-tile-meta{grid-column:1 / -1;grid-row:2;justify-content:flex-start;gap:0;margin:0;font-size:10px;line-height:1.1}
+  .topbar.is-compact .market-tile-meta small{display:none}
+  .topbar.is-compact .market-range-window{max-height:0;overflow:hidden;opacity:0;margin:0}
+}
+@media(prefers-reduced-motion:reduce){.topbar .market-strip-heading,.topbar .market-tile,.topbar>.market-strip{transition:none!important}}
