@@ -7,6 +7,7 @@ const compile = source => 'data:text/javascript;base64,' + Buffer.from(ts.transp
 }).outputText).toString('base64');
 const scannerUrl = compile(fs.readFileSync('src/lib/scanner.ts', 'utf8'));
 const rangesUrl = compile(fs.readFileSync('src/lib/ranges.ts', 'utf8').replace("'./scanner'", JSON.stringify(scannerUrl)));
+const { normalizeMacroCalendar } = await import(compile(fs.readFileSync('src/lib/macroCalendar.ts', 'utf8')));
 const { readSnapshot } = await import(compile(fs.readFileSync('src/lib/snapshot.ts', 'utf8')
   .replace("'./scanner'", JSON.stringify(scannerUrl))
   .replace("'./ranges'", JSON.stringify(rangesUrl))));
@@ -20,6 +21,18 @@ assert.ok(draft.marketContext.every(row => row.value === null && row.previousClo
 assert.ok(draft.keyLevels.every(row => row.high === null && row.low === null));
 assert.ok(draft.briefing.indices.length === 0 && draft.briefing.bonds.length === 0 && draft.briefing.earnings.length === 0 && draft.briefing.news.length === 0);
 assert.equal(draft.briefing.macro.length, 20);
+assert.ok(draft.briefing.macro.every(note => note.sourceKey));
+const normalizedMacro = normalizeMacroCalendar(draft.briefing.macro, draft.sessionDate);
+assert.equal(normalizedMacro.length, 20);
+assert.deepEqual(normalizedMacro.map(row => row.sortKey), [...normalizedMacro.map(row => row.sortKey)].sort((a, b) => a - b));
+assert.ok(normalizedMacro.every(row => row.sortKey % 86400000 < 16 * 60 * 60 * 1000));
+const withAfterClose = normalizeMacroCalendar([...draft.briefing.macro, {
+  title: 'Tuesday, October 6', body: '7:00 p.m. ET — FED · Lorie Logan speaks',
+  source: 'Econoday', url: 'https://us.econoday.com/byweek?day=5&lid=0&month=10&year=2026',
+}], draft.sessionDate);
+assert.equal(withAfterClose.length, normalizedMacro.length);
+assert.ok(!withAfterClose.some(row => row.event.includes('Lorie Logan')));
+
 const macroDayOrder = new Map([
   ['Monday, October 5', 0], ['Tuesday, October 6', 1], ['Wednesday, October 7', 2],
   ['Thursday, October 8', 3], ['Friday, October 9', 4],
@@ -37,13 +50,15 @@ for (const note of draft.briefing.macro) {
   previousMacroMinute = absoluteMinute;
   assert.ok((note.relatedSources ?? []).every(source => source.source && source.url.startsWith('https://')));
 }
-assert.equal(draft.briefing.macro.filter(note => note.body.includes('FED ·') && note.body.includes('speaks')).length, 5);
+assert.equal(draft.briefing.macro.filter(note => note.body.includes('FED ·') && note.body.includes('speaks')).length, 4);
 assert.ok(!draft.briefing.macro.some(note => /Lorie Logan speaks/.test(note.body)));
 assert.ok(draft.briefing.macro.some(note => note.body.includes('FOMC minutes')));
 assert.ok(draft.briefing.macro.some(note => note.body.includes('$39B reopened 10-year notes')
-  && note.relatedSources.some(source => /FinancialJuice/.test(source.source))));
+  && note.relatedSources.some(source => /TreasuryDirect · upcoming auctions/.test(source.source))
+  && note.relatedSources.some(source => /U.S. Treasury · quarterly refunding/.test(source.source))));
 assert.ok(draft.briefing.macro.some(note => note.body.includes('$22B reopened 30-year bonds')
-  && note.relatedSources.some(source => /U.S. Treasury/.test(source.source))));
+  && note.relatedSources.some(source => /TreasuryDirect · upcoming auctions/.test(source.source))
+  && note.relatedSources.some(source => /U.S. Treasury · quarterly refunding/.test(source.source))));
 assert.equal(draft.indexQuotes.find(row => row.id === 'NQ').value, null);
 assert.equal(draft.indexQuotes.find(row => row.id === 'ES').value, 7775.25);
 assert.equal(draft.indexQuotes.find(row => row.id === 'ES').previousClose, 7779);

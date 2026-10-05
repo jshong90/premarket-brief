@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import type { Briefing, Snapshot, TreasuryYield } from './lib/scanner';
+import { normalizeMacroCalendar } from './lib/macroCalendar';
 
 type KeyLevel = { id: 'ES' | 'NQ' | 'YM' | 'RTY'; label: string; high: number | null; low: number | null; highTime?: string | null; lowTime?: string | null; asOf: string | null; retrievedAt?: string | null; source: string; issue?: string };
 type SnapshotKeyLevels = Snapshot & { keyLevels?: KeyLevel[] };
@@ -142,35 +143,18 @@ function TreasuryYieldsTable({ data }: { data: Snapshot }) {
   </>;
 }
 
-function MacroCalendarTable({ notes }: { notes: Briefing['macro'] }) {
-  const rows = notes.flatMap((note) => {
-    const sources = [
-      { source: note.source, url: note.url },
-      ...(note.relatedSources ?? []),
-    ].filter((item) => item.source && item.url);
-    const timed = note.body.split('\n').flatMap((line) => {
-      const match = line.match(/^\s*(\d{1,2}:\d{2}\s*[ap]\.m\.\s*ET)\s*[—–-]\s*(.+?)\s*$/i);
-      return match ? [{ date: note.title, time: match[1].replace(/\s*ET$/i, ''), event: match[2], sources }] : [];
-    });
-    if (timed.length) return timed;
-
-    // Earlier snapshots store the week ahead as weekday prose without event times.
-    const weekdays = note.body.split(/(?=(?:Monday|Tuesday|Wednesday|Thursday|Friday):)/i).flatMap((segment) => {
-      const match = segment.match(/^\s*(Monday|Tuesday|Wednesday|Thursday|Friday):\s*(.+?)\s*$/i);
-      return match ? [{ date: match[1], time: '—', event: match[2].replace(/[.;]+$/, ''), sources }] : [];
-    });
-    return weekdays.length ? weekdays : [{ date: note.title, time: '—', event: note.body, sources }];
-  });
-
+function MacroCalendarTable({ notes, sessionDate }: { notes: Briefing['macro']; sessionDate: string }) {
+  const rows = normalizeMacroCalendar(notes, sessionDate);
   if (!rows.length) return <div className="briefing-empty">No macro events supplied.</div>;
   return <div className="macro-calendar-wrap"><table className="macro-calendar">
     <thead><tr><th scope="col">Date</th><th scope="col">Time (ET)</th><th scope="col">Event</th><th scope="col">Source</th></tr></thead>
-    <tbody>{rows.map((row, index) => <tr key={row.date + '-' + index}>
-      <td>{row.date.replace(/,\s*\d{4}$/, '')}</td><td className="mono">{row.time}</td><td>{row.event}</td>
+    <tbody>{rows.map((row, index) => <tr key={row.date + '-' + row.sortKey + '-' + index}>
+      <td>{row.date.replace(/,\\s*\\d{4}$/, '')}</td><td className="mono">{row.time}</td><td>{row.event}</td>
       <td>{row.sources.map((source, sourceIndex) => <span key={source.url + '-' + sourceIndex}>{sourceIndex > 0 && ' · '}<a href={source.url} target="_blank" rel="noreferrer">{source.source} ↗</a></span>)}</td>
     </tr>)}</tbody>
   </table></div>;
 }
+
 const sourceSections: { key: keyof Briefing; label: string }[] = [
   { key: 'indices', label: '01 · Overnight movements on the indices' },
   { key: 'bonds', label: '01 · Overnight movements on bonds' },
@@ -319,7 +303,7 @@ export default function MorningBrief({ data, error, archived = false }: { data: 
     : key === 'bonds' ? null
     : <section className="briefing-section panel" key={key} aria-labelledby={'brief-' + key}>
     <div className="briefing-section-head"><span className="brief-section-number">0{sectionIndex}</span><h2 id={'brief-' + key}>{title}</h2></div>
-    <div className="briefing-notes">{key === 'macro' ? <MacroCalendarTable notes={data.briefing?.macro || []} /> : (data.briefing?.[key] || []).length ? data.briefing![key].map((note, index) => {
+    <div className="briefing-notes">{key === 'macro' ? <MacroCalendarTable notes={data.briefing?.macro || []} sessionDate={data.sessionDate} /> : (data.briefing?.[key] || []).length ? data.briefing![key].map((note, index) => {
       return <article className="briefing-note" key={index}><h3>{note.title}</h3><p>{note.body}</p></article>;
     }) : <div className="briefing-empty">No notes supplied for this section.</div>}</div>
   </section>;

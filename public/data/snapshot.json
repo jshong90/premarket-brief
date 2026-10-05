@@ -44,218 +44,265 @@
       {
         "title": "Monday, October 5",
         "body": "9:45 a.m. ET — ECONOMIC RELEASE · S&P Global Services PMI Final (September)",
-        "source": "Trading Economics",
+        "source": "Trading Economics · U.S. calendar",
         "url": "https://tradingeconomics.com/united-states/calendar",
-        "asOf": "2026-10-05"
+        "asOf": "2026-10-05",
+        "sourceKey": "economicCalendar"
       },
       {
         "title": "Monday, October 5",
         "body": "10:00 a.m. ET — ECONOMIC RELEASE · ISM Services PMI (September)",
-        "source": "Trading Economics",
+        "source": "Trading Economics · U.S. calendar",
         "url": "https://tradingeconomics.com/united-states/calendar",
-        "asOf": "2026-10-05"
+        "asOf": "2026-10-05",
+        "sourceKey": "economicCalendar"
       },
       {
         "title": "Monday, October 5",
         "body": "11:30 a.m. ET — TREASURY AUCTION · $95B 3-month bills and $82B 6-month bills",
-        "source": "Econoday · auction time",
-        "url": "https://us.econoday.com/byweek?day=5&lid=0&month=10&year=2026",
+        "source": "U.S. Treasury · tentative auction schedule",
+        "url": "https://home.treasury.gov/system/files/221/Tentative-Auction-Schedule.pdf",
         "relatedSources": [
           {
-            "source": "U.S. Treasury · tentative auction schedule",
-            "url": "https://home.treasury.gov/system/files/221/Tentative-Auction-Schedule.pdf"
+            "source": "TreasuryDirect · upcoming auctions",
+            "url": "https://www.treasurydirect.gov/auctions/upcoming/"
           },
           {
-            "source": "FinancialJuice · auction offering sizes",
-            "url": "https://www.financialjuice.com/News/9787779/US-Treasury-Auctions-Summary.aspx"
+            "source": "TreasuryDirect · general auction timing",
+            "url": "https://www.treasurydirect.gov/auctions/general-auction-timing/"
           }
         ],
-        "asOf": "2026-10-05"
+        "asOf": "2026-10-05",
+        "sourceKey": "treasurySchedule"
       },
       {
         "title": "Tuesday, October 6",
         "body": "8:15 a.m. ET — ECONOMIC RELEASE · ADP Employment Change (weekly)",
-        "source": "Trading Economics",
+        "source": "Trading Economics · U.S. calendar",
         "url": "https://tradingeconomics.com/united-states/calendar",
-        "asOf": "2026-10-05"
+        "asOf": "2026-10-05",
+        "sourceKey": "economicCalendar"
       },
       {
         "title": "Tuesday, October 6",
         "body": "8:30 a.m. ET — ECONOMIC RELEASE · U.S. trade balance (August)",
-        "source": "Trading Economics",
+        "source": "Trading Economics · U.S. calendar",
         "url": "https://tradingeconomics.com/united-states/calendar",
-        "asOf": "2026-10-05"
+        "asOf": "2026-10-05",
+        "sourceKey": "economicCalendar"
       },
       {
         "title": "Tuesday, October 6",
-        "body": "9:05 a.m. ET — FED · John Williams speaks",
-        "source": "Econoday · weekly U.S. calendar",
-        "url": "https://us.econoday.com/byweek?day=5&lid=0&month=10&year=2026",
-        "asOf": "2026-10-05"
+        "body": "9:05 a.m. ET — FED · John Williams moderates a discussion",
+        "source": "New York Fed · event agenda",
+        "url": "https://www.newyorkfed.org/newsevents/events/banking/2026/1006-2026",
+        "asOf": "2026-10-05",
+        "sourceKey": "newYorkFed",
+        "relatedSources": []
       },
       {
         "title": "Tuesday, October 6",
         "body": "10:45 a.m. ET — FED · Vice Chair for Supervision Michelle W. Bowman speaks",
-        "source": "Federal Reserve Board · October 2026 calendar",
+        "source": "Federal Reserve Board · monthly calendar",
         "url": "https://www.federalreserve.gov/newsevents/2026-october.htm",
         "relatedSources": [
           {
-            "source": "Econoday · weekly U.S. calendar",
+            "source": "Econoday · event-time cross-check",
             "url": "https://us.econoday.com/byweek?day=5&lid=0&month=10&year=2026"
           }
         ],
-        "asOf": "2026-10-05"
+        "asOf": "2026-10-05",
+        "sourceKey": "federalReserveBoard"
       },
       {
         "title": "Tuesday, October 6",
         "body": "11:30 a.m. ET — TREASURY AUCTION · 6-week bills",
-        "source": "Econoday · auction time",
-        "url": "https://us.econoday.com/byweek?day=5&lid=0&month=10&year=2026",
+        "source": "U.S. Treasury · tentative auction schedule",
+        "url": "https://home.treasury.gov/system/files/221/Tentative-Auction-Schedule.pdf",
         "relatedSources": [
           {
-            "source": "U.S. Treasury · tentative auction schedule",
-            "url": "https://home.treasury.gov/system/files/221/Tentative-Auction-Schedule.pdf"
+            "source": "TreasuryDirect · upcoming auctions",
+            "url": "https://www.treasurydirect.gov/auctions/upcoming/"
+          },
+          {
+            "source": "TreasuryDirect · general auction timing",
+            "url": "https://www.treasurydirect.gov/auctions/general-auction-timing/"
           }
         ],
-        "asOf": "2026-10-05"
+        "asOf": "2026-10-05",
+        "sourceKey": "treasurySchedule"
       },
       {
         "title": "Tuesday, October 6",
         "body": "1:00 p.m. ET — TREASURY AUCTION · $58B 3-year notes",
-        "source": "Econoday · auction time",
-        "url": "https://us.econoday.com/byweek?day=5&lid=0&month=10&year=2026",
+        "source": "U.S. Treasury · tentative auction schedule",
+        "url": "https://home.treasury.gov/system/files/221/Tentative-Auction-Schedule.pdf",
         "relatedSources": [
           {
-            "source": "U.S. Treasury · tentative auction schedule",
-            "url": "https://home.treasury.gov/system/files/221/Tentative-Auction-Schedule.pdf"
+            "source": "TreasuryDirect · upcoming auctions",
+            "url": "https://www.treasurydirect.gov/auctions/upcoming/"
           },
           {
-            "source": "FinancialJuice · auction offering sizes",
-            "url": "https://www.financialjuice.com/News/9787779/US-Treasury-Auctions-Summary.aspx"
+            "source": "TreasuryDirect · general auction timing",
+            "url": "https://www.treasurydirect.gov/auctions/general-auction-timing/"
+          },
+          {
+            "source": "U.S. Treasury · quarterly refunding",
+            "url": "https://home.treasury.gov/news/press-releases/sb0590"
           }
         ],
-        "asOf": "2026-10-05"
+        "asOf": "2026-10-05",
+        "sourceKey": "treasurySchedule"
       },
       {
         "title": "Tuesday, October 6",
         "body": "1:15 p.m. ET — FED · Jeffrey Schmid speaks",
-        "source": "Econoday · weekly U.S. calendar",
-        "url": "https://us.econoday.com/byweek?day=5&lid=0&month=10&year=2026",
-        "asOf": "2026-10-05"
+        "source": "Federal Reserve Bank of Kansas City · speeches",
+        "url": "https://www.kansascityfed.org/speeches/",
+        "asOf": "2026-10-05",
+        "sourceKey": "kansasCityFed",
+        "relatedSources": []
       },
       {
         "title": "Wednesday, October 7",
         "body": "10:30 a.m. ET — ECONOMIC RELEASE · EIA crude oil inventories",
-        "source": "Trading Economics",
+        "source": "Trading Economics · U.S. calendar",
         "url": "https://tradingeconomics.com/united-states/calendar",
-        "asOf": "2026-10-05"
+        "asOf": "2026-10-05",
+        "sourceKey": "economicCalendar"
       },
       {
         "title": "Wednesday, October 7",
         "body": "11:30 a.m. ET — TREASURY AUCTION · 17-week bills",
-        "source": "Econoday · auction time",
-        "url": "https://us.econoday.com/byweek?day=5&lid=0&month=10&year=2026",
+        "source": "U.S. Treasury · tentative auction schedule",
+        "url": "https://home.treasury.gov/system/files/221/Tentative-Auction-Schedule.pdf",
         "relatedSources": [
           {
-            "source": "U.S. Treasury · tentative auction schedule",
-            "url": "https://home.treasury.gov/system/files/221/Tentative-Auction-Schedule.pdf"
+            "source": "TreasuryDirect · upcoming auctions",
+            "url": "https://www.treasurydirect.gov/auctions/upcoming/"
+          },
+          {
+            "source": "TreasuryDirect · general auction timing",
+            "url": "https://www.treasurydirect.gov/auctions/general-auction-timing/"
           }
         ],
-        "asOf": "2026-10-05"
+        "asOf": "2026-10-05",
+        "sourceKey": "treasurySchedule"
       },
       {
         "title": "Wednesday, October 7",
         "body": "1:00 p.m. ET — TREASURY AUCTION · $39B reopened 10-year notes",
-        "source": "Econoday · auction time",
-        "url": "https://us.econoday.com/byweek?day=5&lid=0&month=10&year=2026",
+        "source": "U.S. Treasury · tentative auction schedule",
+        "url": "https://home.treasury.gov/system/files/221/Tentative-Auction-Schedule.pdf",
         "relatedSources": [
           {
-            "source": "U.S. Treasury · tentative auction schedule",
-            "url": "https://home.treasury.gov/system/files/221/Tentative-Auction-Schedule.pdf"
+            "source": "TreasuryDirect · upcoming auctions",
+            "url": "https://www.treasurydirect.gov/auctions/upcoming/"
           },
           {
-            "source": "FinancialJuice · auction offering sizes",
-            "url": "https://www.financialjuice.com/News/9787779/US-Treasury-Auctions-Summary.aspx"
+            "source": "TreasuryDirect · general auction timing",
+            "url": "https://www.treasurydirect.gov/auctions/general-auction-timing/"
+          },
+          {
+            "source": "U.S. Treasury · quarterly refunding",
+            "url": "https://home.treasury.gov/news/press-releases/sb0590"
           }
         ],
-        "asOf": "2026-10-05"
+        "asOf": "2026-10-05",
+        "sourceKey": "treasurySchedule"
       },
       {
         "title": "Wednesday, October 7",
         "body": "2:00 p.m. ET — FED · FOMC minutes (September 15–16 meeting)",
-        "source": "Federal Reserve Board · October 2026 calendar",
+        "source": "Federal Reserve Board · monthly calendar",
         "url": "https://www.federalreserve.gov/newsevents/2026-october.htm",
         "relatedSources": [
           {
-            "source": "Econoday · weekly U.S. calendar",
+            "source": "Econoday · event-time cross-check",
             "url": "https://us.econoday.com/byweek?day=5&lid=0&month=10&year=2026"
           }
         ],
-        "asOf": "2026-10-05"
+        "asOf": "2026-10-05",
+        "sourceKey": "federalReserveBoard"
       },
       {
         "title": "Thursday, October 8",
         "body": "4:30 a.m. ET — FED · Governor Christopher J. Waller speaks",
-        "source": "Federal Reserve Board · October 2026 calendar",
+        "source": "Federal Reserve Board · monthly calendar",
         "url": "https://www.federalreserve.gov/newsevents/2026-october.htm",
         "relatedSources": [
           {
-            "source": "Econoday · weekly U.S. calendar",
+            "source": "Econoday · event-time cross-check",
             "url": "https://us.econoday.com/byweek?day=5&lid=0&month=10&year=2026"
           }
         ],
-        "asOf": "2026-10-05"
+        "asOf": "2026-10-05",
+        "sourceKey": "federalReserveBoard"
       },
       {
         "title": "Thursday, October 8",
         "body": "8:30 a.m. ET — ECONOMIC RELEASE · Initial jobless claims",
-        "source": "Trading Economics",
+        "source": "Trading Economics · U.S. calendar",
         "url": "https://tradingeconomics.com/united-states/calendar",
-        "asOf": "2026-10-05"
+        "asOf": "2026-10-05",
+        "sourceKey": "economicCalendar"
       },
       {
         "title": "Thursday, October 8",
         "body": "11:30 a.m. ET — TREASURY AUCTION · 4-week and 8-week bills",
-        "source": "Econoday · auction time",
-        "url": "https://us.econoday.com/byweek?day=5&lid=0&month=10&year=2026",
+        "source": "U.S. Treasury · tentative auction schedule",
+        "url": "https://home.treasury.gov/system/files/221/Tentative-Auction-Schedule.pdf",
         "relatedSources": [
           {
-            "source": "U.S. Treasury · tentative auction schedule",
-            "url": "https://home.treasury.gov/system/files/221/Tentative-Auction-Schedule.pdf"
+            "source": "TreasuryDirect · upcoming auctions",
+            "url": "https://www.treasurydirect.gov/auctions/upcoming/"
+          },
+          {
+            "source": "TreasuryDirect · general auction timing",
+            "url": "https://www.treasurydirect.gov/auctions/general-auction-timing/"
           }
         ],
-        "asOf": "2026-10-05"
+        "asOf": "2026-10-05",
+        "sourceKey": "treasurySchedule"
       },
       {
         "title": "Thursday, October 8",
         "body": "1:00 p.m. ET — TREASURY AUCTION · $22B reopened 30-year bonds",
-        "source": "Econoday · auction time",
-        "url": "https://us.econoday.com/byweek?day=5&lid=0&month=10&year=2026",
+        "source": "U.S. Treasury · tentative auction schedule",
+        "url": "https://home.treasury.gov/system/files/221/Tentative-Auction-Schedule.pdf",
         "relatedSources": [
           {
-            "source": "U.S. Treasury · tentative auction schedule",
-            "url": "https://home.treasury.gov/system/files/221/Tentative-Auction-Schedule.pdf"
+            "source": "TreasuryDirect · upcoming auctions",
+            "url": "https://www.treasurydirect.gov/auctions/upcoming/"
           },
           {
-            "source": "FinancialJuice · auction offering sizes",
-            "url": "https://www.financialjuice.com/News/9787779/US-Treasury-Auctions-Summary.aspx"
+            "source": "TreasuryDirect · general auction timing",
+            "url": "https://www.treasurydirect.gov/auctions/general-auction-timing/"
+          },
+          {
+            "source": "U.S. Treasury · quarterly refunding",
+            "url": "https://home.treasury.gov/news/press-releases/sb0590"
           }
         ],
-        "asOf": "2026-10-05"
+        "asOf": "2026-10-05",
+        "sourceKey": "treasurySchedule"
       },
       {
         "title": "Thursday, October 8",
         "body": "1:40 p.m. ET — FED · Alberto Musalem speaks",
-        "source": "Econoday · weekly U.S. calendar",
-        "url": "https://us.econoday.com/byweek?day=5&lid=0&month=10&year=2026",
-        "asOf": "2026-10-05"
+        "source": "Federal Reserve Bank of St. Louis · president's remarks",
+        "url": "https://www.stlouisfed.org/from-the-president/remarks",
+        "asOf": "2026-10-05",
+        "sourceKey": "stLouisFed",
+        "relatedSources": []
       },
       {
         "title": "Friday, October 9",
         "body": "10:00 a.m. ET — ECONOMIC RELEASE · University of Michigan consumer sentiment (preliminary)",
-        "source": "Trading Economics",
+        "source": "Trading Economics · U.S. calendar",
         "url": "https://tradingeconomics.com/united-states/calendar",
-        "asOf": "2026-10-05"
+        "asOf": "2026-10-05",
+        "sourceKey": "economicCalendar"
       }
     ],
     "earnings": [],
