@@ -19,9 +19,18 @@ assert.equal(draft.stocks.length, 0);
 assert.ok(draft.marketContext.every(row => row.value === null && row.previousClose === null));
 assert.ok(draft.keyLevels.every(row => row.high === null && row.low === null));
 assert.ok(draft.briefing.indices.length === 0 && draft.briefing.bonds.length === 0 && draft.briefing.earnings.length === 0 && draft.briefing.news.length === 0);
-assert.equal(draft.briefing.macro.length, 5);
-assert.equal(draft.briefing.macro[0].title, 'Monday, October 5');
-assert.ok(draft.briefing.macro.every(note => note.source === 'Trading Economics' && note.url.startsWith('https://')));
+assert.equal(draft.briefing.macro.length, 8);
+assert.deepEqual(draft.briefing.macro.slice(0, 5).map(note => note.title), [
+  'Monday, October 5', 'Tuesday, October 6', 'Wednesday, October 7',
+  'Thursday, October 8', 'Friday, October 9',
+]);
+assert.ok(draft.briefing.macro.slice(0, 5).every(note => note.source === 'Trading Economics' && note.url.startsWith('https://')));
+assert.equal(draft.briefing.macro[5].source, 'Federal Reserve Board · October 2026 calendar');
+assert.equal(draft.briefing.macro[5].url, 'https://www.federalreserve.gov/newsevents/2026-october.htm');
+assert.equal(draft.briefing.macro[6].source, 'U.S. Treasury · Tentative Auction Schedule');
+assert.equal(draft.briefing.macro[6].url, 'https://home.treasury.gov/system/files/221/Tentative-Auction-Schedule.pdf');
+assert.match(draft.briefing.macro[7].source, /FinancialJuice/);
+assert.equal(draft.briefing.macro[7].url, 'https://www.financialjuice.com/News/9787779/US-Treasury-Auctions-Summary.aspx');
 assert.equal(draft.indexQuotes.find(row => row.id === 'NQ').value, null);
 assert.equal(draft.indexQuotes.find(row => row.id === 'ES').value, 7775.25);
 assert.equal(draft.indexQuotes.find(row => row.id === 'ES').previousClose, 7779);
