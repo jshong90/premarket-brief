@@ -1,17 +1,19 @@
 {
   "sessionDate": "2026-10-05",
-  "fetchedAt": "2026-10-03T15:55:57.343965Z",
+  "fetchedAt": "2026-10-05T12:37:48.526Z",
   "status": "draft",
   "previousArchiveDate": "2026-10-02",
   "universeCount": 0,
   "universeComplete": false,
   "connected": {
-    "tradingview": false,
+    "tradingview": true,
     "massive": false,
     "robinhood": false
   },
   "messages": [
-    "October 5 brief \u00b7 draft. Commentary, market data, calendar events, and scanner capture are pending."
+    "October 5 brief · draft. ES has a timestamped overnight quote and the U.S. macro calendar is refreshed. NQ quote, Treasury quotes, and scanner capture remain pending.",
+    "NQ futures quote unavailable this refresh: TradingView returned a WebSocket bad-handshake error. No cash-index substitute was used.",
+    "ES bar is timestamped 8:27 a.m. ET and retrieved at 8:37:48 a.m. ET, about 11 minutes later. TradingView warns historical bars can be delayed 15+ minutes."
   ],
   "stocks": [],
   "sectors": [],
@@ -38,7 +40,43 @@
   "briefing": {
     "indices": [],
     "bonds": [],
-    "macro": [],
+    "macro": [
+      {
+        "title": "Monday, October 5",
+        "body": "9:45 a.m. ET — S&P Global Services PMI Final (September)\n10:00 a.m. ET — ISM Services PMI (September)",
+        "source": "Trading Economics",
+        "url": "https://tradingeconomics.com/united-states/calendar",
+        "asOf": "2026-10-05"
+      },
+      {
+        "title": "Tuesday, October 6",
+        "body": "8:15 a.m. ET — ADP Employment Change (weekly)\n8:30 a.m. ET — U.S. trade balance (August)",
+        "source": "Trading Economics",
+        "url": "https://tradingeconomics.com/united-states/calendar",
+        "asOf": "2026-10-05"
+      },
+      {
+        "title": "Wednesday, October 7",
+        "body": "10:30 a.m. ET — EIA crude oil inventories\n2:00 p.m. ET — FOMC meeting minutes",
+        "source": "Trading Economics",
+        "url": "https://tradingeconomics.com/united-states/calendar",
+        "asOf": "2026-10-05"
+      },
+      {
+        "title": "Thursday, October 8",
+        "body": "8:30 a.m. ET — Initial jobless claims",
+        "source": "Trading Economics",
+        "url": "https://tradingeconomics.com/united-states/calendar",
+        "asOf": "2026-10-05"
+      },
+      {
+        "title": "Friday, October 9",
+        "body": "10:00 a.m. ET — University of Michigan consumer sentiment (preliminary)",
+        "source": "Trading Economics",
+        "url": "https://tradingeconomics.com/united-states/calendar",
+        "asOf": "2026-10-05"
+      }
+    ],
     "earnings": [],
     "news": []
   },
@@ -153,14 +191,21 @@
       "value": null,
       "previousClose": null,
       "asOf": null,
-      "source": "October 5 data pending."
+      "source": "TradingView Official MCP · CME_MINI:NQ1! · timestamped futures bars",
+      "url": "https://www.tradingview.com/chart/?symbol=CME_MINI:NQ1%21",
+      "issue": "TradingView returned a WebSocket bad-handshake error for repeated NQ bar requests. The quote remains blank; no unverified substitute was used.",
+      "retrievedAt": "2026-10-05T12:33:58.764Z"
     },
     {
       "id": "ES",
-      "value": null,
-      "previousClose": null,
-      "asOf": null,
-      "source": "October 5 data pending."
+      "value": 7775.25,
+      "previousClose": 7779,
+      "previousCloseAt": "2026-10-02T19:59:00.000Z",
+      "asOf": "2026-10-05T12:27:00.000Z",
+      "source": "TradingView Official MCP · CME_MINI:ES1! · completed 1-minute bar close; provider warns historical bars may be delayed 15+ minutes",
+      "url": "https://www.tradingview.com/chart/?symbol=CME_MINI:ES1%21",
+      "retrievedAt": "2026-10-05T12:37:48.526Z",
+      "issue": "Latest returned bar is 8:27 a.m. ET, retrieved 8:37:48 a.m. ET. Provider warns historical bars may be delayed 15+ minutes."
     }
   ],
   "treasuryYields": [
@@ -200,5 +245,6 @@
       "url": "https://www.tradingview.com/symbols/TVC-US30Y/",
       "issue": "October 5 data pending."
     }
-  ]
+  ],
+  "quotesRefreshedAt": "2026-10-05T12:37:48.526Z"
 }
