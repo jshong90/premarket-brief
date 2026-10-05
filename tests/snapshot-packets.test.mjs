@@ -36,7 +36,7 @@ for (const note of draft.briefing.macro) {
   previousMacroMinute = absoluteMinute;
   assert.ok((note.relatedSources ?? []).every(source => source.source && source.url.startsWith('https://')));
 }
-assert.equal(draft.briefing.macro.filter(note => note.body.includes('FED ·')).length, 6);
+assert.equal(draft.briefing.macro.filter(note => note.body.includes('FED ·') && note.body.includes('speaks')).length, 6);
 assert.ok(draft.briefing.macro.some(note => note.body.includes('FOMC minutes')));
 assert.ok(draft.briefing.macro.some(note => note.body.includes('$39B reopened 10-year notes')
   && note.relatedSources.some(source => /FinancialJuice/.test(source.source))));
