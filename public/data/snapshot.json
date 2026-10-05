@@ -41,7 +41,7 @@
   "briefing": {
     "indices": [
       {
-        "title": "Equities",
+        "title": "Equity Commentary",
         "body": "Oil is trading at around $90, above the $88 key technical level. While oil exports have rebounded strongly since the start of the war, higher freight costs and risk premium have kept prices stubbornly elevated.\n\nThe market continues to spike into new ATHs and with volatile follow-through. Breadth is still poor, with tech noticeably strong. Industrials and consumer discretionary remain the only non-tech sectors where roughly at least 30% of member stocks trade over the 20DMA. The rate story, uncertainty around midterms and the potential for an Iran deal continue to be primary drivers of price action.",
         "source": "Desk commentary",
         "url": ""
@@ -49,7 +49,7 @@
     ],
     "bonds": [
       {
-        "title": "Bonds",
+        "title": "Bond Commentary",
         "body": "Personally I'm of the opinion that Treasury yields will chill out in the short term and will prove to be a weak headwind against equities.\n\nOverseas, there have been rising concerns about France's national debt - with French bond yields the highest in 24 years.",
         "source": "Desk commentary",
         "url": ""
