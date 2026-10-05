@@ -27,7 +27,7 @@ const macroDayOrder = new Map([
 let previousMacroMinute = -1;
 for (const note of draft.briefing.macro) {
   assert.ok(note.source && note.url.startsWith('https://'));
-  const time = note.body.match(/^(\\d{1,2}):(\\d{2})\\s*([ap])\\.m\\. ET — /i);
+  const time = note.body.match(/^(\d{1,2}):(\d{2})\s*([ap])\.m\. ET — /i);
   assert.ok(time, `expected timestamped calendar event: ${note.body}`);
   assert.ok(macroDayOrder.has(note.title), `unexpected event date: ${note.title}`);
   const hour = Number(time[1]) % 12 + (time[3].toLowerCase() === 'p' ? 12 : 0);
