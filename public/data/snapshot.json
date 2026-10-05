@@ -11,9 +11,10 @@
     "robinhood": false
   },
   "messages": [
-    "October 5 brief · draft. ES has a timestamped overnight quote and the U.S. macro calendar is refreshed. NQ quote, Treasury quotes, and scanner capture remain pending.",
-    "NQ futures quote unavailable this refresh: TradingView returned a WebSocket bad-handshake error. No cash-index substitute was used.",
-    "ES bar is timestamped 8:27 a.m. ET and retrieved at 8:37:48 a.m. ET, about 11 minutes later. TradingView warns historical bars can be delayed 15+ minutes."
+    "October 5 brief remains a draft. ES, NQ, YM and RTY key levels and the VIX reading use timestamped TradingView one-minute bars through 09:19 ET. Treasury quotes, user commentary and the relative-strength scanner remain pending.",
+    "ES and NQ have 920 of 920 eligible futures minute bars; YM has 907 and RTY has 914. Missing minute buckets limit the YM and RTY observed ranges.",
+    "VIX has 239 published one-minute bars from 04:00 through 09:19 ET; its high and low use observed bars only. TradingView warns that historical bars may be delayed 15+ minutes.",
+    "OpenMarket CME prices cannot be shared with the agent under its exchange license. Hyperliquid index proxies were not used for these canonical futures levels."
   ],
   "stocks": [],
   "sectors": [],
@@ -354,12 +355,18 @@
       "name": "Cboe Volatility Index",
       "kind": "volatility",
       "changeUnit": "%",
-      "value": null,
-      "previousClose": null,
-      "change": null,
-      "source": "October 5 data pending.",
-      "asOf": null,
-      "issue": "October 5 data pending."
+      "value": 16.02,
+      "previousClose": 15.31,
+      "change": 4.637491835401697,
+      "source": "TradingView Official MCP · CBOE:VIX · Friday 16:14 ET closing bar and Monday 04:00–09:19 ET one-minute bars",
+      "asOf": "2026-10-05T13:19:00.000Z",
+      "issue": "239 published one-minute bars within the 320-minute premarket window; high/low reflect observed bars. Historical bars may be delayed 15+ minutes.",
+      "previousCloseAt": "2026-10-02T20:14:00.000Z",
+      "high": 16.38,
+      "low": 16.02,
+      "highTime": "2026-10-05T08:47:00.000Z",
+      "lowTime": "2026-10-05T13:19:00.000Z",
+      "retrievedAt": "2026-10-05T15:47:00.999Z"
     },
     {
       "id": "US10Y",
@@ -379,61 +386,70 @@
     {
       "id": "ES",
       "label": "S&P 500 (ES)",
-      "high": null,
-      "low": null,
-      "asOf": null,
-      "source": "October 5 data pending.",
-      "issue": "October 5 data pending."
+      "high": 7793,
+      "low": 7760.25,
+      "asOf": "2026-10-05T13:19:00.000Z",
+      "source": "TradingView Official MCP · CME_MINI:ES1! · completed 1-minute OHLCV · provider notice: historical bars may be delayed 15+ minutes",
+      "highTime": "2026-10-05T01:41:00.000Z",
+      "lowTime": "2026-10-05T10:38:00.000Z",
+      "retrievedAt": "2026-10-05T15:46:19.109Z"
     },
     {
       "id": "NQ",
       "label": "Nasdaq-100 (NQ)",
-      "high": null,
-      "low": null,
-      "asOf": null,
-      "source": "October 5 data pending.",
-      "issue": "October 5 data pending."
+      "high": 31221.25,
+      "low": 30957.5,
+      "asOf": "2026-10-05T13:19:00.000Z",
+      "source": "TradingView Official MCP · CME_MINI:NQ1! · completed 1-minute OHLCV · provider notice: historical bars may be delayed 15+ minutes",
+      "highTime": "2026-10-05T01:42:00.000Z",
+      "lowTime": "2026-10-05T09:42:00.000Z",
+      "retrievedAt": "2026-10-05T15:45:44.906Z"
     },
     {
       "id": "YM",
       "label": "Dow (YM)",
-      "high": null,
-      "low": null,
-      "asOf": null,
-      "source": "October 5 data pending.",
-      "issue": "October 5 data pending."
+      "high": 51560,
+      "low": 51354,
+      "asOf": "2026-10-05T13:19:00.000Z",
+      "source": "TradingView Official MCP · CBOT_MINI:YM1! · completed 1-minute OHLCV · provider notice: historical bars may be delayed 15+ minutes",
+      "issue": "907 of 920 eligible one-minute bars returned; 13 minute buckets absent. High and low reflect observed bars only.",
+      "highTime": "2026-10-04T22:00:00.000Z",
+      "lowTime": "2026-10-05T07:36:00.000Z",
+      "retrievedAt": "2026-10-05T15:47:03.978Z"
     },
     {
       "id": "RTY",
       "label": "Russell 2000 (RTY)",
-      "high": null,
-      "low": null,
-      "asOf": null,
-      "source": "October 5 data pending.",
-      "issue": "October 5 data pending."
+      "high": 2860.7,
+      "low": 2843.8,
+      "asOf": "2026-10-05T13:19:00.000Z",
+      "source": "TradingView Official MCP · CME_MINI:RTY1! · completed 1-minute OHLCV · provider notice: historical bars may be delayed 15+ minutes",
+      "issue": "914 of 920 eligible one-minute bars returned; 6 minute buckets absent. High and low reflect observed bars only.",
+      "highTime": "2026-10-05T11:30:00.000Z",
+      "lowTime": "2026-10-05T07:36:00.000Z",
+      "retrievedAt": "2026-10-05T15:46:24.978Z"
     }
   ],
   "indexQuotes": [
     {
       "id": "NQ",
-      "value": null,
-      "previousClose": null,
-      "asOf": null,
-      "source": "TradingView Official MCP · CME_MINI:NQ1! · timestamped futures bars",
+      "value": 31019.25,
+      "previousClose": 31070,
+      "asOf": "2026-10-05T13:19:00.000Z",
+      "source": "TradingView Official MCP · CME_MINI:NQ1! · completed 09:19 ET one-minute bar; historical bars may be delayed 15+ minutes",
       "url": "https://www.tradingview.com/chart/?symbol=CME_MINI:NQ1%21",
-      "issue": "TradingView returned a WebSocket bad-handshake error for repeated NQ bar requests. The quote remains blank; no unverified substitute was used.",
-      "retrievedAt": "2026-10-05T12:33:58.764Z"
+      "retrievedAt": "2026-10-05T15:45:44.906Z",
+      "previousCloseAt": "2026-10-02T19:59:00.000Z"
     },
     {
       "id": "ES",
-      "value": 7775.25,
+      "value": 7775,
       "previousClose": 7779,
       "previousCloseAt": "2026-10-02T19:59:00.000Z",
-      "asOf": "2026-10-05T12:27:00.000Z",
-      "source": "TradingView Official MCP · CME_MINI:ES1! · completed 1-minute bar close; provider warns historical bars may be delayed 15+ minutes",
+      "asOf": "2026-10-05T13:19:00.000Z",
+      "source": "TradingView Official MCP · CME_MINI:ES1! · completed 09:19 ET one-minute bar; historical bars may be delayed 15+ minutes",
       "url": "https://www.tradingview.com/chart/?symbol=CME_MINI:ES1%21",
-      "retrievedAt": "2026-10-05T12:37:48.526Z",
-      "issue": "Latest returned bar is 8:27 a.m. ET, retrieved 8:37:48 a.m. ET. Provider warns historical bars may be delayed 15+ minutes."
+      "retrievedAt": "2026-10-05T15:46:19.109Z"
     }
   ],
   "treasuryYields": [
@@ -474,5 +490,5 @@
       "issue": "October 5 data pending."
     }
   ],
-  "quotesRefreshedAt": "2026-10-05T12:37:48.526Z"
+  "quotesRefreshedAt": "2026-10-05T15:47:03.978Z"
 }

@@ -17,8 +17,16 @@ assert.equal(readSnapshot(draft).status, 'draft');
 assert.equal(draft.sessionDate, '2026-10-05');
 assert.equal(draft.previousArchiveDate, '2026-10-02');
 assert.equal(draft.stocks.length, 0);
-assert.ok(draft.marketContext.every(row => row.value === null && row.previousClose === null));
-assert.ok(draft.keyLevels.every(row => row.high === null && row.low === null));
+assert.ok(draft.marketContext.filter(row => row.id !== 'VIX').every(row => row.value === null && row.previousClose === null));
+assert.equal(draft.marketContext.find(row => row.id === 'VIX').value, 16.02);
+assert.equal(draft.marketContext.find(row => row.id === 'VIX').asOf, '2026-10-05T13:19:00.000Z');
+assert.deepEqual(draft.keyLevels.map(row => row.id), ['ES', 'NQ', 'YM', 'RTY']);
+assert.ok(draft.keyLevels.every(row => row.high > row.low && row.highTime && row.lowTime
+  && row.asOf === '2026-10-05T13:19:00.000Z' && row.source.startsWith('TradingView Official MCP')));
+assert.equal(draft.keyLevels.find(row => row.id === 'ES').high, 7793);
+assert.equal(draft.keyLevels.find(row => row.id === 'NQ').low, 30957.5);
+assert.match(draft.keyLevels.find(row => row.id === 'YM').issue, /907 of 920/);
+assert.match(draft.keyLevels.find(row => row.id === 'RTY').issue, /914 of 920/);
 assert.ok(draft.briefing.indices.length === 0 && draft.briefing.bonds.length === 0 && draft.briefing.earnings.length === 0 && draft.briefing.news.length === 0);
 assert.equal(draft.briefing.macro.length, 20);
 assert.ok(draft.briefing.macro.every(note => note.sourceKey));
@@ -59,12 +67,13 @@ assert.ok(draft.briefing.macro.some(note => note.body.includes('$39B reopened 10
 assert.ok(draft.briefing.macro.some(note => note.body.includes('$22B reopened 30-year bonds')
   && note.relatedSources.some(source => /TreasuryDirect · upcoming auctions/.test(source.source))
   && note.relatedSources.some(source => /U.S. Treasury · quarterly refunding/.test(source.source))));
-assert.equal(draft.indexQuotes.find(row => row.id === 'NQ').value, null);
-assert.equal(draft.indexQuotes.find(row => row.id === 'ES').value, 7775.25);
+assert.equal(draft.indexQuotes.find(row => row.id === 'NQ').value, 31019.25);
+assert.equal(draft.indexQuotes.find(row => row.id === 'NQ').previousClose, 31070);
+assert.equal(draft.indexQuotes.find(row => row.id === 'NQ').asOf, '2026-10-05T13:19:00.000Z');
+assert.equal(draft.indexQuotes.find(row => row.id === 'ES').value, 7775);
 assert.equal(draft.indexQuotes.find(row => row.id === 'ES').previousClose, 7779);
-assert.equal(draft.indexQuotes.find(row => row.id === 'ES').asOf, '2026-10-05T12:27:00.000Z');
-assert.match(draft.indexQuotes.find(row => row.id === 'NQ').issue, /bad-handshake/);
-assert.equal(draft.quotesRefreshedAt, '2026-10-05T12:37:48.526Z');
+assert.equal(draft.indexQuotes.find(row => row.id === 'ES').asOf, '2026-10-05T13:19:00.000Z');
+assert.equal(draft.quotesRefreshedAt, '2026-10-05T15:47:03.978Z');
 const current = JSON.parse(fs.readFileSync('public/data/snapshot-2026-10-02.json', 'utf8'));
 const opening = JSON.parse(fs.readFileSync('public/data/snapshot-opening-0635.json', 'utf8'));
 const archive = JSON.parse(fs.readFileSync('public/data/snapshot-2026-09-30.json', 'utf8'));
@@ -123,4 +132,3 @@ assert.equal(readSnapshot(changed(s => { s.briefing.indices.push({ title: 'My no
 assert.throws(() => readSnapshot(changed(s => { s.briefing.indices.push({ title: 'External claim', body: 'News', source: 'Other', url: '' }); })), /HTTPS/);
 
 console.log('PASS: published packets, partial scanner coverage, negative changes, quote and key-level validation, archive link, and user-authored commentary.');
-
