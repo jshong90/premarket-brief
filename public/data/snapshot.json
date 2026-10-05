@@ -75,6 +75,27 @@
         "source": "Trading Economics",
         "url": "https://tradingeconomics.com/united-states/calendar",
         "asOf": "2026-10-05"
+      },
+      {
+        "title": "Fed speakers and FOMC minutes",
+        "body": "Tuesday, October 6 — 10:45 a.m. ET: Vice Chair for Supervision Michelle W. Bowman, “Modernizing Regulation and Supervision.” Wednesday, October 7 — 2:00 p.m. ET: FOMC minutes for the September 15–16 meeting. Thursday, October 8 — 4:30 a.m. ET: Governor Christopher J. Waller, “Economic Outlook,” at the Istanbul Economic Forum. These are the Board calendar entries verified for this week.",
+        "source": "Federal Reserve Board · October 2026 calendar",
+        "url": "https://www.federalreserve.gov/newsevents/2026-october.htm",
+        "asOf": "2026-10-05"
+      },
+      {
+        "title": "Treasury auction schedule",
+        "body": "Monday, October 5 — 13-week and 26-week bills. Tuesday, October 6 — 3-year notes. Wednesday, October 7 — reopened 10-year notes. Thursday, October 8 — reopened 30-year bonds. The 10-year and 30-year reopenings are the main duration supply to watch.",
+        "source": "U.S. Treasury · Tentative Auction Schedule",
+        "url": "https://home.treasury.gov/system/files/221/Tentative-Auction-Schedule.pdf",
+        "asOf": "2026-10-01"
+      },
+      {
+        "title": "Treasury offering sizes",
+        "body": "This week’s reported sizes: $95 billion 3-month bills and $82 billion 6-month bills Monday; $58 billion 3-year notes Tuesday; $39 billion reopened 10-year notes Wednesday; and $22 billion reopened 30-year bonds Thursday.",
+        "source": "FinancialJuice · Treasury auction summary (offering sizes)",
+        "url": "https://www.financialjuice.com/News/9787779/US-Treasury-Auctions-Summary.aspx",
+        "asOf": "2026-10-01"
       }
     ],
     "earnings": [],
