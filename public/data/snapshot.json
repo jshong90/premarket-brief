@@ -1,23 +1,19 @@
 {
-  "sessionDate": "2026-10-05",
-  "fetchedAt": "2026-10-05T12:37:48.526Z",
+  "sessionDate": "2026-10-06",
+  "fetchedAt": "2026-10-06T12:57:17.135Z",
   "status": "draft",
-  "previousArchiveDate": "2026-10-02",
+  "previousArchiveDate": "2026-10-05",
   "universeCount": 0,
   "universeComplete": false,
   "connected": {
-    "tradingview": true,
+    "tradingview": false,
     "massive": false,
-    "robinhood": true
+    "robinhood": false
   },
   "messages": [
-    "October 5 brief remains a draft. ES, NQ, YM and RTY key levels and the VIX reading use timestamped TradingView one-minute bars through 09:19 ET. Relative-strength scanner remains pending.",
-    "ES and NQ have 920 of 920 eligible futures minute bars; YM has 907 and RTY has 914. Missing minute buckets limit the YM and RTY observed ranges.",
-    "VIX has 239 published one-minute bars from 04:00 through 09:19 ET; its high and low use observed bars only. TradingView warns that historical bars may be delayed 15+ minutes.",
-    "OpenMarket CME prices cannot be shared with the agent under its exchange license. Hyperliquid index proxies were not used for these canonical futures levels.",
-    "SPY and QQQ premarket values use Robinhood extended-hours bars from 04:00 through 09:19 ET. Ranges include only non-interpolated, positive-volume bars: 197 SPY and 278 QQQ traded minutes were returned out of 320 possible minutes.",
-    "VIX and Treasury yields use TradingView one-minute bars through 09:19 ET. TradingView warns historical bars may be delayed 15+ minutes; observed window coverage was 239 VIX, 243 2Y, 255 5Y, 266 10Y and 281 30Y bars.",
-    "Public.com returned UNKNOWN for the Treasury yield symbols; the approved TradingView fallback supplied timestamped tenor observations."
+    "October 6 snapshot is a draft. No October 6 market-data capture has been added; quote and range fields remain blank pending source refresh.",
+    "The October 5 snapshot is archived. Prior-session prices, highs, lows and timestamps are not carried into today’s page.",
+    "Macro calendar entries verified on October 5 are carried forward only when scheduled after the draft time."
   ],
   "stocks": [],
   "sectors": [],
@@ -27,25 +23,31 @@
       "high": null,
       "low": null,
       "drawdown": null,
-      "source": "October 5 data pending.",
+      "source": "October 6 data pending.",
       "asOf": null,
-      "issue": "October 5 data pending."
+      "issue": "October 6 capture pending.",
+      "highTime": null,
+      "lowTime": null,
+      "retrievedAt": null
     },
     {
       "id": "NQ",
       "high": null,
       "low": null,
       "drawdown": null,
-      "source": "October 5 data pending.",
+      "source": "October 6 data pending.",
       "asOf": null,
-      "issue": "October 5 data pending."
+      "issue": "October 6 capture pending.",
+      "highTime": null,
+      "lowTime": null,
+      "retrievedAt": null
     }
   ],
   "briefing": {
     "indices": [
       {
         "title": "Equity Commentary",
-        "body": "Oil is trading at around $90, above the $88 key technical level. While oil exports have rebounded strongly since the start of the war, higher freight costs and risk premium have kept prices stubbornly elevated.\n\nThe market continues to spike into new ATHs and with volatile follow-through. Breadth is still poor, with tech noticeably strong. Industrials and consumer discretionary remain the only non-tech sectors where roughly at least 30% of member stocks trade over the 20DMA. The rate story, uncertainty around midterms and the potential for an Iran deal continue to be primary drivers of price action.",
+        "body": "Oil is trading at around $86, below the $88 key technical level. While oil exports have rebounded strongly since the start of the war, the combination of reduced pre-Iran refining capacity and oil shippers paying highly elevated risk premiums to ship their goods is contributing to a rise in energy prices.\n\nYesterday we printed a very bullish candle. My personal bias is bullish, and I would focus more on longs than shorts, so long as key support levels are held. QQQ has made consistent all-time highs while the S&P 500 has lagged, making higher lows along the way and now sitting well within 1% of its all-time high.\n\nThat being said, breadth is still weak, with some sign of recovery underway. Tech is the strongest, while industrials and materials are showing more strength than other non-tech sectors.\n\nAs mentioned before, the rate story, uncertainty around midterms and the potential for an Iran deal continue to be primary drivers of price action. Equities are defying high energy prices and elevated bond yields.",
         "source": "Desk commentary",
         "url": ""
       }
@@ -53,62 +55,12 @@
     "bonds": [
       {
         "title": "Bond Commentary",
-        "body": "Personally I'm of the opinion that Treasury yields will chill out in the short term and will prove to be a weak headwind against equities.\n\nOverseas, there have been rising concerns about France's national debt - with French bond yields the highest in 24 years.",
+        "body": "Treasury yields are still highly elevated.\n\nFrance's national debt is driving consistent concern, with French 10-year yields cooling from 4.95% to 4.75% but still comparatively high.",
         "source": "Desk commentary",
         "url": ""
       }
     ],
     "macro": [
-      {
-        "title": "Monday, October 5",
-        "body": "9:45 a.m. ET — ECONOMIC RELEASE · S&P Global Services PMI Final (September)",
-        "source": "Trading Economics · U.S. calendar",
-        "url": "https://tradingeconomics.com/united-states/calendar",
-        "asOf": "2026-10-05",
-        "sourceKey": "economicCalendar"
-      },
-      {
-        "title": "Monday, October 5",
-        "body": "10:00 a.m. ET — ECONOMIC RELEASE · ISM Services PMI (September)",
-        "source": "Trading Economics · U.S. calendar",
-        "url": "https://tradingeconomics.com/united-states/calendar",
-        "asOf": "2026-10-05",
-        "sourceKey": "economicCalendar"
-      },
-      {
-        "title": "Monday, October 5",
-        "body": "11:30 a.m. ET — TREASURY AUCTION · $95B 3-month bills and $82B 6-month bills",
-        "source": "U.S. Treasury · tentative auction schedule",
-        "url": "https://home.treasury.gov/system/files/221/Tentative-Auction-Schedule.pdf",
-        "relatedSources": [
-          {
-            "source": "TreasuryDirect · upcoming auctions",
-            "url": "https://www.treasurydirect.gov/auctions/upcoming/"
-          },
-          {
-            "source": "TreasuryDirect · general auction timing",
-            "url": "https://www.treasurydirect.gov/auctions/general-auction-timing/"
-          }
-        ],
-        "asOf": "2026-10-05",
-        "sourceKey": "treasurySchedule"
-      },
-      {
-        "title": "Tuesday, October 6",
-        "body": "8:15 a.m. ET — ECONOMIC RELEASE · ADP Employment Change (weekly)",
-        "source": "Trading Economics · U.S. calendar",
-        "url": "https://tradingeconomics.com/united-states/calendar",
-        "asOf": "2026-10-05",
-        "sourceKey": "economicCalendar"
-      },
-      {
-        "title": "Tuesday, October 6",
-        "body": "8:30 a.m. ET — ECONOMIC RELEASE · U.S. trade balance (August)",
-        "source": "Trading Economics · U.S. calendar",
-        "url": "https://tradingeconomics.com/united-states/calendar",
-        "asOf": "2026-10-05",
-        "sourceKey": "economicCalendar"
-      },
       {
         "title": "Tuesday, October 6",
         "body": "9:05 a.m. ET — FED · John Williams moderates a discussion",
@@ -336,9 +288,9 @@
       "value": null,
       "previousClose": null,
       "change": null,
-      "source": "October 5 data pending.",
+      "source": "October 6 data pending.",
       "asOf": null,
-      "issue": "October 5 data pending."
+      "issue": "October 6 quote pending."
     },
     {
       "id": "SPY",
@@ -346,17 +298,12 @@
       "name": "SPDR S&P 500 ETF",
       "kind": "etf",
       "changeUnit": "%",
-      "value": 769.33,
-      "previousClose": 769.64,
-      "change": -0.04027857179979,
-      "source": "Robinhood MCP · 04:00–09:19 ET extended-hours minute bars; official SIP prior close dated 2026-10-02",
-      "asOf": "2026-10-05T13:19:00.000Z",
-      "issue": "197 non-interpolated, positive-volume bars in the 320-minute premarket window; range uses observed trades only.",
-      "high": 769.88,
-      "low": 767.97,
-      "highTime": "2026-10-05T11:27:00.000Z",
-      "lowTime": "2026-10-05T10:34:00.000Z",
-      "retrievedAt": "2026-10-05T16:24:43.473Z"
+      "value": null,
+      "previousClose": null,
+      "change": null,
+      "source": "October 6 data pending.",
+      "asOf": null,
+      "issue": "October 6 quote pending."
     },
     {
       "id": "QQQ",
@@ -364,17 +311,12 @@
       "name": "Invesco QQQ Trust",
       "kind": "etf",
       "changeUnit": "%",
-      "value": 748.45,
-      "previousClose": 749.58,
-      "change": -0.15075108727553577,
-      "source": "Robinhood MCP · 04:00–09:19 ET extended-hours minute bars; official SIP prior close dated 2026-10-02",
-      "asOf": "2026-10-05T13:19:00.000Z",
-      "issue": "278 non-interpolated, positive-volume bars in the 320-minute premarket window; range uses observed trades only.",
-      "high": 751.81,
-      "low": 747.02,
-      "highTime": "2026-10-05T12:23:00.000Z",
-      "lowTime": "2026-10-05T09:42:00.000Z",
-      "retrievedAt": "2026-10-05T16:24:43.473Z"
+      "value": null,
+      "previousClose": null,
+      "change": null,
+      "source": "October 6 data pending.",
+      "asOf": null,
+      "issue": "October 6 quote pending."
     },
     {
       "id": "VIX",
@@ -382,18 +324,12 @@
       "name": "Cboe Volatility Index",
       "kind": "volatility",
       "changeUnit": "%",
-      "value": 16.02,
-      "previousClose": 15.31,
-      "change": 4.637491835401697,
-      "source": "TradingView Official MCP · CBOE:VIX · Friday 16:14 ET closing bar and Monday 04:00–09:19 ET one-minute bars",
-      "asOf": "2026-10-05T13:19:00.000Z",
-      "issue": "239 published one-minute bars in the 04:00–09:19 ET window; high/low reflect observed bars. TradingView warns historical bars may be delayed 15+ minutes.",
-      "previousCloseAt": "2026-10-02T20:14:00.000Z",
-      "high": 16.38,
-      "low": 16.02,
-      "highTime": "2026-10-05T08:47:00.000Z",
-      "lowTime": "2026-10-05T13:19:00.000Z",
-      "retrievedAt": "2026-10-05T16:25:49.953Z"
+      "value": null,
+      "previousClose": null,
+      "change": null,
+      "source": "October 6 data pending.",
+      "asOf": null,
+      "issue": "October 6 quote pending."
     },
     {
       "id": "US10Y",
@@ -401,143 +337,107 @@
       "name": "U.S. 10-year Treasury yield",
       "kind": "yield",
       "changeUnit": "bp",
-      "value": 5.296,
-      "previousClose": 5.273,
-      "change": 2.3,
-      "source": "TradingView Official MCP · TVC:US10Y · completed one-minute bars",
-      "asOf": "2026-10-05T13:19:00.000Z",
-      "issue": "266 bars observed in the 04:00–09:19 ET window; TradingView warns historical bars may be delayed 15+ minutes.",
-      "previousCloseAt": "2026-10-02T20:59:00.000Z",
-      "retrievedAt": "2026-10-05T16:25:49.953Z",
-      "high": 5.311,
-      "low": 5.252,
-      "highTime": "2026-10-05T13:06:00.000Z",
-      "lowTime": "2026-10-05T08:00:00.000Z"
+      "value": null,
+      "previousClose": null,
+      "change": null,
+      "source": "October 6 data pending.",
+      "asOf": null,
+      "issue": "October 6 quote pending."
     }
   ],
   "keyLevels": [
     {
       "id": "ES",
       "label": "S&P 500 (ES)",
-      "high": 7793,
-      "low": 7760.25,
-      "asOf": "2026-10-05T13:19:00.000Z",
-      "source": "TradingView Official MCP · CME_MINI:ES1! · completed 1-minute OHLCV · provider notice: historical bars may be delayed 15+ minutes",
-      "highTime": "2026-10-05T01:41:00.000Z",
-      "lowTime": "2026-10-05T10:38:00.000Z",
-      "retrievedAt": "2026-10-05T15:46:19.109Z"
+      "high": null,
+      "low": null,
+      "asOf": null,
+      "source": "October 6 data pending.",
+      "issue": "October 6 premarket range pending."
     },
     {
       "id": "NQ",
       "label": "Nasdaq-100 (NQ)",
-      "high": 31221.25,
-      "low": 30957.5,
-      "asOf": "2026-10-05T13:19:00.000Z",
-      "source": "TradingView Official MCP · CME_MINI:NQ1! · completed 1-minute OHLCV · provider notice: historical bars may be delayed 15+ minutes",
-      "highTime": "2026-10-05T01:42:00.000Z",
-      "lowTime": "2026-10-05T09:42:00.000Z",
-      "retrievedAt": "2026-10-05T15:45:44.906Z"
+      "high": null,
+      "low": null,
+      "asOf": null,
+      "source": "October 6 data pending.",
+      "issue": "October 6 premarket range pending."
     },
     {
       "id": "YM",
       "label": "Dow (YM)",
-      "high": 51560,
-      "low": 51354,
-      "asOf": "2026-10-05T13:19:00.000Z",
-      "source": "TradingView Official MCP · CBOT_MINI:YM1! · completed 1-minute OHLCV · provider notice: historical bars may be delayed 15+ minutes",
-      "issue": "907 of 920 eligible one-minute bars returned; 13 minute buckets absent. High and low reflect observed bars only.",
-      "highTime": "2026-10-04T22:00:00.000Z",
-      "lowTime": "2026-10-05T07:36:00.000Z",
-      "retrievedAt": "2026-10-05T15:47:03.978Z"
+      "high": null,
+      "low": null,
+      "asOf": null,
+      "source": "October 6 data pending.",
+      "issue": "October 6 premarket range pending."
     },
     {
       "id": "RTY",
       "label": "Russell 2000 (RTY)",
-      "high": 2860.7,
-      "low": 2843.8,
-      "asOf": "2026-10-05T13:19:00.000Z",
-      "source": "TradingView Official MCP · CME_MINI:RTY1! · completed 1-minute OHLCV · provider notice: historical bars may be delayed 15+ minutes",
-      "issue": "914 of 920 eligible one-minute bars returned; 6 minute buckets absent. High and low reflect observed bars only.",
-      "highTime": "2026-10-05T11:30:00.000Z",
-      "lowTime": "2026-10-05T07:36:00.000Z",
-      "retrievedAt": "2026-10-05T15:46:24.978Z"
+      "high": null,
+      "low": null,
+      "asOf": null,
+      "source": "October 6 data pending.",
+      "issue": "October 6 premarket range pending."
     }
   ],
   "indexQuotes": [
     {
       "id": "NQ",
-      "value": 31019.25,
-      "previousClose": 31070,
-      "asOf": "2026-10-05T13:19:00.000Z",
-      "source": "TradingView Official MCP · CME_MINI:NQ1! · completed 09:19 ET one-minute bar; historical bars may be delayed 15+ minutes",
-      "url": "https://www.tradingview.com/chart/?symbol=CME_MINI:NQ1%21",
-      "retrievedAt": "2026-10-05T15:45:44.906Z",
-      "previousCloseAt": "2026-10-02T19:59:00.000Z"
+      "value": null,
+      "previousClose": null,
+      "asOf": null,
+      "source": "October 6 data pending.",
+      "url": "https://www.tradingview.com/chart/?symbol=CME_MINI:NQ1%21"
     },
     {
       "id": "ES",
-      "value": 7775,
-      "previousClose": 7779,
-      "previousCloseAt": "2026-10-02T19:59:00.000Z",
-      "asOf": "2026-10-05T13:19:00.000Z",
-      "source": "TradingView Official MCP · CME_MINI:ES1! · completed 09:19 ET one-minute bar; historical bars may be delayed 15+ minutes",
-      "url": "https://www.tradingview.com/chart/?symbol=CME_MINI:ES1%21",
-      "retrievedAt": "2026-10-05T15:46:19.109Z"
+      "value": null,
+      "previousClose": null,
+      "asOf": null,
+      "source": "October 6 data pending.",
+      "url": "https://www.tradingview.com/chart/?symbol=CME_MINI:ES1%21"
     }
   ],
   "treasuryYields": [
     {
       "tenor": "2Y",
-      "value": 4.827,
-      "previousClose": 4.829,
-      "asOf": "2026-10-05T13:19:00.000Z",
-      "source": "TradingView Official MCP · TVC:US02Y · 09:19 ET one-minute close",
+      "value": null,
+      "previousClose": null,
+      "asOf": null,
+      "source": "October 6 data pending.",
       "url": "https://www.tradingview.com/symbols/TVC-US02Y/",
-      "issue": "243 bars observed in the 04:00–09:19 ET window; TradingView warns historical bars may be delayed 15+ minutes.",
-      "previousCloseAt": "2026-10-02T20:59:00.000Z",
-      "retrievedAt": "2026-10-05T16:25:49.953Z",
-      "previousCloseSource": "TradingView Official MCP · TVC:US02Y · 16:59 ET Friday one-minute close",
-      "previousCloseUrl": "https://www.tradingview.com/symbols/TVC-US02Y/"
+      "issue": "October 6 yield observation pending."
     },
     {
       "tenor": "5Y",
-      "value": 5.064,
-      "previousClose": 5.055,
-      "asOf": "2026-10-05T13:19:00.000Z",
-      "source": "TradingView Official MCP · TVC:US05Y · 09:19 ET one-minute close",
+      "value": null,
+      "previousClose": null,
+      "asOf": null,
+      "source": "October 6 data pending.",
       "url": "https://www.tradingview.com/symbols/TVC-US05Y/",
-      "issue": "255 bars observed in the 04:00–09:19 ET window; TradingView warns historical bars may be delayed 15+ minutes.",
-      "previousCloseAt": "2026-10-02T20:59:00.000Z",
-      "retrievedAt": "2026-10-05T16:25:49.953Z",
-      "previousCloseSource": "TradingView Official MCP · TVC:US05Y · 16:59 ET Friday one-minute close",
-      "previousCloseUrl": "https://www.tradingview.com/symbols/TVC-US05Y/"
+      "issue": "October 6 yield observation pending."
     },
     {
       "tenor": "10Y",
-      "value": 5.296,
-      "previousClose": 5.273,
-      "asOf": "2026-10-05T13:19:00.000Z",
-      "source": "TradingView Official MCP · TVC:US10Y · 09:19 ET one-minute close",
+      "value": null,
+      "previousClose": null,
+      "asOf": null,
+      "source": "October 6 data pending.",
       "url": "https://www.tradingview.com/symbols/TVC-US10Y/",
-      "issue": "266 bars observed in the 04:00–09:19 ET window; TradingView warns historical bars may be delayed 15+ minutes.",
-      "previousCloseAt": "2026-10-02T20:59:00.000Z",
-      "retrievedAt": "2026-10-05T16:25:49.953Z",
-      "previousCloseSource": "TradingView Official MCP · TVC:US10Y · 16:59 ET Friday one-minute close",
-      "previousCloseUrl": "https://www.tradingview.com/symbols/TVC-US10Y/"
+      "issue": "October 6 yield observation pending."
     },
     {
       "tenor": "30Y",
-      "value": 5.653,
-      "previousClose": 5.622,
-      "asOf": "2026-10-05T13:19:00.000Z",
-      "source": "TradingView Official MCP · TVC:US30Y · 09:19 ET one-minute close",
+      "value": null,
+      "previousClose": null,
+      "asOf": null,
+      "source": "October 6 data pending.",
       "url": "https://www.tradingview.com/symbols/TVC-US30Y/",
-      "issue": "281 bars observed in the 04:00–09:19 ET window; TradingView warns historical bars may be delayed 15+ minutes.",
-      "previousCloseAt": "2026-10-02T20:59:00.000Z",
-      "retrievedAt": "2026-10-05T16:25:49.953Z",
-      "previousCloseSource": "TradingView Official MCP · TVC:US30Y · 16:59 ET Friday one-minute close",
-      "previousCloseUrl": "https://www.tradingview.com/symbols/TVC-US30Y/"
+      "issue": "October 6 yield observation pending."
     }
   ],
-  "quotesRefreshedAt": "2026-10-05T16:25:49.953Z"
+  "quotesRefreshedAt": null
 }

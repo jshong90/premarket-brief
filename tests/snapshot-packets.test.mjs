@@ -14,35 +14,26 @@ const { readSnapshot } = await import(compile(fs.readFileSync('src/lib/snapshot.
 
 const draft = JSON.parse(fs.readFileSync('public/data/snapshot.json', 'utf8'));
 assert.equal(readSnapshot(draft).status, 'draft');
-assert.equal(draft.sessionDate, '2026-10-05');
-assert.equal(draft.previousArchiveDate, '2026-10-02');
+assert.equal(draft.sessionDate, '2026-10-06');
+assert.equal(draft.previousArchiveDate, '2026-10-05');
 assert.equal(draft.stocks.length, 0);
-assert.equal(draft.marketContext.find(row => row.id === 'SPY').value, 769.33);
-assert.equal(draft.marketContext.find(row => row.id === 'SPY').asOf, '2026-10-05T13:19:00.000Z');
-assert.equal(draft.marketContext.find(row => row.id === 'QQQ').value, 748.45);
-assert.equal(draft.marketContext.find(row => row.id === 'QQQ').previousClose, 749.58);
-assert.equal(draft.marketContext.find(row => row.id === 'US10Y').value, 5.296);
-assert.equal(draft.marketContext.find(row => row.id === 'VIX').value, 16.02);
-assert.equal(draft.marketContext.find(row => row.id === 'VIX').asOf, '2026-10-05T13:19:00.000Z');
-assert.ok(draft.treasuryYields.every(row => row.value !== null && row.previousClose !== null && row.asOf === '2026-10-05T13:19:00.000Z' && row.previousCloseAt === '2026-10-02T20:59:00.000Z'));
+assert.ok(draft.marketContext.every(row => row.value === null && row.previousClose === null && row.asOf === null));
+assert.ok(draft.treasuryYields.every(row => row.value === null && row.previousClose === null && row.asOf === null));
 assert.deepEqual(draft.keyLevels.map(row => row.id), ['ES', 'NQ', 'YM', 'RTY']);
-assert.ok(draft.keyLevels.every(row => row.high > row.low && row.highTime && row.lowTime
-  && row.asOf === '2026-10-05T13:19:00.000Z' && row.source.startsWith('TradingView Official MCP')));
-assert.equal(draft.keyLevels.find(row => row.id === 'ES').high, 7793);
-assert.equal(draft.keyLevels.find(row => row.id === 'NQ').low, 30957.5);
-assert.match(draft.keyLevels.find(row => row.id === 'YM').issue, /907 of 920/);
-assert.match(draft.keyLevels.find(row => row.id === 'RTY').issue, /914 of 920/);
+assert.ok(draft.keyLevels.every(row => row.high === null && row.low === null && row.asOf === null));
 assert.equal(draft.briefing.indices.length, 1);
 assert.equal(draft.briefing.bonds.length, 1);
 assert.equal(draft.briefing.indices[0].source, 'Desk commentary');
 assert.equal(draft.briefing.bonds[0].source, 'Desk commentary');
-assert.match(draft.briefing.indices[0].body, /Oil is trading at around \$90[\s\S]+\n\nThe market continues to spike/);
-assert.match(draft.briefing.bonds[0].body, /weak headwind against equities\.\n\nOverseas/);
+assert.match(draft.briefing.indices[0].body, /Oil is trading at around \$86, below the \$88 key technical level/);
+assert.match(draft.briefing.indices[0].body, /Equities are defying high energy prices and elevated bond yields\./);
+assert.match(draft.briefing.bonds[0].body, /Treasury yields are still highly elevated\./);
+assert.match(draft.briefing.bonds[0].body, /French 10-year yields cooling from 4\.95% to 4\.75%/);
 assert.ok(draft.briefing.earnings.length === 0 && draft.briefing.news.length === 0);
-assert.equal(draft.briefing.macro.length, 20);
+assert.equal(draft.briefing.macro.length, 15);
 assert.ok(draft.briefing.macro.every(note => note.sourceKey));
 const normalizedMacro = normalizeMacroCalendar(draft.briefing.macro, draft.sessionDate);
-assert.equal(normalizedMacro.length, 20);
+assert.equal(normalizedMacro.length, 15);
 assert.deepEqual(normalizedMacro.map(row => row.sortKey), [...normalizedMacro.map(row => row.sortKey)].sort((a, b) => a - b));
 assert.ok(normalizedMacro.every(row => row.sortKey % 86400000 < 16 * 60 * 60 * 1000));
 const withAfterClose = normalizeMacroCalendar([...draft.briefing.macro, {
@@ -53,8 +44,8 @@ assert.equal(withAfterClose.length, normalizedMacro.length);
 assert.ok(!withAfterClose.some(row => row.event.includes('Lorie Logan')));
 
 const macroDayOrder = new Map([
-  ['Monday, October 5', 0], ['Tuesday, October 6', 1], ['Wednesday, October 7', 2],
-  ['Thursday, October 8', 3], ['Friday, October 9', 4],
+  ['Tuesday, October 6', 0], ['Wednesday, October 7', 1],
+  ['Thursday, October 8', 2], ['Friday, October 9', 3],
 ]);
 let previousMacroMinute = -1;
 for (const note of draft.briefing.macro) {
@@ -78,13 +69,15 @@ assert.ok(draft.briefing.macro.some(note => note.body.includes('$39B reopened 10
 assert.ok(draft.briefing.macro.some(note => note.body.includes('$22B reopened 30-year bonds')
   && note.relatedSources.some(source => /TreasuryDirect · upcoming auctions/.test(source.source))
   && note.relatedSources.some(source => /U.S. Treasury · quarterly refunding/.test(source.source))));
-assert.equal(draft.indexQuotes.find(row => row.id === 'NQ').value, 31019.25);
-assert.equal(draft.indexQuotes.find(row => row.id === 'NQ').previousClose, 31070);
-assert.equal(draft.indexQuotes.find(row => row.id === 'NQ').asOf, '2026-10-05T13:19:00.000Z');
-assert.equal(draft.indexQuotes.find(row => row.id === 'ES').value, 7775);
-assert.equal(draft.indexQuotes.find(row => row.id === 'ES').previousClose, 7779);
-assert.equal(draft.indexQuotes.find(row => row.id === 'ES').asOf, '2026-10-05T13:19:00.000Z');
-assert.equal(draft.quotesRefreshedAt, '2026-10-05T16:25:49.953Z');
+assert.ok(draft.indexQuotes.every(row => row.value === null && row.previousClose === null && row.asOf === null));
+assert.equal(draft.quotesRefreshedAt, null);
+const oct5Archive = JSON.parse(fs.readFileSync('public/data/snapshot-2026-10-05.json', 'utf8'));
+assert.equal(readSnapshot(oct5Archive).status, 'archived');
+assert.equal(oct5Archive.sessionDate, '2026-10-05');
+assert.equal(oct5Archive.marketContext.find(row => row.id === 'SPY').value, 769.33);
+assert.equal(oct5Archive.marketContext.find(row => row.id === 'VIX').asOf, '2026-10-05T13:19:00.000Z');
+assert.equal(oct5Archive.keyLevels.find(row => row.id === 'ES').high, 7793);
+assert.match(oct5Archive.briefing.indices[0].body, /Oil is trading at around \$90/);
 const current = JSON.parse(fs.readFileSync('public/data/snapshot-2026-10-02.json', 'utf8'));
 const opening = JSON.parse(fs.readFileSync('public/data/snapshot-opening-0635.json', 'utf8'));
 const archive = JSON.parse(fs.readFileSync('public/data/snapshot-2026-09-30.json', 'utf8'));
