@@ -11,11 +11,11 @@
     "robinhood": true
   },
   "messages": [
-    "October 6 market-context, overnight movement, Treasury-yield and key-level tables were refreshed. Quote collection completed at 2026-10-06T13:31:50Z (09:31:50 ET); price observations retain their actual bar timestamps.",
-    "Robinhood supplied SPY and QQQ one-minute extended-hours bars through 09:19 ET and official October 5 settled closes. TradingView supplied earlier successful NQ, YM, RTY, VIX and Treasury-yield one-minute bars. Repeated TradingView retries at 09:31 ET failed for ES, NQ, YM, VIX and Treasury yields; retained values come from the earlier successful 09:27 ET retrieval. ES remains null.",
-    "Key-level range uses only timestamped futures bars from October 5 at 18:00 ET through October 6 at 09:19 ET. TradingView returned 918/920 NQ, 889/920 YM and 903/920 RTY minute buckets; ES history is unavailable. Highs and lows represent returned bars only.",
-    "TradingView warns its bars may be delayed 15+ minutes depending on exchange. The VIX's latest eligible bar is 09:06 ET; NQ, YM and RTY latest successful bars are 09:17 ET; Treasury yields are timestamped 09:18–09:19 ET. Public.com returned UNKNOWN for Treasury yield symbols, so TradingView was used as the approved fallback.",
-    "The October 6 scanner remains a draft: no complete $50B+ stock universe or valid NQ and ES benchmark ranges were captured. This refresh updates the requested quote tables only."
+    "October 6 market-context, overnight movement, Treasury-yield and key-level tables were refreshed. ES values were added from a successful TradingView 1-minute futures history retrieval at 2026-10-06T15:35:49Z; each row retains the actual observation timestamp.",
+    "Robinhood supplied SPY and QQQ one-minute extended-hours bars through 09:19 ET and official October 5 settled closes. TradingView supplied timestamped ES, NQ, YM, RTY, VIX and Treasury-yield bars. Other retained quotes came from their previously successful retrievals; see per-row timestamps and issues.",
+    "The ES key-level range covers all 920 one-minute buckets from October 5 at 18:00 ET through October 6 at 09:19 ET. NQ, YM and RTY ranges use only returned timestamped bars and disclose missing buckets in their row issues.",
+    "TradingView warns its bars may be delayed 15+ minutes depending on exchange. The ES observation for the table is 09:19 ET; VIX latest eligible bar is 09:06 ET; NQ, YM and RTY latest successful bars are 09:17 ET; Treasury yields are timestamped 09:18–09:19 ET. Public.com returned UNKNOWN for Treasury yield symbols, so TradingView was used as the approved fallback.",
+    "The October 6 scanner remains a draft: the $50B+ common-stock universe is incomplete and the NQ benchmark range is unavailable. The ES scanner benchmark row has not been promoted from pending by this table-only refresh."
   ],
   "stocks": [],
   "sectors": [],
@@ -363,12 +363,14 @@
     {
       "id": "ES",
       "label": "S&P 500 (ES)",
-      "high": null,
-      "low": null,
-      "asOf": null,
-      "retrievedAt": "2026-10-06T13:31:50.141Z",
-      "source": "TradingView Official MCP (retrieval failed).",
-      "issue": "TradingView returned a WebSocket bad-handshake error on repeated requests; Public.com does not provide the required futures history. ES high/low remain unavailable."
+      "high": 7867.75,
+      "low": 7829.0,
+      "asOf": "2026-10-06T13:19:00Z",
+      "retrievedAt": "2026-10-06T15:35:49.266Z",
+      "source": "TradingView Official MCP · CME_MINI:ES1! · timestamped 1-minute OHLCV · provider delay 15+ minutes; 920/920 one-minute bars in the 2026-10-05 18:00–2026-10-06 09:19 ET window.",
+      "issue": "TradingView warns bars may be delayed 15+ minutes. The range uses the complete requested window and excludes the 09:20 ET bar.",
+      "highTime": "2026-10-06T12:16:00Z",
+      "lowTime": "2026-10-06T00:01:00Z"
     },
     {
       "id": "NQ",
@@ -421,13 +423,14 @@
     },
     {
       "id": "ES",
-      "value": null,
-      "previousClose": null,
-      "asOf": null,
-      "retrievedAt": "2026-10-06T13:31:50.141Z",
-      "source": "TradingView Official MCP (retrieval failed).",
+      "value": 7861.5,
+      "previousClose": 7830.0,
+      "asOf": "2026-10-06T13:19:00Z",
+      "retrievedAt": "2026-10-06T15:35:49.266Z",
+      "source": "TradingView Official MCP · CME_MINI:ES1! · timestamped 1-minute OHLCV · provider delay 15+ minutes; prior-session close from the 2026-10-05 16:59 ET bar.",
       "url": "https://www.tradingview.com/chart/?symbol=CME_MINI%3AES1%21",
-      "issue": "TradingView futures history returned a WebSocket bad-handshake error on repeated requests; Robinhood has no futures-history tool and Public.com does not support these futures quotes. No verified ES quote or previous close."
+      "issue": "Uses the last completed bar before the 09:20 ET cutoff (09:19 ET). TradingView warns bars may be delayed 15+ minutes.",
+      "previousCloseAt": "2026-10-05T20:59:00Z"
     }
   ],
   "treasuryYields": [
@@ -484,5 +487,5 @@
       "issue": "TradingView's provider notice says bars may be delayed 15+ minutes. This row uses only returned timestamped one-minute bars, filtered to the requested cutoff."
     }
   ],
-  "quotesRefreshedAt": "2026-10-06T13:31:50.141Z"
+  "quotesRefreshedAt": "2026-10-06T15:35:49.266Z"
 }
