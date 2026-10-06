@@ -17,10 +17,18 @@ assert.equal(readSnapshot(draft).status, 'draft');
 assert.equal(draft.sessionDate, '2026-10-06');
 assert.equal(draft.previousArchiveDate, '2026-10-05');
 assert.equal(draft.stocks.length, 0);
-assert.ok(draft.marketContext.every(row => row.value === null && row.previousClose === null && row.asOf === null));
-assert.ok(draft.treasuryYields.every(row => row.value === null && row.previousClose === null && row.asOf === null));
+assert.ok(['SPY', 'QQQ', 'VIX', 'US10Y'].every(id => {
+  const row = draft.marketContext.find(item => item.id === id);
+  return row.value !== null && row.previousClose !== null && row.asOf && row.source;
+}));
+assert.equal(draft.marketContext.find(row => row.id === 'SPX').value, null);
+assert.ok(draft.treasuryYields.every(row => row.value !== null && row.previousClose !== null && row.asOf && row.previousCloseAt && row.source));
 assert.deepEqual(draft.keyLevels.map(row => row.id), ['ES', 'NQ', 'YM', 'RTY']);
-assert.ok(draft.keyLevels.every(row => row.high === null && row.low === null && row.asOf === null));
+assert.ok(draft.keyLevels.find(row => row.id === 'ES').high === null && draft.keyLevels.find(row => row.id === 'ES').low === null);
+assert.ok(['NQ', 'YM', 'RTY'].every(id => {
+  const row = draft.keyLevels.find(item => item.id === id);
+  return row.high !== null && row.low !== null && row.asOf && row.highTime && row.lowTime && row.issue;
+}));
 assert.equal(draft.briefing.indices.length, 1);
 assert.equal(draft.briefing.bonds.length, 1);
 assert.equal(draft.briefing.indices[0].source, 'Desk commentary');
@@ -69,8 +77,10 @@ assert.ok(draft.briefing.macro.some(note => note.body.includes('$39B reopened 10
 assert.ok(draft.briefing.macro.some(note => note.body.includes('$22B reopened 30-year bonds')
   && note.relatedSources.some(source => /TreasuryDirect · upcoming auctions/.test(source.source))
   && note.relatedSources.some(source => /U.S. Treasury · quarterly refunding/.test(source.source))));
-assert.ok(draft.indexQuotes.every(row => row.value === null && row.previousClose === null && row.asOf === null));
-assert.equal(draft.quotesRefreshedAt, null);
+assert.ok(draft.indexQuotes.find(row => row.id === 'NQ').value !== null);
+assert.ok(draft.indexQuotes.find(row => row.id === 'NQ').previousClose !== null);
+assert.equal(draft.indexQuotes.find(row => row.id === 'ES').value, null);
+assert.ok(draft.quotesRefreshedAt);
 const oct5Archive = JSON.parse(fs.readFileSync('public/data/snapshot-2026-10-05.json', 'utf8'));
 assert.equal(readSnapshot(oct5Archive).status, 'archived');
 assert.equal(oct5Archive.sessionDate, '2026-10-05');
