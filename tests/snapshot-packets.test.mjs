@@ -24,7 +24,15 @@ assert.ok(['SPY', 'QQQ', 'VIX', 'US10Y'].every(id => {
 assert.equal(draft.marketContext.find(row => row.id === 'SPX').value, null);
 assert.ok(draft.treasuryYields.every(row => row.value !== null && row.previousClose !== null && row.asOf && row.previousCloseAt && row.source));
 assert.deepEqual(draft.keyLevels.map(row => row.id), ['ES', 'NQ', 'YM', 'RTY']);
-assert.ok(draft.keyLevels.find(row => row.id === 'ES').high === null && draft.keyLevels.find(row => row.id === 'ES').low === null);
+const esLevels = draft.keyLevels.find(row => row.id === 'ES');
+assert.equal(esLevels.high, 7867.75);
+assert.equal(esLevels.low, 7829);
+assert.equal(esLevels.highTime, '2026-10-06T12:16:00Z');
+assert.equal(esLevels.lowTime, '2026-10-06T00:01:00Z');
+const esQuote = draft.indexQuotes.find(row => row.id === 'ES');
+assert.equal(esQuote.value, 7861.5);
+assert.equal(esQuote.previousClose, 7830);
+assert.equal(esQuote.asOf, '2026-10-06T13:19:00Z');
 assert.ok(['NQ', 'YM', 'RTY'].every(id => {
   const row = draft.keyLevels.find(item => item.id === id);
   return row.high !== null && row.low !== null && row.asOf && row.highTime && row.lowTime && row.issue;
@@ -79,7 +87,7 @@ assert.ok(draft.briefing.macro.some(note => note.body.includes('$22B reopened 30
   && note.relatedSources.some(source => /U.S. Treasury · quarterly refunding/.test(source.source))));
 assert.ok(draft.indexQuotes.find(row => row.id === 'NQ').value !== null);
 assert.ok(draft.indexQuotes.find(row => row.id === 'NQ').previousClose !== null);
-assert.equal(draft.indexQuotes.find(row => row.id === 'ES').value, null);
+assert.equal(draft.indexQuotes.find(row => row.id === 'ES').value, 7861.5);
 assert.ok(draft.quotesRefreshedAt);
 const oct5Archive = JSON.parse(fs.readFileSync('public/data/snapshot-2026-10-05.json', 'utf8'));
 assert.equal(readSnapshot(oct5Archive).status, 'archived');
