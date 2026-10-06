@@ -293,7 +293,6 @@ function SourcesCard({ data }: { data: Snapshot }) {
 
 export default function MorningBrief({ data, error, archived = false }: { data: Snapshot; error: string; archived?: boolean }) {
   const imported = data.status === 'imported';
-  const userSuppliedBriefing = Object.values(data.briefing || {}).flat().some((note) => note.source === 'Desk commentary');
   const renderSection = ({ key, title }: { key: keyof Briefing | 'keyLevels'; title: string }, sectionIndex: number) => key === 'keyLevels'
     ? <section className="briefing-section panel key-levels-section" key={key} aria-labelledby="brief-key-levels">
       <div className="briefing-section-head"><span className="brief-section-number">0{sectionIndex}</span><h2 id="brief-key-levels">{title}</h2></div>
@@ -314,7 +313,6 @@ export default function MorningBrief({ data, error, archived = false }: { data: 
       <a className="primary-button section-jump" href="#relative-strength">Skip to relative strength <span className="jump-arrow" aria-hidden="true">↓</span></a>
       <div className="heading-meta paper-meta"><span className="session-chip">{archived ? 'ARCHIVE COPY' : data.status==='draft' ? 'DRAFT BRIEF' : imported ? 'LEGACY EXAMPLE' : 'DAILY BRIEF'}</span></div>
     </div>
-    <div className="source-notice"><div><strong>{userSuppliedBriefing ? 'Morning commentary' : imported ? 'Your morning briefing' : 'Morning snapshot'}</strong><span>{error || data.messages[0] || 'Source times and coverage are recorded with each note.'}</span></div></div>
     <div className="morning-sections">{sections.map((section, index) => renderSection(section, index))}
       <SourcesCard data={data}/>
     </div>
