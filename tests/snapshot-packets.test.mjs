@@ -27,7 +27,7 @@ assert.equal(draft.briefing.indices[0].source, 'Desk commentary');
 assert.equal(draft.briefing.bonds[0].source, 'Desk commentary');
 assert.match(draft.briefing.indices[0].body, /Oil is trading at around \$86, below the \$88 key technical level/);
 assert.match(draft.briefing.indices[0].body, /Equities are defying high energy prices and elevated bond yields\./);
-assert.match(draft.briefing.bonds[0].body, /Treasury yields are still highly elevated\./);
+assert.match(draft.briefing.bonds[0].body, /Treasury yields made a new high yesterday at 5\.32%\./);
 assert.match(draft.briefing.bonds[0].body, /French 10-year yields cooling from 4\.95% to 4\.75%/);
 assert.ok(draft.briefing.earnings.length === 0 && draft.briefing.news.length === 0);
 assert.equal(draft.briefing.macro.length, 15);
