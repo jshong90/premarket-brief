@@ -6,14 +6,16 @@
   "universeCount": 0,
   "universeComplete": false,
   "connected": {
-    "tradingview": false,
+    "tradingview": true,
     "massive": false,
-    "robinhood": false
+    "robinhood": true
   },
   "messages": [
-    "October 6 snapshot is a draft. No October 6 market-data capture has been added; quote and range fields remain blank pending source refresh.",
-    "The October 5 snapshot is archived. Prior-session prices, highs, lows and timestamps are not carried into today’s page.",
-    "Macro calendar entries verified on October 5 are carried forward only when scheduled after the draft time."
+    "October 6 market-context, overnight movement, Treasury-yield and key-level tables were refreshed. Quote collection completed at 2026-10-06T13:31:50Z (09:31:50 ET); price observations retain their actual bar timestamps.",
+    "Robinhood supplied SPY and QQQ one-minute extended-hours bars through 09:19 ET and official October 5 settled closes. TradingView supplied earlier successful NQ, YM, RTY, VIX and Treasury-yield one-minute bars. Repeated TradingView retries at 09:31 ET failed for ES, NQ, YM, VIX and Treasury yields; retained values come from the earlier successful 09:27 ET retrieval. ES remains null.",
+    "Key-level range uses only timestamped futures bars from October 5 at 18:00 ET through October 6 at 09:19 ET. TradingView returned 918/920 NQ, 889/920 YM and 903/920 RTY minute buckets; ES history is unavailable. Highs and lows represent returned bars only.",
+    "TradingView warns its bars may be delayed 15+ minutes depending on exchange. The VIX's latest eligible bar is 09:06 ET; NQ, YM and RTY latest successful bars are 09:17 ET; Treasury yields are timestamped 09:18–09:19 ET. Public.com returned UNKNOWN for Treasury yield symbols, so TradingView was used as the approved fallback.",
+    "The October 6 scanner remains a draft: no complete $50B+ stock universe or valid NQ and ES benchmark ranges were captured. This refresh updates the requested quote tables only."
   ],
   "stocks": [],
   "sectors": [],
@@ -288,9 +290,9 @@
       "value": null,
       "previousClose": null,
       "change": null,
-      "source": "October 6 data pending.",
+      "source": "Cash index; no premarket value is used.",
       "asOf": null,
-      "issue": "October 6 quote pending."
+      "issue": "SPX does not trade premarket and is not displayed in the market-context strip."
     },
     {
       "id": "SPY",
@@ -298,12 +300,16 @@
       "name": "SPDR S&P 500 ETF",
       "kind": "etf",
       "changeUnit": "%",
-      "value": null,
-      "previousClose": null,
-      "change": null,
-      "source": "October 6 data pending.",
-      "asOf": null,
-      "issue": "October 6 quote pending."
+      "value": 778.05,
+      "previousClose": 774.83,
+      "change": 0.41557502936127033,
+      "source": "Robinhood MCP 1-minute extended-hours OHLCV; previous close from Robinhood official SIP close dated 2026-10-05.",
+      "asOf": "2026-10-06T13:19:00Z",
+      "retrievedAt": "2026-10-06T13:31:50.141Z",
+      "high": 778.532,
+      "low": 775.4,
+      "highTime": "2026-10-06T12:20:00Z",
+      "lowTime": "2026-10-06T08:00:00Z"
     },
     {
       "id": "QQQ",
@@ -311,12 +317,16 @@
       "name": "Invesco QQQ Trust",
       "kind": "etf",
       "changeUnit": "%",
-      "value": null,
-      "previousClose": null,
-      "change": null,
-      "source": "October 6 data pending.",
-      "asOf": null,
-      "issue": "October 6 quote pending."
+      "value": 760.2589,
+      "previousClose": 756.2,
+      "change": 0.5367495371594755,
+      "source": "Robinhood MCP 1-minute extended-hours OHLCV; previous close from Robinhood official SIP close dated 2026-10-05.",
+      "asOf": "2026-10-06T13:19:00Z",
+      "retrievedAt": "2026-10-06T13:31:50.141Z",
+      "high": 761.0556,
+      "low": 756.13,
+      "highTime": "2026-10-06T12:16:00Z",
+      "lowTime": "2026-10-06T08:00:00Z"
     },
     {
       "id": "VIX",
@@ -324,12 +334,14 @@
       "name": "Cboe Volatility Index",
       "kind": "volatility",
       "changeUnit": "%",
-      "value": null,
-      "previousClose": null,
-      "change": null,
-      "source": "October 6 data pending.",
-      "asOf": null,
-      "issue": "October 6 quote pending."
+      "value": 15.29,
+      "previousClose": 15.52,
+      "change": -1.4819587628866038,
+      "source": "TradingView Official MCP · CBOE:VIX 1-minute OHLCV; prior close is the last available 2026-10-05 16:14 ET bar.",
+      "asOf": "2026-10-06T13:06:00.000Z",
+      "issue": "Latest eligible bar is 09:06 ET; no later bar through 09:19 ET was returned. TradingView's provider notice says bars may be delayed 15+ minutes. This row uses only returned timestamped one-minute bars, filtered to the requested cutoff.",
+      "previousCloseAt": "2026-10-05T20:14:00.000Z",
+      "retrievedAt": "2026-10-06T13:27:19Z"
     },
     {
       "id": "US10Y",
@@ -337,12 +349,14 @@
       "name": "U.S. 10-year Treasury yield",
       "kind": "yield",
       "changeUnit": "bp",
-      "value": null,
-      "previousClose": null,
-      "change": null,
-      "source": "October 6 data pending.",
-      "asOf": null,
-      "issue": "October 6 quote pending."
+      "value": 5.29,
+      "previousClose": 5.307,
+      "change": -1.7,
+      "source": "TradingView Official MCP · TVC:US10Y 1-minute OHLCV; previous close is the 2026-10-05 16:59 ET bar.",
+      "asOf": "2026-10-06T13:19:00.000Z",
+      "issue": "TradingView's provider notice says bars may be delayed 15+ minutes. This row uses only returned timestamped one-minute bars, filtered to the requested cutoff.",
+      "previousCloseAt": "2026-10-05T20:59:00.000Z",
+      "retrievedAt": "2026-10-06T13:27:19Z"
     }
   ],
   "keyLevels": [
@@ -352,92 +366,123 @@
       "high": null,
       "low": null,
       "asOf": null,
-      "source": "October 6 data pending.",
-      "issue": "October 6 premarket range pending."
+      "retrievedAt": "2026-10-06T13:31:50.141Z",
+      "source": "TradingView Official MCP (retrieval failed).",
+      "issue": "TradingView returned a WebSocket bad-handshake error on repeated requests; Public.com does not provide the required futures history. ES high/low remain unavailable."
     },
     {
       "id": "NQ",
       "label": "Nasdaq-100 (NQ)",
-      "high": null,
-      "low": null,
-      "asOf": null,
-      "source": "October 6 data pending.",
-      "issue": "October 6 premarket range pending."
+      "high": 31539,
+      "low": 31309.25,
+      "highTime": "2026-10-06T12:16:00.000Z",
+      "lowTime": "2026-10-06T02:35:00.000Z",
+      "asOf": "2026-10-06T13:17:00.000Z",
+      "retrievedAt": "2026-10-06T13:27:19Z",
+      "source": "TradingView Official MCP · CME_MINI:NQ1! 1-minute futures OHLCV.",
+      "issue": "Last returned bar is 9:17 AM ET; 2 of 920 expected minute buckets are absent. High/low use returned bars only. TradingView's provider notice says bars may be delayed 15+ minutes. This row uses only returned timestamped one-minute bars, filtered to the requested cutoff. A later verification retry failed; earlier successful bars are retained."
     },
     {
       "id": "YM",
       "label": "Dow (YM)",
-      "high": null,
-      "low": null,
-      "asOf": null,
-      "source": "October 6 data pending.",
-      "issue": "October 6 premarket range pending."
+      "high": 51929,
+      "low": 51594,
+      "highTime": "2026-10-06T11:56:00.000Z",
+      "lowTime": "2026-10-06T00:01:00.000Z",
+      "asOf": "2026-10-06T13:17:00.000Z",
+      "retrievedAt": "2026-10-06T13:27:19Z",
+      "source": "TradingView Official MCP · CBOT_MINI:YM1! 1-minute futures OHLCV.",
+      "issue": "Last returned bar is 9:17 AM ET; 31 of 920 expected minute buckets are absent. High/low use returned bars only. TradingView's provider notice says bars may be delayed 15+ minutes. This row uses only returned timestamped one-minute bars, filtered to the requested cutoff. A later verification retry failed; earlier successful bars are retained."
     },
     {
       "id": "RTY",
       "label": "Russell 2000 (RTY)",
-      "high": null,
-      "low": null,
-      "asOf": null,
-      "source": "October 6 data pending.",
-      "issue": "October 6 premarket range pending."
+      "high": 2887.2,
+      "low": 2866.1,
+      "highTime": "2026-10-06T12:16:00.000Z",
+      "lowTime": "2026-10-06T01:23:00.000Z",
+      "asOf": "2026-10-06T13:17:00.000Z",
+      "retrievedAt": "2026-10-06T13:27:19Z",
+      "source": "TradingView Official MCP · CME_MINI:RTY1! 1-minute futures OHLCV.",
+      "issue": "Last returned bar is 9:17 AM ET; 17 of 920 expected minute buckets are absent. High/low use returned bars only. TradingView's provider notice says bars may be delayed 15+ minutes. This row uses only returned timestamped one-minute bars, filtered to the requested cutoff."
     }
   ],
   "indexQuotes": [
     {
       "id": "NQ",
-      "value": null,
-      "previousClose": null,
-      "asOf": null,
-      "source": "October 6 data pending.",
-      "url": "https://www.tradingview.com/chart/?symbol=CME_MINI:NQ1%21"
+      "value": 31498.5,
+      "previousClose": 31339.5,
+      "previousCloseAt": "2026-10-05T20:59:00.000Z",
+      "asOf": "2026-10-06T13:17:00.000Z",
+      "retrievedAt": "2026-10-06T13:27:19Z",
+      "source": "TradingView Official MCP · CME_MINI:NQ1! 1-minute futures bars; prior close is the 2026-10-05 16:59 ET bar.",
+      "url": "https://www.tradingview.com/chart/?symbol=CME_MINI%3ANQ1%21",
+      "issue": "Last returned bar is 09:17 ET; 09:18 and 09:19 bars are missing. The final retrieval retry failed; earlier successful timestamped bars are retained. TradingView's provider notice says bars may be delayed 15+ minutes. This row uses only returned timestamped one-minute bars, filtered to the requested cutoff."
     },
     {
       "id": "ES",
       "value": null,
       "previousClose": null,
       "asOf": null,
-      "source": "October 6 data pending.",
-      "url": "https://www.tradingview.com/chart/?symbol=CME_MINI:ES1%21"
+      "retrievedAt": "2026-10-06T13:31:50.141Z",
+      "source": "TradingView Official MCP (retrieval failed).",
+      "url": "https://www.tradingview.com/chart/?symbol=CME_MINI%3AES1%21",
+      "issue": "TradingView futures history returned a WebSocket bad-handshake error on repeated requests; Robinhood has no futures-history tool and Public.com does not support these futures quotes. No verified ES quote or previous close."
     }
   ],
   "treasuryYields": [
     {
       "tenor": "2Y",
-      "value": null,
-      "previousClose": null,
-      "asOf": null,
-      "source": "October 6 data pending.",
+      "value": 4.802,
+      "previousClose": 4.816,
+      "asOf": "2026-10-06T13:18:00.000Z",
+      "previousCloseAt": "2026-10-05T20:59:00.000Z",
+      "retrievedAt": "2026-10-06T13:27:19Z",
+      "source": "TradingView Official MCP · TVC:US02Y 1-minute yield bars; prior close is the last available prior-session bar.",
+      "previousCloseSource": "TradingView Official MCP · TVC:US02Y 1-minute yield bar",
+      "previousCloseUrl": "https://www.tradingview.com/symbols/TVC-US02Y/",
       "url": "https://www.tradingview.com/symbols/TVC-US02Y/",
-      "issue": "October 6 yield observation pending."
+      "issue": "TradingView's provider notice says bars may be delayed 15+ minutes. This row uses only returned timestamped one-minute bars, filtered to the requested cutoff."
     },
     {
       "tenor": "5Y",
-      "value": null,
-      "previousClose": null,
-      "asOf": null,
-      "source": "October 6 data pending.",
+      "value": 5.039,
+      "previousClose": 5.057,
+      "asOf": "2026-10-06T13:19:00.000Z",
+      "previousCloseAt": "2026-10-05T20:58:00.000Z",
+      "retrievedAt": "2026-10-06T13:27:19Z",
+      "source": "TradingView Official MCP · TVC:US05Y 1-minute yield bars; prior close is the last available prior-session bar.",
+      "previousCloseSource": "TradingView Official MCP · TVC:US05Y 1-minute yield bar",
+      "previousCloseUrl": "https://www.tradingview.com/symbols/TVC-US05Y/",
       "url": "https://www.tradingview.com/symbols/TVC-US05Y/",
-      "issue": "October 6 yield observation pending."
+      "issue": "No 16:59 ET bar was returned; previous close uses the last available 16:58 ET bar. TradingView's provider notice says bars may be delayed 15+ minutes. This row uses only returned timestamped one-minute bars, filtered to the requested cutoff."
     },
     {
       "tenor": "10Y",
-      "value": null,
-      "previousClose": null,
-      "asOf": null,
-      "source": "October 6 data pending.",
+      "value": 5.29,
+      "previousClose": 5.307,
+      "asOf": "2026-10-06T13:19:00.000Z",
+      "previousCloseAt": "2026-10-05T20:59:00.000Z",
+      "retrievedAt": "2026-10-06T13:27:19Z",
+      "source": "TradingView Official MCP · TVC:US10Y 1-minute yield bars; prior close is the last available prior-session bar.",
+      "previousCloseSource": "TradingView Official MCP · TVC:US10Y 1-minute yield bar",
+      "previousCloseUrl": "https://www.tradingview.com/symbols/TVC-US10Y/",
       "url": "https://www.tradingview.com/symbols/TVC-US10Y/",
-      "issue": "October 6 yield observation pending."
+      "issue": "TradingView's provider notice says bars may be delayed 15+ minutes. This row uses only returned timestamped one-minute bars, filtered to the requested cutoff."
     },
     {
       "tenor": "30Y",
-      "value": null,
-      "previousClose": null,
-      "asOf": null,
-      "source": "October 6 data pending.",
+      "value": 5.66,
+      "previousClose": 5.664,
+      "asOf": "2026-10-06T13:19:00.000Z",
+      "previousCloseAt": "2026-10-05T20:59:00.000Z",
+      "retrievedAt": "2026-10-06T13:27:19Z",
+      "source": "TradingView Official MCP · TVC:US30Y 1-minute yield bars; prior close is the last available prior-session bar.",
+      "previousCloseSource": "TradingView Official MCP · TVC:US30Y 1-minute yield bar",
+      "previousCloseUrl": "https://www.tradingview.com/symbols/TVC-US30Y/",
       "url": "https://www.tradingview.com/symbols/TVC-US30Y/",
-      "issue": "October 6 yield observation pending."
+      "issue": "TradingView's provider notice says bars may be delayed 15+ minutes. This row uses only returned timestamped one-minute bars, filtered to the requested cutoff."
     }
   ],
-  "quotesRefreshedAt": null
+  "quotesRefreshedAt": "2026-10-06T13:31:50.141Z"
 }
