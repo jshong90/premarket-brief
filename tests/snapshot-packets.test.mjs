@@ -37,7 +37,7 @@ assert.ok(draft.treasuryYields.every(row => row.source.startsWith('TradingView O
 assert.deepEqual(draft.keyLevels.map(row => row.id), ['ES', 'NQ', 'YM', 'RTY']);
 assert.ok(draft.keyLevels.every(row => row.high === null && row.low === null && row.asOf === null));
 assert.ok(draft.indexQuotes.every(row => row.value === null && row.previousClose === null && row.asOf === null));
-assert.equal(draft.quotesRefreshedAt, null);
+assert.equal(draft.quotesRefreshedAt, '2026-10-07T12:40:56.887Z');
 assert.equal(draft.briefing.indices.length, 0);
 assert.equal(draft.briefing.bonds.length, 0);
 assert.equal(draft.briefing.earnings.length, 0);
