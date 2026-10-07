@@ -14,42 +14,26 @@ const { readSnapshot } = await import(compile(fs.readFileSync('src/lib/snapshot.
 
 const draft = JSON.parse(fs.readFileSync('public/data/snapshot.json', 'utf8'));
 assert.equal(readSnapshot(draft).status, 'draft');
-assert.equal(draft.sessionDate, '2026-10-06');
-assert.equal(draft.previousArchiveDate, '2026-10-05');
+assert.equal(draft.sessionDate, '2026-10-07');
+assert.equal(draft.previousArchiveDate, '2026-10-06');
+assert.equal(draft.cutoffAt, undefined);
 assert.equal(draft.stocks.length, 0);
-assert.ok(['SPY', 'QQQ', 'VIX', 'US10Y'].every(id => {
-  const row = draft.marketContext.find(item => item.id === id);
-  return row.value !== null && row.previousClose !== null && row.asOf && row.source;
-}));
-assert.equal(draft.marketContext.find(row => row.id === 'SPX').value, null);
-assert.ok(draft.treasuryYields.every(row => row.value !== null && row.previousClose !== null && row.asOf && row.previousCloseAt && row.source));
+assert.equal(draft.sectors.length, 0);
+assert.equal(draft.marketContext.length, 5);
+assert.ok(draft.marketContext.every(row => row.value === null && row.previousClose === null && row.change === null && row.asOf === null));
+assert.ok(draft.treasuryYields.every(row => row.value === null && row.previousClose === null && row.asOf === null));
 assert.deepEqual(draft.keyLevels.map(row => row.id), ['ES', 'NQ', 'YM', 'RTY']);
-const esLevels = draft.keyLevels.find(row => row.id === 'ES');
-assert.equal(esLevels.high, 7867.75);
-assert.equal(esLevels.low, 7829);
-assert.equal(esLevels.highTime, '2026-10-06T12:16:00Z');
-assert.equal(esLevels.lowTime, '2026-10-06T00:01:00Z');
-const esQuote = draft.indexQuotes.find(row => row.id === 'ES');
-assert.equal(esQuote.value, 7861.5);
-assert.equal(esQuote.previousClose, 7830);
-assert.equal(esQuote.asOf, '2026-10-06T13:19:00Z');
-assert.ok(['NQ', 'YM', 'RTY'].every(id => {
-  const row = draft.keyLevels.find(item => item.id === id);
-  return row.high !== null && row.low !== null && row.asOf && row.highTime && row.lowTime && row.issue;
-}));
-assert.equal(draft.briefing.indices.length, 1);
-assert.equal(draft.briefing.bonds.length, 1);
-assert.equal(draft.briefing.indices[0].source, 'Desk commentary');
-assert.equal(draft.briefing.bonds[0].source, 'Desk commentary');
-assert.match(draft.briefing.indices[0].body, /Oil is trading at around \$86, below the \$88 key technical level/);
-assert.match(draft.briefing.indices[0].body, /Equities are defying high energy prices and elevated bond yields\./);
-assert.match(draft.briefing.bonds[0].body, /Treasury yields made a new high yesterday at 5\.32%\./);
-assert.match(draft.briefing.bonds[0].body, /French 10-year yields cooling from 4\.95% to 4\.75%/);
-assert.ok(draft.briefing.earnings.length === 0 && draft.briefing.news.length === 0);
-assert.equal(draft.briefing.macro.length, 15);
+assert.ok(draft.keyLevels.every(row => row.high === null && row.low === null && row.asOf === null));
+assert.ok(draft.indexQuotes.every(row => row.value === null && row.previousClose === null && row.asOf === null));
+assert.equal(draft.quotesRefreshedAt, null);
+assert.equal(draft.briefing.indices.length, 0);
+assert.equal(draft.briefing.bonds.length, 0);
+assert.equal(draft.briefing.earnings.length, 0);
+assert.equal(draft.briefing.news.length, 0);
+assert.equal(draft.briefing.macro.length, 10);
 assert.ok(draft.briefing.macro.every(note => note.sourceKey));
 const normalizedMacro = normalizeMacroCalendar(draft.briefing.macro, draft.sessionDate);
-assert.equal(normalizedMacro.length, 15);
+assert.equal(normalizedMacro.length, 10);
 assert.deepEqual(normalizedMacro.map(row => row.sortKey), [...normalizedMacro.map(row => row.sortKey)].sort((a, b) => a - b));
 assert.ok(normalizedMacro.every(row => row.sortKey % 86400000 < 16 * 60 * 60 * 1000));
 const withAfterClose = normalizeMacroCalendar([...draft.briefing.macro, {
@@ -60,8 +44,7 @@ assert.equal(withAfterClose.length, normalizedMacro.length);
 assert.ok(!withAfterClose.some(row => row.event.includes('Lorie Logan')));
 
 const macroDayOrder = new Map([
-  ['Tuesday, October 6', 0], ['Wednesday, October 7', 1],
-  ['Thursday, October 8', 2], ['Friday, October 9', 3],
+  ['Wednesday, October 7', 0], ['Thursday, October 8', 1], ['Friday, October 9', 2],
 ]);
 let previousMacroMinute = -1;
 for (const note of draft.briefing.macro) {
@@ -76,19 +59,22 @@ for (const note of draft.briefing.macro) {
   previousMacroMinute = absoluteMinute;
   assert.ok((note.relatedSources ?? []).every(source => source.source && source.url.startsWith('https://')));
 }
-assert.equal(draft.briefing.macro.filter(note => note.body.includes('FED ·') && note.body.includes('speaks')).length, 4);
-assert.ok(!draft.briefing.macro.some(note => /Lorie Logan speaks/.test(note.body)));
+assert.equal(draft.briefing.macro.filter(note => note.body.includes('FED ·') && note.body.includes('speaks')).length, 2);
 assert.ok(draft.briefing.macro.some(note => note.body.includes('FOMC minutes')));
 assert.ok(draft.briefing.macro.some(note => note.body.includes('$39B reopened 10-year notes')
   && note.relatedSources.some(source => /TreasuryDirect · upcoming auctions/.test(source.source))
   && note.relatedSources.some(source => /U.S. Treasury · quarterly refunding/.test(source.source))));
-assert.ok(draft.briefing.macro.some(note => note.body.includes('$22B reopened 30-year bonds')
-  && note.relatedSources.some(source => /TreasuryDirect · upcoming auctions/.test(source.source))
-  && note.relatedSources.some(source => /U.S. Treasury · quarterly refunding/.test(source.source))));
-assert.ok(draft.indexQuotes.find(row => row.id === 'NQ').value !== null);
-assert.ok(draft.indexQuotes.find(row => row.id === 'NQ').previousClose !== null);
-assert.equal(draft.indexQuotes.find(row => row.id === 'ES').value, 7861.5);
-assert.ok(draft.quotesRefreshedAt);
+
+const oct6Archive = JSON.parse(fs.readFileSync('public/data/snapshot-2026-10-06.json', 'utf8'));
+assert.equal(readSnapshot(oct6Archive).status, 'archived');
+assert.equal(oct6Archive.sessionDate, '2026-10-06');
+assert.equal(oct6Archive.previousArchiveDate, '2026-10-05');
+assert.equal(oct6Archive.marketContext.find(row => row.id === 'SPY').value, 778.05);
+assert.equal(oct6Archive.marketContext.find(row => row.id === 'VIX').value, 15.29);
+assert.equal(oct6Archive.keyLevels.find(row => row.id === 'ES').high, 7867.75);
+assert.match(oct6Archive.briefing.indices[0].body, /Oil is trading at around \$86/);
+assert.match(oct6Archive.briefing.bonds[0].body, /new high yesterday at 5\.32%/);
+
 const oct5Archive = JSON.parse(fs.readFileSync('public/data/snapshot-2026-10-05.json', 'utf8'));
 assert.equal(readSnapshot(oct5Archive).status, 'archived');
 assert.equal(oct5Archive.sessionDate, '2026-10-05');
