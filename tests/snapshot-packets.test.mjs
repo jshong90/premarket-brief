@@ -20,24 +20,40 @@ assert.equal(draft.cutoffAt, undefined);
 assert.equal(draft.stocks.length, 0);
 assert.equal(draft.sectors.length, 0);
 assert.equal(draft.marketContext.length, 5);
-assert.ok(draft.marketContext.filter(row => row.id !== 'US10Y').every(row => row.value === null && row.previousClose === null && row.change === null && row.asOf === null));
+assert.deepEqual(draft.marketContext.map(row => [row.id, row.value, row.previousClose, row.asOf]), [
+  ['SPX', 7819.83, 7819.83, '2026-10-06T20:00:00.000Z'],
+  ['SPY', 775.9632, 779.09, '2026-10-07T13:19:00.000Z'],
+  ['QQQ', 754.3426, 759.66, '2026-10-07T13:19:00.000Z'],
+  ['VIX', 15.79, 15.01, '2026-10-07T13:18:00.000Z'],
+  ['US10Y', 5.354, 5.284, '2026-10-07T13:19:00.000Z'],
+]);
 const tenYear = draft.marketContext.find(row => row.id === 'US10Y');
-assert.equal(tenYear.value, 5.337);
+assert.equal(tenYear.value, 5.354);
 assert.equal(tenYear.previousClose, 5.284);
-assert.ok(Math.abs(tenYear.change - 5.3) < 1e-9);
-assert.equal(tenYear.asOf, '2026-10-07T12:36:00.000Z');
+assert.ok(Math.abs(tenYear.change - 7) < 1e-9);
+assert.equal(tenYear.asOf, '2026-10-07T13:19:00.000Z');
 assert.equal(tenYear.source.startsWith('TradingView Official MCP'), true);
 assert.deepEqual(draft.treasuryYields.map(row => [row.tenor, row.value, row.previousClose, row.asOf, row.previousCloseAt]), [
-  ['2Y', 4.814, 4.802, '2026-10-07T12:39:00.000Z', '2026-10-06T20:58:00.000Z'],
-  ['5Y', 5.07, 5.037, '2026-10-07T12:35:00.000Z', '2026-10-06T20:56:00.000Z'],
-  ['10Y', 5.337, 5.284, '2026-10-07T12:36:00.000Z', '2026-10-06T20:59:00.000Z'],
-  ['30Y', 5.713, 5.66, '2026-10-07T12:35:00.000Z', '2026-10-06T20:59:00.000Z'],
+  ['2Y', 4.831, 4.802, '2026-10-07T13:18:00.000Z', '2026-10-06T20:58:00.000Z'],
+  ['5Y', 5.091, 5.037, '2026-10-07T13:19:00.000Z', '2026-10-06T20:56:00.000Z'],
+  ['10Y', 5.354, 5.284, '2026-10-07T13:19:00.000Z', '2026-10-06T20:59:00.000Z'],
+  ['30Y', 5.723, 5.66, '2026-10-07T13:19:00.000Z', '2026-10-06T20:59:00.000Z'],
 ]);
 assert.ok(draft.treasuryYields.every(row => row.source.startsWith('TradingView Official MCP') && row.retrievedAt && row.url.startsWith('https://')));
 assert.deepEqual(draft.keyLevels.map(row => row.id), ['ES', 'NQ', 'YM', 'RTY']);
-assert.ok(draft.keyLevels.every(row => row.high === null && row.low === null && row.asOf === null));
-assert.ok(draft.indexQuotes.every(row => row.value === null && row.previousClose === null && row.asOf === null));
-assert.equal(draft.quotesRefreshedAt, '2026-10-07T12:40:56.887Z');
+assert.deepEqual(draft.keyLevels.map(row => [row.id, row.high, row.low, row.asOf]), [
+  ['ES', 7884.5, 7832.5, '2026-10-07T13:19:00.000Z'],
+  ['NQ', 31521, 31206.25, '2026-10-07T13:19:00.000Z'],
+  ['YM', null, null, null],
+  ['RTY', null, null, null],
+]);
+assert.match(draft.keyLevels.find(row => row.id === 'YM').issue, /handshake/);
+assert.match(draft.keyLevels.find(row => row.id === 'RTY').issue, /handshake/);
+assert.deepEqual(draft.indexQuotes.map(row => [row.id, row.value, row.previousClose, row.asOf]), [
+  ['NQ', 31257.5, 31501, '2026-10-07T13:19:00.000Z'],
+  ['ES', 7840.75, 7880.5, '2026-10-07T13:19:00.000Z'],
+]);
+assert.equal(draft.quotesRefreshedAt, '2026-10-07T18:29:00.692Z');
 assert.equal(draft.briefing.indices.length, 1);
 assert.equal(draft.briefing.indices[0].title, 'Equity Commentary');
 assert.equal(draft.briefing.indices[0].source, 'Desk commentary');
