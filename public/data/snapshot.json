@@ -245,13 +245,13 @@
       "label": "10Y",
       "name": "U.S. 10-year Treasury yield",
       "kind": "yield",
-      "value": 5.335,
+      "value": 5.337,
       "previousClose": 5.284,
-      "change": 5.100000000000016,
+      "change": 5.299999999999994,
       "changeUnit": "bp",
       "source": "TradingView Official MCP · TVC:US10Y 1-minute yield bars; last complete bar 08:36 ET on October 7.",
-      "asOf": "2026-10-07T12:38:00.000Z",
-      "issue": "Latest usable timestamped bar retained after the subsequent TradingView refresh returned no usable bars.",
+      "asOf": "2026-10-07T12:36:00.000Z",
+      "issue": "Later refresh attempts did not return usable bars; the earlier successful timestamped observation was retained.",
       "previousCloseAt": "2026-10-06T20:59:00.000Z",
       "retrievedAt": "2026-10-07T12:38:49.317Z"
     }
@@ -359,27 +359,29 @@
     },
     {
       "tenor": "10Y",
-      "value": 5.335,
+      "value": 5.337,
       "previousClose": 5.284,
-      "asOf": "2026-10-07T12:38:00.000Z",
+      "asOf": "2026-10-07T12:36:00.000Z",
       "previousCloseAt": "2026-10-06T20:59:00.000Z",
       "retrievedAt": "2026-10-07T12:38:49.317Z",
-      "source": "TradingView Official MCP · TVC:US10Y 1-minute yield bars; last complete bar 08:38 ET on October 7.",
+      "source": "TradingView Official MCP · TVC:US10Y 1-minute yield bars; last complete bar 08:36 ET on October 7.",
       "url": "https://www.tradingview.com/symbols/TVC-US10Y/",
       "previousCloseSource": "TradingView Official MCP · TVC:US10Y 1-minute yield bar; last available prior-session bar before 17:00 ET on October 6 (16:59 ET).",
-      "previousCloseUrl": "https://www.tradingview.com/symbols/TVC-US10Y/"
+      "previousCloseUrl": "https://www.tradingview.com/symbols/TVC-US10Y/",
+      "issue": "Later refresh attempts did not return usable bars; earlier successful timestamped observations were retained."
     },
     {
       "tenor": "30Y",
-      "value": 5.715,
+      "value": 5.713,
       "previousClose": 5.66,
-      "asOf": "2026-10-07T12:38:00.000Z",
+      "asOf": "2026-10-07T12:35:00.000Z",
       "previousCloseAt": "2026-10-06T20:59:00.000Z",
       "retrievedAt": "2026-10-07T12:38:49.317Z",
-      "source": "TradingView Official MCP · TVC:US30Y 1-minute yield bars; last complete bar 08:38 ET on October 7.",
+      "source": "TradingView Official MCP · TVC:US30Y 1-minute yield bars; last complete bar 08:35 ET on October 7.",
       "url": "https://www.tradingview.com/symbols/TVC-US30Y/",
       "previousCloseSource": "TradingView Official MCP · TVC:US30Y 1-minute yield bar; last available prior-session bar before 17:00 ET on October 6 (16:59 ET).",
-      "previousCloseUrl": "https://www.tradingview.com/symbols/TVC-US30Y/"
+      "previousCloseUrl": "https://www.tradingview.com/symbols/TVC-US30Y/",
+      "issue": "Later refresh attempts did not return usable bars; earlier successful timestamped observations were retained."
     }
   ],
   "quotesRefreshedAt": "2026-10-07T12:40:56.887Z"
