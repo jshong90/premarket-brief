@@ -24,7 +24,7 @@ assert.ok(draft.marketContext.filter(row => row.id !== 'US10Y').every(row => row
 const tenYear = draft.marketContext.find(row => row.id === 'US10Y');
 assert.equal(tenYear.value, 5.337);
 assert.equal(tenYear.previousClose, 5.284);
-assert.equal(tenYear.change, 5.299999999999982);
+assert.ok(Math.abs(tenYear.change - 5.3) < 1e-9);
 assert.equal(tenYear.asOf, '2026-10-07T12:36:00.000Z');
 assert.equal(tenYear.source.startsWith('TradingView Official MCP'), true);
 assert.deepEqual(draft.treasuryYields.map(row => [row.tenor, row.value, row.previousClose, row.asOf, row.previousCloseAt]), [
