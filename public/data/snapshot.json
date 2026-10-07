@@ -11,7 +11,7 @@
     "robinhood": false
   },
   "messages": [
-    "October 7 draft prepared. Treasury yield quotes were added; equity and futures quotes, key levels and new commentary remain pending.",
+    "October 7 draft updated with the user's equity and bond commentary. Treasury yield quotes remain populated; equity/futures quotes and key levels are pending.",
     "TradingView Official MCP supplied timestamped 1-minute Treasury yield bars. Public.com returned UNKNOWN for all four Treasury yield symbols. The latest successful observations are 08:35 ET (5Y and 30Y), 08:36 ET (10Y), and 08:39 ET (2Y); retrieval times are recorded per row.",
     "Previous-session values use the last available bars before 17:00 ET on October 6: 16:58 (2Y), 16:56 (5Y), and 16:59 (10Y and 30Y). Later TradingView refresh calls did not return usable bars for 5Y/10Y/30Y; a 5Y retry reported a WebSocket bad handshake, so earlier successful observations were retained.",
     "Upcoming macro entries dated October 7–9 were carried forward from the October 6 packet (last checked October 5); verify them before publishing."
@@ -39,8 +39,22 @@
     }
   ],
   "briefing": {
-    "indices": [],
-    "bonds": [],
+    "indices": [
+      {
+        "title": "Equity Commentary",
+        "body": "Oil is trading at around $90, hovering around that 88 technical level. Oil and bond yields will still prove to be strong headwinds against equities.\n\nBoth indices made new ATHs yesterday, with a strong fade into 2nd half of the session and follow through selling overnight. Bitcoin is following through on a strong down move in Asia session.\n\nThat being said, breadth still remains weak and we are trading into earnings/midterms which only means additional volatility is on the horizon. I get the sense the market will range here until things change. Neither bulls nor bears want to be offsides if Trump strikes a deal with Iran.",
+        "source": "Desk commentary",
+        "url": ""
+      }
+    ],
+    "bonds": [
+      {
+        "title": "Bond Commentary",
+        "body": "France's national debt is still a point of concern - small cooldown to 4.9% overnight, still elevated.\n\nUS Treasury 10Y made a new high overnight, sitting around 5.337%.",
+        "source": "Desk commentary",
+        "url": ""
+      }
+    ],
     "macro": [
       {
         "title": "Wednesday, October 7",
