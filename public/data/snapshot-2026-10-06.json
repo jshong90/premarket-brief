@@ -1,0 +1,492 @@
+{
+  "sessionDate": "2026-10-06",
+  "fetchedAt": "2026-10-06T12:57:17.135Z",
+  "status": "archived",
+  "previousArchiveDate": "2026-10-05",
+  "universeCount": 0,
+  "universeComplete": false,
+  "connected": {
+    "tradingview": true,
+    "massive": false,
+    "robinhood": true
+  },
+  "messages": [
+    "October 6 draft archived for historical reference. Original quotes, source timestamps, macro notes and user commentary are preserved; the page had not been marked frozen.",
+    "October 6 market-context, overnight movement, Treasury-yield and key-level tables were refreshed. ES values were added from a successful TradingView 1-minute futures history retrieval at 2026-10-06T15:35:49Z; each row retains the actual observation timestamp.",
+    "Robinhood supplied SPY and QQQ one-minute extended-hours bars through 09:19 ET and official October 5 settled closes. TradingView supplied timestamped ES, NQ, YM, RTY, VIX and Treasury-yield bars. Other retained quotes came from their previously successful retrievals; see per-row timestamps and issues.",
+    "The ES key-level range covers all 920 one-minute buckets from October 5 at 18:00 ET through October 6 at 09:19 ET. NQ, YM and RTY ranges use only returned timestamped bars and disclose missing buckets in their row issues.",
+    "TradingView warns its bars may be delayed 15+ minutes depending on exchange. The ES observation for the table is 09:19 ET; VIX latest eligible bar is 09:06 ET; NQ, YM and RTY latest successful bars are 09:17 ET; Treasury yields are timestamped 09:18–09:19 ET. Public.com returned UNKNOWN for Treasury yield symbols, so TradingView was used as the approved fallback.",
+    "The October 6 scanner remains a draft: the $50B+ common-stock universe is incomplete and the NQ benchmark range is unavailable. The ES scanner benchmark row has not been promoted from pending by this table-only refresh."
+  ],
+  "stocks": [],
+  "sectors": [],
+  "benchmarks": [
+    {
+      "id": "ES",
+      "high": null,
+      "low": null,
+      "drawdown": null,
+      "source": "October 6 data pending.",
+      "asOf": null,
+      "issue": "October 6 capture pending.",
+      "highTime": null,
+      "lowTime": null,
+      "retrievedAt": null
+    },
+    {
+      "id": "NQ",
+      "high": null,
+      "low": null,
+      "drawdown": null,
+      "source": "October 6 data pending.",
+      "asOf": null,
+      "issue": "October 6 capture pending.",
+      "highTime": null,
+      "lowTime": null,
+      "retrievedAt": null
+    }
+  ],
+  "briefing": {
+    "indices": [
+      {
+        "title": "Equity Commentary",
+        "body": "Oil is trading at around $86, below the $88 key technical level. While oil exports have rebounded strongly since the start of the war, the combination of reduced pre-Iran refining capacity and oil shippers paying highly elevated risk premiums to ship their goods is contributing to a rise in energy prices.\n\nYesterday we printed a very bullish candle. My personal bias is bullish, and I would focus more on longs than shorts, so long as key support levels are held. QQQ has made consistent all-time highs while the S&P 500 has lagged, making higher lows along the way and now sitting well within 1% of its all-time high.\n\nThat being said, breadth is still weak, with some sign of recovery underway. Tech is the strongest, while industrials and materials are showing more strength than other non-tech sectors.\n\nAs mentioned before, the rate story, uncertainty around midterms and the potential for an Iran deal continue to be primary drivers of price action. Equities are defying high energy prices and elevated bond yields.",
+        "source": "Desk commentary",
+        "url": ""
+      }
+    ],
+    "bonds": [
+      {
+        "title": "Bond Commentary",
+        "body": "Treasury yields made a new high yesterday at 5.32%.\n\nFrance's national debt is driving consistent concern, with French 10-year yields cooling from 4.95% to 4.75% but still comparatively high.",
+        "source": "Desk commentary",
+        "url": ""
+      }
+    ],
+    "macro": [
+      {
+        "title": "Tuesday, October 6",
+        "body": "9:05 a.m. ET — FED · John Williams moderates a discussion",
+        "source": "New York Fed · event agenda",
+        "url": "https://www.newyorkfed.org/newsevents/events/banking/2026/1006-2026",
+        "asOf": "2026-10-05",
+        "sourceKey": "newYorkFed",
+        "relatedSources": []
+      },
+      {
+        "title": "Tuesday, October 6",
+        "body": "10:45 a.m. ET — FED · Vice Chair for Supervision Michelle W. Bowman speaks",
+        "source": "Federal Reserve Board · monthly calendar",
+        "url": "https://www.federalreserve.gov/newsevents/2026-october.htm",
+        "relatedSources": [
+          {
+            "source": "Econoday · event-time cross-check",
+            "url": "https://us.econoday.com/byweek?day=5&lid=0&month=10&year=2026"
+          }
+        ],
+        "asOf": "2026-10-05",
+        "sourceKey": "federalReserveBoard"
+      },
+      {
+        "title": "Tuesday, October 6",
+        "body": "11:30 a.m. ET — TREASURY AUCTION · 6-week bills",
+        "source": "U.S. Treasury · tentative auction schedule",
+        "url": "https://home.treasury.gov/system/files/221/Tentative-Auction-Schedule.pdf",
+        "relatedSources": [
+          {
+            "source": "TreasuryDirect · upcoming auctions",
+            "url": "https://www.treasurydirect.gov/auctions/upcoming/"
+          },
+          {
+            "source": "TreasuryDirect · general auction timing",
+            "url": "https://www.treasurydirect.gov/auctions/general-auction-timing/"
+          }
+        ],
+        "asOf": "2026-10-05",
+        "sourceKey": "treasurySchedule"
+      },
+      {
+        "title": "Tuesday, October 6",
+        "body": "1:00 p.m. ET — TREASURY AUCTION · $58B 3-year notes",
+        "source": "U.S. Treasury · tentative auction schedule",
+        "url": "https://home.treasury.gov/system/files/221/Tentative-Auction-Schedule.pdf",
+        "relatedSources": [
+          {
+            "source": "TreasuryDirect · upcoming auctions",
+            "url": "https://www.treasurydirect.gov/auctions/upcoming/"
+          },
+          {
+            "source": "TreasuryDirect · general auction timing",
+            "url": "https://www.treasurydirect.gov/auctions/general-auction-timing/"
+          },
+          {
+            "source": "U.S. Treasury · quarterly refunding",
+            "url": "https://home.treasury.gov/news/press-releases/sb0590"
+          }
+        ],
+        "asOf": "2026-10-05",
+        "sourceKey": "treasurySchedule"
+      },
+      {
+        "title": "Tuesday, October 6",
+        "body": "1:15 p.m. ET — FED · Jeffrey Schmid speaks",
+        "source": "Federal Reserve Bank of Kansas City · speeches",
+        "url": "https://www.kansascityfed.org/speeches/",
+        "asOf": "2026-10-05",
+        "sourceKey": "kansasCityFed",
+        "relatedSources": []
+      },
+      {
+        "title": "Wednesday, October 7",
+        "body": "10:30 a.m. ET — ECONOMIC RELEASE · EIA crude oil inventories",
+        "source": "Trading Economics · U.S. calendar",
+        "url": "https://tradingeconomics.com/united-states/calendar",
+        "asOf": "2026-10-05",
+        "sourceKey": "economicCalendar"
+      },
+      {
+        "title": "Wednesday, October 7",
+        "body": "11:30 a.m. ET — TREASURY AUCTION · 17-week bills",
+        "source": "U.S. Treasury · tentative auction schedule",
+        "url": "https://home.treasury.gov/system/files/221/Tentative-Auction-Schedule.pdf",
+        "relatedSources": [
+          {
+            "source": "TreasuryDirect · upcoming auctions",
+            "url": "https://www.treasurydirect.gov/auctions/upcoming/"
+          },
+          {
+            "source": "TreasuryDirect · general auction timing",
+            "url": "https://www.treasurydirect.gov/auctions/general-auction-timing/"
+          }
+        ],
+        "asOf": "2026-10-05",
+        "sourceKey": "treasurySchedule"
+      },
+      {
+        "title": "Wednesday, October 7",
+        "body": "1:00 p.m. ET — TREASURY AUCTION · $39B reopened 10-year notes",
+        "source": "U.S. Treasury · tentative auction schedule",
+        "url": "https://home.treasury.gov/system/files/221/Tentative-Auction-Schedule.pdf",
+        "relatedSources": [
+          {
+            "source": "TreasuryDirect · upcoming auctions",
+            "url": "https://www.treasurydirect.gov/auctions/upcoming/"
+          },
+          {
+            "source": "TreasuryDirect · general auction timing",
+            "url": "https://www.treasurydirect.gov/auctions/general-auction-timing/"
+          },
+          {
+            "source": "U.S. Treasury · quarterly refunding",
+            "url": "https://home.treasury.gov/news/press-releases/sb0590"
+          }
+        ],
+        "asOf": "2026-10-05",
+        "sourceKey": "treasurySchedule"
+      },
+      {
+        "title": "Wednesday, October 7",
+        "body": "2:00 p.m. ET — FED · FOMC minutes (September 15–16 meeting)",
+        "source": "Federal Reserve Board · monthly calendar",
+        "url": "https://www.federalreserve.gov/newsevents/2026-october.htm",
+        "relatedSources": [
+          {
+            "source": "Econoday · event-time cross-check",
+            "url": "https://us.econoday.com/byweek?day=5&lid=0&month=10&year=2026"
+          }
+        ],
+        "asOf": "2026-10-05",
+        "sourceKey": "federalReserveBoard"
+      },
+      {
+        "title": "Thursday, October 8",
+        "body": "4:30 a.m. ET — FED · Governor Christopher J. Waller speaks",
+        "source": "Federal Reserve Board · monthly calendar",
+        "url": "https://www.federalreserve.gov/newsevents/2026-october.htm",
+        "relatedSources": [
+          {
+            "source": "Econoday · event-time cross-check",
+            "url": "https://us.econoday.com/byweek?day=5&lid=0&month=10&year=2026"
+          }
+        ],
+        "asOf": "2026-10-05",
+        "sourceKey": "federalReserveBoard"
+      },
+      {
+        "title": "Thursday, October 8",
+        "body": "8:30 a.m. ET — ECONOMIC RELEASE · Initial jobless claims",
+        "source": "Trading Economics · U.S. calendar",
+        "url": "https://tradingeconomics.com/united-states/calendar",
+        "asOf": "2026-10-05",
+        "sourceKey": "economicCalendar"
+      },
+      {
+        "title": "Thursday, October 8",
+        "body": "11:30 a.m. ET — TREASURY AUCTION · 4-week and 8-week bills",
+        "source": "U.S. Treasury · tentative auction schedule",
+        "url": "https://home.treasury.gov/system/files/221/Tentative-Auction-Schedule.pdf",
+        "relatedSources": [
+          {
+            "source": "TreasuryDirect · upcoming auctions",
+            "url": "https://www.treasurydirect.gov/auctions/upcoming/"
+          },
+          {
+            "source": "TreasuryDirect · general auction timing",
+            "url": "https://www.treasurydirect.gov/auctions/general-auction-timing/"
+          }
+        ],
+        "asOf": "2026-10-05",
+        "sourceKey": "treasurySchedule"
+      },
+      {
+        "title": "Thursday, October 8",
+        "body": "1:00 p.m. ET — TREASURY AUCTION · $22B reopened 30-year bonds",
+        "source": "U.S. Treasury · tentative auction schedule",
+        "url": "https://home.treasury.gov/system/files/221/Tentative-Auction-Schedule.pdf",
+        "relatedSources": [
+          {
+            "source": "TreasuryDirect · upcoming auctions",
+            "url": "https://www.treasurydirect.gov/auctions/upcoming/"
+          },
+          {
+            "source": "TreasuryDirect · general auction timing",
+            "url": "https://www.treasurydirect.gov/auctions/general-auction-timing/"
+          },
+          {
+            "source": "U.S. Treasury · quarterly refunding",
+            "url": "https://home.treasury.gov/news/press-releases/sb0590"
+          }
+        ],
+        "asOf": "2026-10-05",
+        "sourceKey": "treasurySchedule"
+      },
+      {
+        "title": "Thursday, October 8",
+        "body": "1:40 p.m. ET — FED · Alberto Musalem speaks",
+        "source": "Federal Reserve Bank of St. Louis · president's remarks",
+        "url": "https://www.stlouisfed.org/from-the-president/remarks",
+        "asOf": "2026-10-05",
+        "sourceKey": "stLouisFed",
+        "relatedSources": []
+      },
+      {
+        "title": "Friday, October 9",
+        "body": "10:00 a.m. ET — ECONOMIC RELEASE · University of Michigan consumer sentiment (preliminary)",
+        "source": "Trading Economics · U.S. calendar",
+        "url": "https://tradingeconomics.com/united-states/calendar",
+        "asOf": "2026-10-05",
+        "sourceKey": "economicCalendar"
+      }
+    ],
+    "earnings": [],
+    "news": []
+  },
+  "marketContext": [
+    {
+      "id": "SPX",
+      "label": "SPX",
+      "name": "S&P 500 cash index",
+      "kind": "index",
+      "changeUnit": "%",
+      "value": null,
+      "previousClose": null,
+      "change": null,
+      "source": "Cash index; no premarket value is used.",
+      "asOf": null,
+      "issue": "SPX does not trade premarket and is not displayed in the market-context strip."
+    },
+    {
+      "id": "SPY",
+      "label": "SPY",
+      "name": "SPDR S&P 500 ETF",
+      "kind": "etf",
+      "changeUnit": "%",
+      "value": 778.05,
+      "previousClose": 774.83,
+      "change": 0.41557502936127033,
+      "source": "Robinhood MCP 1-minute extended-hours OHLCV; previous close from Robinhood official SIP close dated 2026-10-05.",
+      "asOf": "2026-10-06T13:19:00Z",
+      "retrievedAt": "2026-10-06T13:31:50.141Z",
+      "high": 778.532,
+      "low": 775.4,
+      "highTime": "2026-10-06T12:20:00Z",
+      "lowTime": "2026-10-06T08:00:00Z"
+    },
+    {
+      "id": "QQQ",
+      "label": "QQQ",
+      "name": "Invesco QQQ Trust",
+      "kind": "etf",
+      "changeUnit": "%",
+      "value": 760.2589,
+      "previousClose": 756.2,
+      "change": 0.5367495371594755,
+      "source": "Robinhood MCP 1-minute extended-hours OHLCV; previous close from Robinhood official SIP close dated 2026-10-05.",
+      "asOf": "2026-10-06T13:19:00Z",
+      "retrievedAt": "2026-10-06T13:31:50.141Z",
+      "high": 761.0556,
+      "low": 756.13,
+      "highTime": "2026-10-06T12:16:00Z",
+      "lowTime": "2026-10-06T08:00:00Z"
+    },
+    {
+      "id": "VIX",
+      "label": "VIX",
+      "name": "Cboe Volatility Index",
+      "kind": "volatility",
+      "changeUnit": "%",
+      "value": 15.29,
+      "previousClose": 15.52,
+      "change": -1.4819587628866038,
+      "source": "TradingView Official MCP · CBOE:VIX 1-minute OHLCV; prior close is the last available 2026-10-05 16:14 ET bar.",
+      "asOf": "2026-10-06T13:06:00.000Z",
+      "issue": "Latest eligible bar is 09:06 ET; no later bar through 09:19 ET was returned. TradingView's provider notice says bars may be delayed 15+ minutes. This row uses only returned timestamped one-minute bars, filtered to the requested cutoff.",
+      "previousCloseAt": "2026-10-05T20:14:00.000Z",
+      "retrievedAt": "2026-10-06T13:27:19Z"
+    },
+    {
+      "id": "US10Y",
+      "label": "10Y",
+      "name": "U.S. 10-year Treasury yield",
+      "kind": "yield",
+      "changeUnit": "bp",
+      "value": 5.29,
+      "previousClose": 5.307,
+      "change": -1.7,
+      "source": "TradingView Official MCP · TVC:US10Y 1-minute OHLCV; previous close is the 2026-10-05 16:59 ET bar.",
+      "asOf": "2026-10-06T13:19:00.000Z",
+      "issue": "TradingView's provider notice says bars may be delayed 15+ minutes. This row uses only returned timestamped one-minute bars, filtered to the requested cutoff.",
+      "previousCloseAt": "2026-10-05T20:59:00.000Z",
+      "retrievedAt": "2026-10-06T13:27:19Z"
+    }
+  ],
+  "keyLevels": [
+    {
+      "id": "ES",
+      "label": "S&P 500 (ES)",
+      "high": 7867.75,
+      "low": 7829,
+      "asOf": "2026-10-06T13:19:00Z",
+      "retrievedAt": "2026-10-06T15:35:49.266Z",
+      "source": "TradingView Official MCP · CME_MINI:ES1! · timestamped 1-minute OHLCV · provider delay 15+ minutes; 920/920 one-minute bars in the 2026-10-05 18:00–2026-10-06 09:19 ET window.",
+      "issue": "TradingView warns bars may be delayed 15+ minutes. The range uses the complete requested window and excludes the 09:20 ET bar.",
+      "highTime": "2026-10-06T12:16:00Z",
+      "lowTime": "2026-10-06T00:01:00Z"
+    },
+    {
+      "id": "NQ",
+      "label": "Nasdaq-100 (NQ)",
+      "high": 31539,
+      "low": 31309.25,
+      "highTime": "2026-10-06T12:16:00.000Z",
+      "lowTime": "2026-10-06T02:35:00.000Z",
+      "asOf": "2026-10-06T13:17:00.000Z",
+      "retrievedAt": "2026-10-06T13:27:19Z",
+      "source": "TradingView Official MCP · CME_MINI:NQ1! 1-minute futures OHLCV.",
+      "issue": "Last returned bar is 9:17 AM ET; 2 of 920 expected minute buckets are absent. High/low use returned bars only. TradingView's provider notice says bars may be delayed 15+ minutes. This row uses only returned timestamped one-minute bars, filtered to the requested cutoff. A later verification retry failed; earlier successful bars are retained."
+    },
+    {
+      "id": "YM",
+      "label": "Dow (YM)",
+      "high": 51929,
+      "low": 51594,
+      "highTime": "2026-10-06T11:56:00.000Z",
+      "lowTime": "2026-10-06T00:01:00.000Z",
+      "asOf": "2026-10-06T13:17:00.000Z",
+      "retrievedAt": "2026-10-06T13:27:19Z",
+      "source": "TradingView Official MCP · CBOT_MINI:YM1! 1-minute futures OHLCV.",
+      "issue": "Last returned bar is 9:17 AM ET; 31 of 920 expected minute buckets are absent. High/low use returned bars only. TradingView's provider notice says bars may be delayed 15+ minutes. This row uses only returned timestamped one-minute bars, filtered to the requested cutoff. A later verification retry failed; earlier successful bars are retained."
+    },
+    {
+      "id": "RTY",
+      "label": "Russell 2000 (RTY)",
+      "high": 2887.2,
+      "low": 2866.1,
+      "highTime": "2026-10-06T12:16:00.000Z",
+      "lowTime": "2026-10-06T01:23:00.000Z",
+      "asOf": "2026-10-06T13:17:00.000Z",
+      "retrievedAt": "2026-10-06T13:27:19Z",
+      "source": "TradingView Official MCP · CME_MINI:RTY1! 1-minute futures OHLCV.",
+      "issue": "Last returned bar is 9:17 AM ET; 17 of 920 expected minute buckets are absent. High/low use returned bars only. TradingView's provider notice says bars may be delayed 15+ minutes. This row uses only returned timestamped one-minute bars, filtered to the requested cutoff."
+    }
+  ],
+  "indexQuotes": [
+    {
+      "id": "NQ",
+      "value": 31498.5,
+      "previousClose": 31339.5,
+      "previousCloseAt": "2026-10-05T20:59:00.000Z",
+      "asOf": "2026-10-06T13:17:00.000Z",
+      "retrievedAt": "2026-10-06T13:27:19Z",
+      "source": "TradingView Official MCP · CME_MINI:NQ1! 1-minute futures bars; prior close is the 2026-10-05 16:59 ET bar.",
+      "url": "https://www.tradingview.com/chart/?symbol=CME_MINI%3ANQ1%21",
+      "issue": "Last returned bar is 09:17 ET; 09:18 and 09:19 bars are missing. The final retrieval retry failed; earlier successful timestamped bars are retained. TradingView's provider notice says bars may be delayed 15+ minutes. This row uses only returned timestamped one-minute bars, filtered to the requested cutoff."
+    },
+    {
+      "id": "ES",
+      "value": 7861.5,
+      "previousClose": 7830,
+      "asOf": "2026-10-06T13:19:00Z",
+      "retrievedAt": "2026-10-06T15:35:49.266Z",
+      "source": "TradingView Official MCP · CME_MINI:ES1! · timestamped 1-minute OHLCV · provider delay 15+ minutes; prior-session close from the 2026-10-05 16:59 ET bar.",
+      "url": "https://www.tradingview.com/chart/?symbol=CME_MINI%3AES1%21",
+      "issue": "Uses the last completed bar before the 09:20 ET cutoff (09:19 ET). TradingView warns bars may be delayed 15+ minutes.",
+      "previousCloseAt": "2026-10-05T20:59:00Z"
+    }
+  ],
+  "treasuryYields": [
+    {
+      "tenor": "2Y",
+      "value": 4.802,
+      "previousClose": 4.816,
+      "asOf": "2026-10-06T13:18:00.000Z",
+      "previousCloseAt": "2026-10-05T20:59:00.000Z",
+      "retrievedAt": "2026-10-06T13:27:19Z",
+      "source": "TradingView Official MCP · TVC:US02Y 1-minute yield bars; prior close is the last available prior-session bar.",
+      "previousCloseSource": "TradingView Official MCP · TVC:US02Y 1-minute yield bar",
+      "previousCloseUrl": "https://www.tradingview.com/symbols/TVC-US02Y/",
+      "url": "https://www.tradingview.com/symbols/TVC-US02Y/",
+      "issue": "TradingView's provider notice says bars may be delayed 15+ minutes. This row uses only returned timestamped one-minute bars, filtered to the requested cutoff."
+    },
+    {
+      "tenor": "5Y",
+      "value": 5.039,
+      "previousClose": 5.057,
+      "asOf": "2026-10-06T13:19:00.000Z",
+      "previousCloseAt": "2026-10-05T20:58:00.000Z",
+      "retrievedAt": "2026-10-06T13:27:19Z",
+      "source": "TradingView Official MCP · TVC:US05Y 1-minute yield bars; prior close is the last available prior-session bar.",
+      "previousCloseSource": "TradingView Official MCP · TVC:US05Y 1-minute yield bar",
+      "previousCloseUrl": "https://www.tradingview.com/symbols/TVC-US05Y/",
+      "url": "https://www.tradingview.com/symbols/TVC-US05Y/",
+      "issue": "No 16:59 ET bar was returned; previous close uses the last available 16:58 ET bar. TradingView's provider notice says bars may be delayed 15+ minutes. This row uses only returned timestamped one-minute bars, filtered to the requested cutoff."
+    },
+    {
+      "tenor": "10Y",
+      "value": 5.29,
+      "previousClose": 5.307,
+      "asOf": "2026-10-06T13:19:00.000Z",
+      "previousCloseAt": "2026-10-05T20:59:00.000Z",
+      "retrievedAt": "2026-10-06T13:27:19Z",
+      "source": "TradingView Official MCP · TVC:US10Y 1-minute yield bars; prior close is the last available prior-session bar.",
+      "previousCloseSource": "TradingView Official MCP · TVC:US10Y 1-minute yield bar",
+      "previousCloseUrl": "https://www.tradingview.com/symbols/TVC-US10Y/",
+      "url": "https://www.tradingview.com/symbols/TVC-US10Y/",
+      "issue": "TradingView's provider notice says bars may be delayed 15+ minutes. This row uses only returned timestamped one-minute bars, filtered to the requested cutoff."
+    },
+    {
+      "tenor": "30Y",
+      "value": 5.66,
+      "previousClose": 5.664,
+      "asOf": "2026-10-06T13:19:00.000Z",
+      "previousCloseAt": "2026-10-05T20:59:00.000Z",
+      "retrievedAt": "2026-10-06T13:27:19Z",
+      "source": "TradingView Official MCP · TVC:US30Y 1-minute yield bars; prior close is the last available prior-session bar.",
+      "previousCloseSource": "TradingView Official MCP · TVC:US30Y 1-minute yield bar",
+      "previousCloseUrl": "https://www.tradingview.com/symbols/TVC-US30Y/",
+      "url": "https://www.tradingview.com/symbols/TVC-US30Y/",
+      "issue": "TradingView's provider notice says bars may be delayed 15+ minutes. This row uses only returned timestamped one-minute bars, filtered to the requested cutoff."
+    }
+  ],
+  "quotesRefreshedAt": "2026-10-06T15:35:49.266Z"
+}
