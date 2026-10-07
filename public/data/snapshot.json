@@ -6,12 +6,14 @@
   "universeCount": 0,
   "universeComplete": false,
   "connected": {
-    "tradingview": false,
+    "tradingview": true,
     "massive": false,
     "robinhood": false
   },
   "messages": [
-    "October 7 draft prepared. October 6 quote, range and commentary values were cleared; capture and new commentary are pending.",
+    "October 7 draft prepared. Treasury yield quotes were added; equity and futures quotes, key levels and new commentary remain pending.",
+    "TradingView Official MCP supplied timestamped 1-minute Treasury yield bars. Public.com returned UNKNOWN for all four Treasury yield symbols. The latest successful observations are 08:35 ET (5Y and 30Y), 08:36 ET (10Y), and 08:39 ET (2Y); retrieval times are recorded per row.",
+    "Previous-session values use the last available bars before 17:00 ET on October 6: 16:58 (2Y), 16:56 (5Y), and 16:59 (10Y and 30Y). Later TradingView refresh calls did not return usable bars for 5Y/10Y/30Y; a 5Y retry reported a WebSocket bad handshake, so earlier successful observations were retained.",
     "Upcoming macro entries dated October 7–9 were carried forward from the October 6 packet (last checked October 5); verify them before publishing."
   ],
   "stocks": [],
@@ -243,13 +245,15 @@
       "label": "10Y",
       "name": "U.S. 10-year Treasury yield",
       "kind": "yield",
-      "value": null,
-      "previousClose": null,
-      "change": null,
+      "value": 5.335,
+      "previousClose": 5.284,
+      "change": 5.100000000000016,
       "changeUnit": "bp",
-      "source": "Pending October 7 capture.",
-      "asOf": null,
-      "issue": "No October 7 observation captured."
+      "source": "TradingView Official MCP · TVC:US10Y 1-minute yield bars; last complete bar 08:36 ET on October 7.",
+      "asOf": "2026-10-07T12:38:00.000Z",
+      "issue": "Latest usable timestamped bar retained after the subsequent TradingView refresh returned no usable bars.",
+      "previousCloseAt": "2026-10-06T20:59:00.000Z",
+      "retrievedAt": "2026-10-07T12:38:49.317Z"
     }
   ],
   "keyLevels": [
@@ -329,48 +333,54 @@
   "treasuryYields": [
     {
       "tenor": "2Y",
-      "value": null,
-      "previousClose": null,
-      "asOf": null,
-      "previousCloseAt": null,
-      "retrievedAt": null,
-      "source": "Pending October 7 capture.",
-      "url": "https://www.tradingview.com/symbols/TVC-US02Y/",
-      "issue": "No October 7 yield captured."
+      "value": 4.814,
+      "previousClose": 4.802,
+      "asOf": "2026-10-07T12:39:00.000Z",
+      "previousCloseAt": "2026-10-06T20:58:00.000Z",
+      "retrievedAt": "2026-10-07T12:40:56.887Z",
+      "source": "TradingView Official MCP · TVC:US2Y 1-minute yield bars; last complete bar 08:39 ET on October 7.",
+      "url": "https://www.tradingview.com/symbols/TVC-US2Y/",
+      "issue": "No 16:59 ET bar was returned; previous-session close uses the last available bar at 16:58 ET.",
+      "previousCloseSource": "TradingView Official MCP · TVC:US2Y 1-minute yield bar; last available prior-session bar before 17:00 ET on October 6 (16:58 ET).",
+      "previousCloseUrl": "https://www.tradingview.com/symbols/TVC-US2Y/"
     },
     {
       "tenor": "5Y",
-      "value": null,
-      "previousClose": null,
-      "asOf": null,
-      "previousCloseAt": null,
-      "retrievedAt": null,
-      "source": "Pending October 7 capture.",
-      "url": "https://www.tradingview.com/symbols/TVC-US05Y/",
-      "issue": "No October 7 yield captured."
+      "value": 5.07,
+      "previousClose": 5.037,
+      "asOf": "2026-10-07T12:35:00.000Z",
+      "previousCloseAt": "2026-10-06T20:56:00.000Z",
+      "retrievedAt": "2026-10-07T12:38:49.317Z",
+      "source": "TradingView Official MCP · TVC:US5Y 1-minute yield bars; last complete bar 08:35 ET on October 7.",
+      "url": "https://www.tradingview.com/symbols/TVC-US5Y/",
+      "issue": "No 16:59 ET bar was returned; previous-session close uses the last available bar at 16:56 ET.",
+      "previousCloseSource": "TradingView Official MCP · TVC:US5Y 1-minute yield bar; last available prior-session bar before 17:00 ET on October 6 (16:56 ET).",
+      "previousCloseUrl": "https://www.tradingview.com/symbols/TVC-US5Y/"
     },
     {
       "tenor": "10Y",
-      "value": null,
-      "previousClose": null,
-      "asOf": null,
-      "previousCloseAt": null,
-      "retrievedAt": null,
-      "source": "Pending October 7 capture.",
+      "value": 5.335,
+      "previousClose": 5.284,
+      "asOf": "2026-10-07T12:38:00.000Z",
+      "previousCloseAt": "2026-10-06T20:59:00.000Z",
+      "retrievedAt": "2026-10-07T12:38:49.317Z",
+      "source": "TradingView Official MCP · TVC:US10Y 1-minute yield bars; last complete bar 08:38 ET on October 7.",
       "url": "https://www.tradingview.com/symbols/TVC-US10Y/",
-      "issue": "No October 7 yield captured."
+      "previousCloseSource": "TradingView Official MCP · TVC:US10Y 1-minute yield bar; last available prior-session bar before 17:00 ET on October 6 (16:59 ET).",
+      "previousCloseUrl": "https://www.tradingview.com/symbols/TVC-US10Y/"
     },
     {
       "tenor": "30Y",
-      "value": null,
-      "previousClose": null,
-      "asOf": null,
-      "previousCloseAt": null,
-      "retrievedAt": null,
-      "source": "Pending October 7 capture.",
+      "value": 5.715,
+      "previousClose": 5.66,
+      "asOf": "2026-10-07T12:38:00.000Z",
+      "previousCloseAt": "2026-10-06T20:59:00.000Z",
+      "retrievedAt": "2026-10-07T12:38:49.317Z",
+      "source": "TradingView Official MCP · TVC:US30Y 1-minute yield bars; last complete bar 08:38 ET on October 7.",
       "url": "https://www.tradingview.com/symbols/TVC-US30Y/",
-      "issue": "No October 7 yield captured."
+      "previousCloseSource": "TradingView Official MCP · TVC:US30Y 1-minute yield bar; last available prior-session bar before 17:00 ET on October 6 (16:59 ET).",
+      "previousCloseUrl": "https://www.tradingview.com/symbols/TVC-US30Y/"
     }
   ],
-  "quotesRefreshedAt": null
+  "quotesRefreshedAt": "2026-10-07T12:40:56.887Z"
 }
