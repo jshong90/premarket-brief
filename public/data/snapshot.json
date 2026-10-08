@@ -42,8 +42,24 @@
     }
   ],
   "briefing": {
-    "indices": [],
-    "bonds": [],
+    "indices": [
+      {
+        "title": "Equity Commentary",
+        "body": "Oil is trading at around $92, gapping up 5% from the $88 technical level owing to the conflict in the Middle East. Oil and bond yields will still prove to be strong headwinds against equities, and of course the anticipation of a potential deal with Iran. The jobless claims report published premarket shows a robust labor market.\n\nThe Fed provided more clarification on the rate path moving forward in its published minutes yesterday, with most board members in favor of another hike before end of year.\n\nBoth indices are right back to yesterday's lows, driven in part from a disappointing Samsung profit forecast. There is a scenario where the opening gap from Monday premarket gets filled if sellers seize momentum. However, SMH (chip ETF) is trading exactly at the $615 key technical level and could rebound from here - otherwise can trade back to Monday's lows.",
+        "source": "Desk commentary",
+        "url": "",
+        "asOf": "2026-10-08T14:39:23.000Z"
+      }
+    ],
+    "bonds": [
+      {
+        "title": "Bond Commentary",
+        "body": "France's national debt is still a point of concern - small cooldown on 10Y from 4.96 to 4.893% overnight, still elevated.\n\nUS Treasury 10Y did not make a new high overnight but still trading near highs at 5.325%.",
+        "source": "Desk commentary",
+        "url": "",
+        "asOf": "2026-10-08T14:39:23.000Z"
+      }
+    ],
     "macro": [
       {
         "title": "Thursday, October 8",

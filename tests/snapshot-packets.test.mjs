@@ -47,8 +47,12 @@ assert.deepEqual(draft.keyLevels.map(row => [row.id, row.high, row.low, row.asOf
 ]);
 assert.match(draft.keyLevels.find(row => row.id === 'RTY').issue, /no verified timestamped high\/low pair/);
 assert.deepEqual(Object.keys(draft.briefing).sort(), ['bonds', 'earnings', 'indices', 'macro', 'news']);
-assert.equal(draft.briefing.indices.length, 0);
-assert.equal(draft.briefing.bonds.length, 0);
+assert.equal(draft.briefing.indices.length, 1);
+assert.equal(draft.briefing.indices[0].title, 'Equity Commentary');
+assert.equal(draft.briefing.indices[0].source, 'Desk commentary');
+assert.equal(draft.briefing.bonds.length, 1);
+assert.equal(draft.briefing.bonds[0].title, 'Bond Commentary');
+assert.equal(draft.briefing.bonds[0].source, 'Desk commentary');
 assert.equal(draft.briefing.macro.length, 4);
 assert.ok(draft.briefing.macro.every(note => note.sourceKey && note.asOf === '2026-10-08'));
 const normalizedMacro = normalizeMacroCalendar(draft.briefing.macro, draft.sessionDate);
