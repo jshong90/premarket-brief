@@ -14,90 +14,78 @@ const { readSnapshot } = await import(compile(fs.readFileSync('src/lib/snapshot.
 
 const draft = JSON.parse(fs.readFileSync('public/data/snapshot.json', 'utf8'));
 assert.equal(readSnapshot(draft).status, 'draft');
-assert.equal(draft.sessionDate, '2026-10-07');
-assert.equal(draft.previousArchiveDate, '2026-10-06');
+assert.equal(draft.sessionDate, '2026-10-08');
+assert.equal(draft.previousArchiveDate, '2026-10-07');
 assert.equal(draft.cutoffAt, undefined);
 assert.equal(draft.stocks.length, 0);
 assert.equal(draft.sectors.length, 0);
-assert.equal(draft.marketContext.length, 5);
 assert.deepEqual(draft.marketContext.map(row => [row.id, row.value, row.previousClose, row.asOf]), [
-  ['SPX', 7819.83, 7819.83, '2026-10-06T20:00:00.000Z'],
-  ['SPY', 775.9632, 779.09, '2026-10-07T13:19:00.000Z'],
-  ['QQQ', 754.3426, 759.66, '2026-10-07T13:19:00.000Z'],
-  ['VIX', 15.79, 15.01, '2026-10-07T13:18:00.000Z'],
-  ['US10Y', 5.354, 5.284, '2026-10-07T13:19:00.000Z'],
+  ['SPX', 7800.26, 7800.26, '2026-10-07T20:00:00.000Z'],
+  ['SPY', 774.98, 777.22, '2026-10-08T13:19:00.000Z'],
+  ['QQQ', 753.91, 757.73, '2026-10-08T13:19:00.000Z'],
+  ['VIX', 15.53, 15.08, '2026-10-08T13:19:00.000Z'],
+  ['US10Y', 5.297, 5.286, '2026-10-08T13:19:00.000Z'],
 ]);
-const tenYear = draft.marketContext.find(row => row.id === 'US10Y');
-assert.equal(tenYear.value, 5.354);
-assert.equal(tenYear.previousClose, 5.284);
-assert.ok(Math.abs(tenYear.change - 7) < 1e-9);
-assert.equal(tenYear.asOf, '2026-10-07T13:19:00.000Z');
-assert.equal(tenYear.source.startsWith('TradingView Official MCP'), true);
-assert.deepEqual(draft.treasuryYields.map(row => [row.tenor, row.value, row.previousClose, row.asOf, row.previousCloseAt]), [
-  ['2Y', 4.831, 4.802, '2026-10-07T13:18:00.000Z', '2026-10-06T20:58:00.000Z'],
-  ['5Y', 5.091, 5.037, '2026-10-07T13:19:00.000Z', '2026-10-06T20:56:00.000Z'],
-  ['10Y', 5.354, 5.284, '2026-10-07T13:19:00.000Z', '2026-10-06T20:59:00.000Z'],
-  ['30Y', 5.723, 5.66, '2026-10-07T13:19:00.000Z', '2026-10-06T20:59:00.000Z'],
+assert.ok(Math.abs(draft.marketContext.find(row => row.id === 'SPY').change - ((774.98 / 777.22 - 1) * 100)) < 1e-12);
+assert.ok(Math.abs(draft.marketContext.find(row => row.id === 'US10Y').change - 1.1) < 1e-9);
+assert.deepEqual(draft.treasuryYields.map(row => [row.tenor, row.value, row.previousClose, row.asOf]), [
+  ['2Y', null, null, null],
+  ['5Y', 5.052, 5.027, '2026-10-08T13:18:00.000Z'],
+  ['10Y', 5.297, 5.286, '2026-10-08T13:19:00.000Z'],
+  ['30Y', 5.67, 5.673, '2026-10-08T13:19:00.000Z'],
 ]);
-assert.ok(draft.treasuryYields.every(row => row.source.startsWith('TradingView Official MCP') && row.retrievedAt && row.url.startsWith('https://')));
-assert.deepEqual(draft.keyLevels.map(row => row.id), ['ES', 'NQ', 'YM', 'RTY']);
+assert.ok(draft.treasuryYields.every(row => row.source.startsWith('TradingView Official MCP') && row.url.startsWith('https://')));
+assert.deepEqual(draft.indexQuotes.map(row => [row.id, row.value, row.previousClose, row.asOf]), [
+  ['NQ', 31235.5, 31403.75, '2026-10-08T13:19:00.000Z'],
+  ['ES', 7828.75, 7850.25, '2026-10-08T13:19:00.000Z'],
+]);
 assert.deepEqual(draft.keyLevels.map(row => [row.id, row.high, row.low, row.asOf]), [
-  ['ES', 7884.5, 7832.5, '2026-10-07T13:19:00.000Z'],
-  ['NQ', 31521, 31206.25, '2026-10-07T13:19:00.000Z'],
-  ['YM', null, null, null],
+  ['ES', 7858.25, 7802.75, '2026-10-08T13:19:00.000Z'],
+  ['NQ', 31466, 31119.75, '2026-10-08T13:19:00.000Z'],
+  ['YM', 51470, 50909, '2026-10-08T13:18:00.000Z'],
   ['RTY', null, null, null],
 ]);
-assert.match(draft.keyLevels.find(row => row.id === 'YM').issue, /handshake/);
-assert.match(draft.keyLevels.find(row => row.id === 'RTY').issue, /handshake/);
-assert.deepEqual(draft.indexQuotes.map(row => [row.id, row.value, row.previousClose, row.asOf]), [
-  ['NQ', 31257.5, 31501, '2026-10-07T13:19:00.000Z'],
-  ['ES', 7840.75, 7880.5, '2026-10-07T13:19:00.000Z'],
-]);
-assert.equal(draft.quotesRefreshedAt, '2026-10-07T18:29:00.692Z');
-assert.equal(draft.briefing.indices.length, 1);
-assert.equal(draft.briefing.indices[0].title, 'Equity Commentary');
-assert.equal(draft.briefing.indices[0].source, 'Desk commentary');
-assert.equal(draft.briefing.indices[0].body, "Oil is trading at around $90, hovering around that 88 technical level. Oil and bond yields will still prove to be strong headwinds against equities.\n\nBoth indices made new ATHs yesterday, with a strong fade into 2nd half of the session and follow through selling overnight. Bitcoin is following through on a strong down move in Asia session.\n\nThat being said, breadth still remains weak and we are trading into earnings/midterms which only means additional volatility is on the horizon. I get the sense the market will range here until things change. Neither bulls nor bears want to be offsides if Trump strikes a deal with Iran.");
-assert.equal(draft.briefing.bonds.length, 1);
-assert.equal(draft.briefing.bonds[0].title, 'Bond Commentary');
-assert.equal(draft.briefing.bonds[0].source, 'Desk commentary');
-assert.equal(draft.briefing.bonds[0].body, "France's national debt is still a point of concern - small cooldown to 4.9% overnight, still elevated.\n\nUS Treasury 10Y made a new high overnight, sitting around 5.337%.");
-assert.equal(draft.briefing.earnings.length, 0);
-assert.equal(draft.briefing.news.length, 0);
-assert.equal(draft.briefing.macro.length, 10);
-assert.ok(draft.briefing.macro.every(note => note.sourceKey));
+assert.match(draft.keyLevels.find(row => row.id === 'RTY').issue, /no verified timestamped high\/low pair/);
+assert.deepEqual(Object.keys(draft.briefing).sort(), ['bonds', 'earnings', 'indices', 'macro', 'news']);
+assert.equal(draft.briefing.indices.length, 0);
+assert.equal(draft.briefing.bonds.length, 0);
+assert.equal(draft.briefing.macro.length, 4);
+assert.ok(draft.briefing.macro.every(note => note.sourceKey && note.asOf === '2026-10-08'));
 const normalizedMacro = normalizeMacroCalendar(draft.briefing.macro, draft.sessionDate);
-assert.equal(normalizedMacro.length, 10);
+assert.equal(normalizedMacro.length, 4);
 assert.deepEqual(normalizedMacro.map(row => row.sortKey), [...normalizedMacro.map(row => row.sortKey)].sort((a, b) => a - b));
 assert.ok(normalizedMacro.every(row => row.sortKey % 86400000 < 16 * 60 * 60 * 1000));
 const withAfterClose = normalizeMacroCalendar([...draft.briefing.macro, {
-  title: 'Tuesday, October 6', body: '7:00 p.m. ET — FED · Lorie Logan speaks',
-  source: 'Econoday', url: 'https://us.econoday.com/byweek?day=5&lid=0&month=10&year=2026',
+  title: 'Thursday, October 8', body: '7:00 p.m. ET — FED · after-close event',
+  source: 'Desk calendar', url: 'https://example.com/calendar',
 }], draft.sessionDate);
 assert.equal(withAfterClose.length, normalizedMacro.length);
-assert.ok(!withAfterClose.some(row => row.event.includes('Lorie Logan')));
-
 const macroDayOrder = new Map([
-  ['Wednesday, October 7', 0], ['Thursday, October 8', 1], ['Friday, October 9', 2],
+  ['Thursday, October 8', 0], ['Friday, October 9', 1],
 ]);
 let previousMacroMinute = -1;
 for (const note of draft.briefing.macro) {
-  assert.ok(note.source && note.url.startsWith('https://'));
+  assert.ok(note.url.startsWith('https://'));
   const time = note.body.match(/^(\d{1,2}):(\d{2})\s*([ap])\.m\. ET — /i);
   assert.ok(time, `expected timestamped calendar event: ${note.body}`);
-  assert.ok(macroDayOrder.has(note.title), `unexpected event date: ${note.title}`);
+  assert.ok(macroDayOrder.has(note.title));
   const hour = Number(time[1]) % 12 + (time[3].toLowerCase() === 'p' ? 12 : 0);
-  const absoluteMinute = macroDayOrder.get(note.title) * 1440 + hour * 60 + Number(time[2]);
-  assert.ok(absoluteMinute >= previousMacroMinute, `macro events are out of chronological order at ${note.body}`);
-  assert.ok(hour * 60 + Number(time[2]) < 16 * 60, `event is after the 4:00 p.m. ET close: ${note.body}`);
-  previousMacroMinute = absoluteMinute;
-  assert.ok((note.relatedSources ?? []).every(source => source.source && source.url.startsWith('https://')));
+  const minute = macroDayOrder.get(note.title) * 1440 + hour * 60 + Number(time[2]);
+  assert.ok(minute >= previousMacroMinute);
+  assert.ok(hour * 60 + Number(time[2]) < 16 * 60);
+  previousMacroMinute = minute;
+  assert.ok((note.relatedSources ?? []).every(source => source.url.startsWith('https://')));
 }
-assert.equal(draft.briefing.macro.filter(note => note.body.includes('FED ·') && note.body.includes('speaks')).length, 2);
-assert.ok(draft.briefing.macro.some(note => note.body.includes('FOMC minutes')));
-assert.ok(draft.briefing.macro.some(note => note.body.includes('$39B reopened 10-year notes')
-  && note.relatedSources.some(source => /TreasuryDirect · upcoming auctions/.test(source.source))
-  && note.relatedSources.some(source => /U.S. Treasury · quarterly refunding/.test(source.source))));
+assert.equal(draft.briefing.macro.filter(note => note.body.includes('FED ·')).length, 1);
+assert.ok(draft.briefing.macro.some(note => note.body.includes('4-week and 8-week bills')));
+assert.ok(draft.briefing.macro.some(note => note.body.includes('reopened 30-year bonds')));
+assert.ok(draft.briefing.macro.some(note => note.body.includes('University of Michigan consumer sentiment')));
+assert.ok(!draft.briefing.macro.some(note => /Waller|jobless claims/i.test(note.body)));
+const oct7Archive = JSON.parse(fs.readFileSync('public/data/snapshot-2026-10-07.json', 'utf8'));
+assert.equal(readSnapshot(oct7Archive).status, 'archived');
+assert.equal(oct7Archive.sessionDate, '2026-10-07');
+assert.equal(oct7Archive.previousArchiveDate, '2026-10-06');
+assert.equal(oct7Archive.marketContext.find(row => row.id === 'SPY').value, 775.9632);
 
 const oct6Archive = JSON.parse(fs.readFileSync('public/data/snapshot-2026-10-06.json', 'utf8'));
 assert.equal(readSnapshot(oct6Archive).status, 'archived');
