@@ -14,6 +14,7 @@ import ThemeToggle from './ThemeToggle';
 import MorningBrief from './MorningBrief';
 import MassiveConnectionTest from './MassiveConnectionTest';
 import DesignLabs from './DesignLabs';
+import { readBriefingTopics, type BriefingTopicSelection } from '@/lib/briefingTopics';
 
 const number = (v: number | null | undefined, digits=2) => v == null || !Number.isFinite(v) ? '—' : v.toLocaleString('en-US',{minimumFractionDigits:digits,maximumFractionDigits:digits});
 const quotePrice = (v: number | null | undefined) => v == null || !Number.isFinite(v) ? '—' : v.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:3});
@@ -26,6 +27,8 @@ export default function Scanner() {
   const [data,setData] = useState<Snapshot>(IMPORTED);
   const [snapshotLoaded,setSnapshotLoaded] = useState(false);
   const [compactHeader,setCompactHeader] = useState(false);
+  const [briefingTopics,setBriefingTopics] = useState<BriefingTopicSelection | null>(null);
+  useEffect(()=>{setBriefingTopics(readBriefingTopics());},[]);
   useEffect(()=>{
     const mobile=window.matchMedia('(max-width: 640px)');
     let frame=0;
@@ -175,6 +178,7 @@ export default function Scanner() {
   const pageDateLabel=dateLabel;
   const archiveDate=data.previousArchiveDate;
   const latestHref=isDevelopmentMode?'./index.html?dev=1':'./index.html';
+  const builderHref=`./briefing-builder.html${isArchivePreview?`?date=${new URLSearchParams(window.location.search).get('date')}${isDevelopmentMode?'&dev=1':''}`:isDevelopmentMode?'?dev=1':''}`;
   const archiveHref=archiveDate?`./index.html?date=${archiveDate}${isDevelopmentMode?'&dev=1':''}`:latestHref;
   const selectedMetrics=selected?metrics(selected,data.benchmarks.find(b=>b.id===(benchmark==='auto'?selected.benchmark:benchmark))):null;
 
@@ -200,14 +204,14 @@ export default function Scanner() {
   return <div className="app-shell">
     <header className={`topbar${compactHeader?' is-compact':''}`}>
       <div className="topbar-main">
-        <div className="topbar-leading">{(isArchivePreview||archiveDate)&&<a className="snapshot-nav-link" href={isArchivePreview?latestHref:archiveHref} aria-label={isArchivePreview?'Return to the latest snapshot':`View the ${formatDateLabel(archiveDate!)} archive`} title={isArchivePreview?'Latest snapshot':`Previous snapshot · ${formatDateLabel(archiveDate!)}`}>{isArchivePreview?<ChevronRight size={18}/>:<ChevronLeft size={18}/>}<span>{isArchivePreview?'Latest':archiveDate!.slice(5).replace('-', '/')}</span></a>}<a href={latestHref} className="brand" aria-label="The Warren home"><span className="brand-mark">W</span></a></div>
+        <div className="topbar-leading">{(isArchivePreview||archiveDate)&&<a className="snapshot-nav-link" href={isArchivePreview?latestHref:archiveHref} aria-label={isArchivePreview?'Return to the latest snapshot':`View the ${formatDateLabel(archiveDate!)} archive`} title={isArchivePreview?'Latest snapshot':`Previous snapshot · ${formatDateLabel(archiveDate!)}`}>{isArchivePreview?<ChevronRight size={18}/>:<ChevronLeft size={18}/>}<span>{isArchivePreview?'Latest':archiveDate!.slice(5).replace('-', '/')}</span></a>}<a href={latestHref} className="brand" aria-label="The Warren home"><span className="brand-mark">W</span></a><a className="brief-builder-link" href={builderHref}><SlidersHorizontal size={15}/><span>Build your brief</span></a></div>
         <time className="topbar-date" dateTime={data.sessionDate}>{pageDateLabel}</time>
         <ThemeToggle/><button className="connection-button" onClick={()=>setDrawer('connections')}><Clock3 size={14}/><span>{cutoffPacific} Pacific</span><ChevronRight size={15}/></button>
       </div>
       <MarketStrip data={data}/>
     </header>
     <main>
-      <MorningBrief data={data} error={error} archived={isArchivePreview}/>
+      <MorningBrief data={data} error={error} archived={isArchivePreview} topics={briefingTopics}/>
 
       <section id="relative-strength" className="dashboard-section" aria-labelledby="scanner-title" tabIndex={-1}>
       <div className="page-heading centered-heading">
@@ -253,4 +257,5 @@ export default function Scanner() {
     {isDevelopmentMode&&<DesignLabs/>}
   </div>;
 }
+
 

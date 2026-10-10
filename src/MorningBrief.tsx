@@ -1,14 +1,16 @@
 import { useState } from 'react';
 import type { Briefing, Snapshot, TreasuryYield } from './lib/scanner';
 import { normalizeMacroCalendar } from './lib/macroCalendar';
+import { visibleBriefingSectionKeys, type BriefingSectionKey, type BriefingTopicSelection } from './lib/briefingTopics';
 
 type KeyLevel = { id: 'ES' | 'NQ' | 'YM' | 'RTY'; label: string; high: number | null; low: number | null; highTime?: string | null; lowTime?: string | null; asOf: string | null; retrievedAt?: string | null; source: string; issue?: string };
 type SnapshotKeyLevels = Snapshot & { keyLevels?: KeyLevel[] };
 
-const sections: { key: keyof Briefing | 'keyLevels'; title: string }[] = [
+const sections: { key: keyof Briefing | 'keyLevels' | 'energy'; title: string }[] = [
   { key: 'indices', title: 'Overnight movements on the indices' },
   { key: 'bonds', title: 'Overnight movements on bonds' },
   { key: 'keyLevels', title: 'Key Levels' },
+  { key: 'energy', title: 'Energy' },
   { key: 'macro', title: 'Upcoming macro events' },
   { key: 'earnings', title: 'Upcoming earnings' },
   { key: 'news', title: 'Overnight news' },
@@ -77,26 +79,27 @@ function IndexOvernightTable({ data }: { data: Snapshot }) {
   </table></div>;
 }
 
-function OvernightMovementsPanel({ data }: { data: Snapshot }) {
+function OvernightMovementsPanel({ data, showEquities = true, showBonds = true }: { data: Snapshot; showEquities?: boolean; showBonds?: boolean }) {
   const indexNotes = data.briefing?.indices ?? [];
   const bondNotes = data.briefing?.bonds ?? [];
+  if (!showEquities && !showBonds) return null;
   return <section className="briefing-section panel overnight-combined-section" aria-labelledby="brief-overnight-movements">
     <div className="briefing-section-head"><span className="brief-section-number">01</span><h2 id="brief-overnight-movements">Overnight movements</h2></div>
-    <div className="overnight-pair">
-      <section className="overnight-column" aria-labelledby="brief-indices">
+    <div className={`overnight-pair${showEquities && showBonds ? '' : ' is-single-topic'}${showEquities ? ' has-equities' : ''}${showBonds ? ' has-bonds' : ''}`}>
+      {showEquities && <section className="overnight-column" aria-labelledby="brief-indices">
         <h3 id="brief-indices">Overnight movements on the indices</h3>
         <IndexOvernightTable data={data} />
         <div className="overnight-commentary">{indexNotes.length ? indexNotes.map((note, index) => <article key={index}>
           <h4>{note.title}</h4><p>{note.body}</p>
         </article>) : <p className="briefing-empty">No index commentary supplied.</p>}</div>
-      </section>
-      <section className="overnight-column" aria-labelledby="brief-bonds">
+      </section>}
+      {showBonds && <section className="overnight-column" aria-labelledby="brief-bonds">
         <h3 id="brief-bonds">Overnight movements on bonds</h3>
         <TreasuryYieldsTable data={data} />
         <div className="overnight-commentary">{bondNotes.length ? bondNotes.map((note, index) => <article key={index}>
           <h4>{note.title}</h4><p>{note.body}</p>
         </article>) : <p className="briefing-empty">No bond commentary supplied.</p>}</div>
-      </section>
+      </section>}
     </div>
   </section>;
 }
@@ -291,15 +294,22 @@ function SourcesCard({ data }: { data: Snapshot }) {
   </section>;
 }
 
-export default function MorningBrief({ data, error, archived = false }: { data: Snapshot; error: string; archived?: boolean }) {
+export default function MorningBrief({ data, error, archived = false, topics, showJump = true }: { data: Snapshot; error: string; archived?: boolean; topics?: BriefingTopicSelection | null; showJump?: boolean }) {
   const imported = data.status === 'imported';
-  const renderSection = ({ key, title }: { key: keyof Briefing | 'keyLevels'; title: string }, sectionIndex: number) => key === 'keyLevels'
+  const customized = topics !== undefined && topics !== null;
+  const selectedTopics = topics ?? { equities: true, bonds: true, energy: true, macro: true, earnings: true };
+  const visibleKeys: BriefingSectionKey[] = customized
+    ? visibleBriefingSectionKeys(selectedTopics)
+    : ['indices', 'bonds', 'keyLevels', 'macro', 'earnings', 'news'];
+  const sectionVisible = (key: keyof Briefing | 'keyLevels' | 'energy') => visibleKeys.includes(key);
+  const renderSection = ({ key, title }: { key: keyof Briefing | 'keyLevels' | 'energy'; title: string }, sectionIndex: number) => key === 'keyLevels'
     ? <section className="briefing-section panel key-levels-section" key={key} aria-labelledby="brief-key-levels">
       <div className="briefing-section-head"><span className="brief-section-number">0{sectionIndex}</span><h2 id="brief-key-levels">{title}</h2></div>
       <div className="briefing-notes"><KeyLevelsTable data={data} /></div>
     </section>
-    : key === 'indices' ? <OvernightMovementsPanel data={data} key="overnight-movements" />
+    : key === 'indices' ? <OvernightMovementsPanel data={data} key="overnight-movements" showEquities={!customized || selectedTopics.equities} showBonds={!customized || selectedTopics.bonds} />
     : key === 'bonds' ? null
+    : key === 'energy' ? <section className="briefing-section panel" key={key} aria-labelledby="brief-energy"><div className="briefing-section-head"><span className="brief-section-number">0{sectionIndex}</span><h2 id="brief-energy">{title}</h2></div><div className="briefing-notes"><div className="briefing-empty">No energy commentary supplied for this snapshot.</div></div></section>
     : <section className="briefing-section panel" key={key} aria-labelledby={'brief-' + key}>
     <div className="briefing-section-head"><span className="brief-section-number">0{sectionIndex}</span><h2 id={'brief-' + key}>{title}</h2></div>
     <div className="briefing-notes">{key === 'macro' ? <MacroCalendarTable notes={data.briefing?.macro || []} sessionDate={data.sessionDate} /> : (data.briefing?.[key] || []).length ? data.briefing![key].map((note, index) => {
@@ -310,11 +320,12 @@ export default function MorningBrief({ data, error, archived = false }: { data: 
   return <section id="morning-brief" className="dashboard-section morning-section" aria-labelledby="brief-title" tabIndex={-1}>
     <div className="page-heading centered-heading">
       <div className="heading-center"><div className="section-heading-row"><h1 id="brief-title">Your Morning Brief<span className="title-dot">.</span></h1></div></div>
-      <a className="primary-button section-jump" href="#relative-strength">Skip to relative strength <span className="jump-arrow" aria-hidden="true">↓</span></a>
+      {showJump && <a className="primary-button section-jump" href="#relative-strength">Skip to relative strength <span className="jump-arrow" aria-hidden="true">↓</span></a>}
       <div className="heading-meta paper-meta"><span className="session-chip">{archived ? 'ARCHIVE COPY' : data.status==='draft' ? 'DRAFT BRIEF' : imported ? 'LEGACY EXAMPLE' : 'DAILY BRIEF'}</span></div>
     </div>
-    <div className="morning-sections">{sections.map((section, index) => renderSection(section, index))}
-      <SourcesCard data={data}/>
+    <div className="morning-sections">{sections.filter((section) => sectionVisible(section.key) && section.key !== 'bonds').map((section, index) => renderSection(section, index + 1))}
+      {!customized && <SourcesCard data={data}/>}
     </div>
   </section>;
 }
+

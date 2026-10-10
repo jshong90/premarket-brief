@@ -604,3 +604,40 @@ html[data-chart-grid="false"] body::before{display:none}
   .topbar.is-compact .market-range-window{max-height:0;overflow:hidden;opacity:0;margin:0}
 }
 @media(prefers-reduced-motion:reduce){.topbar .market-strip-heading,.topbar .market-tile,.topbar>.market-strip{transition:none!important}}
+
+.brief-builder-link{display:inline-flex;align-items:center;gap:6px;min-height:34px;padding:6px 10px;border:1px solid var(--border);border-radius:6px;background:var(--card);color:var(--text-primary);font-size:13px;white-space:nowrap}
+.brief-builder-link:hover{border-color:var(--primary);background:var(--secondary)}
+.brief-builder-main{max-width:1320px;padding:38px clamp(16px,4vw,52px) 72px;margin:0 auto}
+.brief-builder-controls{border:1px solid var(--border);border-radius:10px;background:var(--card);padding:clamp(20px,3vw,34px);margin-bottom:42px}
+.builder-heading{max-width:760px;margin-bottom:22px}
+.builder-heading h1{color:var(--foreground);font-family:"Newsreader",Georgia,serif;font-size:clamp(30px,4vw,42px);font-weight:600;letter-spacing:-.6px;margin:6px 0 10px}
+.builder-heading p{color:var(--text-secondary);font-size:16px;line-height:1.5;margin:0}
+.builder-options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.builder-option{position:relative;display:flex;align-items:center;gap:13px;min-height:76px;padding:13px 15px;border:1px solid var(--border);border-radius:7px;background:var(--background);cursor:pointer;transition:background .18s,border-color .18s,transform .18s}
+.builder-option:hover{border-color:var(--primary);transform:translateY(-1px)}
+.builder-option input{position:absolute;width:1px;height:1px;opacity:0;pointer-events:none}
+.builder-check{display:grid;place-items:center;flex:0 0 22px;width:22px;height:22px;border:1px solid var(--input);border-radius:5px;color:transparent;background:var(--card);transition:background .15s,border-color .15s,color .15s}
+.builder-option input:checked+.builder-check{background:var(--primary);border-color:var(--primary);color:var(--primary-foreground)}
+.builder-option input:focus-visible+.builder-check{outline:2px solid var(--ring);outline-offset:3px}
+.builder-option-copy{display:flex;flex-direction:column;gap:3px;min-width:0}
+.builder-option-copy strong{font-size:16px;font-weight:600;color:var(--foreground)}
+.builder-option-copy small{font-size:13px;line-height:1.35;color:var(--text-secondary)}
+.builder-actions{display:flex;align-items:center;gap:11px;margin-top:20px;flex-wrap:wrap}
+.builder-actions .primary-button,.builder-actions .secondary-button{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:38px}
+.builder-forward-icon{transform:rotate(180deg)}
+.builder-saved{font-size:13px;color:var(--text-secondary);margin-left:auto}
+.builder-energy-note{font-size:13px;color:var(--text-secondary);margin:15px 0 0}
+.builder-preview-heading{display:flex;align-items:end;justify-content:space-between;gap:16px;margin:0 0 16px}
+.builder-preview-heading h2{font-family:"Newsreader",Georgia,serif;font-size:30px;font-weight:600;letter-spacing:-.4px;margin:3px 0 0}
+.builder-preview-heading>span{font-size:13px;color:var(--text-secondary);padding-bottom:4px}
+.brief-builder-error{padding:22px;border:1px solid var(--border);border-radius:8px;background:var(--card);color:var(--foreground)}
+.brief-builder-error p{color:var(--text-secondary);margin:8px 0 0}
+.brief-builder-preview .morning-section{padding:0}
+.brief-builder-preview .morning-section>.page-heading{margin-bottom:16px}
+.brief-builder-preview .morning-section>.page-heading .heading-center{margin-inline:auto}
+.brief-builder-preview .morning-section>.page-heading h1{font-size:clamp(25px,3vw,34px)}
+.brief-builder-preview .morning-section .morning-sections{margin-top:0}
+.brief-builder-preview .overnight-pair.is-single-topic{grid-template-columns:minmax(0,1fr)}
+.brief-builder-preview .overnight-pair.is-single-topic .overnight-column{border-left:0;padding-left:var(--card-inset,20px)}
+@media(max-width:760px){.brief-builder-main{padding-top:24px}.builder-options{grid-template-columns:1fr}.brief-builder-controls{padding:20px}.builder-saved{margin-left:0;width:100%}.brief-builder-preview .morning-section>.page-heading{display:block}.brief-builder-preview .morning-section>.page-heading .heading-meta{display:none}}
+@media(max-width:540px){.topbar-main .brief-builder-link{font-size:0;padding:7px;gap:0}.topbar-main .brief-builder-link svg{width:16px;height:16px}.builder-actions .primary-button{flex:1}.builder-preview-heading{align-items:flex-start;flex-direction:column;gap:4px}.builder-preview-heading h2{font-size:26px}}
