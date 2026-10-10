@@ -1,0 +1,40 @@
+{
+  "version": 1,
+  "entries": [
+    {
+      "sessionDate": "2026-10-07",
+      "file": "snapshot-2026-10-07.json",
+      "status": "archived"
+    },
+    {
+      "sessionDate": "2026-10-06",
+      "file": "snapshot-2026-10-06.json",
+      "status": "archived"
+    },
+    {
+      "sessionDate": "2026-10-05",
+      "file": "snapshot-2026-10-05.json",
+      "status": "archived"
+    },
+    {
+      "sessionDate": "2026-10-02",
+      "file": "snapshot-2026-10-02.json",
+      "status": "archived"
+    },
+    {
+      "sessionDate": "2026-10-01",
+      "file": "snapshot-2026-10-01.json",
+      "status": "partial"
+    },
+    {
+      "sessionDate": "2026-09-30",
+      "file": "snapshot-2026-09-30.json",
+      "status": "imported"
+    },
+    {
+      "sessionDate": "2026-09-28",
+      "file": "snapshot-2026-09-27.json",
+      "status": "partial"
+    }
+  ]
+}

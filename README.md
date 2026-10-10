@@ -6,6 +6,14 @@ This repository is the editable React + TypeScript + Vite project. `index.html` 
 
 ## Daily snapshot
 
+## Site architecture
+
+The site is organized by user task under `src/features/`: the dashboard, morning brief, briefing builder, market context, connection diagnostics, and design lab. `src/pages/ArchivePage.tsx` presents dated snapshots. Shared theme controls live in `src/shared/`, while `src/data/` owns snapshot loading and the archive catalog. `src/lib/` contains validated data models and calculations; page components do not choose data providers.
+
+`public/data/snapshot.json` is the current packet. Dated packets remain immutable. The archive index is generated from valid dated packet files by `npm run archive:index` and regenerated during build, so a new archive appears without a hard-coded page edit. The briefing builder stores display choices in browser local storage separately from the snapshot. Its topics include Equities, Bonds, Energy, Macro Events, Earnings, and Overnight News.
+
+The main dashboard remains the morning brief followed by the relative-strength scanner. `index.html`, `premarket.html`, `briefing-builder.html`, and `archive.html` are Vite entry pages; all share the same theme and style system. Existing date query links continue to open the corresponding archived packet.
+
 **The relative-strength scanner cutoff is 06:20 AM America/Los_Angeles (09:20 AM Eastern), ten minutes before the open.** It follows daylight saving time, rather than remaining fixed to UTC−8 all year. No new scanner session is created on weekends or US stock-market holidays. Index and bond quote updates are separate from this cutoff: refresh them only at the user's request, at the actual observation time, without changing an already captured scanner range.
 
 Stocks and ETFs: 04:00 to 09:20 ET. NQ and ES futures: prior calendar day 18:00 to 09:20 ET. The end is exclusive: the 09:19 one-minute bar is the last eligible bar, and the 09:20 bar is excluded. If collection runs late, request historical bars bounded by the same cutoff; do not use later live range fields.
@@ -102,7 +110,7 @@ Validation covers TypeScript, snapshot structure, source metadata, date handling
 
 ## Design reference
 
-The combined dashboard uses the theme blocks and semantic text roles in `src/globals.css`. Change a theme token there to update every element that consumes it. Surface, border, and some component colors still have explicit rules; the component table below locates those exceptions. `src/MassiveConnectionTest.css` styles the connection result. The older CSS for the former separate Premarket layout is retained in `src/globals.css`, but both HTML entries now render the combined dashboard.
+The combined dashboard uses the theme blocks and semantic text roles in `src/globals.css`. Change a theme token there to update every element that consumes it. Surface, border, and some component colors still have explicit rules; the component table below locates those exceptions. `src/features/connections/MassiveConnectionTest.css` styles the connection result. The older CSS for the former separate Premarket layout is retained in `src/globals.css`, but both HTML entries now render the combined dashboard.
 
 ### Theme colors
 

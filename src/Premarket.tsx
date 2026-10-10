@@ -1,1 +1,1 @@
-export { default } from './App';
+export { default } from './features/dashboard/DashboardPage';

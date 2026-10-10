@@ -5,8 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc --noEmit && vite build",
-    "test": "node tests/text-tokens.test.mjs && node tests/scanner.test.mjs && node tests/briefing-topics.test.mjs && node tests/snapshot-packets.test.mjs && node tests/massive-api.test.mjs"
+    "archive:index": "node scripts/build-archive-index.mjs",
+    "build": "node scripts/build-archive-index.mjs && tsc --noEmit && vite build",
+    "test": "node scripts/build-archive-index.mjs && node tests/text-tokens.test.mjs && node tests/scanner.test.mjs && node tests/briefing-topics.test.mjs && node tests/archive-catalog.test.mjs && node tests/snapshot-packets.test.mjs && node tests/massive-api.test.mjs"
   },
   "dependencies": {
     "react": "19.2.6",

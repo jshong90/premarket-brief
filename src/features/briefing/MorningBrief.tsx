@@ -1,7 +1,7 @@
 import { useState } from 'react';
-import type { Briefing, Snapshot, TreasuryYield } from './lib/scanner';
-import { normalizeMacroCalendar } from './lib/macroCalendar';
-import { visibleBriefingSectionKeys, type BriefingSectionKey, type BriefingTopicSelection } from './lib/briefingTopics';
+import type { Briefing, Snapshot, TreasuryYield } from '@/lib/scanner';
+import { normalizeMacroCalendar } from '@/lib/macroCalendar';
+import { visibleBriefingSectionKeys, type BriefingSectionKey, type BriefingTopicSelection } from '@/lib/briefingTopics';
 
 type KeyLevel = { id: 'ES' | 'NQ' | 'YM' | 'RTY'; label: string; high: number | null; low: number | null; highTime?: string | null; lowTime?: string | null; asOf: string | null; retrievedAt?: string | null; source: string; issue?: string };
 type SnapshotKeyLevels = Snapshot & { keyLevels?: KeyLevel[] };
@@ -297,7 +297,7 @@ function SourcesCard({ data }: { data: Snapshot }) {
 export default function MorningBrief({ data, error, archived = false, topics, showJump = true }: { data: Snapshot; error: string; archived?: boolean; topics?: BriefingTopicSelection | null; showJump?: boolean }) {
   const imported = data.status === 'imported';
   const customized = topics !== undefined && topics !== null;
-  const selectedTopics = topics ?? { equities: true, bonds: true, energy: true, macro: true, earnings: true };
+  const selectedTopics = topics ?? { equities: true, bonds: true, energy: true, macro: true, earnings: true, news: true };
   const visibleKeys: BriefingSectionKey[] = customized
     ? visibleBriefingSectionKeys(selectedTopics)
     : ['indices', 'bonds', 'keyLevels', 'macro', 'earnings', 'news'];

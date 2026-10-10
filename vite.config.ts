@@ -5,6 +5,6 @@ export default defineConfig({
   base:"./",
   plugins:[react()],
   resolve:{alias:{"@":fileURLToPath(new URL("./src",import.meta.url))}},
-  build:{outDir:"dist",emptyOutDir:true,rollupOptions:{input:{index:fileURLToPath(new URL("./index.html",import.meta.url)),premarket:fileURLToPath(new URL("./premarket.html",import.meta.url)),briefingBuilder:fileURLToPath(new URL("./briefing-builder.html",import.meta.url))}}}
+  build:{outDir:"dist",emptyOutDir:true,rollupOptions:{input:{index:fileURLToPath(new URL("./index.html",import.meta.url)),premarket:fileURLToPath(new URL("./premarket.html",import.meta.url)),briefingBuilder:fileURLToPath(new URL("./briefing-builder.html",import.meta.url)),archive:fileURLToPath(new URL("./archive.html",import.meta.url))}}}
 });
 

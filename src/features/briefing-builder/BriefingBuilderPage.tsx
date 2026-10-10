@@ -1,11 +1,11 @@
 import { useEffect, useState } from 'react';
 import { ArrowLeft, Check, RotateCcw } from 'lucide-react';
 import { IMPORTED, type Snapshot } from '@/lib/scanner';
-import { readSnapshot } from '@/lib/snapshot';
+import { loadSnapshot } from '@/data/snapshotRepository';
 import { BRIEFING_TOPICS, DEFAULT_BRIEFING_TOPICS, readBriefingTopics, saveBriefingTopics, type BriefingTopicSelection } from '@/lib/briefingTopics';
-import MarketStrip from './MarketStrip';
-import MorningBrief from './MorningBrief';
-import ThemeToggle from './ThemeToggle';
+import MarketStrip from '@/features/market-context/MarketContextStrip';
+import MorningBrief from '@/features/briefing/MorningBrief';
+import ThemeToggle from '@/shared/ThemeToggle';
 
 const formatDate = (date: string) => new Intl.DateTimeFormat('en-US', {
   weekday: 'long', month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC',
@@ -19,16 +19,9 @@ export default function BriefingBuilder() {
 
   useEffect(() => {
     setTopics(readBriefingTopics() ?? DEFAULT_BRIEFING_TOPICS);
-    const params = new URLSearchParams(window.location.search);
-    const requestedDate = params.get('date');
-    const openingRequested = params.get('scan') === '0635' && !requestedDate;
-    const snapshotFile = requestedDate && /^\d{4}-\d{2}-\d{2}$/.test(requestedDate)
-      ? `snapshot-${requestedDate}.json`
-      : openingRequested ? 'snapshot-opening-0635.json' : 'snapshot.json';
     const controller = new AbortController();
-    fetch(new URL(`./data/${snapshotFile}`, window.location.href), { cache: 'no-store', signal: controller.signal })
-      .then((response) => { if (!response.ok) throw new Error(`Snapshot file unavailable (${response.status}).`); return response.json(); })
-      .then((packet) => { setData(readSnapshot(packet)); setLoaded(true); })
+    loadSnapshot({ search: window.location.search, baseUrl: window.location.href, signal: controller.signal })
+      .then((packet) => { setData(packet); setLoaded(true); })
       .catch((cause: unknown) => {
         if (cause instanceof Error && cause.name === 'AbortError') return;
         setError(cause instanceof Error ? cause.message : 'The snapshot could not be loaded.');
@@ -55,7 +48,7 @@ export default function BriefingBuilder() {
   return <div className="app-shell brief-builder-page">
     <header className="topbar">
       <div className="topbar-main">
-        <div className="topbar-leading"><a href={backHref} className="brand" aria-label="Return to the morning brief"><span className="brand-mark">W</span></a><a className="brief-builder-link" href={backHref}><ArrowLeft size={15}/> Morning brief</a></div>
+        <div className="topbar-leading"><a href={backHref} className="brand" aria-label="Return to the morning brief"><span className="brand-mark">W</span></a><a className="brief-builder-link" href={backHref}><ArrowLeft size={15}/> Morning brief</a><a className="brief-builder-link" href="./archive.html"><span>Archive</span></a></div>
         <time className="topbar-date" dateTime={error ? undefined : data.sessionDate}>{error ? 'Snapshot unavailable' : pageDate}</time>
         <ThemeToggle/>
       </div>
@@ -83,7 +76,7 @@ export default function BriefingBuilder() {
         <p className="builder-energy-note">Energy is ready as a section; it will show a placeholder until energy commentary is added to the snapshot.</p>
       </section>
       <section className="brief-builder-preview" aria-labelledby="brief-preview-title">
-        <div className="builder-preview-heading"><div><div className="eyebrow">PREVIEW</div><h2 id="brief-preview-title">Your selected brief</h2></div><span>{Object.values(topics).filter(Boolean).length} of 5 topics</span></div>
+        <div className="builder-preview-heading"><div><div className="eyebrow">PREVIEW</div><h2 id="brief-preview-title">Your selected brief</h2></div><span>{Object.values(topics).filter(Boolean).length} of {BRIEFING_TOPICS.length} topics</span></div>
         {error ? <div className="brief-builder-error" role="alert"><strong>Brief preview unavailable</strong><p>{error}</p><p>Topic choices remain available and are saved in this browser.</p></div> : <MorningBrief data={data} error="" archived={Boolean(params.get('date'))} topics={topics} showJump={false}/>}
       </section>
     </main>
