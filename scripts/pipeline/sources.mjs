@@ -57,8 +57,8 @@ export const marketDataSources = [
     detail: 'Completed one-minute OHLC bars for the exact overnight window only. Partial or missing ranges remain null; never substitute a quote or an unbounded chart high/low.',
   },
   {
-    field: 'US common-stock universe at/above $50B', primary: [providers.robinhood], backup: [],
-    detail: 'Record the discovered count and market-cap evidence. Set universeComplete=false unless discovery coverage is demonstrated; StockAnalysis is approved for the earnings screen, not as a claimed complete scanner universe.',
+    field: 'U.S. equity-universe discovery', primary: [providers.robinhood], backup: [],
+    detail: 'Report the discovered count and disclose coverage gaps; do not claim complete discovery without evidence.',
   },
   {
     field: 'Sector-strength panel', primary: [], backup: [],
