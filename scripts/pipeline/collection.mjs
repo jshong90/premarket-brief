@@ -88,7 +88,7 @@ export function normalizeResponse(envelope, request, calendar, cache = { previou
     source: `${providers[envelope.provider].name} · ${envelope.symbol}`, url: envelope.url, retrievedAt,
     delayMinutes: delay, previousClose: previousClose(envelope.previousClose, request, envelope, cache) };
   if (!base.previousClose) issues.push('Previous-session close unavailable for this instrument.');
-  if (spec.kind === 'proxy') issues.push('Spreadex CFD proxy; not the SPX cash index.');
+  if (spec.kind === 'proxy') issues.push(spec.proxyDescription ?? 'Proxy instrument; not the underlying cash index.');
 
   if (request.kind === 'quote') {
     let raw = envelope.data;

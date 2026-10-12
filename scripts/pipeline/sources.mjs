@@ -4,32 +4,86 @@ export const providers = {
   robinhood: { name: 'Robinhood MCP', url: 'https://robinhood.com/' },
   public: { name: 'Public.com MCP', url: 'https://public.com/' },
   tradingview: { name: 'TradingView Official MCP', url: 'https://www.tradingview.com/' },
+  openmarket: { name: 'OpenMarket MCP', url: 'https://openmarket.xyz/' },
 };
-const quoteOrder = ['robinhood', 'public', 'tradingview'];
+
+// These routes are the collection adapter's supported quote/bar requests.
+// Public replaces TradingView as a quote fallback; TradingView remains assigned
+// where timestamped one-minute futures bars are required.
+const quoteOrder = ['robinhood', 'public'];
 export const instruments = {
-  SPX: { name: 'Spreadex SPX CFD proxy', kind: 'proxy', unit: 'price', quote: ['tradingview'], symbols: { tradingview: 'SPREADEX:SPX' } },
-  SPY: { name: 'SPDR S&P 500 ETF Trust', kind: 'equity', unit: 'price', quote: quoteOrder, symbols: { robinhood: 'SPY', public: 'SPY', tradingview: 'AMEX:SPY' } },
-  QQQ: { name: 'Invesco QQQ Trust', kind: 'equity', unit: 'price', quote: quoteOrder, symbols: { robinhood: 'QQQ', public: 'QQQ', tradingview: 'NASDAQ:QQQ' } },
+  SPX: {
+    name: 'OpenMarket HYPERLIQUID_HIP3 / xyz:SP500 proxy', kind: 'proxy', unit: 'price',
+    quote: ['openmarket'], symbols: { openmarket: 'HYPERLIQUID_HIP3 / xyz:SP500' },
+    proxyDescription: 'OpenMarket synthetic SP500 proxy; not the SPX cash index.',
+  },
+  SPY: { name: 'SPDR S&P 500 ETF Trust', kind: 'equity', unit: 'price', quote: quoteOrder, symbols: { robinhood: 'SPY', public: 'SPY' } },
+  QQQ: { name: 'Invesco QQQ Trust', kind: 'equity', unit: 'price', quote: quoteOrder, symbols: { robinhood: 'QQQ', public: 'QQQ' } },
   VIX: { name: 'Cboe Volatility Index', kind: 'volatility', unit: 'price', quote: ['tradingview'], symbols: { tradingview: 'CBOE:VIX' } },
   ...Object.fromEntries(['2Y', '5Y', '10Y', '30Y'].map(tenor => [`US${tenor}`, {
     name: `U.S. ${tenor} Treasury yield`, kind: 'yield', unit: 'percent', quote: quoteOrder,
-    symbols: { robinhood: `US${tenor}`, public: `US${tenor}`, tradingview: `TVC:US${tenor.padStart(3, '0')}` },
+    symbols: { robinhood: `US${tenor}`, public: `US${tenor}` },
   }])),
   ...Object.fromEntries(['ES', 'NQ', 'YM', 'RTY'].map(id => [id, {
     name: `${id} futures`, kind: 'futures', unit: 'price', quote: quoteOrder, bars: ['tradingview'],
     symbols: { robinhood: id, public: id, tradingview: `${id === 'YM' ? 'CBOT_MINI' : 'CME_MINI'}:${id}1!` },
   }])),
 };
+
+const source = (name, url) => ({ name, url });
+export const marketDataSources = [
+  {
+    field: 'SPX premarket reference', primary: [providers.openmarket], backup: [],
+    detail: 'HYPERLIQUID_HIP3 / xyz:SP500 is a temporary proxy, not the SPX cash index. Keep the proxy and its prior close on the same instrument.',
+  },
+  {
+    field: 'SPY, QQQ and individual-equity quotes', primary: [providers.robinhood], backup: [providers.public],
+    detail: 'Public.com is the quote fallback. Scanner ranges require actual timestamped OHLCV bars; quote-only data stays unranked.',
+  },
+  {
+    field: 'U.S. Treasury yields (2Y, 5Y, 10Y, 30Y)', primary: [providers.robinhood], backup: [providers.public],
+    detail: 'Use the observation timestamp returned by the source; stale or unsupported readings remain blank.',
+  },
+  {
+    field: 'VIX', primary: [providers.tradingview], backup: [],
+    detail: 'TradingView Official MCP · CBOE:VIX. Retain the observation time.',
+  },
+  {
+    field: 'ES/NQ quotes and Key Levels', primary: [providers.openmarket], backup: [],
+    detail: 'Use the configured OpenMarket charts. Record the actual symbol and observation times; disclose any CME-related proxy and leave levels blank when the chart does not prove the requested window.',
+  },
+  {
+    field: 'Timestamped ES/NQ scanner benchmark ranges', primary: [providers.tradingview], backup: [],
+    detail: 'Completed one-minute OHLC bars for the exact overnight window only. Partial or missing ranges remain null; never substitute a quote or an unbounded chart high/low.',
+  },
+  {
+    field: 'US common-stock universe at/above $50B', primary: [providers.robinhood], backup: [],
+    detail: 'Record the discovered count and market-cap evidence. Set universeComplete=false unless discovery coverage is demonstrated; StockAnalysis is approved for the earnings screen, not as a claimed complete scanner universe.',
+  },
+  {
+    field: 'Sector-strength panel', primary: [], backup: [],
+    detail: 'Retired. Do not collect or display sector-relative-strength rows.',
+  },
+].map(row => ({ ...row, primary: row.primary.length ? row.primary : [source('Not collected', '')] }));
+
 export const editorialSources = [
-  { field: 'U.S. economic releases', source: 'Trading Economics', url: 'https://tradingeconomics.com/calendar', rule: 'Only explicitly approved releases; recheck dates and ET times.' },
-  { field: 'Fed events', source: 'Federal Reserve Board / relevant regional Fed', url: 'https://www.federalreserve.gov/newsevents/calendar.htm', rule: 'Official event pages; chronological; omit events at or after 16:00 ET.' },
-  { field: 'Treasury auctions', source: 'TreasuryDirect / U.S. Treasury', url: 'https://www.treasurydirect.gov/auctions/upcoming/', rule: 'Verify auction date, deadline and offering sizes; omit after-close events.' },
-  { field: 'Earnings', source: 'Earnings Whispers', url: 'https://www.earningswhispers.com/calendar', rule: 'Verify release timing; retain only companies above $25B with dated market-cap evidence.' },
-  { field: 'Earnings market caps', source: 'StockAnalysis', url: 'https://stockanalysis.com/list/biggest-companies/', rule: 'Dated USD capitalization; do not guess missing values.' },
+  { field: 'U.S. economic releases', source: 'Trading Economics', url: 'https://tradingeconomics.com/calendar', rule: 'U.S. calendar only; include upcoming events rated at least two stars. Recheck dates and ET times.' },
+  { field: 'Fed policy events, releases and speakers', source: 'Trading Economics', url: 'https://tradingeconomics.com/calendar', backup: 'Federal Reserve Board / relevant regional Fed', backupUrl: 'https://www.federalreserve.gov/newsevents/calendar.htm', rule: 'Trading Economics is primary; use official Fed event pages only to verify or fill a missing detail. Keep chronological and omit events at or after 16:00 ET.' },
+  { field: 'Treasury auctions and offering sizes', source: 'TreasuryDirect / U.S. Treasury', url: 'https://www.treasurydirect.gov/auctions/upcoming/', rule: 'Use official auction schedules and Treasury announcements for offering sizes; include relevant upcoming items before market close.' },
+  { field: 'Earnings', source: 'Earnings Whispers', url: 'https://www.earningswhispers.com/calendar', rule: 'Verify release timing; retain only companies strictly above $25B market capitalization with dated evidence.' },
+  { field: 'Earnings market-cap checks', source: 'StockAnalysis', url: 'https://stockanalysis.com/list/biggest-companies/', rule: 'Dated USD market-cap evidence for the earnings screen only; do not treat this list as a complete scanner universe.' },
+  { field: 'Overnight news', source: 'User-provided', url: '', rule: 'The user supplies news and commentary. Do not search or scrape other news sources.' },
 ];
+
+function sourceLinks(items) {
+  return items.map(item => item.url ? `[${item.name}](${item.url})` : item.name).join(' → ') || '—';
+}
+
 export function sourceMarkdown() {
-  return ['| Instrument | Quote order | Range source |', '| --- | --- | --- |',
-    ...Object.entries(instruments).map(([id, x]) => `| ${id}${x.kind === 'proxy' ? ' (CFD proxy)' : ''} | ${x.quote.map(p => providers[p].name).join(' → ')} | ${(x.bars ?? []).map(p => providers[p].name).join(' → ') || '—'} |`),
-    '', '| Calendar field | Source | Handling |', '| --- | --- | --- |',
-    ...editorialSources.map(x => `| ${x.field} | [${x.source}](${x.url}) | ${x.rule} |`)].join('\n');
+  return [
+    '| Dashboard data | Primary source | Backup | Handling |', '| --- | --- | --- | --- |',
+    ...marketDataSources.map(x => `| ${x.field} | ${sourceLinks(x.primary)} | ${sourceLinks(x.backup)} | ${x.detail} |`),
+    '', '| Briefing field | Primary source | Backup | Handling |', '| --- | --- | --- | --- |',
+    ...editorialSources.map(x => `| ${x.field} | ${x.url ? `[${x.source}](${x.url})` : x.source} | ${x.backup ? `[${x.backup}](${x.backupUrl})` : '—'} | ${x.rule} |`),
+  ].join('\n');
 }

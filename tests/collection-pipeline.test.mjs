@@ -16,9 +16,13 @@ const calendar = { sessionDate: day, equitiesOpen: true, bondsOpen: true,
 const now = () => '2026-10-12T13:35:00.000Z';
 const plan = makePlan(day, calendar, now());
 const request = id => plan.requests.find(r => r.id === id);
-const envelope = (id, overrides = {}) => ({ id, provider: 'tradingview', kind: request(id).kind,
-  symbol: request(id).symbols.tradingview, unit: request(id).unit, url: 'https://www.tradingview.com/',
-  retrievedAt: now(), delayMinutes: 10, data: { value: 100, asOf: '2026-10-12T13:19:00Z' }, ...overrides });
+const envelope = (id, overrides = {}) => {
+  const provider = overrides.provider ?? request(id).providers[0];
+  return { id, provider, kind: request(id).kind,
+    symbol: request(id).symbols[provider], unit: request(id).unit,
+    url: provider === 'openmarket' ? 'https://openmarket.xyz/' : `https://${provider === 'tradingview' ? 'www.tradingview.com' : provider === 'public' ? 'public.com' : 'robinhood.com'}/`,
+    retrievedAt: now(), delayMinutes: 10, data: { value: 100, asOf: '2026-10-12T13:19:00Z' }, ...overrides };
+};
 function bars(id = 'ES', count) {
   const w = windows(day), expected = (w.end - w.futuresStart) / 60000;
   return envelope(id, { intervalMinutes: 1, data: Array.from({ length: count ?? expected }, (_, i) => ({
@@ -77,14 +81,14 @@ test('stale equity readings and closed bond session retain no false current quot
   assert.match(closed.issue, /closed/);
 });
 
-test('TradingView bar quotes are normalized without copying their close by hand', () => {
+test('OpenMarket SPX proxy is labeled and uses the exact proxy instrument', () => {
   const q = normalizeResponse(envelope('SPX', { intervalMinutes: 1, data: [
     { time: '2026-10-12T13:19:00Z', close: 100 },
     { time: '2026-10-12T13:20:00Z', close: 200 },
   ] }), request('SPX'), calendar);
   assert.equal(q.value, 100);
   assert.equal(q.asOf, '2026-10-12T13:19:00.000Z');
-  assert.match(q.issue, /CFD proxy/);
+  assert.match(q.issue, /synthetic SP500 proxy; not the SPX cash index/);
 });
 
 test('collection batches by provider, caches unsupported results and falls back', async () => {
@@ -159,7 +163,9 @@ test('failed refreshed field clears old values and rollover prepares a separate 
   assert.equal(rolled.draft.previousArchiveDate, day);
   assert.ok(rolled.draft.marketContext.every(r => r.value === null));
   assert.deepEqual(rolled.archive.marketContext, original.marketContext);
-  assert.deepEqual(rolled.draft.briefing, { indices: [], bonds: [], energy: [], macro: [], earnings: [], news: [] });
+  assert.deepEqual(rolled.draft.briefing, Object.fromEntries(
+    Object.keys(original.briefing).map(section => [section, []]),
+  ));
 });
 
 test('apply enforces snapshot lease and refuses to overwrite a different archive', async () => {

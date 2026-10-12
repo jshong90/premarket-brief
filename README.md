@@ -40,28 +40,29 @@ Source assignments are maintained in the [generated approved source table](docs/
 
 | Dashboard area | Packet field | Handling |
 | --- | --- | --- |
-| Market context | `marketContext` | Shared canonical quotes; Spreadex SPX is explicitly labeled as a CFD proxy. |
-| Overnight indices | `indexQuotes` | ES/NQ last eligible futures close comes from the same bars as Key Levels when available. |
-| Overnight bonds | `treasuryYields` | US10Y reuses the header observation. Previous-session references retain their own provenance. |
-| Key Levels | `keyLevels` | Timestamped completed one-minute futures ranges; report incomplete coverage. |
-| Macro events | `briefing.macro` | Only approved releases; official Fed and Treasury events; chronological and before 16:00 ET. |
-| Earnings | `briefing.earnings` | Earnings Whispers; company capitalization strictly above $25B with dated evidence. |
-| News / commentary | `briefing.news`, `briefing.indices`, `briefing.bonds` | External factual notes need citations; user-authored commentary stays verbatim. |
-| Scanner | `stocks`, `benchmarks` | Existing scanner logic; shared valid futures records are available for an explicit benchmark capture. |
+| Market context | `marketContext` | OpenMarket's `HYPERLIQUID_HIP3 / xyz:SP500` is a temporary SPX proxy; Robinhood → Public for SPY/QQQ and Treasury yields; TradingView for VIX. |
+| Overnight indices | `indexQuotes` | OpenMarket charts for ES/NQ; retain the actual chart symbol and observation times. |
+| Overnight bonds | `treasuryYields` | Robinhood primary, Public fallback; US10Y can reuse the header observation with its provenance. |
+| Key Levels | `keyLevels` | OpenMarket ES/NQ chart reads; leave values blank unless the chart proves the requested session window and timestamps. |
+| Macro events | `briefing.macro` | Trading Economics: U.S. events rated at least two stars; Fed items use it first and official Fed pages as backup. |
+| Treasury auctions | `briefing.macro` | TreasuryDirect / U.S. Treasury official schedules and offering-size announcements. |
+| Earnings | `briefing.earnings` | Earnings Whispers; only companies strictly above $25B with dated StockAnalysis cap evidence. |
+| News / commentary | `briefing.news`, `briefing.indices`, `briefing.bonds` | Overnight news is user-provided; preserve the user's commentary verbatim. |
+| Scanner | `stocks`, `benchmarks` | Robinhood stock fields, with Public only as quote fallback; TradingView timestamped ES/NQ one-minute benchmark bars. Disclose incomplete universe discovery. |
 
-The collector covers the market tables. The existing scanner universe collection remains a separate operation. Reporting sources such as Reuters/CNBC can support editorial yield context but are not automatically treated as live quote feeds. Massive remains an optional connector with the limitations below.
+Use only the sources in the [approved source table](docs/data-sources.md); do not search elsewhere for replacement data. The scanner universe and its capitalization coverage must be reported as discovered, and must remain incomplete unless full coverage is demonstrated. Public.com is the designated quote fallback; it is not assumed to provide qualifying minute bars. Massive is available only as a connection diagnostic, not as an automatic market-data fallback.
 
 ### Section 03 refresh
 
 Section 03 stays part of the static snapshot; the site does not scrape calendars at runtime. Add or revise event notes in `public/data/snapshot.json` using a date title and a time-prefixed body such as `8:30 a.m. ET — ECONOMIC RELEASE · Initial jobless claims`. Use `sourceKey` values from `src/lib/macroCalendar.ts` for configured primary references. That module resolves display links, sorts by date and ET time, and drops timed events at or after 4:00 p.m. ET. The snapshot remains the source of selected event facts.
 
-For economic releases, Trading Economics is an index for only the U.S. reports you explicitly request or approve; there is no broad default import. For Fed events, check the Board's monthly calendar or the relevant Reserve Bank's official event/speech page. For auctions, check Treasury's tentative schedule and TreasuryDirect's upcoming auction details; use Treasury's refunding or auction announcements for offering sizes. Retain Econoday only to cross-check an exact event time when the primary page does not give one. The existing October 5 release selection is preserved; no new economic releases were added. Discord Markdown is produced only on request.
+Trading Economics is the primary calendar for U.S. economic releases and Fed policy events, releases, and speakers. Filter to upcoming U.S. events with at least two stars. Official Federal Reserve Board or regional Reserve Bank pages are backup verification for Fed items. Use TreasuryDirect and U.S. Treasury announcements for auctions and offering sizes. Earnings Whispers supplies earnings dates; include only companies strictly above $25B and retain dated StockAnalysis market-cap evidence. Overnight news is supplied by the user; do not search or scrape other news sources. Discord Markdown is produced only on request.
 
 ### Provenance rules and current gaps
 
 - Provider data must retain source, direct URL where applicable, actual bar/observation time, retrieval time, and any delay or coverage issue. Keep provider-specific details in the snapshot metadata so the page remains source-independent.
 - The expandable Sources card lists briefing-note links, index quote links when supplied, and Treasury-yield references. It does not yet expose links for Market Context rows, whose source and timestamp remain in the packet metadata.
-- The October 1 Key Levels rows contain observed cutoff-window highs and lows with bar and retrieval timestamps. ES and NQ have 920 eligible minute bars; YM and RTY each have eight absent minute buckets, disclosed on their rows. The scanner reuses the captured ES/NQ range as its benchmarks and uses independently sourced Robinhood stock and sector ranges.
+- OpenMarket is the approved source for the SPX proxy and configured ES/NQ Key Levels charts. TradingView remains assigned to VIX and the scanner's timestamped ES/NQ benchmark bars. The sector-strength panel has been retired.
 - The TradingView connection can report a delay of 15 minutes or more. A late collection must still use bars bounded by the original cutoff, and the delay must remain visible.
 - Changing a provider does not change the section contract. Change the provider registry only when the source is deliberately replaced, then regenerate its documentation; the packet must continue to meet the same field, timestamp, coverage, and null-handling rules.
 
