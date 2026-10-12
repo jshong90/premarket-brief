@@ -3,7 +3,8 @@ import { BriefTable } from '@/components/brief/BriefTable';
 import { NumericCell } from '@/components/brief/NumericCell';
 import { formatET } from '@/components/brief/numericFormat';
 import { CommentaryNotes } from '@/components/brief/Commentary';
-import { SectionHeading } from '@/components/brief/SectionHeading';
+import { BriefCard } from '@/components/brief/BriefCard';
+import { BriefStack, OvernightPair } from '@/components/brief/BriefLayout';
 import type { Briefing, Snapshot, TreasuryYield } from '@/lib/scanner';
 import { groupMacroCalendarRows, normalizeMacroCalendar } from '@/lib/macroCalendar';
 import { eligibleEarningsSessions, hasStructuredEarnings } from '@/lib/earningsCalendar';
@@ -81,9 +82,8 @@ function OvernightMovementsPanel({ data, showEquities = true, showBonds = true }
   const indexNotes = data.briefing?.indices ?? [];
   const bondNotes = data.briefing?.bonds ?? [];
   if (!showEquities && !showBonds) return null;
-  return <section className="briefing-section panel overnight-combined-section" aria-labelledby="brief-overnight-movements">
-    <SectionHeading id="brief-overnight-movements" number={1} title="Overnight movements" />
-    <div className={`overnight-pair${showEquities && showBonds ? '' : ' is-single-topic'}${showEquities ? ' has-equities' : ''}${showBonds ? ' has-bonds' : ''}`}>
+  return <BriefCard id="brief-overnight-movements" number={1} title="Overnight movements" role="overnight">
+    <OvernightPair equities={showEquities} bonds={showBonds}>
       {showEquities && <section className="overnight-column" aria-labelledby="brief-indices">
         <h3 id="brief-indices">Overnight movements on the indices</h3>
         <IndexOvernightTable data={data} />
@@ -94,8 +94,8 @@ function OvernightMovementsPanel({ data, showEquities = true, showBonds = true }
         <TreasuryYieldsTable data={data} />
         <div className="overnight-commentary"><CommentaryNotes notes={bondNotes} empty="No bond commentary supplied." /></div>
       </section>}
-    </div>
-  </section>;
+    </OvernightPair>
+  </BriefCard>;
 }
 
 const treasuryTenors = ['5Y', '10Y', '30Y'] as const;
@@ -323,19 +323,17 @@ export default function MorningBrief({ data, error, archived = false, topics, sh
     : ['indices', 'bonds', 'keyLevels', 'energy', 'macro', 'earnings', 'news'];
   const sectionVisible = (key: keyof Briefing | 'keyLevels' | 'energy') => visibleKeys.includes(key);
   const renderSection = ({ key, title }: { key: keyof Briefing | 'keyLevels' | 'energy'; title: string }, sectionIndex: number) => key === 'keyLevels'
-    ? <section className="briefing-section panel key-levels-section" key={key} aria-labelledby="brief-key-levels">
-      <SectionHeading id="brief-key-levels" number={sectionIndex} title={title} />
-      <div className="briefing-notes"><KeyLevelsTable data={data} /></div>
-    </section>
+    ? <BriefCard id="brief-key-levels" number={sectionIndex} title={title} role="levels" key={key}>
+      <KeyLevelsTable data={data} />
+    </BriefCard>
     : key === 'indices' ? <OvernightMovementsPanel data={data} key="overnight-movements" showEquities={!customized || selectedTopics.equities} showBonds={!customized || selectedTopics.bonds} />
     : key === 'bonds' ? null
-    : key === 'energy' ? <section className="briefing-section panel" key={key} aria-labelledby="brief-energy"><SectionHeading id="brief-energy" number={sectionIndex} title={title} /><div className="commentary-card-body"><CommentaryNotes notes={data.briefing?.energy ?? []} empty="No energy commentary supplied for this snapshot." /></div></section>
-    : <section className="briefing-section panel" key={key} aria-labelledby={'brief-' + key}>
-    <SectionHeading id={'brief-' + key} number={sectionIndex} title={title} />
-    <div className="briefing-notes">{key === 'macro' ? <MacroCalendarTable notes={data.briefing?.macro || []} sessionDate={data.sessionDate} /> : key === 'earnings' && hasStructuredEarnings(data.briefing?.earnings ?? []) ? <EarningsCalendar notes={data.briefing?.earnings ?? []} /> : (data.briefing?.[key] || []).length ? data.briefing![key].map((note, index) => {
+    : key === 'energy' ? <BriefCard id="brief-energy" number={sectionIndex} title={title} role="commentary" key={key}><CommentaryNotes notes={data.briefing?.energy ?? []} empty="No energy commentary supplied for this snapshot." /></BriefCard>
+    : <BriefCard id={'brief-' + key} number={sectionIndex} title={title} key={key}>
+    {key === 'macro' ? <MacroCalendarTable notes={data.briefing?.macro || []} sessionDate={data.sessionDate} /> : key === 'earnings' && hasStructuredEarnings(data.briefing?.earnings ?? []) ? <EarningsCalendar notes={data.briefing?.earnings ?? []} /> : (data.briefing?.[key] || []).length ? data.briefing![key].map((note, index) => {
       return <article className="briefing-note" key={index}><h3>{note.title}</h3><p>{note.body}</p></article>;
-    }) : <div className="briefing-empty">No notes supplied for this section.</div>}</div>
-  </section>;
+    }) : <div className="briefing-empty">No notes supplied for this section.</div>}
+  </BriefCard>;
   const sectionIndex = (key: keyof Briefing | 'keyLevels') => sections.findIndex((section) => section.key === key);
   return <section id="morning-brief" className="dashboard-section morning-section" aria-labelledby="brief-title" tabIndex={-1}>
     <div className="page-heading centered-heading">
@@ -343,9 +341,9 @@ export default function MorningBrief({ data, error, archived = false, topics, sh
       {showJump && <a className="primary-button section-jump" href="#relative-strength">Skip to relative strength <span className="jump-arrow" aria-hidden="true">↓</span></a>}
       <div className="heading-meta paper-meta"><span className="session-chip">{archived ? 'ARCHIVE COPY' : data.status==='draft' ? 'DRAFT BRIEF' : imported ? 'LEGACY EXAMPLE' : 'DAILY BRIEF'}</span></div>
     </div>
-    <div className="morning-sections">{sections.filter((section) => sectionVisible(section.key) && section.key !== 'bonds').map((section, index) => renderSection(section, index + 1))}
+    <BriefStack>{sections.filter((section) => sectionVisible(section.key) && section.key !== 'bonds').map((section, index) => renderSection(section, index + 1))}
       {!customized && <SourcesCard data={data}/>}
-    </div>
+    </BriefStack>
   </section>;
 }
 
