@@ -26,7 +26,17 @@ assert.ok(draft.marketContext.every(row => row.value === null || (row.asOf && ro
 assert.ok(draft.treasuryYields.every(row => row.value === null || (row.asOf && row.source && row.retrievedAt)));
 assert.ok(draft.indexQuotes.every(row => row.value === null || (row.asOf && row.source && row.retrievedAt)));
 assert.ok(draft.keyLevels.every(row => row.high === null || (row.low !== null && row.asOf && row.highTime && row.lowTime && row.source && row.retrievedAt)));
-assert.deepEqual(Object.keys(draft.briefing).sort(), ['bonds', 'earnings', 'indices', 'macro', 'news']);
+assert.deepEqual(Object.keys(draft.briefing).sort(), ['bonds', 'earnings', 'energy', 'indices', 'macro', 'news']);
+assert.equal(draft.sessionDate, '2026-10-12');
+assert.equal(draft.status, 'partial');
+assert.equal(draft.cutoffAt, '2026-10-12T13:20:00.000Z');
+assert.equal(draft.briefing.energy[0].title, 'Energy Commentary');
+assert.match(draft.briefing.energy[0].body, /\$93\.6/);
+assert.equal(draft.benchmarks.find(row => row.id === 'ES').high, 7887);
+assert.equal(draft.benchmarks.find(row => row.id === 'NQ').high, 31289.25);
+assert.equal(draft.stocks.length, 0);
+assert.equal(draft.sectors.length, 11);
+assert.ok(draft.messages.some(message => message.startsWith('Relative-strength scan is partial:')));
 const normalizedMacro = normalizeMacroCalendar(draft.briefing.macro, draft.sessionDate);
 assert.deepEqual(normalizedMacro.map(row => row.sortKey), [...normalizedMacro.map(row => row.sortKey)].sort((a, b) => a - b));
 assert.ok(normalizedMacro.every(row => row.time === '—' || row.sortKey % 86400000 < 16 * 60 * 60 * 1000));
