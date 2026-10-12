@@ -261,16 +261,24 @@ html[data-theme="light"] body p,html[data-theme="dark"] body p{color:var(--foreg
 .treasury-yields-table tbody tr:last-child>*{border-bottom:0}
 .treasury-yields-table tbody td small{display:block;margin-top:2px;font:10px "Source Sans 3",Arial,Helvetica,sans-serif;color:var(--muted-foreground);letter-spacing:0}
 .treasury-yields-note{font-size:11px!important;line-height:1.4!important;color:var(--muted-foreground)!important;margin:7px 0 0!important}
-.macro-calendar-wrap{max-width:100%;overflow-x:auto;margin:0 0 8px}
-.morning-sections>section[aria-labelledby="brief-macro"] .macro-calendar-wrap{grid-column:1/-1;width:100%}
-.macro-calendar{border-collapse:collapse;width:100%;min-width:580px;font-size:13px;font-variant-numeric:tabular-nums}
-.macro-calendar th,.macro-calendar td{padding:9px 8px;border-bottom:1px solid var(--border);text-align:left;vertical-align:top}
-.macro-calendar thead th{font-size:11px;font-weight:600;color:var(--foreground);white-space:nowrap}
-.macro-calendar tbody tr:last-child>*{border-bottom:0}
-.macro-calendar td:nth-child(2){white-space:nowrap}
-.macro-calendar td:last-child{font-size:11px;max-width:180px}
+.macro-calendar{width:100%;margin:0 0 8px}
+.morning-sections>section[aria-labelledby="brief-macro"] .macro-calendar{grid-column:1/-1;width:100%}
+.macro-calendar-meta{margin:0 0 8px;text-align:right;color:var(--muted-foreground);font-size:11px}
+.macro-days{display:grid;gap:10px}
+.macro-day{overflow:hidden;border:1px solid var(--border);border-radius:8px;background:var(--card)}
+.macro-day-header{display:flex;align-items:center;gap:10px;padding:10px 13px;background:var(--secondary);border-bottom:1px solid var(--border)}
+.macro-day-header h3{margin:0;color:var(--foreground);font-size:14px;font-weight:650;line-height:1.3}
+.macro-relative-day{margin-left:auto;padding:2px 7px;border:1px solid var(--border);border-radius:999px;color:var(--foreground);font-size:10px;font-weight:600;line-height:1.5;text-transform:uppercase;letter-spacing:.04em}
+.macro-events{list-style:none;margin:0;padding:0}
+.macro-event{display:grid;grid-template-columns:minmax(95px,120px) minmax(0,1fr);gap:12px;padding:10px 13px;border-bottom:1px solid var(--border);font-size:13px}
+.macro-event:last-child{border-bottom:0}
+.macro-event-time{color:var(--foreground);font-size:12px;font-variant-numeric:tabular-nums;white-space:nowrap}
+.macro-event-copy{min-width:0}
+.macro-event-copy p{margin:0;color:var(--foreground);line-height:1.4}
+.macro-event-sources{margin-top:3px;color:var(--muted-foreground);font-size:10px;line-height:1.35}
 .macro-calendar a{color:var(--foreground);text-decoration:underline;text-decoration-color:var(--border);text-underline-offset:2px}
 .macro-calendar a:hover{text-decoration-color:currentColor}
+@media(max-width:540px){.macro-day-header{padding:9px 10px}.macro-event{grid-template-columns:82px minmax(0,1fr);gap:8px;padding:9px 10px}.macro-event-time{font-size:11px}}
 .key-levels-wrap{max-width:100%;overflow-x:auto}
 .key-levels-table{border-collapse:collapse;width:100%;min-width:430px;font-size:13px;font-variant-numeric:tabular-nums}
 .key-levels-table th,.key-levels-table td{padding:10px 8px;border-bottom:1px solid var(--border);text-align:right;white-space:nowrap}

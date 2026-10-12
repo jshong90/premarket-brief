@@ -7,7 +7,7 @@ const compile = source => 'data:text/javascript;base64,' + Buffer.from(ts.transp
 }).outputText).toString('base64');
 const scannerUrl = compile(fs.readFileSync('src/lib/scanner.ts', 'utf8'));
 const rangesUrl = compile(fs.readFileSync('src/lib/ranges.ts', 'utf8').replace("'./scanner'", JSON.stringify(scannerUrl)));
-const { normalizeMacroCalendar } = await import(compile(fs.readFileSync('src/lib/macroCalendar.ts', 'utf8')));
+const { normalizeMacroCalendar, groupMacroCalendarRows } = await import(compile(fs.readFileSync('src/lib/macroCalendar.ts', 'utf8')));
 const { readSnapshot } = await import(compile(fs.readFileSync('src/lib/snapshot.ts', 'utf8')
   .replace("'./scanner'", JSON.stringify(scannerUrl))
   .replace("'./ranges'", JSON.stringify(rangesUrl))));
@@ -35,6 +35,13 @@ const normalizedMacro = normalizeMacroCalendar(draft.briefing.macro, draft.sessi
 assert.ok(normalizedMacro.length >= 20);
 assert.deepEqual(normalizedMacro.map(row => row.sortKey), [...normalizedMacro.map(row => row.sortKey)].sort((a, b) => a - b));
 assert.ok(normalizedMacro.every(row => row.time === '—' || row.sortKey % 86400000 < 16 * 60 * 60 * 1000));
+const agendaRows = normalizeMacroCalendar([
+  { title: 'Wednesday, October 14, 2026', body: '10:00 a.m. ET — Later event\n8:30 a.m. ET — Earlier event', source: 'Calendar', url: 'https://example.com/calendar' },
+  { title: 'Thursday, October 15, 2026', body: '8:30 a.m. ET — Next day event', source: 'Calendar', url: 'https://example.com/calendar' },
+], '2026-10-13');
+const agendaGroups = groupMacroCalendarRows(agendaRows, '2026-10-13');
+assert.deepEqual(agendaGroups.map(group => [group.heading, group.relative]), [['Wednesday, Oct 14', 'Tomorrow'], ['Thursday, Oct 15', null]]);
+assert.deepEqual(agendaGroups[0].rows.map(row => row.event), ['Earlier event', 'Later event']);
 const withAfterClose = normalizeMacroCalendar([...draft.briefing.macro, {
   title: 'Thursday, October 15', body: '7:00 p.m. ET — FED · after-close event',
   source: 'Desk calendar', url: 'https://example.com/calendar',
