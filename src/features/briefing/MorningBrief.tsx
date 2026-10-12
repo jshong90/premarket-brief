@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import type { Briefing, Snapshot, TreasuryYield } from '@/lib/scanner';
+import type { Briefing, BriefingNote, Snapshot, TreasuryYield } from '@/lib/scanner';
 import { groupMacroCalendarRows, normalizeMacroCalendar } from '@/lib/macroCalendar';
 import { eligibleEarningsSessions, hasStructuredEarnings } from '@/lib/earningsCalendar';
 import { visibleBriefingSectionKeys, type BriefingSectionKey, type BriefingTopicSelection } from '@/lib/briefingTopics';
@@ -80,6 +80,14 @@ function IndexOvernightTable({ data }: { data: Snapshot }) {
   </table></div>;
 }
 
+function CommentaryNotes({ notes, empty }: { notes: BriefingNote[]; empty: string }) {
+  if (!notes.length) return <p className="commentary-empty">{empty}</p>;
+  return <>{notes.map((note, index) => <article className="commentary-note" key={index}>
+    <h4 className="commentary-label">{note.title}</h4>
+    <p className="commentary-body">{note.body}</p>
+  </article>)}</>;
+}
+
 function OvernightMovementsPanel({ data, showEquities = true, showBonds = true }: { data: Snapshot; showEquities?: boolean; showBonds?: boolean }) {
   const indexNotes = data.briefing?.indices ?? [];
   const bondNotes = data.briefing?.bonds ?? [];
@@ -90,16 +98,12 @@ function OvernightMovementsPanel({ data, showEquities = true, showBonds = true }
       {showEquities && <section className="overnight-column" aria-labelledby="brief-indices">
         <h3 id="brief-indices">Overnight movements on the indices</h3>
         <IndexOvernightTable data={data} />
-        <div className="overnight-commentary">{indexNotes.length ? indexNotes.map((note, index) => <article key={index}>
-          <h4>{note.title}</h4><p>{note.body}</p>
-        </article>) : <p className="briefing-empty">No index commentary supplied.</p>}</div>
+        <div className="overnight-commentary"><CommentaryNotes notes={indexNotes} empty="No index commentary supplied." /></div>
       </section>}
       {showBonds && <section className="overnight-column" aria-labelledby="brief-bonds">
         <h3 id="brief-bonds">Overnight movements on bonds</h3>
         <TreasuryYieldsTable data={data} />
-        <div className="overnight-commentary">{bondNotes.length ? bondNotes.map((note, index) => <article key={index}>
-          <h4>{note.title}</h4><p>{note.body}</p>
-        </article>) : <p className="briefing-empty">No bond commentary supplied.</p>}</div>
+        <div className="overnight-commentary"><CommentaryNotes notes={bondNotes} empty="No bond commentary supplied." /></div>
       </section>}
     </div>
   </section>;
@@ -349,7 +353,7 @@ export default function MorningBrief({ data, error, archived = false, topics, sh
     </section>
     : key === 'indices' ? <OvernightMovementsPanel data={data} key="overnight-movements" showEquities={!customized || selectedTopics.equities} showBonds={!customized || selectedTopics.bonds} />
     : key === 'bonds' ? null
-    : key === 'energy' ? <section className="briefing-section panel" key={key} aria-labelledby="brief-energy"><div className="briefing-section-head"><span className="brief-section-number">0{sectionIndex}</span><h2 id="brief-energy">{title}</h2></div><div className="briefing-notes">{(data.briefing?.energy ?? []).length ? (data.briefing?.energy ?? []).map((note, index) => <article className="briefing-note" key={index}><h3>{note.title}</h3><p>{note.body}</p></article>) : <div className="briefing-empty">No energy commentary supplied for this snapshot.</div>}</div></section>
+    : key === 'energy' ? <section className="briefing-section panel" key={key} aria-labelledby="brief-energy"><div className="briefing-section-head"><span className="brief-section-number">0{sectionIndex}</span><h2 id="brief-energy">{title}</h2></div><div className="commentary-card-body"><CommentaryNotes notes={data.briefing?.energy ?? []} empty="No energy commentary supplied for this snapshot." /></div></section>
     : <section className="briefing-section panel" key={key} aria-labelledby={'brief-' + key}>
     <div className="briefing-section-head"><span className="brief-section-number">0{sectionIndex}</span><h2 id={'brief-' + key}>{title}</h2></div>
     <div className="briefing-notes">{key === 'macro' ? <MacroCalendarTable notes={data.briefing?.macro || []} sessionDate={data.sessionDate} /> : key === 'earnings' && hasStructuredEarnings(data.briefing?.earnings ?? []) ? <EarningsCalendar notes={data.briefing?.earnings ?? []} /> : (data.briefing?.[key] || []).length ? data.briefing![key].map((note, index) => {
@@ -368,4 +372,5 @@ export default function MorningBrief({ data, error, archived = false, topics, sh
     </div>
   </section>;
 }
+
 
