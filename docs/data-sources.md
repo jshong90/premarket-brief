@@ -2,25 +2,22 @@
 
 Generated from scripts/pipeline/sources.mjs. Run npm run brief:sources after an intentional source change.
 
-| Instrument | Quote order | Range source |
-| --- | --- | --- |
-| SPX (CFD proxy) | TradingView Official MCP | — |
-| SPY | Robinhood MCP → Public.com MCP → TradingView Official MCP | — |
-| QQQ | Robinhood MCP → Public.com MCP → TradingView Official MCP | — |
-| VIX | TradingView Official MCP | — |
-| US2Y | Robinhood MCP → Public.com MCP → TradingView Official MCP | — |
-| US5Y | Robinhood MCP → Public.com MCP → TradingView Official MCP | — |
-| US10Y | Robinhood MCP → Public.com MCP → TradingView Official MCP | — |
-| US30Y | Robinhood MCP → Public.com MCP → TradingView Official MCP | — |
-| ES | Robinhood MCP → Public.com MCP → TradingView Official MCP | TradingView Official MCP |
-| NQ | Robinhood MCP → Public.com MCP → TradingView Official MCP | TradingView Official MCP |
-| YM | Robinhood MCP → Public.com MCP → TradingView Official MCP | TradingView Official MCP |
-| RTY | Robinhood MCP → Public.com MCP → TradingView Official MCP | TradingView Official MCP |
+| Dashboard data | Primary source | Backup | Handling |
+| --- | --- | --- | --- |
+| SPX premarket reference | [OpenMarket MCP](https://openmarket.xyz/) | — | HYPERLIQUID_HIP3 / xyz:SP500 is a temporary proxy, not the SPX cash index. Keep the proxy and its prior close on the same instrument. |
+| SPY, QQQ and individual-equity quotes | [Robinhood MCP](https://robinhood.com/) | [Public.com MCP](https://public.com/) | Public.com is the quote fallback. Scanner ranges require actual timestamped OHLCV bars; quote-only data stays unranked. |
+| U.S. Treasury yields (2Y, 5Y, 10Y, 30Y) | [Robinhood MCP](https://robinhood.com/) | [Public.com MCP](https://public.com/) | Use the observation timestamp returned by the source; stale or unsupported readings remain blank. |
+| VIX | [TradingView Official MCP](https://www.tradingview.com/) | — | TradingView Official MCP · CBOE:VIX. Retain the observation time. |
+| ES/NQ quotes and Key Levels | [OpenMarket MCP](https://openmarket.xyz/) | — | Use the configured OpenMarket charts. Record the actual symbol and observation times; disclose any CME-related proxy and leave levels blank when the chart does not prove the requested window. |
+| Timestamped ES/NQ scanner benchmark ranges | [TradingView Official MCP](https://www.tradingview.com/) | — | Completed one-minute OHLC bars for the exact overnight window only. Partial or missing ranges remain null; never substitute a quote or an unbounded chart high/low. |
+| US common-stock universe at/above $50B | [Robinhood MCP](https://robinhood.com/) | — | Record the discovered count and market-cap evidence. Set universeComplete=false unless discovery coverage is demonstrated; StockAnalysis is approved for the earnings screen, not as a claimed complete scanner universe. |
+| Sector-strength panel | Not collected | — | Retired. Do not collect or display sector-relative-strength rows. |
 
-| Calendar field | Source | Handling |
-| --- | --- | --- |
-| U.S. economic releases | [Trading Economics](https://tradingeconomics.com/calendar) | Only explicitly approved releases; recheck dates and ET times. |
-| Fed events | [Federal Reserve Board / relevant regional Fed](https://www.federalreserve.gov/newsevents/calendar.htm) | Official event pages; chronological; omit events at or after 16:00 ET. |
-| Treasury auctions | [TreasuryDirect / U.S. Treasury](https://www.treasurydirect.gov/auctions/upcoming/) | Verify auction date, deadline and offering sizes; omit after-close events. |
-| Earnings | [Earnings Whispers](https://www.earningswhispers.com/calendar) | Verify release timing; retain only companies above $25B with dated market-cap evidence. |
-| Earnings market caps | [StockAnalysis](https://stockanalysis.com/list/biggest-companies/) | Dated USD capitalization; do not guess missing values. |
+| Briefing field | Primary source | Backup | Handling |
+| --- | --- | --- | --- |
+| U.S. economic releases | [Trading Economics](https://tradingeconomics.com/calendar) | — | U.S. calendar only; include upcoming events rated at least two stars. Recheck dates and ET times. |
+| Fed policy events, releases and speakers | [Trading Economics](https://tradingeconomics.com/calendar) | [Federal Reserve Board / relevant regional Fed](https://www.federalreserve.gov/newsevents/calendar.htm) | Trading Economics is primary; use official Fed event pages only to verify or fill a missing detail. Keep chronological and omit events at or after 16:00 ET. |
+| Treasury auctions and offering sizes | [TreasuryDirect / U.S. Treasury](https://www.treasurydirect.gov/auctions/upcoming/) | — | Use official auction schedules and Treasury announcements for offering sizes; include relevant upcoming items before market close. |
+| Earnings | [Earnings Whispers](https://www.earningswhispers.com/calendar) | — | Verify release timing; retain only companies strictly above $25B market capitalization with dated evidence. |
+| Earnings market-cap checks | [StockAnalysis](https://stockanalysis.com/list/biggest-companies/) | — | Dated USD market-cap evidence for the earnings screen only; do not treat this list as a complete scanner universe. |
+| Overnight news | User-provided | — | The user supplies news and commentary. Do not search or scrape other news sources. |
