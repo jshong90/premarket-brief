@@ -680,7 +680,7 @@ h1 {
   gap: 2px;
   overflow: hidden;
   margin: 1px 18px 18px;
-  background: #303c26;
+  background: var(--resilience-track);
 }
 .scale-row {
   display: flex;
@@ -1989,6 +1989,7 @@ html[data-theme="light"] {
   --background: #f4f1eb;
   --foreground: #000000;
   --card: #fbfaf8;
+  --resilience-track: #dadada;
   --card-foreground: var(--foreground);
   --popover: #fbfaf8;
   --popover-foreground: var(--foreground);
@@ -2008,6 +2009,7 @@ html[data-theme="dark"] {
   --background: #25282b;
   --foreground: #e7e8e9;
   --card: #303438;
+  --resilience-track: #222222;
   --card-foreground: var(--foreground);
   --popover: #383c40;
   --popover-foreground: var(--foreground);
@@ -2169,7 +2171,7 @@ html[data-theme="dark"] .ticker-mark.aapl,html[data-theme="dark"] .ticker-mark.c
   border-color: #555b60;
   color: var(--text-primary);
 }
-html[data-theme="light"] .capture-track,html[data-theme="light"] .coverage-track,html[data-theme="light"] .distribution-bar {
+html[data-theme="light"] .capture-track,html[data-theme="light"] .coverage-track {
   background: #e2ded7;
 }
 html[data-theme="dark"] .capture-track,html[data-theme="dark"] .coverage-track {
