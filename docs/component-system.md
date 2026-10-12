@@ -108,3 +108,16 @@ are unchanged. Header/market-context and scanner composition remain separate
 future increments; the entire dashboard migration is not yet complete.
 
 The archive audit also found an existing invalid-date conversion for undated macro titles. Source-month fallback now checks the Date value before conversion; undated labels and unconfirmed times remain undated. A regression test covers dated and undated source resolution.
+
+## Increment 6: header and scanner overview
+
+DashboardHeader composes navigation, the session date, ThemeToggle and the existing
+MarketContextStrip. ScannerOverview renders the benchmark, leaders and coverage
+cards. ResilienceScale owns the mode-independent classification display. The page
+passes callbacks; snapshot loading, filter/selection state and calculations remain
+centralized. Scanner display formatters moved unchanged into scannerDisplay.ts;
+they retain the scanner's distinct precision and 24-hour timestamp conventions.
+
+Before/after markup matches in 24 header/overview/scale combinations covering
+compact state, archive navigation and imported/current modes. Full tests/build
+pass. Scanner rankings, drawers and status footer remain the next composition step.

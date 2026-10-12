@@ -1,28 +1,25 @@
-import { SectionJump } from '@/components/brief/SectionJump';
 'use client';
+
+import { SectionJump } from '@/components/brief/SectionJump';
 
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { flushSync } from 'react-dom';
-import { ArrowDown, ArrowDownUp, ArrowUpRight, Archive, ChevronLeft, ChevronRight, CircleHelp, Database, Info, Clock3, LockKeyhole, Search, ShieldCheck, SlidersHorizontal, Sunrise, X } from 'lucide-react';
+import { ArrowDown, ArrowDownUp, ArrowUpRight, ChevronRight, CircleHelp, Database, Info, LockKeyhole, Search, ShieldCheck, Sunrise, X } from 'lucide-react';
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle } from '@/components/ui/sheet';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import { IMPORTED, metrics, topRelativeStrength, type Snapshot, type Instrument, type BenchmarkId, type Band } from '@/lib/scanner';
+import { IMPORTED, metrics, topRelativeStrength, type Snapshot, type Instrument, type BenchmarkId } from '@/lib/scanner';
 import { loadSnapshot } from '@/data/snapshotRepository';
 import { readBriefingTopics, type BriefingTopicSelection } from '@/lib/briefingTopics';
-import MarketStrip from '@/features/market-context/MarketContextStrip';
-import ThemeToggle from '@/shared/ThemeToggle';
 import MorningBrief from '@/features/briefing/MorningBrief';
 import MassiveConnectionTest from '@/features/connections/MassiveConnectionTest';
 import DesignLabs from '@/features/design-lab/DesignLabs';
+import { DashboardHeader } from './DashboardHeader';
+import { ScannerOverview } from './ScannerOverview';
+import { ResilienceScale } from './ResilienceScale';
+import { number, quotePrice, percent, signed, clock, tone } from './scannerDisplay';
 
-const number = (v: number | null | undefined, digits=2) => v == null || !Number.isFinite(v) ? '—' : v.toLocaleString('en-US',{minimumFractionDigits:digits,maximumFractionDigits:digits});
-const quotePrice = (v: number | null | undefined) => v == null || !Number.isFinite(v) ? '—' : v.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:3});
-const percent = (v: number | null | undefined, digits=2) => v == null ? '—' : `${number(v,digits)}%`;
-const signed = (v: number | null | undefined, suffix='%') => v == null ? '—' : `${v>0?'+':''}${number(v)}${suffix}`;
-const clock = (v: string | null | undefined) => !v ? '—' : new Intl.DateTimeFormat('en-US',{timeZone:'America/New_York',hour:'2-digit',minute:'2-digit',hour12:false}).format(new Date(v));
-const tone = (band: Band | null) => band === 'Exceptional RS' ? 'exceptional' : band === 'Clear RS' ? 'clear' : band === 'Moderate RS' ? 'moderate' : band === 'Laggard' ? 'laggard' : 'neutral';
 type SortKey='ticker'|'drawdown'|'capture'|'advantage'|'recovery';
 const dataConnectionRows = [
   { field:'SPX premarket reference', sources:[{label:'OpenMarket MCP',url:'https://openmarket.xyz/'}], detail:'HYPERLIQUID_HIP3 / xyz:SP500 is a temporary proxy, not the SPX cash index. Compare only with the same instrument’s prior close.' },
@@ -213,14 +210,10 @@ export default function Scanner() {
   if (!snapshotLoaded) return <main className="snapshot-load-state" role={error?'alert':'status'} aria-live="polite"><div className="snapshot-load-card"><span className="snapshot-load-mark">W</span><h1>{error?'Snapshot unavailable':'Loading morning snapshot'}</h1><p>{error||'Checking the published snapshot and its required fields…'}</p>{error&&<button type="button" onClick={()=>window.location.reload()}>Try again</button>}</div></main>;
 
   return <div className="app-shell">
-    <header className={`topbar${compactHeader?' is-compact':''}`}>
-      <div className="topbar-main">
-        <div className="topbar-leading">{(isArchivePreview||archiveDate)&&<a className="snapshot-nav-link" href={isArchivePreview?latestHref:archiveHref} aria-label={isArchivePreview?'Return to the latest snapshot':`View the ${formatDateLabel(archiveDate!)} archive`} title={isArchivePreview?'Latest snapshot':`Previous snapshot · ${formatDateLabel(archiveDate!)}`}>{isArchivePreview?<ChevronRight size={18}/>:<ChevronLeft size={18}/>}<span>{isArchivePreview?'Latest':archiveDate!.slice(5).replace('-', '/')}</span></a>}<a href={latestHref} className="brand" aria-label="The Warren home"><span className="brand-mark">W</span></a><a className="brief-builder-link" href={builderHref}><SlidersHorizontal size={15}/><span>Build your brief</span></a><a className="brief-builder-link" href="./archive.html"><Archive size={15}/><span>Archive</span></a></div>
-        <time className="topbar-date" dateTime={data.sessionDate}>{pageDateLabel}</time>
-        <ThemeToggle/><button className="connection-button" onClick={()=>setDrawer('connections')}><Clock3 size={14}/><span>{cutoffPacific} Pacific</span><ChevronRight size={15}/></button>
-      </div>
-      <MarketStrip data={data}/>
-    </header>
+    <DashboardHeader data={data} compactHeader={compactHeader} isArchivePreview={isArchivePreview}
+      archiveDate={archiveDate} archiveLabel={archiveDate ? formatDateLabel(archiveDate) : ''}
+      latestHref={latestHref} archiveHref={archiveHref} builderHref={builderHref}
+      pageDateLabel={pageDateLabel} cutoffPacific={cutoffPacific} onConnections={()=>setDrawer('connections')} />
     <main>
       <MorningBrief data={data} error={error} archived={isArchivePreview} topics={briefingTopics}/>
 
@@ -234,11 +227,8 @@ export default function Scanner() {
         <Info size={16}/><div>{isDraftBrief?<><strong>{dateLabel} brief · draft</strong><span>{data.messages[0]||'Premarket inputs and cutoff ranges are pending.'}</span></>:isArchivePreview?<><strong>{dateLabel} archive</strong><span>{data.messages[0]||'Archived snapshot.'}</span></>:mode==='imported'?<><strong>Legacy example · cutoff unverified</strong><span>Earlier approximate drawdowns. The daily scanner cutoff is 06:20 Pacific.</span></>:<><strong>{isOpening?'Opening experiment':'Frozen scanner'} at {cutoffPacific} Pacific · {data.status==='partial'?'partial coverage':data.status==='unavailable'?'data unavailable':'daily snapshot'}</strong><span>{data.messages[0]||`Ranges through ${cutoffEastern} ET.`}</span></>}</div>
         {!isArchivePreview && data.sessionDate==='2026-10-01' && <a className="text-link" href={isOpening?'./index.html?dev=1':'./index.html?dev=1&scan=0635'}>{isOpening?'Compare 06:20 baseline':'Compare 06:35 experiment'} <ArrowUpRight size={13}/></a>}
       </div>
-      <section className="benchmark-grid" aria-label="Session overview">
-        {data.benchmarks.map(b=><article className="benchmark-card" key={b.id}><div className="card-label"><span><strong>{b.id}</strong> {b.id==='NQ'?'NASDAQ 100':'S&P 500'} FUTURES</span><span className="small-tag">{isOpening?'THROUGH OPEN':'OVERNIGHT'}</span></div><div className="benchmark-number">{b.drawdown==null?'—':`−${number(b.drawdown)}%`}<span>drawdown</span></div><div className="benchmark-range"><span>H <b>{number(b.high)}</b><small>{clock(b.highTime)}</small></span><span className="range-arrow">→</span><span>L <b>{number(b.low)}</b><small>{clock(b.lowTime)}</small></span></div><div className="card-foot">{mode==='imported'?'Cutoff unverified':`18:00 → ${cutoffEastern} ET`} <span>{mode==='imported'?'Prior scan':b.source}</span></div></article>)}
-        <article className="benchmark-card leader-card"><div className="card-label"><span>RESILIENCE LEADERS</span><ShieldCheck size={16}/></div><div className="benchmark-number accent">{(counts['Exceptional RS']||0)+(counts['Clear RS']||0)}<span>leading names</span></div><div className="leader-tickers">{leaders.map(r=><button key={r.ticker} onClick={()=>setSelected(r)}>{r.ticker}<ArrowUpRight size={12}/></button>)}{!validCount&&<span className="muted">Waiting for complete ranges</span>}</div><div className="card-foot">{counts['Exceptional RS']||0} exceptional <span>{counts['Clear RS']||0} clear RS</span></div></article>
-        <article className="benchmark-card coverage-card"><div className="card-label"><span>SCAN COVERAGE</span><Database size={15}/></div><div className="benchmark-number">{validCount}<span>/ {data.universeCount||'—'} names</span></div><div className="coverage-track"><span style={{width:`${data.universeCount?validCount/data.universeCount*100:0}%`}}/></div><div className="card-foot">{mode==='imported'?'12 supplied names':data.universeComplete?'Universe discovery complete':'Universe incomplete'}<span>{mode==='imported'?'Not a full scan':`${data.stocks.filter(r=>r.drawdown===null).length} missing`}</span></div></article>
-      </section>
+      <ScannerOverview data={data} mode={mode} isOpening={isOpening} cutoffEastern={cutoffEastern}
+        counts={counts} leaders={leaders} validCount={validCount} onSelect={setSelected} />
       <div className="work-grid">
         <section className="rankings panel">
           <div className="panel-heading"><div><h2>Stock scanner</h2><span className="section-meta">Top 25 by downside capture.</span></div><button className="icon-button" aria-label="Open scanner information" onClick={()=>setDrawer('method')}><CircleHelp size={17}/></button></div>
@@ -255,7 +245,7 @@ export default function Scanner() {
         </section>
         <aside className="right-rail">
 
-          <section className="distribution panel"><div className="panel-heading"><h2>The resilience scale</h2></div><div className="distribution-bar" aria-label="Classification distribution">{['Exceptional RS','Clear RS','Moderate RS','Market-like','Laggard'].map(b=><span key={b} className={tone(b as Band)} style={{flex:1}}/>)}</div>{[['Exceptional RS',''],['Clear RS',''],['Moderate RS',''],['Market-like',''],['Laggard','']].map(([label,range])=><div className="scale-row" key={label}><span><i className={tone(label as Band)}/>{label}</span>{range&&<span className="mono">{range}</span>}</div>)}<button className="text-link" onClick={()=>setDrawer('method')}>About the scanner <ArrowUpRight size={13}/></button></section>
+          <ResilienceScale onAbout={()=>setDrawer('method')} />
         </aside>
       </div>
       </section>
