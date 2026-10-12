@@ -264,6 +264,8 @@ function SourcesCard({ data }: { data: Snapshot }) {
   const keyLevelData = data as SnapshotKeyLevels;
   const keyLevels = keyLevelData.keyLevels ?? [];
   const capturedKeyLevels = keyLevels.filter((row) => row.high!==null && row.low!==null);
+  const latestKeyLevelAsOf = keyLevels.map((row) => row.asOf).filter((value): value is string => Boolean(value)).sort().at(-1);
+  const keyLevelsComplete = data.status === 'frozen' && keyLevels.length === 4 && keyLevels.every((row) => row.high !== null && row.low !== null);
   const retrievedAt = capturedKeyLevels.find((row) => row.retrievedAt)?.retrievedAt;
   const referenceCount = references.length + treasuryCitationCount + indexQuoteReferences.length + (capturedKeyLevels.length ? 1 : 0);
   if (!referenceCount) return null;
@@ -287,7 +289,7 @@ function SourcesCard({ data }: { data: Snapshot }) {
           })}
           {capturedKeyLevels.length > 0 && <li>
             <a href="https://www.tradingview.com/markets/futures/quotes/" target="_blank" rel="noreferrer">Premarket key levels ↗</a>
-            <small>Futures session: {formatFuturesSession(data.sessionDate)}; last complete one-minute bar ends at 9:19 AM ET. Provider delay may exceed 15 minutes.</small>
+            <small>Futures session: {formatFuturesSession(data.sessionDate)}; latest completed bar {latestKeyLevelAsOf ? `observed at ${formatET(latestKeyLevelAsOf)} ET` : 'time unavailable'}. {keyLevelsComplete ? 'The 09:20 ET bar is excluded.' : 'Partial range; the final 09:20 ET cutoff has not been reached.'} Provider timing is shown per row.</small>
             {retrievedAt && <small>Retrieved {new Date(retrievedAt).toLocaleString('en-US', { timeZone: 'America/Los_Angeles', dateStyle: 'short', timeStyle: 'short' })} PT.</small>}
           </li>}
         </ul>
@@ -318,7 +320,7 @@ function SourcesCard({ data }: { data: Snapshot }) {
             key: `${row.tenor}-previous`, label: `${row.tenor} previous session close`, source: row.previousCloseSource, url: row.previousCloseUrl, retrievedAt: row.retrievedAt,
           }] : []),
           ...(row.value !== null && row.source && row.url ? [{
-            key: `${row.tenor}-premarket`, label: `${row.tenor} premarket quote`, source: row.source, url: row.url, retrievedAt: row.retrievedAt,
+            key: `${row.tenor}-latest`, label: `${row.tenor} latest available observation`, source: row.source, url: row.url, retrievedAt: row.retrievedAt,
           }] : []),
         ]).map((citation) => <li key={citation.key}>
           <a href={citation.url} target="_blank" rel="noreferrer">{citation.label} ↗</a>
