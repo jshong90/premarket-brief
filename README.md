@@ -206,3 +206,7 @@ The morning brief has six sections: combined overnight indices and bonds, key le
 ### Incremental component rebuild
 
 See [the component system](docs/component-system.md) for the primitive inventory, migration order and verification rules. Shared commentary and numbered section headings are the first completed increment.
+
+### Visual component reference
+
+Open `/design-reference.html?dev=1` to inspect shared text, numeric cells, tables, card roles, layouts, navigation, disclosure and resilience colors together. All values are clearly labeled synthetic examples; the page never loads a market packet. It reuses the existing theme toggle and Design Lab; those controls retain their normal saved-preference behavior. The reference is not linked from the public dashboard and is marked noindex. The dev parameter is a display convention, not access control.
