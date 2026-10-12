@@ -1,4 +1,7 @@
 import { useState } from 'react';
+import { BriefTable } from '@/components/brief/BriefTable';
+import { NumericCell } from '@/components/brief/NumericCell';
+import { formatET } from '@/components/brief/numericFormat';
 import { CommentaryNotes } from '@/components/brief/Commentary';
 import { SectionHeading } from '@/components/brief/SectionHeading';
 import type { Briefing, Snapshot, TreasuryYield } from '@/lib/scanner';
@@ -36,13 +39,6 @@ const tvSymbols: Record<KeyLevel['id'], string> = {
 type IndexQuoteRow = { label: string; fridayClose: number | null; scanPrice: number | null; changePercent: number | null };
 type IndexQuoteNote = { indexQuotes?: IndexQuoteRow[] };
 
-const formatPrice = (value: number | null | undefined) => value == null
-  ? '—'
-  : new Intl.NumberFormat('en-US', { maximumFractionDigits: 2 }).format(value);
-const formatChange = (value: number | null) => value === null
-  ? '—'
-  : `${value > 0 ? '+' : ''}${value.toFixed(2)}%`;
-
 function IndexOvernightTable({ data }: { data: Snapshot }) {
   const legacyQuotes = (data.briefing?.indices ?? []).flatMap((note) => (note as typeof note & IndexQuoteNote).indexQuotes ?? []);
   const getLegacyQuote = (symbol: 'NQ' | 'ES') => legacyQuotes.find((row) =>
@@ -71,15 +67,14 @@ function IndexOvernightTable({ data }: { data: Snapshot }) {
     },
   ];
 
-  return <div className="index-quotes-wrap"><table className="index-quotes">
-    <thead><tr><th scope="col">Market</th><th scope="col">Prev. Session Close</th><th scope="col">Premarket</th><th scope="col">Change (%)</th></tr></thead>
-    <tbody>{rows.map((row) => <tr key={row.id}>
+  return <BriefTable role="indices" columns={['Market', 'Prev. Session Close', 'Premarket', 'Change (%)']}>
+    {rows.map((row) => <tr key={row.id}>
       <th scope="row">{row.label}</th>
-      <td className="mono">{row.previous == null ? '—' : `${row.approximate ? '~' : ''}${formatPrice(row.previous)}`}</td>
-      <td className="mono">{row.current == null ? '—' : <>{row.approximate ? '~' : ''}{formatPrice(row.current)}{row.asOf && <small>{formatET(row.asOf)} ET</small>}</>}</td>
-      <td className={`mono ${row.change == null ? '' : row.change < 0 ? 'negative' : row.change > 0 ? 'positive' : ''}`}>{row.change == null ? '—' : `${row.approximate ? '~' : ''}${formatChange(row.change)}`}</td>
-    </tr>)}</tbody>
-  </table></div>;
+      <NumericCell value={row.previous} format="price" approximate={row.approximate} />
+      <NumericCell value={row.current} format="price" approximate={row.approximate} asOf={row.current == null ? null : row.asOf} />
+      <NumericCell value={row.change} format="percent" approximate={row.approximate} movement="standard" />
+    </tr>)}
+  </BriefTable>;
 }
 
 function OvernightMovementsPanel({ data, showEquities = true, showBonds = true }: { data: Snapshot; showEquities?: boolean; showBonds?: boolean }) {
@@ -122,25 +117,21 @@ function TreasuryYieldsTable({ data }: { data: Snapshot }) {
     ...(row.value === null ? [`${row.tenor} premarket quote`] : []),
   ]);
   return <>
-    <div className="treasury-yields-wrap">
-      <table className="treasury-yields-table">
-        <thead><tr><th scope="col">Treasury</th><th scope="col">Prev. Session Close</th><th scope="col">Premarket</th><th scope="col">Change</th></tr></thead>
-        <tbody>{rows.map((row) => {
+    <BriefTable role="yields" columns={['Treasury', 'Prev. Session Close', 'Premarket', 'Change']}>
+        {rows.map((row) => {
           const { tenor } = row;
           const current = row.value;
           const previous = row.previousClose;
           const changeBps = current !== null && previous !== null ? (current - previous) * 100 : null;
-          const asOf = formatET(row.asOf);
           const approximate = row.approximate;
           return <tr key={tenor}>
             <th scope="row">{tenor}</th>
-            <td className="mono">{previous === null ? '—' : `${approximate ? '~' : ''}${previous.toFixed(3)}%`}</td>
-            <td className="mono">{current === null ? '—' : <>{approximate ? '~' : ''}{current.toFixed(3)}%{asOf && <small>{asOf} ET</small>}</>}</td>
-            <td className={`mono ${changeBps === null ? '' : changeBps > 0 ? 'negative' : changeBps < 0 ? 'positive' : ''}`}>{changeBps === null ? '—' : `${changeBps > 0 ? '+' : ''}${changeBps.toFixed(1)} bp`}</td>
+            <NumericCell value={previous} format="yield" approximate={approximate} />
+            <NumericCell value={current} format="yield" approximate={approximate} asOf={current === null ? null : row.asOf} />
+            <NumericCell value={changeBps} format="basisPoints" movement="inverse" />
           </tr>;
-        })}</tbody>
-      </table>
-    </div>
+        })}
+    </BriefTable>
     {missing.length > 0 && <p className="treasury-yields-note">Unavailable: {missing.join(', ')}. Blank values are not estimated.</p>}
   </>;
 }
@@ -212,31 +203,22 @@ function formatFuturesSession(sessionDate: string) {
   return `${formatDate(previousDate)} 6:00 PM–${formatDate(date)} 9:20 AM ET`;
 }
 
-const formatET = (value?: string | null) => value
-  ? new Date(value).toLocaleTimeString('en-US', { timeZone: 'America/New_York', hour: 'numeric', minute: '2-digit' })
-  : null;
-
 function KeyLevelsTable({ data }: { data: Snapshot }) {
   const keyLevelData = data as SnapshotKeyLevels;
   const keyLevels = keyLevelData.keyLevels ?? [];
   const byId = new Map(keyLevels.map((row) => [row.id, row]));
   const coverageIssues = keyLevels.filter((row) => row.issue);
   return <>
-    <div className="key-levels-wrap">
-      <table className="key-levels-table">
-        <thead><tr><th scope="col">Index futures</th><th scope="col">Premarket high</th><th scope="col">Premarket low</th></tr></thead>
-        <tbody>{majorIndices.map((id) => {
+    <BriefTable role="levels" columns={['Index futures', 'Premarket high', 'Premarket low']}>
+        {majorIndices.map((id) => {
           const row = byId.get(id);
-          const highTime = formatET(row?.highTime);
-          const lowTime = formatET(row?.lowTime);
           return <tr key={id}>
             <th scope="row"><a href={`https://www.tradingview.com/chart/?symbol=${encodeURIComponent(tvSymbols[id])}`} target="_blank" rel="noreferrer">{indexNames[id]} ↗</a></th>
-            <td className="mono">{formatPrice(row?.high)}{highTime && <small>{highTime} ET</small>}</td>
-            <td className="mono">{formatPrice(row?.low)}{lowTime && <small>{lowTime} ET</small>}</td>
+            <NumericCell value={row?.high} format="price" asOf={row?.highTime} />
+            <NumericCell value={row?.low} format="price" asOf={row?.lowTime} />
           </tr>;
-        })}</tbody>
-      </table>
-    </div>
+        })}
+    </BriefTable>
     <p className="key-levels-note">Window: {formatFuturesSession(data.sessionDate)}; the 9:20 AM ET bar is excluded. {coverageIssues.length > 0 ? coverageIssues.map((row) => `${row.id}: ${row.issue}`).join(' ') : 'All four rows have complete returned-bar coverage.'}</p>
   </>;
 }
