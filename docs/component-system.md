@@ -150,3 +150,5 @@ No market packet is requested and no fixture is written into public/data. The
 page is noindex and absent from dashboard navigation. The dev parameter is an
 opt-in display convention, not authentication. Use this page to review shared
 style changes together before modifying individual sections.
+
+The resilience scale owns its viewport fill through `useViewportBars`, shared automatically wherever ResilienceScale is mounted. It uses the main-page threshold/root margin, toggles bars-visible on every entry/exit, cleans up the observer, and retains the existing CSS timing/stagger and reduced-motion rules. DashboardPage observes ranking bars only, avoiding two observers controlling the scale.

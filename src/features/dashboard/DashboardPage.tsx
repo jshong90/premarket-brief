@@ -60,7 +60,7 @@ export default function Scanner() {
     return()=>reveal.disconnect();
   },[snapshotLoaded]);
   useEffect(()=>{
-    const panels=Array.from(document.querySelectorAll<HTMLElement>('.rankings, .distribution'));
+    const panels=Array.from(document.querySelectorAll<HTMLElement>('.rankings'));
     if(!('IntersectionObserver' in window)){panels.forEach(panel=>panel.classList.add('bars-visible'));return;}
     const reveal=new IntersectionObserver(entries=>{
       for(const entry of entries){
