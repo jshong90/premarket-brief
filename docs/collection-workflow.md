@@ -63,7 +63,7 @@ For an authenticated programmatic connection, `brief:collect --adapter /absolute
 - Equities: 04:00 ET through, excluding, 09:20 ET. Futures ranges: prior calendar day 18:00 ET through, excluding, 09:20 ET. DST conversion uses the application's existing rules.
 - Only completed one-minute bars qualify. Retrieval before a minute closes excludes that bar. The 09:20 bar and regular-session values are excluded even when collected late.
 - Range coverage counts unique eligible minute buckets. Missing buckets, unknown delay and actual latest timestamps are disclosed. Partial ranges can appear as partial key levels; they cannot supply complete scanner benchmarks.
-- SPREADEX:SPX is labeled a CFD proxy. A cash SPX previous close cannot be used to compute change against the CFD. Both values must refer to the exact same instrument. No silent substitution with ES.
+- OpenMarket's `HYPERLIQUID_HIP3 / xyz:SP500` is labeled as a temporary SPX proxy, not the cash index. A cash SPX previous close cannot be used to compute change against it. Both values must refer to the exact same instrument. No silent substitution with ES.
 - Prior-session closes are cached by instrument, exact provider symbol and previous trading date. They retain original provenance. Live quotes and ranges are never silently reused from a previous run.
 - Earlier equity/VIX/yield readings remain null as current prices. On a bond holiday, the prior reference can be preserved, but an old yield is not labeled as a fresh quote.
 - Quote refreshes leave the scanner cutoff, status and observations alone. `--scanner-benchmarks` is an explicit generation option for an existing cutoff-based scanner packet; both benchmark fields come from the same normalized futures records as Key Levels. Incomplete benchmark ranges remain null.
@@ -77,7 +77,7 @@ The archive preserves values and commentary; a draft becomes `archived` without 
 
 ## Editorial content
 
-Consult the generated checklist when updating macro/earnings notes. Only import the economic releases the user explicitly selected. Fed events and auctions use primary sources and remain in chronological order. Earnings use Earnings Whispers and the established $25B screen. Collection does not parse user commentary for numbers or rewrite their words. Broader calendar scraping and unattended MCP authentication are not implemented by this pipeline.
+Consult the generated checklist when updating macro/earnings notes. Trading Economics is primary for U.S. economic and Fed events, using the U.S.-only, two-star-minimum filter; official Fed pages are backup verification. Auctions use TreasuryDirect and U.S. Treasury sources. Earnings use Earnings Whispers and the strict above-$25B screen with dated StockAnalysis evidence. Overnight news is user-supplied. Collection does not parse user commentary for numbers or rewrite their words. Broader calendar scraping and unattended MCP authentication are not implemented by this pipeline.
 
 ## Replay and review
 
