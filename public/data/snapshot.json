@@ -1,7 +1,7 @@
 {
   "sessionDate": "2026-10-12",
-  "fetchedAt": "2026-10-12T06:04:26.041Z",
-  "status": "draft",
+  "fetchedAt": "2026-10-12T13:53:02.081Z",
+  "status": "partial",
   "previousArchiveDate": "2026-10-08",
   "universeCount": 0,
   "universeComplete": false,
@@ -18,34 +18,242 @@
     "VIX uses TradingView; first available bar was 04:03 ET and last bar 09:19 ET, so 04:00–04:02 coverage is unavailable.",
     "SPX is represented by the approved Spreadex CFD proxy on TradingView; it is not the cash SPX index.",
     "Treasury yields are last-observed TradingView values from Friday, October 9 at 17:25 ET. There was no Monday cash-market session, so these are dated references, not October 12 quotes.",
-    "The relative-strength scanner remains a draft and is not populated by this refresh; no claim of complete $50B+ stock-universe discovery is made.",
-    "Overnight news is left empty for user-provided notes."
+    "Overnight news is left empty for user-provided notes.",
+    "Relative-strength scan is partial: the approved source table does not provide discovery for the $50B+ U.S. common-stock universe or timestamped premarket range bars for individual equities. No stock rows were discovered or ranked.",
+    "All 11 required sector ETF rows are retained with null values because the approved source table has no sector ETF premarket range source; none are ranked.",
+    "ES and NQ benchmark ranges use the complete approved TradingView 18:00 ET–09:19 ET bars already captured for Key Levels; TradingView delay is unknown. The equity scan remains incomplete."
   ],
   "stocks": [],
-  "sectors": [],
+  "sectors": [
+    {
+      "ticker": "XLK",
+      "name": "Technology Select Sector SPDR Fund",
+      "sector": "Technology",
+      "benchmark": "ES",
+      "high": null,
+      "low": null,
+      "last": null,
+      "previousClose": null,
+      "drawdown": null,
+      "volume": null,
+      "marketCap": null,
+      "source": "Not collected · no sector ETF range source is listed in the approved data-source table",
+      "asOf": null,
+      "retrievedAt": null,
+      "issue": "No approved premarket one-minute range source; values remain unavailable and unranked."
+    },
+    {
+      "ticker": "XLC",
+      "name": "Communication Services Select Sector SPDR Fund",
+      "sector": "Communication Services",
+      "benchmark": "ES",
+      "high": null,
+      "low": null,
+      "last": null,
+      "previousClose": null,
+      "drawdown": null,
+      "volume": null,
+      "marketCap": null,
+      "source": "Not collected · no sector ETF range source is listed in the approved data-source table",
+      "asOf": null,
+      "retrievedAt": null,
+      "issue": "No approved premarket one-minute range source; values remain unavailable and unranked."
+    },
+    {
+      "ticker": "XLY",
+      "name": "Consumer Discretionary Select Sector SPDR Fund",
+      "sector": "Consumer Discretionary",
+      "benchmark": "ES",
+      "high": null,
+      "low": null,
+      "last": null,
+      "previousClose": null,
+      "drawdown": null,
+      "volume": null,
+      "marketCap": null,
+      "source": "Not collected · no sector ETF range source is listed in the approved data-source table",
+      "asOf": null,
+      "retrievedAt": null,
+      "issue": "No approved premarket one-minute range source; values remain unavailable and unranked."
+    },
+    {
+      "ticker": "XLF",
+      "name": "Financial Select Sector SPDR Fund",
+      "sector": "Financials",
+      "benchmark": "ES",
+      "high": null,
+      "low": null,
+      "last": null,
+      "previousClose": null,
+      "drawdown": null,
+      "volume": null,
+      "marketCap": null,
+      "source": "Not collected · no sector ETF range source is listed in the approved data-source table",
+      "asOf": null,
+      "retrievedAt": null,
+      "issue": "No approved premarket one-minute range source; values remain unavailable and unranked."
+    },
+    {
+      "ticker": "XLI",
+      "name": "Industrial Select Sector SPDR Fund",
+      "sector": "Industrials",
+      "benchmark": "ES",
+      "high": null,
+      "low": null,
+      "last": null,
+      "previousClose": null,
+      "drawdown": null,
+      "volume": null,
+      "marketCap": null,
+      "source": "Not collected · no sector ETF range source is listed in the approved data-source table",
+      "asOf": null,
+      "retrievedAt": null,
+      "issue": "No approved premarket one-minute range source; values remain unavailable and unranked."
+    },
+    {
+      "ticker": "XLV",
+      "name": "Health Care Select Sector SPDR Fund",
+      "sector": "Health Care",
+      "benchmark": "ES",
+      "high": null,
+      "low": null,
+      "last": null,
+      "previousClose": null,
+      "drawdown": null,
+      "volume": null,
+      "marketCap": null,
+      "source": "Not collected · no sector ETF range source is listed in the approved data-source table",
+      "asOf": null,
+      "retrievedAt": null,
+      "issue": "No approved premarket one-minute range source; values remain unavailable and unranked."
+    },
+    {
+      "ticker": "XLP",
+      "name": "Consumer Staples Select Sector SPDR Fund",
+      "sector": "Consumer Staples",
+      "benchmark": "ES",
+      "high": null,
+      "low": null,
+      "last": null,
+      "previousClose": null,
+      "drawdown": null,
+      "volume": null,
+      "marketCap": null,
+      "source": "Not collected · no sector ETF range source is listed in the approved data-source table",
+      "asOf": null,
+      "retrievedAt": null,
+      "issue": "No approved premarket one-minute range source; values remain unavailable and unranked."
+    },
+    {
+      "ticker": "XLU",
+      "name": "Utilities Select Sector SPDR Fund",
+      "sector": "Utilities",
+      "benchmark": "ES",
+      "high": null,
+      "low": null,
+      "last": null,
+      "previousClose": null,
+      "drawdown": null,
+      "volume": null,
+      "marketCap": null,
+      "source": "Not collected · no sector ETF range source is listed in the approved data-source table",
+      "asOf": null,
+      "retrievedAt": null,
+      "issue": "No approved premarket one-minute range source; values remain unavailable and unranked."
+    },
+    {
+      "ticker": "XLRE",
+      "name": "Real Estate Select Sector SPDR Fund",
+      "sector": "Real Estate",
+      "benchmark": "ES",
+      "high": null,
+      "low": null,
+      "last": null,
+      "previousClose": null,
+      "drawdown": null,
+      "volume": null,
+      "marketCap": null,
+      "source": "Not collected · no sector ETF range source is listed in the approved data-source table",
+      "asOf": null,
+      "retrievedAt": null,
+      "issue": "No approved premarket one-minute range source; values remain unavailable and unranked."
+    },
+    {
+      "ticker": "XLB",
+      "name": "Materials Select Sector SPDR Fund",
+      "sector": "Materials",
+      "benchmark": "ES",
+      "high": null,
+      "low": null,
+      "last": null,
+      "previousClose": null,
+      "drawdown": null,
+      "volume": null,
+      "marketCap": null,
+      "source": "Not collected · no sector ETF range source is listed in the approved data-source table",
+      "asOf": null,
+      "retrievedAt": null,
+      "issue": "No approved premarket one-minute range source; values remain unavailable and unranked."
+    },
+    {
+      "ticker": "XLE",
+      "name": "Energy Select Sector SPDR Fund",
+      "sector": "Energy",
+      "benchmark": "ES",
+      "high": null,
+      "low": null,
+      "last": null,
+      "previousClose": null,
+      "drawdown": null,
+      "volume": null,
+      "marketCap": null,
+      "source": "Not collected · no sector ETF range source is listed in the approved data-source table",
+      "asOf": null,
+      "retrievedAt": null,
+      "issue": "No approved premarket one-minute range source; values remain unavailable and unranked."
+    }
+  ],
   "benchmarks": [
     {
       "id": "ES",
-      "high": null,
-      "low": null,
-      "drawdown": null,
-      "source": "Not captured for October 12 draft",
-      "asOf": null,
-      "issue": "No benchmark range has been captured for this draft."
+      "high": 7887,
+      "low": 7857.75,
+      "drawdown": 0.37086344617724976,
+      "source": "TradingView Official MCP · CME_MINI:ES1! · same captured bars as Key Levels",
+      "asOf": "2026-10-12T13:19:00.000Z",
+      "highTime": "2026-10-12T04:48:00.000Z",
+      "lowTime": "2026-10-12T12:39:00.000Z",
+      "issue": "Provider delay unknown."
     },
     {
       "id": "NQ",
-      "high": null,
-      "low": null,
-      "drawdown": null,
-      "source": "Not captured for October 12 draft",
-      "asOf": null,
-      "issue": "No benchmark range has been captured for this draft."
+      "high": 31289.25,
+      "low": 31017.25,
+      "drawdown": 0.8693081489648979,
+      "source": "TradingView Official MCP · CME_MINI:NQ1! · same captured bars as Key Levels",
+      "asOf": "2026-10-12T13:19:00.000Z",
+      "highTime": "2026-10-11T23:34:00.000Z",
+      "lowTime": "2026-10-12T12:38:00.000Z",
+      "issue": "Provider delay unknown."
     }
   ],
   "briefing": {
-    "indices": [],
-    "bonds": [],
+    "indices": [
+      {
+        "title": "Equity Commentary",
+        "body": "Both indices recovered from last week's panic driven lows. Currently ES is trading at the highs while NQ has acted a bit weaker, giving up almost the entire gap up. Price action thus remains extremely tricky going into earnings season and OPEX.",
+        "source": "Desk commentary",
+        "url": ""
+      }
+    ],
+    "bonds": [
+      {
+        "title": "Bond Commentary",
+        "body": "US Treasury 10Y did not make a new high overnight but still trading near highs at 5.23%. Still observing elevated risk in EU bonds.",
+        "source": "Desk commentary",
+        "url": ""
+      }
+    ],
     "macro": [
       {
         "title": "Monday, October 12",
@@ -415,7 +623,15 @@
         ]
       }
     ],
-    "news": []
+    "news": [],
+    "energy": [
+      {
+        "title": "Energy Commentary",
+        "body": "Oil is trading at around $93.6, gapping up from 89.6 on Friday and continues to be extremely news driven.",
+        "source": "Desk commentary",
+        "url": ""
+      }
+    ]
   },
   "marketContext": [
     {
@@ -672,5 +888,6 @@
       "RTY: Provider delay unknown. Partial range: 888/920 minute buckets; last bar 2026-10-12T13:19:00.000Z."
     ],
     "baseHash": "b5305ef3f3adcb58f843a82333bcb7a5c57dabaf7e74d71a70d47af45640503f"
-  }
+  },
+  "cutoffAt": "2026-10-12T13:20:00.000Z"
 }
