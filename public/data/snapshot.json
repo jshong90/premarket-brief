@@ -11,15 +11,15 @@
     "robinhood": true
   },
   "messages": [
-    "October 12, 2026 remains a draft: this is an interim refresh, not the final 09:20 ET capture.",
-    "NYSE and Nasdaq are scheduled to trade regular hours today; U.S. fixed-income markets are closed for Columbus Day. Source: NYSE 2026 calendar and SIFMA holiday schedule.",
-    "The standard U.S. stock premarket window (04:00–09:20 ET) has not opened at collection time (02:04 ET). No individual-stock or ETF premarket ranges, session volume, or scanner rankings are included.",
-    "Robinhood SPY and QQQ values are timestamped overnight trades from before 04:00 ET, shown as overnight context and not as standard premarket prices.",
-    "TradingView futures bars were last observed around 01:53–01:54 ET and retrieved at 02:04 ET, about 10–11 minutes later. Key Levels show a partial overnight range from Sunday 18:00 ET through each row's asOf; the final premarket range will be wider or equal.",
-    "Treasury yields are the latest available TradingView one-minute observations from Friday, October 9; Monday fixed-income markets are closed. They are not Monday premarket readings.",
-    "VIX is the latest available cash-index bar from Friday, October 9 at 16:14 ET; no overnight cash VIX observation is available.",
-    "The SPX market-context value uses the approved SPREADEX:SPX Spreadex CFD proxy. It is explicitly not the cash index; TradingView did not provide a feed-delay field for that symbol.",
-    "The relative-strength stock universe and sector ETF rows remain blank because their required timestamped 04:00–09:20 ET inputs and positive session volume are not available yet."
+    "U.S. equity markets were open Monday, October 12, 2026; U.S. Treasury cash markets were closed for Columbus Day.",
+    "Quote inputs are frozen at the last completed bar before 09:20 ET (09:19 ET); data was retrieved at approximately 09:53 ET. The 09:20 bar and later trading are excluded.",
+    "SPY and QQQ use Robinhood extended-hours one-minute bars for 04:00–09:19 ET (320 of 320 bars each); provider delay is not reported.",
+    "TradingView futures coverage for 18:00 ET October 11 through 09:19 ET October 12: ES 920/920 bars, NQ 920/920, YM 904/920, RTY 888/920. YM and RTY ranges are partial. TradingView delay is unknown for this account.",
+    "VIX uses TradingView; first available bar was 04:03 ET and last bar 09:19 ET, so 04:00–04:02 coverage is unavailable.",
+    "SPX is represented by the approved Spreadex CFD proxy on TradingView; it is not the cash SPX index.",
+    "Treasury yields are last-observed TradingView values from Friday, October 9 at 17:25 ET. There was no Monday cash-market session, so these are dated references, not October 12 quotes.",
+    "The relative-strength scanner remains a draft and is not populated by this refresh; no claim of complete $50B+ stock-universe discovery is made.",
+    "Overnight news is left empty for user-provided notes."
   ],
   "stocks": [],
   "sectors": [],
@@ -52,13 +52,8 @@
         "body": "BOND MARKET HOLIDAY · U.S. fixed-income markets are closed for Columbus Day.",
         "source": "SIFMA · 2026 holiday schedule",
         "url": "https://www.sifma.org/resources/general/holiday-schedule/",
-        "relatedSources": [
-          {
-            "source": "Barron’s · U.S. exchange holiday hours",
-            "url": "https://www.barrons.com/articles/stock-market-open-closed-today-columbus-day-indigenous-peoples-day-e5ec6e4f"
-          }
-        ],
-        "asOf": "2026-10-11"
+        "relatedSources": [],
+        "asOf": "2026-10-12"
       },
       {
         "title": "Tuesday, October 13",
@@ -76,7 +71,7 @@
             "url": "https://www.treasurydirect.gov/auctions/upcoming/"
           }
         ],
-        "asOf": "2026-10-11"
+        "asOf": "2026-10-12"
       },
       {
         "title": "Wednesday, October 14",
@@ -102,7 +97,7 @@
             "url": "https://www.federalreserve.gov/monetarypolicy/beige-book-default.htm"
           }
         ],
-        "asOf": "2026-10-11"
+        "asOf": "2026-10-12"
       },
       {
         "title": "Thursday, October 15",
@@ -124,7 +119,7 @@
             "url": "https://www.treasurydirect.gov/auctions/upcoming/"
           }
         ],
-        "asOf": "2026-10-11"
+        "asOf": "2026-10-12"
       },
       {
         "title": "Friday, October 16",
@@ -142,7 +137,7 @@
             "url": "https://www.federalreserve.gov/releases/g17/"
           }
         ],
-        "asOf": "2026-10-11"
+        "asOf": "2026-10-12"
       }
     ],
     "earnings": [
@@ -425,67 +420,75 @@
   "marketContext": [
     {
       "id": "SPX",
-      "label": "SPX CFD proxy",
-      "name": "Spreadex SPX 500 CFD (cash-index proxy)",
+      "label": "SPX · CFD proxy",
+      "name": "Spreadex SPX CFD proxy",
       "kind": "index",
-      "value": 7831.13,
-      "previousClose": 7811.09,
+      "value": 7816.13,
+      "asOf": "2026-10-12T13:19:00.000Z",
+      "previousClose": 7811.93,
       "previousCloseAt": "2026-10-09T19:59:00.000Z",
-      "change": 0.25655830364264,
+      "previousCloseSource": "TradingView Official MCP - SPREADEX:SPX completed 1-minute close Friday Oct 9 at 15:59 ET",
+      "previousCloseUrl": "https://www.tradingview.com/chart/?symbol=SPREADEX%3ASPX",
+      "retrievedAt": "2026-10-12T13:53:02.081Z",
+      "source": "TradingView Official MCP · SPREADEX:SPX",
+      "url": "https://www.tradingview.com/chart/?symbol=SPREADEX%3ASPX",
+      "issue": "Provider delay unknown. Spreadex CFD proxy; not the SPX cash index. Observation age at retrieval: 34 minutes.",
       "changeUnit": "%",
-      "source": "TradingView Official MCP · SPREADEX:SPX completed 1-minute CFD bar at 02:03 ET Oct 12; compared with TradingView SP:SPX cash-index closing bar at 15:59 ET Oct 9. The CFD is not the cash index; symbol-specific delay was not returned.",
-      "asOf": "2026-10-12T06:03:00.000Z",
-      "retrievedAt": "2026-10-12T06:04:26.041Z",
-      "high": 7838.38,
-      "low": 7812.08,
-      "highTime": "2026-10-12T05:08:00.000Z",
-      "lowTime": "2026-10-11T22:00:00.000Z",
-      "issue": "Overnight CFD proxy only; standard U.S. stock premarket has not opened."
+      "change": 0.05376392261580154
     },
     {
       "id": "SPY",
       "label": "SPY",
       "name": "SPDR S&P 500 ETF Trust",
       "kind": "etf",
-      "value": 780.43,
-      "previousClose": 778.57,
-      "previousCloseAt": "2026-10-09T19:59:59.958Z",
-      "change": 0.23889952091653566,
+      "value": 778.9,
+      "asOf": "2026-10-12T13:19:00.000Z",
+      "previousClose": 778.53,
+      "previousCloseAt": "2026-10-09T19:59:00.000Z",
+      "previousCloseSource": "Robinhood one-minute bar close at 15:59 ET",
+      "previousCloseUrl": "https://robinhood.com/stocks/SPY",
+      "retrievedAt": "2026-10-12T13:53:02.081Z",
+      "source": "Robinhood MCP · SPY",
+      "url": "https://robinhood.com/stocks/SPY",
+      "issue": "Provider delay unknown. Observation age at retrieval: 34 minutes.",
       "changeUnit": "%",
-      "source": "Robinhood MCP · overnight last non-regular trade; official SIP close for Oct 9. Overnight observation is before 04:00 ET and is not the standard premarket quote.",
-      "asOf": "2026-10-12T06:04:09.241Z",
-      "retrievedAt": "2026-10-12T06:04:26.041Z",
-      "issue": "The standard 04:00–09:20 ET premarket window has not begun."
+      "change": 0.04752546465776053
     },
     {
       "id": "QQQ",
       "label": "QQQ",
       "name": "Invesco QQQ Trust",
       "kind": "etf",
-      "value": 752.96,
-      "previousClose": 751.27,
-      "previousCloseAt": "2026-10-09T19:59:59.990Z",
-      "change": 0.22495241391244925,
+      "value": 750.09,
+      "asOf": "2026-10-12T13:19:00.000Z",
+      "previousClose": 751.24,
+      "previousCloseAt": "2026-10-09T19:59:00.000Z",
+      "previousCloseSource": "Robinhood one-minute bar close at 15:59 ET",
+      "previousCloseUrl": "https://robinhood.com/stocks/QQQ",
+      "retrievedAt": "2026-10-12T13:53:02.081Z",
+      "source": "Robinhood MCP · QQQ",
+      "url": "https://robinhood.com/stocks/QQQ",
+      "issue": "Provider delay unknown. Observation age at retrieval: 34 minutes.",
       "changeUnit": "%",
-      "source": "Robinhood MCP · overnight last non-regular trade; official SIP close for Oct 9. Overnight observation is before 04:00 ET and is not the standard premarket quote.",
-      "asOf": "2026-10-12T06:04:19.102Z",
-      "retrievedAt": "2026-10-12T06:04:26.041Z",
-      "issue": "The standard 04:00–09:20 ET premarket window has not begun."
+      "change": -0.15308024066875703
     },
     {
       "id": "VIX",
       "label": "VIX",
       "name": "Cboe Volatility Index",
       "kind": "volatility",
-      "value": 14.84,
-      "previousClose": 15.42,
-      "previousCloseAt": "2026-10-08T20:14:00.000Z",
-      "change": -3.7613488975356657,
+      "value": 15.41,
+      "asOf": "2026-10-12T13:19:00.000Z",
+      "previousClose": 14.84,
+      "previousCloseAt": "2026-10-09T20:14:00.000Z",
+      "previousCloseSource": "TradingView Official MCP - CBOE:VIX completed 1-minute bar close Friday Oct 9 at 16:14 ET",
+      "previousCloseUrl": "https://www.tradingview.com/chart/?symbol=CBOE%3AVIX",
+      "retrievedAt": "2026-10-12T13:53:02.081Z",
+      "source": "TradingView Official MCP · CBOE:VIX",
+      "url": "https://www.tradingview.com/chart/?symbol=CBOE%3AVIX",
+      "issue": "Provider delay unknown. Observation age at retrieval: 34 minutes.",
       "changeUnit": "%",
-      "source": "TradingView Official MCP · CBOE:VIX completed one-minute bar at 16:14 ET Friday, Oct 9; 15-minute delayed feed. Previous close is Thursday's 16:14 ET bar.",
-      "asOf": "2026-10-09T20:14:00.000Z",
-      "retrievedAt": "2026-10-12T06:04:26.041Z",
-      "issue": "Latest available cash VIX close only; no Monday overnight cash-index reading."
+      "change": 3.840970350404316
     },
     {
       "id": "US10Y",
@@ -508,73 +511,77 @@
       "id": "ES",
       "label": "S&P 500 (ES)",
       "high": 7887,
-      "low": 7861.25,
+      "low": 7857.75,
       "highTime": "2026-10-12T04:48:00.000Z",
-      "lowTime": "2026-10-11T22:00:00.000Z",
-      "asOf": "2026-10-12T05:54:00.000Z",
-      "retrievedAt": "2026-10-12T06:04:26.041Z",
-      "source": "TradingView Official MCP · CME_MINI:ES1! timestamped 1-minute bars; Sunday 18:00 ET through Monday 01:54 ET; latest data about 10 minutes delayed.",
-      "issue": "Partial overnight range, collected before the 09:20 ET cutoff."
+      "lowTime": "2026-10-12T12:39:00.000Z",
+      "asOf": "2026-10-12T13:19:00.000Z",
+      "retrievedAt": "2026-10-12T13:53:02.081Z",
+      "source": "TradingView Official MCP · CME_MINI:ES1!",
+      "issue": "Provider delay unknown."
     },
     {
       "id": "NQ",
       "label": "Nasdaq-100 (NQ)",
       "high": 31289.25,
-      "low": 31124.5,
+      "low": 31017.25,
       "highTime": "2026-10-11T23:34:00.000Z",
-      "lowTime": "2026-10-11T22:00:00.000Z",
-      "asOf": "2026-10-12T05:53:00.000Z",
-      "retrievedAt": "2026-10-12T06:04:26.041Z",
-      "source": "TradingView Official MCP · CME_MINI:NQ1! timestamped 1-minute bars; Sunday 18:00 ET through Monday 01:53 ET; latest data about 11 minutes delayed.",
-      "issue": "Partial overnight range, collected before the 09:20 ET cutoff."
+      "lowTime": "2026-10-12T12:38:00.000Z",
+      "asOf": "2026-10-12T13:19:00.000Z",
+      "retrievedAt": "2026-10-12T13:53:02.081Z",
+      "source": "TradingView Official MCP · CME_MINI:NQ1!",
+      "issue": "Provider delay unknown."
     },
     {
       "id": "YM",
       "label": "Dow (YM)",
       "high": 52131,
-      "low": 51931,
+      "low": 51913,
       "highTime": "2026-10-12T03:50:00.000Z",
-      "lowTime": "2026-10-11T22:01:00.000Z",
-      "asOf": "2026-10-12T05:54:00.000Z",
-      "retrievedAt": "2026-10-12T06:04:26.041Z",
-      "source": "TradingView Official MCP · CBOT_MINI:YM1! timestamped 1-minute bars; Sunday 18:00 ET through Monday 01:54 ET; latest data about 10 minutes delayed.",
-      "issue": "Partial overnight range, collected before the 09:20 ET cutoff."
+      "lowTime": "2026-10-12T09:43:00.000Z",
+      "asOf": "2026-10-12T13:19:00.000Z",
+      "retrievedAt": "2026-10-12T13:53:02.081Z",
+      "source": "TradingView Official MCP · CBOT_MINI:YM1!",
+      "issue": "Provider delay unknown. Partial range: 904/920 minute buckets; last bar 2026-10-12T13:19:00.000Z."
     },
     {
       "id": "RTY",
       "label": "Russell 2000 (RTY)",
       "high": 2834.3,
-      "low": 2821.7,
+      "low": 2816.3,
       "highTime": "2026-10-12T01:06:00.000Z",
-      "lowTime": "2026-10-11T22:00:00.000Z",
-      "asOf": "2026-10-12T05:53:00.000Z",
-      "retrievedAt": "2026-10-12T06:04:26.041Z",
-      "source": "TradingView Official MCP · CME_MINI:RTY1! timestamped 1-minute bars; Sunday 18:00 ET through Monday 01:53 ET; latest data about 11 minutes delayed.",
-      "issue": "Partial overnight range, collected before the 09:20 ET cutoff."
+      "lowTime": "2026-10-12T12:39:00.000Z",
+      "asOf": "2026-10-12T13:19:00.000Z",
+      "retrievedAt": "2026-10-12T13:53:02.081Z",
+      "source": "TradingView Official MCP · CME_MINI:RTY1!",
+      "issue": "Provider delay unknown. Partial range: 888/920 minute buckets; last bar 2026-10-12T13:19:00.000Z."
     }
   ],
   "indexQuotes": [
     {
       "id": "NQ",
-      "value": 31225.25,
-      "previousClose": 31123.25,
-      "previousCloseAt": "2026-10-09T20:59:00.000Z",
-      "asOf": "2026-10-12T05:53:00.000Z",
-      "retrievedAt": "2026-10-12T06:04:26.041Z",
-      "source": "TradingView Official MCP · CME_MINI:NQ1! completed 1-minute bars; last bar 01:53 ET Oct 12. Approx. 11-minute data delay at retrieval.",
+      "value": 31062,
+      "asOf": "2026-10-12T13:19:00.000Z",
+      "previousClose": 31112.25,
+      "previousCloseAt": "2026-10-09T19:59:00.000Z",
+      "previousCloseSource": "TradingView Official MCP - CME_MINI:NQ1! completed 1-minute close Friday Oct 9 at 15:59 ET",
+      "previousCloseUrl": "https://www.tradingview.com/chart/?symbol=CME_MINI%3ANQ1%21",
+      "retrievedAt": "2026-10-12T13:53:02.081Z",
+      "source": "TradingView Official MCP · CME_MINI:NQ1!",
       "url": "https://www.tradingview.com/chart/?symbol=CME_MINI%3ANQ1%21",
-      "issue": "Overnight futures quote; the standard stock premarket window has not opened."
+      "issue": "Provider delay unknown."
     },
     {
       "id": "ES",
-      "value": 7884,
-      "previousClose": 7866,
-      "previousCloseAt": "2026-10-09T20:59:00.000Z",
-      "asOf": "2026-10-12T05:54:00.000Z",
-      "retrievedAt": "2026-10-12T06:04:26.041Z",
-      "source": "TradingView Official MCP · CME_MINI:ES1! completed 1-minute bars; last bar 01:54 ET Oct 12. Approx. 10-minute data delay at retrieval.",
+      "value": 7865.25,
+      "asOf": "2026-10-12T13:19:00.000Z",
+      "previousClose": 7861,
+      "previousCloseAt": "2026-10-09T19:59:00.000Z",
+      "previousCloseSource": "TradingView Official MCP - CME_MINI:ES1! completed 1-minute close Friday Oct 9 at 15:59 ET",
+      "previousCloseUrl": "https://www.tradingview.com/chart/?symbol=CME_MINI%3AES1%21",
+      "retrievedAt": "2026-10-12T13:53:02.081Z",
+      "source": "TradingView Official MCP · CME_MINI:ES1!",
       "url": "https://www.tradingview.com/chart/?symbol=CME_MINI%3AES1%21",
-      "issue": "Overnight futures quote; the standard stock premarket window has not opened."
+      "issue": "Provider delay unknown."
     }
   ],
   "treasuryYields": [
@@ -631,6 +638,39 @@
       "issue": "U.S. fixed-income markets are closed Oct 12; no Monday yield observation."
     }
   ],
-  "quotesRefreshedAt": "2026-10-12T06:04:26.041Z",
-  "sectorQuotesRefreshedAt": null
+  "quotesRefreshedAt": "2026-10-12T13:53:13.807Z",
+  "sectorQuotesRefreshedAt": null,
+  "collection": {
+    "version": 1,
+    "id": "4ee6b8cd5b36819f475f67a39aa4c448877d487d8daf5967f29693671cdf5045",
+    "startedAt": "2026-10-12T13:47:25.770Z",
+    "finishedAt": "2026-10-12T13:53:13.807Z",
+    "timing": {
+      "elapsedMs": 348037,
+      "processingMs": 61,
+      "providerAttempts": 8
+    },
+    "requestedIds": [
+      "SPX",
+      "SPY",
+      "QQQ",
+      "VIX",
+      "ES",
+      "NQ",
+      "YM",
+      "RTY"
+    ],
+    "messages": [
+      "Collection completed 2026-10-12T13:53:13.807Z; observations retain their individual times.",
+      "SPX: Provider delay unknown. Spreadex CFD proxy; not the SPX cash index. Observation age at retrieval: 34 minutes.",
+      "SPY: Provider delay unknown. Observation age at retrieval: 34 minutes.",
+      "QQQ: Provider delay unknown. Observation age at retrieval: 34 minutes.",
+      "VIX: Provider delay unknown. Observation age at retrieval: 34 minutes.",
+      "ES: Provider delay unknown.",
+      "NQ: Provider delay unknown.",
+      "YM: Provider delay unknown. Partial range: 904/920 minute buckets; last bar 2026-10-12T13:19:00.000Z.",
+      "RTY: Provider delay unknown. Partial range: 888/920 minute buckets; last bar 2026-10-12T13:19:00.000Z."
+    ],
+    "baseHash": "b5305ef3f3adcb58f843a82333bcb7a5c57dabaf7e74d71a70d47af45640503f"
+  }
 }
