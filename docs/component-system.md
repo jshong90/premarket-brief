@@ -106,3 +106,5 @@ Whole-brief markup matches the prior implementation across 24 states; full tests
 and build pass. Snapshot schemas, data collection, citations and market formulas
 are unchanged. Header/market-context and scanner composition remain separate
 future increments; the entire dashboard migration is not yet complete.
+
+The archive audit also found an existing invalid-date conversion for undated macro titles. Source-month fallback now checks the Date value before conversion; undated labels and unconfirmed times remain undated. A regression test covers dated and undated source resolution.
