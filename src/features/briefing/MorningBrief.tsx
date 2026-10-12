@@ -198,6 +198,7 @@ function EarningsCalendar({ notes }: { notes: Briefing['earnings'] }) {
 const sourceSections: { key: keyof Briefing; label: string }[] = [
   { key: 'indices', label: '01 · Overnight movements on the indices' },
   { key: 'bonds', label: '01 · Overnight movements on bonds' },
+  { key: 'energy', label: '02 · Energy commentary' },
   { key: 'macro', label: '03 · Upcoming macro events' },
   { key: 'earnings', label: '04 · Upcoming earnings' },
   { key: 'news', label: '05 · Overnight news' },
@@ -339,7 +340,7 @@ export default function MorningBrief({ data, error, archived = false, topics, sh
   const selectedTopics = topics ?? { equities: true, bonds: true, energy: true, macro: true, earnings: true, news: true };
   const visibleKeys: BriefingSectionKey[] = customized
     ? visibleBriefingSectionKeys(selectedTopics)
-    : ['indices', 'bonds', 'keyLevels', 'macro', 'earnings', 'news'];
+    : ['indices', 'bonds', 'keyLevels', 'energy', 'macro', 'earnings', 'news'];
   const sectionVisible = (key: keyof Briefing | 'keyLevels' | 'energy') => visibleKeys.includes(key);
   const renderSection = ({ key, title }: { key: keyof Briefing | 'keyLevels' | 'energy'; title: string }, sectionIndex: number) => key === 'keyLevels'
     ? <section className="briefing-section panel key-levels-section" key={key} aria-labelledby="brief-key-levels">
@@ -348,7 +349,7 @@ export default function MorningBrief({ data, error, archived = false, topics, sh
     </section>
     : key === 'indices' ? <OvernightMovementsPanel data={data} key="overnight-movements" showEquities={!customized || selectedTopics.equities} showBonds={!customized || selectedTopics.bonds} />
     : key === 'bonds' ? null
-    : key === 'energy' ? <section className="briefing-section panel" key={key} aria-labelledby="brief-energy"><div className="briefing-section-head"><span className="brief-section-number">0{sectionIndex}</span><h2 id="brief-energy">{title}</h2></div><div className="briefing-notes"><div className="briefing-empty">No energy commentary supplied for this snapshot.</div></div></section>
+    : key === 'energy' ? <section className="briefing-section panel" key={key} aria-labelledby="brief-energy"><div className="briefing-section-head"><span className="brief-section-number">0{sectionIndex}</span><h2 id="brief-energy">{title}</h2></div><div className="briefing-notes">{(data.briefing?.energy ?? []).length ? (data.briefing?.energy ?? []).map((note, index) => <article className="briefing-note" key={index}><h3>{note.title}</h3><p>{note.body}</p></article>) : <div className="briefing-empty">No energy commentary supplied for this snapshot.</div>}</div></section>
     : <section className="briefing-section panel" key={key} aria-labelledby={'brief-' + key}>
     <div className="briefing-section-head"><span className="brief-section-number">0{sectionIndex}</span><h2 id={'brief-' + key}>{title}</h2></div>
     <div className="briefing-notes">{key === 'macro' ? <MacroCalendarTable notes={data.briefing?.macro || []} sessionDate={data.sessionDate} /> : key === 'earnings' && hasStructuredEarnings(data.briefing?.earnings ?? []) ? <EarningsCalendar notes={data.briefing?.earnings ?? []} /> : (data.briefing?.[key] || []).length ? data.briefing![key].map((note, index) => {
