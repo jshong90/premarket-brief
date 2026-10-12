@@ -210,3 +210,5 @@ See [the component system](docs/component-system.md) for the primitive inventory
 ### Visual component reference
 
 Open `/design-reference.html?dev=1` to inspect shared text, numeric cells, tables, card roles, layouts, navigation, disclosure and resilience colors together. All values are clearly labeled synthetic examples; the page never loads a market packet. It reuses the existing theme toggle and Design Lab; those controls retain their normal saved-preference behavior. The reference is not linked from the public dashboard and is marked noindex. The dev parameter is a display convention, not access control.
+
+The unfilled resilience scale track uses `--resilience-track`: light `#DADADA`, dark `#222222`. Both are neutral grays darker than the default card surface. Filled classification colors remain mode-independent.
