@@ -115,7 +115,7 @@ Validation covers TypeScript, snapshot structure, source metadata, date handling
 
 ## Design reference
 
-The combined dashboard uses the theme blocks and semantic text roles in `src/globals.css`. Change a theme token there to update every element that consumes it. Surface, border, and some component colors still have explicit rules; the component table below locates those exceptions. `src/features/connections/MassiveConnectionTest.css` styles the connection result. The older CSS for the former separate Premarket layout is retained in `src/globals.css`, but both HTML entries now render the combined dashboard.
+The combined dashboard uses the theme blocks and semantic text, font, and spacing roles in `src/globals.css`. Change the existing role rather than adding another selector patch. Equities, Bonds, and Energy render through the same commentary component. The [styling audit](docs/styling-audit.md) documents the cleanup and the checks that prevent duplicate declarations, hard-coded text/fonts, and non-accessibility `!important` rules. `src/features/connections/MassiveConnectionTest.css` uses the shared surface and status tokens.
 
 ### Theme colors
 
@@ -171,7 +171,7 @@ These are explicit component rules in `src/globals.css`; changing only a base to
 | Primary button normal → hover | `#555555` → `#3E3E3E` | `#D1D3D5` → `#FFFFFF` |
 | Secondary button surface / border | `#EFEDE8` / `#D0CCC5` | `#3A3E42` / `#555B60` |
 | Capture/coverage/sector track background | `#E2DED7` | `#44494E` |
-| Connection result surface / border (`MassiveConnectionTest.css`) | `#FFF8EE` / `#D5C6B3` | `#20271C` / `#45533A` |
+| Connection result surface / border (`MassiveConnectionTest.css`) | `--secondary` / `--border` | `--secondary` / `--border` |
 
 ### Typography and size
 
@@ -182,8 +182,9 @@ These are explicit component rules in `src/globals.css`; changing only a base to
 | Centered top-bar date | Newsreader / 700 | Same `--dashboard-title-size` token as the page titles |
 | Numbered morning sections | Newsreader / 700 | `--dashboard-section-size`: 24px |
 | Card and note titles | Newsreader / 500 | `--dashboard-card-title-size`: 16px |
-| Briefing paragraphs | Newsreader / 400 | 14px desktop, 13px at ≤640px; bonds copy 13px |
-| Brief closing line | Newsreader label / 500; Source Sans 3 detail / normal | 20px label, 14px detail |
+| General briefing notes | `--font-editorial` (Newsreader) / 400 | `--brief-body-size`: 14px desktop, 13px at ≤640px |
+| Equity, Bond, and Energy Commentary labels | `--font-ui` (Source Sans 3) / 600 | `--commentary-label-size`: 14px; line height 1.5 |
+| Equity, Bond, and Energy Commentary body | `--font-ui` (Source Sans 3) / 400 | `--commentary-body-size`: 13px; line height 1.6 |
 | Eyebrows, buttons, chips and metadata | Source Sans 3 / 600 where emphasized | Mostly 12px; heading chip 10px at ≤540px |
 | Market-strip price | UI monospace / 500 | 20px |
 | Scanner table | UI monospace for numeric values, Source Sans 3 for labels | 14px body, 12px headers/company secondary labels |
@@ -198,5 +199,6 @@ Section cards fade in while moving upward 12px over 650ms whenever they enter th
 
 ## Consolidated layout
 
-The morning brief has five sections: combined overnight indices and bonds, key levels, upcoming macro events, upcoming earnings, and overnight news. The button beside the Morning brief heading skips to the scanner; the button beside the Relative strength heading returns to the brief. Both use same-page anchors and account for the sticky header.
+The morning brief has six sections: combined overnight indices and bonds, key levels, energy, upcoming macro events, upcoming earnings, and overnight news. The button beside the Morning brief heading skips to the scanner; the button beside the Relative strength heading returns to the brief. Both use same-page anchors. The header scrolls with the page.
+
 
