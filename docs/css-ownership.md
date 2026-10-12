@@ -45,3 +45,13 @@ contains imports only. Third-party CSS is kept separate from authored rules.
 Use the visual reference and its responsive frame for review. Compare both themes,
 stock details, sorting/filter controls, disclosures, motion and archived snapshots
 before release. Synthetic examples never enter the published snapshot data.
+
+## Verification of this migration
+
+The preview matched all sampled computed properties of 110 component elements
+against the original stylesheet in both themes (zero differences). Checks covered
+colors, backgrounds, typography, padding/margins/gaps, borders, display and grid
+columns. Five responsive frame widths had no document overflow. Sources expansion,
+stock details, Design Lab text controls, builder and all eight archive entries were
+verified. Full tests and production build passed. The comparison is broad evidence
+of preserved appearance; future states still need the normal component review.

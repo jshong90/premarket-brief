@@ -7,7 +7,7 @@ accessibility relationships and motion hooks before moving on to the next layer.
 
 | Layer | Existing roles | Migration |
 | --- | --- | --- |
-| Tokens | Theme colors, UI/editorial fonts, text sizes, card inset, motion values | Centralized in globals.css; preserve Design Lab bindings |
+| Tokens | Theme colors, UI/editorial fonts, text sizes, card inset, motion values | Centralized in styles/foundations.css; preserve Design Lab bindings |
 | Repeated content | Commentary label/body/empty state, numbered section heading | Extracted into components/brief in increment 1 |
 | Numeric displays | Price, yield, percent/basis-point change, timestamp, missing value | Extracted formatNumeric / NumericCell in increment 2 |
 | Tables | Indices, Treasury yields, key levels | Shared BriefTable shell and NumericCell in increment 2 |
@@ -26,7 +26,7 @@ commentary beneath a table differs structurally from a standalone card body.
 number; parent sections retain aria-labelledby. It creates no extra wrapper.
 
 Both components retain existing CSS classes. Styles remain token-driven in the
-single stylesheet, and Design Lab continues targeting those roles. No new CSS,
+owned stylesheets, and Design Lab continues targeting those roles. No new CSS,
 state, packages or per-section appearance overrides were introduced.
 
 ## Rules for subsequent increments

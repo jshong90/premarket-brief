@@ -33,3 +33,5 @@ Edit the existing component role or theme token. Avoid appending a corrective ru
 - `!important` outside reduced-motion safeguards.
 
 Run the suite and production build, then inspect a preview in both themes. Verify commentary labels and bodies through computed styles, and verify production's commit matches the tested release. A successful build alone does not prove the production alias is serving that commit.
+
+The subsequent ownership migration replaces globals.css with an import manifest. Current stylesheet locations and verification evidence are documented in [CSS ownership](css-ownership.md); the cleanup figures above describe the earlier audit.
