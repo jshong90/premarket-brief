@@ -9,8 +9,8 @@ accessibility relationships and motion hooks before moving on to the next layer.
 | --- | --- | --- |
 | Tokens | Theme colors, UI/editorial fonts, text sizes, card inset, motion values | Centralized in globals.css; preserve Design Lab bindings |
 | Repeated content | Commentary label/body/empty state, numbered section heading | Extracted into components/brief in increment 1 |
-| Numeric displays | Price, yield, percent/basis-point change, timestamp, missing value | Next: define precision and direction semantics before sharing |
-| Tables | Indices, Treasury yields, key levels | Next: share shell and cells while retaining column definitions and data transformations |
+| Numeric displays | Price, yield, percent/basis-point change, timestamp, missing value | Extracted formatNumeric / NumericCell in increment 2 |
+| Tables | Indices, Treasury yields, key levels | Shared BriefTable shell and NumericCell in increment 2 |
 | Cards/layout | Card surface, header, body, stack, paired columns | Later: preserve selector hooks used by animations and responsive layout |
 | Controls | Jump link, disclosure, theme toggle, Design Lab inputs | Later: consolidate only repeated behavior; reuse existing UI components |
 | Sections/page | Brief, market context, calendar, earnings, scanner | Compose migrated building blocks; retain feature-specific logic |
@@ -38,3 +38,24 @@ state, packages or per-section appearance overrides were introduced.
 - Verify filled/empty and topic-selection states, desktop/mobile, both themes and
   Design Lab controls. Compare rendered markup when an extraction should be neutral.
 - Roll back the increment with a commit revert; do not edit archived snapshots.
+
+## Increment 2
+
+`BriefTable` owns the scroll wrapper, native table, column headers and body. Its
+indices/yields/levels roles retain their existing CSS hooks; feature adapters own
+row headers, column titles, provenance and calculations. Calendar and scanner
+tables are not forced into this briefing-specific shell.
+
+`NumericCell` owns numeric formatting, optional observation time and movement
+color. Price uses up to two decimals, yield uses three with %, percent changes
+use two with a signed %, and basis-point changes use one with a signed bp.
+Missing values use an em dash. Approximate inputs retain their tilde. The caller
+explicitly selects standard or inverse movement colors: an increasing yield
+retains the existing red treatment. Formatting never calculates or infers prices.
+
+`numericFormat.ts` is the pure format/direction layer. Observation times remain
+Eastern and DST-aware. Providers and snapshot validation remain upstream.
+
+Verification: full tests/build, numeric unit/direction/DST tests, and whole-brief
+HTML parity against the prior implementation in populated, empty, archive and
+topic-filter states.
