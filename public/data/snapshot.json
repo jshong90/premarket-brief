@@ -43,12 +43,12 @@
     "macro": [
       {
         "title": "Monday, October 12",
-        "body": "BOND MARKET HOLIDAY \u00b7 U.S. fixed-income markets are closed for Columbus Day.",
-        "source": "SIFMA \u00b7 2026 holiday schedule",
+        "body": "BOND MARKET HOLIDAY · U.S. fixed-income markets are closed for Columbus Day.",
+        "source": "SIFMA · 2026 holiday schedule",
         "url": "https://www.sifma.org/resources/general/holiday-schedule/",
         "relatedSources": [
           {
-            "source": "Barron\u2019s \u00b7 U.S. exchange holiday hours",
+            "source": "Barron’s · U.S. exchange holiday hours",
             "url": "https://www.barrons.com/articles/stock-market-open-closed-today-columbus-day-indigenous-peoples-day-e5ec6e4f"
           }
         ],
@@ -56,17 +56,17 @@
       },
       {
         "title": "Tuesday, October 13",
-        "body": "3:45 a.m. ET \u2014 FED \u00b7 Governor Christopher J. Waller speaks\n6:00 a.m. ET \u2014 ECONOMIC RELEASE \u00b7 NFIB Small Business Optimism Index (September)\n8:15 a.m. ET \u2014 ECONOMIC RELEASE \u00b7 ADP Weekly Employment Change\n10:00 a.m. ET \u2014 ECONOMIC RELEASE \u00b7 Existing Home Sales (September)\n11:30 a.m. ET \u2014 TREASURY AUCTION \u00b7 3- and 6-month bills\n1:00 p.m. ET \u2014 TREASURY AUCTION \u00b7 6-week bill\n1:00 p.m. ET \u2014 FED \u00b7 Richmond Fed President Thomas Barkin speaks\n2:00 p.m. ET \u2014 ECONOMIC RELEASE \u00b7 Monthly Budget Statement (September)",
-        "source": "Trading Economics \u00b7 U.S. calendar",
+        "body": "3:45 a.m. ET — FED · Governor Christopher J. Waller speaks\n6:00 a.m. ET — ECONOMIC RELEASE · NFIB Small Business Optimism Index (September)\n8:15 a.m. ET — ECONOMIC RELEASE · ADP Weekly Employment Change\n10:00 a.m. ET — ECONOMIC RELEASE · Existing Home Sales (September)\n11:30 a.m. ET — TREASURY AUCTION · 3- and 6-month bills\n1:00 p.m. ET — TREASURY AUCTION · 6-week bill\n1:00 p.m. ET — FED · Richmond Fed President Thomas Barkin speaks\n2:00 p.m. ET — ECONOMIC RELEASE · Monthly Budget Statement (September)",
+        "source": "Trading Economics · U.S. calendar",
         "url": "https://tradingeconomics.com/united-states/calendar",
         "sourceKey": "economicCalendar",
         "relatedSources": [
           {
-            "source": "Federal Reserve \u00b7 October 2026 calendar",
+            "source": "Federal Reserve · October 2026 calendar",
             "url": "https://www.federalreserve.gov/newsevents/2026-october.htm"
           },
           {
-            "source": "TreasuryDirect \u00b7 upcoming auctions",
+            "source": "TreasuryDirect · upcoming auctions",
             "url": "https://www.treasurydirect.gov/auctions/upcoming/"
           }
         ],
@@ -74,25 +74,25 @@
       },
       {
         "title": "Wednesday, October 14",
-        "body": "5:40 a.m. ET \u2014 FED \u00b7 Governor Michelle W. Bowman speaks\n8:30 a.m. ET \u2014 ECONOMIC RELEASE \u00b7 Consumer Price Index and core CPI (September)\n11:30 a.m. ET \u2014 TREASURY AUCTION \u00b7 17-week bill\n1:30 p.m. ET \u2014 FED \u00b7 Richmond Fed President Thomas Barkin speaks\n2:00 p.m. ET \u2014 FED \u00b7 Beige Book",
-        "source": "Trading Economics \u00b7 U.S. calendar",
+        "body": "5:40 a.m. ET — FED · Governor Michelle W. Bowman speaks\n8:30 a.m. ET — ECONOMIC RELEASE · Consumer Price Index and core CPI (September)\n11:30 a.m. ET — TREASURY AUCTION · 17-week bill\n1:30 p.m. ET — FED · Richmond Fed President Thomas Barkin speaks\n2:00 p.m. ET — FED · Beige Book",
+        "source": "Trading Economics · U.S. calendar",
         "url": "https://tradingeconomics.com/united-states/calendar",
         "sourceKey": "economicCalendar",
         "relatedSources": [
           {
-            "source": "Federal Reserve \u00b7 October 2026 calendar",
+            "source": "Federal Reserve · October 2026 calendar",
             "url": "https://www.federalreserve.gov/newsevents/2026-october.htm"
           },
           {
-            "source": "U.S. Bureau of Labor Statistics \u00b7 2026 release schedule",
+            "source": "U.S. Bureau of Labor Statistics · 2026 release schedule",
             "url": "https://www.bls.gov/schedule/2026/home.htm"
           },
           {
-            "source": "TreasuryDirect \u00b7 upcoming auctions",
+            "source": "TreasuryDirect · upcoming auctions",
             "url": "https://www.treasurydirect.gov/auctions/upcoming/"
           },
           {
-            "source": "Federal Reserve \u00b7 Beige Book",
+            "source": "Federal Reserve · Beige Book",
             "url": "https://www.federalreserve.gov/monetarypolicy/beige-book-default.htm"
           }
         ],
@@ -100,21 +100,21 @@
       },
       {
         "title": "Thursday, October 15",
-        "body": "8:30 a.m. ET \u2014 ECONOMIC RELEASE \u00b7 Producer Price Index, initial jobless claims, and regional manufacturing surveys (September/October)\n8:30 a.m. ET \u2014 ECONOMIC RELEASE \u00b7 Advance Retail Sales (September)\n11:30 a.m. ET \u2014 TREASURY AUCTION \u00b7 4-week and 8-week bills",
-        "source": "Trading Economics \u00b7 U.S. calendar",
+        "body": "8:30 a.m. ET — ECONOMIC RELEASE · Producer Price Index, initial jobless claims, and regional manufacturing surveys (September/October)\n8:30 a.m. ET — ECONOMIC RELEASE · Advance Retail Sales (September)\n11:30 a.m. ET — TREASURY AUCTION · 4-week and 8-week bills",
+        "source": "Trading Economics · U.S. calendar",
         "url": "https://tradingeconomics.com/united-states/calendar",
         "sourceKey": "economicCalendar",
         "relatedSources": [
           {
-            "source": "U.S. Bureau of Labor Statistics \u00b7 2026 release schedule",
+            "source": "U.S. Bureau of Labor Statistics · 2026 release schedule",
             "url": "https://www.bls.gov/schedule/2026/home.htm"
           },
           {
-            "source": "U.S. Census Bureau \u00b7 economic indicator calendar",
+            "source": "U.S. Census Bureau · economic indicator calendar",
             "url": "https://www.census.gov/economic-indicators/calendar-listview.html"
           },
           {
-            "source": "TreasuryDirect \u00b7 upcoming auctions",
+            "source": "TreasuryDirect · upcoming auctions",
             "url": "https://www.treasurydirect.gov/auctions/upcoming/"
           }
         ],
@@ -122,17 +122,17 @@
       },
       {
         "title": "Friday, October 16",
-        "body": "8:30 a.m. ET \u2014 ECONOMIC RELEASE \u00b7 U.S. Import and Export Price Indexes (September)\n8:30 a.m. ET \u2014 ECONOMIC RELEASE \u00b7 NY Fed Services Activity Index\n9:15 a.m. ET \u2014 ECONOMIC RELEASE \u00b7 Industrial Production and Capacity Utilization (September)",
-        "source": "Trading Economics \u00b7 U.S. calendar",
+        "body": "8:30 a.m. ET — ECONOMIC RELEASE · U.S. Import and Export Price Indexes (September)\n8:30 a.m. ET — ECONOMIC RELEASE · NY Fed Services Activity Index\n9:15 a.m. ET — ECONOMIC RELEASE · Industrial Production and Capacity Utilization (September)",
+        "source": "Trading Economics · U.S. calendar",
         "url": "https://tradingeconomics.com/united-states/calendar",
         "sourceKey": "economicCalendar",
         "relatedSources": [
           {
-            "source": "U.S. Bureau of Labor Statistics \u00b7 2026 release schedule",
+            "source": "U.S. Bureau of Labor Statistics · 2026 release schedule",
             "url": "https://www.bls.gov/schedule/2026/home.htm"
           },
           {
-            "source": "Federal Reserve \u00b7 Industrial Production and Capacity Utilization",
+            "source": "Federal Reserve · Industrial Production and Capacity Utilization",
             "url": "https://www.federalreserve.gov/releases/g17/"
           }
         ],
@@ -142,38 +142,276 @@
     "earnings": [
       {
         "title": "Monday, October 12",
-        "body": "Before Open \u2014 LVMUY (LVMH Mo\u00ebt Hennessy Louis Vuitton).",
-        "source": "Earnings Whispers \u00b7 confirmed earnings calendar",
+        "body": "",
+        "source": "Earnings Whispers · confirmed earnings calendar",
         "url": "https://www.earningswhispers.com/calweek/20261012",
-        "asOf": "2026-10-11"
+        "relatedSources": [
+          {
+            "source": "StockAnalysis · daily market-cap data",
+            "url": "https://stockanalysis.com/list/biggest-companies/"
+          }
+        ],
+        "asOf": "2026-10-11",
+        "sessions": [
+          {
+            "period": "Before Open",
+            "companies": [
+              {
+                "ticker": "LVMUY",
+                "name": "LVMH Moët Hennessy Louis Vuitton",
+                "marketCap": 209810000000,
+                "marketCapAsOf": "2026-10-09",
+                "marketCapSource": "StockAnalysis · market capitalization",
+                "marketCapUrl": "https://stockanalysis.com/quote/otc/LVMUY/market-cap/"
+              }
+            ]
+          }
+        ]
       },
       {
         "title": "Tuesday, October 13",
-        "body": "Before Open \u2014 UNH, JPM, GS, WFC, JNJ, C, DPZ, ACI, FBK.\nAfter Close \u2014 AZZ.",
-        "source": "Earnings Whispers \u00b7 confirmed earnings calendar",
+        "body": "",
+        "source": "Earnings Whispers · confirmed earnings calendar",
         "url": "https://www.earningswhispers.com/calweek/20261012",
-        "asOf": "2026-10-11"
+        "asOf": "2026-10-11",
+        "sessions": [
+          {
+            "period": "Before Open",
+            "companies": [
+              {
+                "ticker": "UNH",
+                "name": "UnitedHealth Group",
+                "marketCap": 340460000000,
+                "marketCapAsOf": "2026-10-09",
+                "marketCapSource": "StockAnalysis · market capitalization",
+                "marketCapUrl": "https://stockanalysis.com/stocks/unh/market-cap/"
+              },
+              {
+                "ticker": "JPM",
+                "name": "JPMorgan Chase",
+                "marketCap": 885150000000,
+                "marketCapAsOf": "2026-10-09",
+                "marketCapSource": "StockAnalysis · market capitalization",
+                "marketCapUrl": "https://stockanalysis.com/stocks/jpm/market-cap/"
+              },
+              {
+                "ticker": "GS",
+                "name": "Goldman Sachs",
+                "marketCap": 271070000000,
+                "marketCapAsOf": "2026-10-09",
+                "marketCapSource": "StockAnalysis · market capitalization",
+                "marketCapUrl": "https://stockanalysis.com/stocks/gs/market-cap/"
+              },
+              {
+                "ticker": "WFC",
+                "name": "Wells Fargo",
+                "marketCap": 252660000000,
+                "marketCapAsOf": "2026-10-09",
+                "marketCapSource": "StockAnalysis · market capitalization",
+                "marketCapUrl": "https://stockanalysis.com/stocks/wfc/market-cap/"
+              },
+              {
+                "ticker": "JNJ",
+                "name": "Johnson & Johnson",
+                "marketCap": 630040000000,
+                "marketCapAsOf": "2026-10-09",
+                "marketCapSource": "StockAnalysis · market capitalization",
+                "marketCapUrl": "https://stockanalysis.com/stocks/jnj/market-cap/"
+              },
+              {
+                "ticker": "C",
+                "name": "Citigroup",
+                "marketCap": 217460000000,
+                "marketCapAsOf": "2026-10-09",
+                "marketCapSource": "StockAnalysis · market capitalization",
+                "marketCapUrl": "https://stockanalysis.com/stocks/c/market-cap/"
+              }
+            ]
+          }
+        ]
       },
       {
         "title": "Wednesday, October 14",
-        "body": "Before Open \u2014 ASML, BAC, MS, BLK, FAST, PGR, STT, SOTK.\nAfter Close \u2014 EQBK, HOMB, CMTL.",
-        "source": "Earnings Whispers \u00b7 confirmed earnings calendar",
+        "body": "",
+        "source": "Earnings Whispers · confirmed earnings calendar",
         "url": "https://www.earningswhispers.com/calweek/20261012",
-        "asOf": "2026-10-11"
+        "asOf": "2026-10-11",
+        "sessions": [
+          {
+            "period": "Before Open",
+            "companies": [
+              {
+                "ticker": "ASML",
+                "name": "ASML Holding",
+                "marketCap": 688720000000,
+                "marketCapAsOf": "2026-10-09",
+                "marketCapSource": "StockAnalysis · market capitalization",
+                "marketCapUrl": "https://stockanalysis.com/stocks/asml/market-cap/"
+              },
+              {
+                "ticker": "BAC",
+                "name": "Bank of America",
+                "marketCap": 379850000000,
+                "marketCapAsOf": "2026-10-09",
+                "marketCapSource": "StockAnalysis · market capitalization",
+                "marketCapUrl": "https://stockanalysis.com/stocks/bac/market-cap/"
+              },
+              {
+                "ticker": "MS",
+                "name": "Morgan Stanley",
+                "marketCap": 298440000000,
+                "marketCapAsOf": "2026-10-09",
+                "marketCapSource": "StockAnalysis · market capitalization",
+                "marketCapUrl": "https://stockanalysis.com/stocks/ms/market-cap/"
+              },
+              {
+                "ticker": "BLK",
+                "name": "BlackRock",
+                "marketCap": 175860000000,
+                "marketCapAsOf": "2026-10-09",
+                "marketCapSource": "StockAnalysis · market capitalization",
+                "marketCapUrl": "https://stockanalysis.com/stocks/blk/market-cap/"
+              },
+              {
+                "ticker": "FAST",
+                "name": "Fastenal",
+                "marketCap": 58240000000,
+                "marketCapAsOf": "2026-10-09",
+                "marketCapSource": "StockAnalysis · market capitalization",
+                "marketCapUrl": "https://stockanalysis.com/stocks/fast/market-cap/"
+              },
+              {
+                "ticker": "PGR",
+                "name": "Progressive",
+                "marketCap": 126410000000,
+                "marketCapAsOf": "2026-10-09",
+                "marketCapSource": "StockAnalysis · market capitalization",
+                "marketCapUrl": "https://stockanalysis.com/stocks/pgr/market-cap/"
+              },
+              {
+                "ticker": "STT",
+                "name": "State Street",
+                "marketCap": 48060000000,
+                "marketCapAsOf": "2026-10-09",
+                "marketCapSource": "StockAnalysis · market capitalization",
+                "marketCapUrl": "https://stockanalysis.com/stocks/stt/market-cap/"
+              }
+            ]
+          }
+        ]
       },
       {
         "title": "Thursday, October 15",
-        "body": "Before Open \u2014 TSM, CMC, ERIC, SCHW, MAN, MRSH, PNC, BNY, BSVN, FHN.\nAfter Close \u2014 AA, IBKR, JBHT, INDB, WSE, CNS, SFNC, WAFD, LOOP.",
-        "source": "Earnings Whispers \u00b7 confirmed earnings calendar",
+        "body": "",
+        "source": "Earnings Whispers · confirmed earnings calendar",
         "url": "https://www.earningswhispers.com/calweek/20261012",
-        "asOf": "2026-10-11"
+        "asOf": "2026-10-11",
+        "sessions": [
+          {
+            "period": "Before Open",
+            "companies": [
+              {
+                "ticker": "TSM",
+                "name": "Taiwan Semiconductor Manufacturing",
+                "marketCap": 2070000000000,
+                "marketCapAsOf": "2026-10-09",
+                "marketCapSource": "StockAnalysis · market capitalization",
+                "marketCapUrl": "https://stockanalysis.com/stocks/tsm/market-cap/"
+              },
+              {
+                "ticker": "ERIC",
+                "name": "Telefonaktiebolaget LM Ericsson",
+                "marketCap": 31540000000,
+                "marketCapAsOf": "2026-10-09",
+                "marketCapSource": "StockAnalysis · market capitalization",
+                "marketCapUrl": "https://stockanalysis.com/stocks/eric/market-cap/"
+              },
+              {
+                "ticker": "SCHW",
+                "name": "Charles Schwab",
+                "marketCap": 167230000000,
+                "marketCapAsOf": "2026-10-09",
+                "marketCapSource": "StockAnalysis · market capitalization",
+                "marketCapUrl": "https://stockanalysis.com/stocks/schw/market-cap/"
+              },
+              {
+                "ticker": "MRSH",
+                "name": "Marsh & McLennan",
+                "marketCap": 83870000000,
+                "marketCapAsOf": "2026-10-09",
+                "marketCapSource": "StockAnalysis · market capitalization",
+                "marketCapUrl": "https://stockanalysis.com/stocks/mrsh/market-cap/"
+              },
+              {
+                "ticker": "PNC",
+                "name": "PNC Financial Services",
+                "marketCap": 87450000000,
+                "marketCapAsOf": "2026-10-09",
+                "marketCapSource": "StockAnalysis · market capitalization",
+                "marketCapUrl": "https://stockanalysis.com/stocks/pnc/market-cap/"
+              },
+              {
+                "ticker": "BNY",
+                "name": "Bank of New York Mellon",
+                "marketCap": 96830000000,
+                "marketCapAsOf": "2026-10-09",
+                "marketCapSource": "StockAnalysis · market capitalization",
+                "marketCapUrl": "https://stockanalysis.com/stocks/bny/market-cap/"
+              }
+            ]
+          },
+          {
+            "period": "After Close",
+            "companies": [
+              {
+                "ticker": "IBKR",
+                "name": "Interactive Brokers Group",
+                "marketCap": 39810000000,
+                "marketCapAsOf": "2026-10-09",
+                "marketCapSource": "StockAnalysis · market capitalization",
+                "marketCapUrl": "https://stockanalysis.com/stocks/ibkr/market-cap/"
+              }
+            ]
+          }
+        ]
       },
       {
         "title": "Friday, October 16",
-        "body": "Before Open \u2014 MTB, TFC, TRV, RF, CFG.",
-        "source": "Earnings Whispers \u00b7 confirmed earnings calendar",
+        "body": "",
+        "source": "Earnings Whispers · confirmed earnings calendar",
         "url": "https://www.earningswhispers.com/calweek/20261012",
-        "asOf": "2026-10-11"
+        "asOf": "2026-10-11",
+        "sessions": [
+          {
+            "period": "Before Open",
+            "companies": [
+              {
+                "ticker": "MTB",
+                "name": "M&T Bank",
+                "marketCap": 31410000000,
+                "marketCapAsOf": "2026-10-09",
+                "marketCapSource": "StockAnalysis · market capitalization",
+                "marketCapUrl": "https://stockanalysis.com/stocks/mtb/market-cap/"
+              },
+              {
+                "ticker": "TFC",
+                "name": "Truist Financial",
+                "marketCap": 56330000000,
+                "marketCapAsOf": "2026-10-09",
+                "marketCapSource": "StockAnalysis · market capitalization",
+                "marketCapUrl": "https://stockanalysis.com/stocks/tfc/market-cap/"
+              },
+              {
+                "ticker": "TRV",
+                "name": "Travelers",
+                "marketCap": 76910000000,
+                "marketCapAsOf": "2026-10-09",
+                "marketCapSource": "StockAnalysis · market capitalization",
+                "marketCapUrl": "https://stockanalysis.com/stocks/trv/market-cap/"
+              }
+            ]
+          }
+        ]
       }
     ],
     "news": []

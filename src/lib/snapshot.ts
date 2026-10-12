@@ -56,6 +56,11 @@ export function readSnapshot(input: unknown): Snapshot {
       for (const note of notes) {
         if (!note || typeof note!=='object' || typeof note.title!=='string' || typeof note.body!=='string' || typeof note.source!=='string' || typeof note.url!=='string' || note.source!=='Desk commentary' && !/^https:\/\//i.test(note.url) || note.url && !/^https:\/\//i.test(note.url)) return fail('briefing notes need a direct HTTPS source.');
         for (const field of ['publishedAt','asOf'] as const) if (note[field]!==undefined && note[field]!==null && (typeof note[field]!=='string' || !Number.isFinite(Date.parse(note[field])))) return fail('briefing note date is invalid.');
+        const earningsNote=note as typeof note & { sessions?: unknown };
+        if (key==='earnings' && earningsNote.sessions!==undefined) {
+          const sessions=earningsNote.sessions;
+          if (!Array.isArray(sessions) || sessions.some(session=>!session || !['Before Open','After Close'].includes(session.period) || !Array.isArray(session.companies) || session.companies.some((company: any)=>!company || typeof company.ticker!=='string' || !company.ticker || typeof company.name!=='string' || typeof company.marketCap!=='number' || !Number.isFinite(company.marketCap) || company.marketCap<0 || typeof company.marketCapAsOf!=='string' || !/^\d{4}-\d{2}-\d{2}$/.test(company.marketCapAsOf) || typeof company.marketCapUrl!=='string' || !/^https:\/\//i.test(company.marketCapUrl) || typeof company.marketCapSource!=='string' || !company.marketCapSource))) return fail('invalid structured earnings session or market-cap source.');
+        }
         const legacyQuotes=(note as typeof note & {indexQuotes?: unknown}).indexQuotes;
         if (legacyQuotes!==undefined && (!Array.isArray(legacyQuotes) || legacyQuotes.some(row=>!row || typeof row.label!=='string' || ![row.fridayClose,row.scanPrice].every(validNumber) || !validChange(row.changePercent) || !optionalTime(row.fridayCloseAt)))) return fail('invalid legacy index quote.');
       }

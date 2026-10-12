@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import type { Briefing, Snapshot, TreasuryYield } from '@/lib/scanner';
 import { normalizeMacroCalendar } from '@/lib/macroCalendar';
+import { eligibleEarningsSessions, hasStructuredEarnings } from '@/lib/earningsCalendar';
 import { visibleBriefingSectionKeys, type BriefingSectionKey, type BriefingTopicSelection } from '@/lib/briefingTopics';
 
 type KeyLevel = { id: 'ES' | 'NQ' | 'YM' | 'RTY'; label: string; high: number | null; low: number | null; highTime?: string | null; lowTime?: string | null; asOf: string | null; retrievedAt?: string | null; source: string; issue?: string };
@@ -158,6 +159,38 @@ function MacroCalendarTable({ notes, sessionDate }: { notes: Briefing['macro']; 
   </table></div>;
 }
 
+function EarningsTicker({ company }: { company: NonNullable<Briefing['earnings'][number]['sessions']>[number]['companies'][number] }) {
+  const cap = (company.marketCap! / 1e9).toFixed(1);
+  return <a className="earnings-ticker" href={company.marketCapUrl} target="_blank" rel="noreferrer" title={`${company.name} · $${cap}B market cap`} aria-label={`${company.ticker}, ${company.name}, market cap $${cap} billion`}>{company.ticker}</a>;
+}
+
+function EarningsCalendar({ notes }: { notes: Briefing['earnings'] }) {
+  const days = notes.map((note) => ({ note, sessions: eligibleEarningsSessions(note) }))
+    .filter(({ sessions }) => sessions.length > 0);
+  const companies = days.flatMap(({ sessions }) => sessions.flatMap((session) => session.companies));
+  const checkedDates = [...new Set(companies.map((company) => company.marketCapAsOf).filter((date): date is string => Boolean(date)))].sort();
+  const capUrl = companies.find((company) => company.marketCapUrl)?.marketCapUrl;
+  const capSource = companies.find((company) => company.marketCapSource)?.marketCapSource;
+  const capDate = checkedDates.length === 1
+    ? new Date(`${checkedDates[0]}T12:00:00Z`).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' })
+    : checkedDates.length ? `${checkedDates[0]}–${checkedDates.at(-1)}` : null;
+
+  return <div className="earnings-calendar">
+    {days.length ? <div className="earnings-days">{days.map(({ note, sessions }) => {
+      const before = sessions.find((session) => session.period === 'Before Open')?.companies ?? [];
+      const after = sessions.find((session) => session.period === 'After Close')?.companies ?? [];
+      return <article className="earnings-day" key={note.title}>
+        <h3 className="earnings-day-title">{note.title}</h3>
+        <div className="earnings-periods">
+          {before.length > 0 && <div className="earnings-period"><span className="earnings-period-label">Before open</span><div className="earnings-tickers">{before.map((company) => <EarningsTicker company={company} key={company.ticker} />)}</div></div>}
+          {after.length > 0 && <div className="earnings-period"><span className="earnings-period-label">After close</span><div className="earnings-tickers">{after.map((company) => <EarningsTicker company={company} key={company.ticker} />)}</div></div>}
+        </div>
+      </article>;
+    })}</div> : <div className="briefing-empty">No companies above the market-cap threshold are listed.</div>}
+    <p className="earnings-calendar-footnote">Companies over $25B market cap{capDate ? ` · checked ${capDate}` : ''}{capUrl && capSource ? <> · <a href={capUrl} target="_blank" rel="noreferrer">{capSource} ↗</a></> : ''}</p>
+  </div>;
+}
+
 const sourceSections: { key: keyof Briefing; label: string }[] = [
   { key: 'indices', label: '01 · Overnight movements on the indices' },
   { key: 'bonds', label: '01 · Overnight movements on bonds' },
@@ -312,7 +345,7 @@ export default function MorningBrief({ data, error, archived = false, topics, sh
     : key === 'energy' ? <section className="briefing-section panel" key={key} aria-labelledby="brief-energy"><div className="briefing-section-head"><span className="brief-section-number">0{sectionIndex}</span><h2 id="brief-energy">{title}</h2></div><div className="briefing-notes"><div className="briefing-empty">No energy commentary supplied for this snapshot.</div></div></section>
     : <section className="briefing-section panel" key={key} aria-labelledby={'brief-' + key}>
     <div className="briefing-section-head"><span className="brief-section-number">0{sectionIndex}</span><h2 id={'brief-' + key}>{title}</h2></div>
-    <div className="briefing-notes">{key === 'macro' ? <MacroCalendarTable notes={data.briefing?.macro || []} sessionDate={data.sessionDate} /> : (data.briefing?.[key] || []).length ? data.briefing![key].map((note, index) => {
+    <div className="briefing-notes">{key === 'macro' ? <MacroCalendarTable notes={data.briefing?.macro || []} sessionDate={data.sessionDate} /> : key === 'earnings' && hasStructuredEarnings(data.briefing?.earnings ?? []) ? <EarningsCalendar notes={data.briefing?.earnings ?? []} /> : (data.briefing?.[key] || []).length ? data.briefing![key].map((note, index) => {
       return <article className="briefing-note" key={index}><h3>{note.title}</h3><p>{note.body}</p></article>;
     }) : <div className="briefing-empty">No notes supplied for this section.</div>}</div>
   </section>;
