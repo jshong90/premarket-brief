@@ -1,3 +1,5 @@
+import { ResponsivePreview } from './ResponsivePreview';
+import { ScannerSandbox } from './ScannerSandbox';
 import { useState } from 'react';
 import ThemeToggle from '@/shared/ThemeToggle';
 import DesignLabs from '@/features/design-lab/DesignLabs';
@@ -71,6 +73,6 @@ export default function DesignReferencePage() {
       <div className="page-heading centered-heading"><div className="heading-center"><h2 id="reference-controls" className="section-title">Scale and controls</h2></div><SectionJump target="morning-brief">Back to primitives ↑</SectionJump></div>
       <ResilienceScale onAbout={()=>setShowScaleNote(value=>!value)} />
       {showScaleNote && <div className="inline-note" role="status">The scale uses the same classification colors in both themes.</div>}
-    </section></main><DesignLabs />
+    </section><section className="dashboard-section" aria-labelledby="reference-scanner"><h2 id="reference-scanner" className="section-title">Scanner interaction examples</h2><ScannerSandbox /></section><section className="dashboard-section" aria-labelledby="reference-responsive"><h2 id="reference-responsive" className="section-title">Responsive dashboard preview</h2><ResponsivePreview /></section></main><DesignLabs />
   </div>;
 }

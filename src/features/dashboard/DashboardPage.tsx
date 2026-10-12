@@ -1,5 +1,7 @@
 'use client';
 
+import { filterScannerRows } from './scannerRows';
+
 import { SectionJump } from '@/components/brief/SectionJump';
 
 import { useEffect, useMemo, useRef, useState } from 'react';
@@ -153,7 +155,7 @@ export default function Scanner() {
     return()=>controller.abort();
   },[]);
   const topStocks=useMemo(()=>topRelativeStrength(data.stocks.map(r=>{const b=benchmark==='auto'?r.benchmark:benchmark as BenchmarkId;return{...r,usedBenchmark:b,...metrics(r,data.benchmarks.find(x=>x.id===b))};})),[data,benchmark]);
-  const rows=useMemo(()=>topStocks.filter(r=>(sector==='all'||r.sector===sector)&&`${r.ticker} ${r.name}`.toLowerCase().includes(query.toLowerCase())).sort((a,b)=>{const av=a[sort.key],bv=b[sort.key];if(av==null)return bv==null?a.rsRank-b.rsRank:1;if(bv==null)return-1;const result=typeof av==='string'?av.localeCompare(String(bv)):av-Number(bv);return(sort.asc?result:-result)||a.rsRank-b.rsRank;}),[topStocks,sector,query,sort]);
+  const rows=useMemo(()=>filterScannerRows(topStocks,query,sector,sort),[topStocks,sector,query,sort]);
   const leaders=useMemo(()=>data.stocks.map(row=>({row,capture:metrics(row,data.benchmarks.find(b=>b.id===(benchmark==='auto'?row.benchmark:benchmark))).capture})).filter(({capture})=>capture!==null&&capture<70).sort((a,b)=>a.capture!-b.capture!||a.row.ticker.localeCompare(b.row.ticker)).slice(0,5).map(({row})=>row),[data,benchmark]);
   const counts=useMemo(()=>{const c:Record<string,number>={};for(const r of data.stocks){const b=benchmark==='auto'?r.benchmark:benchmark;const band=metrics(r,data.benchmarks.find(x=>x.id===b)).band;if(band)c[band]=(c[band]||0)+1;}return c;},[data,benchmark]);
   const validCount=Object.values(counts).reduce((a,b)=>a+b,0);

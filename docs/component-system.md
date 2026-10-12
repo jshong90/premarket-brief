@@ -152,3 +152,24 @@ opt-in display convention, not authentication. Use this page to review shared
 style changes together before modifying individual sections.
 
 The resilience scale owns its viewport fill through `useViewportBars`, shared automatically wherever ResilienceScale is mounted. It uses the main-page threshold/root margin, toggles bars-visible on every entry/exit, cleans up the observer, and retains the existing CSS timing/stagger and reduced-motion rules. DashboardPage observes ranking bars only, avoiding two observers controlling the scale.
+
+## Final consistency pass
+
+372 repeated spacing, corner, border-width and font declarations now consume
+shared tokens, preserving their resolved values. Spacing uses --space-2/4/6/8/10/
+12/14/16/18/20/24/28/32/40/48. Corner sizes use --corner-4/5/6/7/8/9/10/12/14/16.
+--border-width is 1px; Tailwind's font-sans consumes the existing --font-ui.
+Existing semantic card inset/gap/radius and responsive variants remain the owners
+of card formatting. Chart dimensions, data-driven bar widths, logo geometry and
+breakpoints are layout/visual constraints rather than general spacing tokens.
+
+The reference includes a synthetic scanner sandbox using the real rankings and
+instrument drawer, with shared filter/sort behavior from scannerRows.ts. Synthetic
+examples are isolated from public/data and never presented as a live capture.
+A responsive iframe displays the actual published dashboard at 320, 375, 390,
+768 or 1200 CSS pixels so media-query behavior can be reviewed directly.
+
+Motion ownership is explicit: the scale owns its viewport observer, disclosure
+owns open state with shared CSS timing, and page-level heading/card/parallax
+observers coordinate the layout once. Design Lab modifies the same shared motion
+variables; it is a development control, not a second production animation system.
