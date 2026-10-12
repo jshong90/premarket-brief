@@ -146,7 +146,7 @@ price/percent/yield/basis-point roles, paired layout, key-level timestamps, card
 roles, navigation, Sources disclosure and the resilience scale. ThemeToggle and
 DesignLabs are the same controls as the dashboard, including saved preferences.
 
-No market packet is requested and no fixture is written into public/data. The
+Primitive/scanner examples request no market packet, and no fixture is written into public/data. The responsive iframe separately loads the published dashboard. The
 page is noindex and absent from dashboard navigation. The dev parameter is an
 opt-in display convention, not authentication. Use this page to review shared
 style changes together before modifying individual sections.
@@ -173,3 +173,5 @@ Motion ownership is explicit: the scale owns its viewport observer, disclosure
 owns open state with shared CSS timing, and page-level heading/card/parallax
 observers coordinate the layout once. Design Lab modifies the same shared motion
 variables; it is a development control, not a second production animation system.
+
+Browser audit passed synthetic stock-detail open/Escape close, search, company/Recovery sorting, sector filter and benchmark override. Responsive frame widths 320/375/390/768/1200 showed no document overflow; mobile/tablet layouts stacked overnight columns and desktop retained two columns.

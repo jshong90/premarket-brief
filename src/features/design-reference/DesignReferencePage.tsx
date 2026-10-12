@@ -31,7 +31,7 @@ export default function DesignReferencePage() {
       <span className="topbar-date">Design reference</span><ThemeToggle />
     </div></header>
     <main><section className="dashboard-section" id="morning-brief" aria-labelledby="reference-title" tabIndex={-1}>
-      <div className="page-heading centered-heading"><div className="heading-center"><h1 id="reference-title">Shared primitives<span className="title-dot">.</span></h1><p>All numbers below are synthetic examples. No market data is loaded.</p><p>Use the theme toggle and Design Lab to compare the same components in both modes.</p></div><SectionJump target="relative-strength">Jump to controls <span className="jump-arrow" aria-hidden="true">↓</span></SectionJump></div>
+      <div className="page-heading centered-heading"><div className="heading-center"><h1 id="reference-title">Shared primitives<span className="title-dot">.</span></h1><p>Primitive and scanner examples are synthetic. The responsive frame separately displays the published dashboard.</p><p>Use the theme toggle and Design Lab to compare the same components in both modes.</p></div><SectionJump target="relative-strength">Jump to controls <span className="jump-arrow" aria-hidden="true">↓</span></SectionJump></div>
       <BriefStack>
         <BriefCard id="reference-text" number={1} title="Text and commentary" role="commentary">
           <CommentaryNotes notes={[
