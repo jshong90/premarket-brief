@@ -163,7 +163,9 @@ test('failed refreshed field clears old values and rollover prepares a separate 
   assert.equal(rolled.draft.previousArchiveDate, day);
   assert.ok(rolled.draft.marketContext.every(r => r.value === null));
   assert.deepEqual(rolled.archive.marketContext, original.marketContext);
-  assert.deepEqual(rolled.draft.briefing, { indices: [], bonds: [], macro: [], earnings: [], news: [] });
+  assert.deepEqual(rolled.draft.briefing, Object.fromEntries(
+    Object.keys(original.briefing).map(section => [section, []]),
+  ));
 });
 
 test('apply enforces snapshot lease and refuses to overwrite a different archive', async () => {
