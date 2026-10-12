@@ -50,8 +50,9 @@ export function readSnapshot(input: unknown): Snapshot {
   }
   if (s.briefing!==undefined) {
     if (!s.briefing || typeof s.briefing!=='object' || Array.isArray(s.briefing)) return fail('invalid briefing.');
-    for (const key of ['indices','bonds','macro','earnings','news'] as const) {
+    for (const key of ['indices','bonds','macro','earnings','news','energy'] as const) {
       const notes=s.briefing[key];
+      if (key==='energy' && notes===undefined) continue;
       if (!Array.isArray(notes)) return fail(`briefing.${key} must be an array.`);
       for (const note of notes) {
         if (!note || typeof note!=='object' || typeof note.title!=='string' || typeof note.body!=='string' || typeof note.source!=='string' || typeof note.url!=='string' || note.source!=='Desk commentary' && !/^https:\/\//i.test(note.url) || note.url && !/^https:\/\//i.test(note.url)) return fail('briefing notes need a direct HTTPS source.');
