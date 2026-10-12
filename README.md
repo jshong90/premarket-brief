@@ -202,3 +202,7 @@ Section cards fade in while moving upward 12px over 650ms whenever they enter th
 The morning brief has six sections: combined overnight indices and bonds, key levels, energy, upcoming macro events, upcoming earnings, and overnight news. The button beside the Morning brief heading skips to the scanner; the button beside the Relative strength heading returns to the brief. Both use same-page anchors. The header scrolls with the page.
 
 
+
+### Incremental component rebuild
+
+See [the component system](docs/component-system.md) for the primitive inventory, migration order and verification rules. Shared commentary and numbered section headings are the first completed increment.
