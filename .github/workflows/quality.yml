@@ -1,0 +1,45 @@
+name: Quality checks
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+concurrency:
+  group: quality-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  quality:
+    name: Validate, test, and build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22.x
+          cache: npm
+
+      - name: Install locked dependencies
+        run: npm ci
+
+      - name: Validate briefing packet
+        run: npm run brief:validate
+
+      - name: Run test suite
+        run: npm test
+
+      - name: Build production site
+        run: npm run build
+
+      - name: Smoke-check generated site and snapshot data
+        run: node scripts/smoke-build.mjs
