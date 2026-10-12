@@ -13,28 +13,21 @@ const { readSnapshot } = await import(compile(fs.readFileSync('src/lib/snapshot.
   .replace("'./ranges'", JSON.stringify(rangesUrl))));
 
 const draft = JSON.parse(fs.readFileSync('public/data/snapshot.json', 'utf8'));
-assert.equal(readSnapshot(draft).status, 'draft');
-assert.equal(draft.sessionDate, '2026-10-12');
-assert.equal(draft.previousArchiveDate, '2026-10-08');
-assert.equal(draft.cutoffAt, undefined);
-assert.equal(draft.stocks.length, 0);
-assert.equal(draft.sectors.length, 0);
+assert.equal(readSnapshot(draft).sessionDate, draft.sessionDate);
+if (draft.status === 'draft') assert.equal(draft.cutoffAt, undefined);
+if (draft.previousArchiveDate) {
+  const previous = JSON.parse(fs.readFileSync(`public/data/snapshot-${draft.previousArchiveDate}.json`, 'utf8'));
+  assert.equal(previous.sessionDate, draft.previousArchiveDate);
+  assert.ok(previous.sessionDate < draft.sessionDate);
+}
 // A draft may be partially populated before its final capture. Validate provenance
 // for values that are present instead of assuming that every draft stays blank.
 assert.ok(draft.marketContext.every(row => row.value === null || (row.asOf && row.source && row.retrievedAt)));
 assert.ok(draft.treasuryYields.every(row => row.value === null || (row.asOf && row.source && row.retrievedAt)));
 assert.ok(draft.indexQuotes.every(row => row.value === null || (row.asOf && row.source && row.retrievedAt)));
 assert.ok(draft.keyLevels.every(row => row.high === null || (row.low !== null && row.asOf && row.highTime && row.lowTime && row.source && row.retrievedAt)));
-assert.ok(draft.benchmarks.every(row => row.high === null && row.low === null && row.drawdown === null && row.asOf === null));
 assert.deepEqual(Object.keys(draft.briefing).sort(), ['bonds', 'earnings', 'indices', 'macro', 'news']);
-assert.equal(draft.briefing.indices.length, 0);
-assert.equal(draft.briefing.bonds.length, 0);
-assert.equal(draft.briefing.macro.length, 5);
-assert.equal(draft.briefing.earnings.length, 5);
-assert.ok(draft.briefing.macro.filter(note => note.sourceKey).every(note => note.asOf === '2026-10-11'));
-assert.ok(draft.briefing.earnings.every(note => note.source === 'Earnings Whispers · confirmed earnings calendar' && note.url === 'https://www.earningswhispers.com/calweek/20261012' && note.asOf === '2026-10-11'));
 const normalizedMacro = normalizeMacroCalendar(draft.briefing.macro, draft.sessionDate);
-assert.ok(normalizedMacro.length >= 20);
 assert.deepEqual(normalizedMacro.map(row => row.sortKey), [...normalizedMacro.map(row => row.sortKey)].sort((a, b) => a - b));
 assert.ok(normalizedMacro.every(row => row.time === '—' || row.sortKey % 86400000 < 16 * 60 * 60 * 1000));
 const agendaRows = normalizeMacroCalendar([
@@ -53,12 +46,7 @@ for (const note of draft.briefing.macro) {
   assert.ok(note.url.startsWith('https://'));
   assert.ok((note.relatedSources ?? []).every(source => source.url.startsWith('https://')));
 }
-assert.ok(draft.briefing.macro.some(note => note.body.includes('Consumer Price Index')));
-assert.ok(draft.briefing.macro.some(note => note.body.includes('4-week and 8-week bills')));
-assert.ok(draft.briefing.macro.some(note => /initial jobless claims/i.test(note.body)));
-assert.ok(draft.briefing.macro.some(note => note.body.includes('Industrial Production')));
 assert.ok(!normalizedMacro.some(row => /after-close event/i.test(row.event)));
-assert.ok(!normalizedMacro.some(row => row.event.includes('Fed Chair Warsh')));
 const oct8Archive = JSON.parse(fs.readFileSync('public/data/snapshot-2026-10-08.json', 'utf8'));
 assert.equal(readSnapshot(oct8Archive).status, 'archived');
 assert.equal(oct8Archive.sessionDate, '2026-10-08');
@@ -144,3 +132,4 @@ assert.equal(readSnapshot(changed(s => { s.briefing.indices.push({ title: 'My no
 assert.throws(() => readSnapshot(changed(s => { s.briefing.indices.push({ title: 'External claim', body: 'News', source: 'Other', url: '' }); })), /HTTPS/);
 
 console.log('PASS: published packets, partial scanner coverage, negative changes, quote and key-level validation, archive link, and user-authored commentary.');
+

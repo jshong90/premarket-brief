@@ -3,3 +3,9 @@ dist/
 .env
 .env.*
 !.env.example
+
+
+.collection/
+public/data/.snapshot.lock
+*.tmp
+node_modules
