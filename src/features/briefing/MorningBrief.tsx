@@ -353,7 +353,7 @@ export default function MorningBrief({ data, error, archived = false, topics, sh
     </section>
     : key === 'indices' ? <OvernightMovementsPanel data={data} key="overnight-movements" showEquities={!customized || selectedTopics.equities} showBonds={!customized || selectedTopics.bonds} />
     : key === 'bonds' ? null
-    : key === 'energy' ? <section className="briefing-section panel" key={key} aria-labelledby="brief-energy"><div className="briefing-section-head"><span className="brief-section-number">0{sectionIndex}</span><h2 id="brief-energy">{title}</h2></div><div className="briefing-notes energy-commentary"><CommentaryNotes notes={data.briefing?.energy ?? []} empty="No energy commentary supplied for this snapshot." /></div></section>
+    : key === 'energy' ? <section className="briefing-section panel" key={key} aria-labelledby="brief-energy"><div className="briefing-section-head"><span className="brief-section-number">0{sectionIndex}</span><h2 id="brief-energy">{title}</h2></div><div className="commentary-card-body"><CommentaryNotes notes={data.briefing?.energy ?? []} empty="No energy commentary supplied for this snapshot." /></div></section>
     : <section className="briefing-section panel" key={key} aria-labelledby={'brief-' + key}>
     <div className="briefing-section-head"><span className="brief-section-number">0{sectionIndex}</span><h2 id={'brief-' + key}>{title}</h2></div>
     <div className="briefing-notes">{key === 'macro' ? <MacroCalendarTable notes={data.briefing?.macro || []} sessionDate={data.sessionDate} /> : key === 'earnings' && hasStructuredEarnings(data.briefing?.earnings ?? []) ? <EarningsCalendar notes={data.briefing?.earnings ?? []} /> : (data.briefing?.[key] || []).length ? data.briefing![key].map((note, index) => {

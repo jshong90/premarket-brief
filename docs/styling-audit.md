@@ -11,11 +11,11 @@
 
 Equity, Bond, and Energy commentary share `CommentaryNotes` in `MorningBrief.tsx`, including heading level, label/body classes, paragraph whitespace, separators, and empty states. Energy has a card-body inset; the indices/bonds commentary begins below a table. These are structural containers, with no section-specific typography.
 
-Design Lab changes the role tokens. Its Body text control applies to every commentary body and general briefing note. Its Card heading control applies to every commentary label. Fonts are declared once; component rules consume font tokens.
+Design Lab changes the role tokens. Its Brief text control applies to every commentary body and general briefing note. Its Card headings control applies to every commentary label. Fonts are declared once; component rules consume font tokens.
 
 ## October 12 audit
 
-The global stylesheet had 1,239 rules, 3,366 declarations, and 49 priority declarations. The cleanup removes 310 shadowed declarations and 273 unused selector entries from prior layouts, including the former separate overview, retired sector panel, and compact standalone bond-card patches. The remaining sheet has 925 rules and 2,649 declarations before build optimization.
+The global stylesheet had 1,239 rules, 3,366 declarations, and 49 priority declarations. The cleanup removes 310 shadowed declarations and 273 unused selector entries from prior layouts, including the former separate overview, retired sector panel, and compact standalone bond-card patches. The remaining sheet has 926 rules and 2,651 declarations before build optimization.
 
 The eight remaining `!important` declarations are reduced-motion safeguards, including the development reduced-motion switch. Ordinary typography, theme, surface, and control styling no longer uses `!important`. The connection diagnostic uses shared surface, border, success, and error tokens rather than separate theme literals.
 

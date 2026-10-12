@@ -1884,7 +1884,7 @@ html[data-theme="light"] .theme-toggle:hover {
   border-color: #bf5a25;
   color: var(--text-secondary);
 }
-/* One morning page, with headings clear of the sticky market strip. */
+/* Combined dashboard layout. */
 html {
   scroll-behavior: smooth;
   scroll-padding-top: var(--dashboard-offset,265px);
@@ -2002,8 +2002,7 @@ html[data-theme="light"] {
   --ring: #777777;
   --green: #27824d;
   --red: #c63e3e;
-  --destructive: #c63e3e
-;
+  --destructive: #c63e3e;
 }
 html[data-theme="dark"] {
   --background: #25282b;
@@ -2022,8 +2021,7 @@ html[data-theme="dark"] {
   --ring: #b7bbc0;
   --green: #62c982;
   --red: #f07878;
-  --destructive: #f07878
-;
+  --destructive: #f07878;
 }
 /* Semantic text roles: theme values live here; components consume these roles. */
 :root {
@@ -2044,8 +2042,7 @@ html[data-theme="dark"] {
   --rs-clear-text: #a6d982;
   --rs-moderate-text: #a9b7a3;
   --rs-market-text: #c8b998;
-  --rs-laggard-text: #dea19c
-;
+  --rs-laggard-text: #dea19c;
 }
 html[data-theme="light"] {
   --text-secondary: #555555;
@@ -2054,8 +2051,7 @@ html[data-theme="light"] {
   --rs-clear-text: #a64f24;
   --rs-moderate-text: #86694f;
   --rs-market-text: #806044;
-  --rs-laggard-text: #a34f45
-;
+  --rs-laggard-text: #a34f45;
 }
 html[data-theme="light"] body,html[data-theme="dark"] body {
   background: var(--background);
@@ -2070,11 +2066,11 @@ html[data-theme="dark"] .topbar {
   border-color: #454a4f;
 }
 html[data-theme="light"] .brand-mark {
-  color: var(--text-secondary);
+  color: var(--header-text,var(--foreground));
   border-color: #aaa;
 }
 html[data-theme="dark"] .brand-mark {
-  color: var(--text-secondary);
+  color: var(--header-text,var(--foreground));
   border-color: #777;
 }
 html[data-theme="light"] .session-chip,html[data-theme="light"] .connection-button,html[data-theme="light"] .theme-toggle {
@@ -2371,7 +2367,6 @@ html[data-theme="dark"] .briefing-note,html[data-theme="dark"] .briefing-section
 html[data-theme="light"] .company strong,html[data-theme="light"] .company small,html[data-theme="dark"] .company strong,html[data-theme="dark"] .company small {
   color: var(--foreground);
 }
-/* Keep body copy on the main text token; the Design Lab can tune headers separately. */
 /* Preserve intentional per-index line breaks in the briefing copy. */
 .briefing-note p {
   white-space: pre-line;
@@ -2561,8 +2556,8 @@ html[data-theme="light"] .company strong,html[data-theme="light"] .company small
   margin: 0;
   color: var(--foreground);
 }
-.energy-commentary {
-  padding-block: var(--card-inset);
+.commentary-card-body {
+  padding: var(--card-inset);
 }
 @media(max-width:900px) {
   .overnight-pair {
@@ -2778,7 +2773,6 @@ html[data-theme="light"] .company strong,html[data-theme="light"] .company small
   font-size: 12px;
   line-height: 1.6;
 }
-/* Keep the bonds card compact so the adjacent key levels carry more visual weight. */
 @media(max-width:700px) {
   .morning-sections {
     row-gap: 16px;
@@ -2823,6 +2817,10 @@ main {
 h1,h2,h3 {
   font-family: var(--font-editorial);
   font-optical-sizing: auto;
+  color: var(--header-text,var(--foreground));
+}
+h4,h5,h6 {
+  color: var(--header-text,var(--foreground));
 }
 /* Set only morning brief body copy in Newsreader; controls and market data stay sans serif. */
 .briefing-note p {
