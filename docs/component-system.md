@@ -11,7 +11,7 @@ accessibility relationships and motion hooks before moving on to the next layer.
 | Repeated content | Commentary label/body/empty state, numbered section heading | Extracted into components/brief in increment 1 |
 | Numeric displays | Price, yield, percent/basis-point change, timestamp, missing value | Extracted formatNumeric / NumericCell in increment 2 |
 | Tables | Indices, Treasury yields, key levels | Shared BriefTable shell and NumericCell in increment 2 |
-| Cards/layout | Card surface, header, body, stack, paired columns | Later: preserve selector hooks used by animations and responsive layout |
+| Cards/layout | Card surface, header, body, stack, paired columns | BriefCard, BriefStack and OvernightPair in increment 3 |
 | Controls | Jump link, disclosure, theme toggle, Design Lab inputs | Later: consolidate only repeated behavior; reuse existing UI components |
 | Sections/page | Brief, market context, calendar, earnings, scanner | Compose migrated building blocks; retain feature-specific logic |
 
@@ -59,3 +59,19 @@ Eastern and DST-aware. Providers and snapshot validation remain upstream.
 Verification: full tests/build, numeric unit/direction/DST tests, and whole-brief
 HTML parity against the prior implementation in populated, empty, archive and
 topic-filter states.
+
+## Increment 3
+
+`BriefCard` composes the section surface, accessible numbered heading and body.
+Four named roles preserve structural needs: notes, standalone commentary, key
+levels, and the combined overnight layout. They select existing classes and body
+wrappers; they do not add appearance overrides or new CSS.
+
+`BriefStack` owns section stacking. `OvernightPair` owns paired/single-topic classes,
+so the responsive layout continues using the original selectors. Topic visibility
+and content stay in the feature. No wrapper elements were added. Sources retains
+its disclosure-specific structure for the controls increment.
+
+Verification: identical whole-brief markup across 24 content, archive and topic
+selection states; tests/build and deployment checks. Existing theme, Design Lab
+and viewport-motion selectors continue matching the same elements.
