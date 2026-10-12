@@ -19,10 +19,12 @@ assert.equal(draft.previousArchiveDate, '2026-10-08');
 assert.equal(draft.cutoffAt, undefined);
 assert.equal(draft.stocks.length, 0);
 assert.equal(draft.sectors.length, 0);
-assert.ok(draft.marketContext.every(row => row.value === null && row.previousClose === null && row.asOf === null && row.change === null));
-assert.ok(draft.treasuryYields.every(row => row.value === null && row.previousClose === null && row.asOf === null));
-assert.ok(draft.indexQuotes.every(row => row.value === null && row.previousClose === null && row.asOf === null));
-assert.ok(draft.keyLevels.every(row => row.high === null && row.low === null && row.asOf === null));
+// A draft may be partially populated before its final capture. Validate provenance
+// for values that are present instead of assuming that every draft stays blank.
+assert.ok(draft.marketContext.every(row => row.value === null || (row.asOf && row.source && row.retrievedAt)));
+assert.ok(draft.treasuryYields.every(row => row.value === null || (row.asOf && row.source && row.retrievedAt)));
+assert.ok(draft.indexQuotes.every(row => row.value === null || (row.asOf && row.source && row.retrievedAt)));
+assert.ok(draft.keyLevels.every(row => row.high === null || (row.low !== null && row.asOf && row.highTime && row.lowTime && row.source && row.retrievedAt)));
 assert.ok(draft.benchmarks.every(row => row.high === null && row.low === null && row.drawdown === null && row.asOf === null));
 assert.deepEqual(Object.keys(draft.briefing).sort(), ['bonds', 'earnings', 'indices', 'macro', 'news']);
 assert.equal(draft.briefing.indices.length, 0);
