@@ -90,3 +90,21 @@ without first making their ids unique.
 Existing theme toggles, Design Lab sliders and form controls already have their
 own behavior; this increment does not create a universal control abstraction.
 Verification includes whole-brief HTML parity and browser open/close checks.
+
+## Increment 5: briefing section composition
+
+MorningBrief now assembles dedicated OvernightMovements, MacroCalendar,
+EarningsCalendar, KeyLevelsTable and SourcesCard feature components. It retains
+section order, topic selection and page-level headings/navigation. Each feature
+uses the shared presentation primitives and owns its existing data adaptation.
+
+Key-level types and futures-session labeling are shared within the briefing
+feature, avoiding copies between the key-level table and Sources. Imports are
+direct; there is no component registry, new state layer or dynamic loader.
+
+Whole-brief markup matches the prior implementation across 24 states; full tests
+and build pass. Snapshot schemas, data collection, citations and market formulas
+are unchanged. Header/market-context and scanner composition remain separate
+future increments; the entire dashboard migration is not yet complete.
+
+The archive audit also found an existing invalid-date conversion for undated macro titles. Source-month fallback now checks the Date value before conversion; undated labels and unconfirmed times remain undated. A regression test covers dated and undated source resolution.

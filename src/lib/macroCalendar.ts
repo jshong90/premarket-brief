@@ -52,7 +52,8 @@ function getSources(note: MacroNote, sessionDate: string) {
   const key = note.sourceKey as keyof typeof MACRO_SOURCE_MAP | undefined;
   const configured = key ? MACRO_SOURCE_MAP[key] : undefined;
   const date = resolveDate(note.title, sessionDate);
-  const eventDate = Number.isFinite(date.key) ? new Date(date.key).toISOString().slice(0, 10) : sessionDate;
+  const observedDate = new Date(date.key);
+  const eventDate = Number.isFinite(observedDate.getTime()) ? observedDate.toISOString().slice(0, 10) : sessionDate;
   const fallback = configured
     ? { source: configured.source, url: 'urlForDate' in configured ? configured.urlForDate(eventDate) : configured.url }
     : { source: note.source, url: note.url };
@@ -116,3 +117,4 @@ export function groupMacroCalendarRows(rows: MacroCalendarRow[], sessionDate: st
   }
   return [...groups.values()].sort((a, b) => a.dayOrder - b.dayOrder).map(({ dayOrder: _dayOrder, ...group }) => group);
 }
+
