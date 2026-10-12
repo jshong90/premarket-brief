@@ -12,7 +12,7 @@ accessibility relationships and motion hooks before moving on to the next layer.
 | Numeric displays | Price, yield, percent/basis-point change, timestamp, missing value | Extracted formatNumeric / NumericCell in increment 2 |
 | Tables | Indices, Treasury yields, key levels | Shared BriefTable shell and NumericCell in increment 2 |
 | Cards/layout | Card surface, header, body, stack, paired columns | BriefCard, BriefStack and OvernightPair in increment 3 |
-| Controls | Jump link, disclosure, theme toggle, Design Lab inputs | Later: consolidate only repeated behavior; reuse existing UI components |
+| Controls | Jump link, disclosure, theme toggle, Design Lab inputs | SectionJump and SourcesDisclosure in increment 4; existing UI controls retained |
 | Sections/page | Brief, market context, calendar, earnings, scanner | Compose migrated building blocks; retain feature-specific logic |
 
 ## Increment 1
@@ -75,3 +75,18 @@ its disclosure-specific structure for the controls increment.
 Verification: identical whole-brief markup across 24 content, archive and topic
 selection states; tests/build and deployment checks. Existing theme, Design Lab
 and viewport-motion selectors continue matching the same elements.
+
+## Increment 4
+
+`SectionJump` is the shared native fragment link for navigation between brief
+and scanner. Callers supply the content; classes, arrows and targets are preserved.
+
+`SourcesDisclosure` owns the disclosure state, toggle button, expanded/controls
+attributes, animated reveal and inert collapsed content. Reference collection and
+citation rendering remain in the briefing feature. The content id is fixed because
+the page has one Sources disclosure. Do not mount several copies on one page
+without first making their ids unique.
+
+Existing theme toggles, Design Lab sliders and form controls already have their
+own behavior; this increment does not create a universal control abstraction.
+Verification includes whole-brief HTML parity and browser open/close checks.

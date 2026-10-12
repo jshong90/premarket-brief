@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { SectionJump } from '@/components/brief/SectionJump';
+import { SourcesDisclosure } from '@/components/brief/SourcesDisclosure';
 import { BriefTable } from '@/components/brief/BriefTable';
 import { NumericCell } from '@/components/brief/NumericCell';
 import { formatET } from '@/components/brief/numericFormat';
@@ -225,7 +226,6 @@ function KeyLevelsTable({ data }: { data: Snapshot }) {
 
 
 function SourcesCard({ data }: { data: Snapshot }) {
-  const [open, setOpen] = useState(false);
   const references = sourceSections.flatMap((section) => (data.briefing?.[section.key] ?? []).flatMap((note) => [
     ...(note.source && note.url && note.source !== 'Desk commentary'
       ? [{ section: section.label, note, source: note.source, url: note.url }]
@@ -251,10 +251,7 @@ function SourcesCard({ data }: { data: Snapshot }) {
   const referenceCount = references.length + treasuryCitationCount + indexQuoteReferences.length + (capturedKeyLevels.length ? 1 : 0);
   if (!referenceCount) return null;
 
-  return <section className={`sources-card panel ${open ? 'is-open' : ''}`}>
-    <button className="sources-summary" type="button" aria-expanded={open} aria-controls="sources-content" onClick={() => setOpen((value) => !value)}><span className="sources-title">Sources</span><span className="sources-count">{referenceCount} references</span></button>
-    <div className="sources-reveal" aria-hidden={!open} inert={!open}>
-    <div className="sources-content" id="sources-content">
+  return <SourcesDisclosure count={referenceCount}>
       {Boolean(tradingViewRefs.length || capturedKeyLevels.length) && <section className="sources-group">
         <h3>TradingView Official MCP</h3>
         <p className="sources-intro">Timestamped market data; provider delay may exceed 15 minutes.</p>
@@ -309,9 +306,7 @@ function SourcesCard({ data }: { data: Snapshot }) {
           {citation.retrievedAt && <small>Retrieved {new Date(citation.retrievedAt).toLocaleString('en-US', { timeZone: 'America/Los_Angeles', dateStyle: 'short', timeStyle: 'short' })} PT.</small>}
         </li>)}</ul>
       </section>}
-    </div>
-    </div>
-  </section>;
+  </SourcesDisclosure>;
 }
 
 export default function MorningBrief({ data, error, archived = false, topics, showJump = true }: { data: Snapshot; error: string; archived?: boolean; topics?: BriefingTopicSelection | null; showJump?: boolean }) {
@@ -338,7 +333,7 @@ export default function MorningBrief({ data, error, archived = false, topics, sh
   return <section id="morning-brief" className="dashboard-section morning-section" aria-labelledby="brief-title" tabIndex={-1}>
     <div className="page-heading centered-heading">
       <div className="heading-center"><div className="section-heading-row"><h1 id="brief-title">Your Morning Brief<span className="title-dot">.</span></h1></div></div>
-      {showJump && <a className="primary-button section-jump" href="#relative-strength">Skip to relative strength <span className="jump-arrow" aria-hidden="true">↓</span></a>}
+      {showJump && <SectionJump target="relative-strength">Skip to relative strength <span className="jump-arrow" aria-hidden="true">↓</span></SectionJump>}
       <div className="heading-meta paper-meta"><span className="session-chip">{archived ? 'ARCHIVE COPY' : data.status==='draft' ? 'DRAFT BRIEF' : imported ? 'LEGACY EXAMPLE' : 'DAILY BRIEF'}</span></div>
     </div>
     <BriefStack>{sections.filter((section) => sectionVisible(section.key) && section.key !== 'bonds').map((section, index) => renderSection(section, index + 1))}

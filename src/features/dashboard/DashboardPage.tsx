@@ -1,3 +1,4 @@
+import { SectionJump } from '@/components/brief/SectionJump';
 'use client';
 
 import { useEffect, useMemo, useRef, useState } from 'react';
@@ -226,7 +227,7 @@ export default function Scanner() {
       <section id="relative-strength" className="dashboard-section" aria-labelledby="scanner-title" tabIndex={-1}>
       <div className="page-heading centered-heading">
         <div className="heading-center"><div className="eyebrow">THE PREMARKET READ <span>/</span> RS SCANNER V1</div><div className="section-heading-row"><h2 id="scanner-title" className="section-title">Relative strength<span className="title-dot">.</span></h2></div><p>Who held up when the market sold off?</p></div>
-        <a className="primary-button section-jump" href="#morning-brief">Back to morning brief ↑</a>
+        <SectionJump target="morning-brief">Back to morning brief ↑</SectionJump>
         <div className="heading-meta"><span className="session-chip"><LockKeyhole size={13}/>{isDraftBrief?'DRAFT':isArchivePreview?'ARCHIVE COPY':mode==='imported'?'LEGACY EXAMPLE':isOpening?'OPENING EXPERIMENT':data.status==='partial'?'PARTIAL SNAPSHOT':'FROZEN SNAPSHOT'}</span></div>
       </div>
       <div className={`source-notice ${mode==='imported'?'is-imported':''}`}>
@@ -267,6 +268,7 @@ export default function Scanner() {
     {isDevelopmentMode&&<DesignLabs/>}
   </div>;
 }
+
 
 
 
