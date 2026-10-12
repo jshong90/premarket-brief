@@ -100,7 +100,7 @@ export function rolloverDraft(base, sessionDate, calendar, now = new Date().toIS
   next.messages = ['Draft for a new session; quotes and commentary await collection.'];
   next.stocks = []; next.sectors = []; next.universeCount = 0; next.universeComplete = false;
   next.connected = { tradingview: false, massive: false };
-  next.briefing = { indices: [], bonds: [], macro: [], earnings: [], news: [] };
+  next.briefing = { indices: [], bonds: [], energy: [], macro: [], earnings: [], news: [] };
   const quoteFields = ['value', 'previousClose', 'asOf', 'previousCloseAt', 'retrievedAt', 'change', 'high', 'low', 'highTime', 'lowTime'];
   for (const key of ['marketContext', 'indexQuotes', 'treasuryYields']) next[key] = base[key]?.map(row => {
     const cleaned = clearRow(row, quoteFields.filter(k => k in row));
