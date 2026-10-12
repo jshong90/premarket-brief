@@ -1,0 +1,89 @@
+/* motion: authoritative owned styles. See docs/css-ownership.md. */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes paper-settle {
+  from {
+    opacity: 0;
+    transform: translateY(var(--lab-paper-distance,8px));
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes jump-cue {
+  0%,100% {
+    transform: translateY(0);
+  }
+  45% {
+    transform: translateY(var(--lab-jump-distance,4px));
+  }
+}
+.viewport-card {
+  opacity: 0;
+  transform: translateY(var(--lab-card-distance,12px));
+  transition: opacity var(--lab-card-duration,.65s) ease-out var(--card-reveal-delay,0ms),transform var(--lab-card-duration,.65s) cubic-bezier(.18,.72,.24,1) var(--card-reveal-delay,0ms);
+  will-change: opacity,transform;
+}
+.viewport-card.is-in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+.rankings.bars-visible .capture-track>span {
+  transform: scaleX(1);
+  transition: transform var(--lab-resilience-duration,.88s) cubic-bezier(.18,.72,.24,1);
+}
+.distribution.bars-visible .distribution-bar>span {
+  transform: scaleX(1);
+  transition: transform var(--lab-resilience-duration,.65s) cubic-bezier(.18,.72,.24,1);
+}
+.distribution-bar>span:nth-child(2) {
+  transition-delay: calc(var(--lab-resilience-stagger,.105s)*1);
+}
+.distribution-bar>span:nth-child(3) {
+  transition-delay: calc(var(--lab-resilience-stagger,.105s)*2);
+}
+.distribution-bar>span:nth-child(4) {
+  transition-delay: calc(var(--lab-resilience-stagger,.105s)*3);
+}
+.distribution-bar>span:nth-child(5) {
+  transition-delay: calc(var(--lab-resilience-stagger,.105s)*4);
+}
+@media(prefers-reduced-motion:reduce) {
+  .rankings.bars-visible .capture-track>span,.distribution.bars-visible .distribution-bar>span {
+    transform: none;
+    transition: none;
+  }
+  .viewport-card,.viewport-card.is-in-view {
+    opacity: 1;
+    transform: none;
+    transition: none;
+    will-change: auto;
+  }
+}
+  @keyframes snapshot-mark-in {
+    from {
+      opacity: 0;
+      transform: translateY(5px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+html[data-chart-grid="false"] body::before {
+  display: none;
+}
+.viewport-card[data-parallax-layer] {
+  translate: 0 var(--warren-parallax-y,0px);
+  transition: translate 90ms linear,opacity var(--lab-card-duration,.65s) ease-out var(--card-reveal-delay,0ms),transform var(--lab-card-duration,.65s) cubic-bezier(.18,.72,.24,1) var(--card-reveal-delay,0ms);
+  will-change: opacity,transform,translate;
+}
+@media(prefers-reduced-motion:reduce) {
+  .viewport-card[data-parallax-layer] {
+    translate: 0 0 !important;
+  }
+}

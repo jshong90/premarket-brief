@@ -1,12 +1,30 @@
 import { readFileSync } from 'node:fs';
+import { dirname, resolve, relative } from 'node:path';
 import postcss from 'postcss';
 
-for (const path of ['src/globals.css', 'src/features/connections/MassiveConnectionTest.css']) {
+const declarations = new Set();
+const paths = new Set();
+function visit(path) {
+  if (paths.has(path)) return;
+  paths.add(path);
+  const root = postcss.parse(readFileSync(path, 'utf8'));
+  root.walkAtRules('import', rule => {
+    const match = rule.params.match(/^['"](\.[^'"]+)['"]$/);
+    if (!match) return;
+    const child = relative(process.cwd(), resolve(dirname(path), match[1]));
+    if (child.startsWith('src/')) visit(child);
+  });
+  if (path === 'src/globals.css' && root.nodes.some(node => node.type !== 'comment' && !(node.type === 'atrule' && node.name === 'import'))) {
+    throw new Error('globals.css is an import manifest; put authored styles with their documented owner');
+  }
+}
+visit('src/globals.css');
+visit('src/features/connections/MassiveConnectionTest.css');
+for (const path of paths) {
   const css = readFileSync(new URL(`../${path}`, import.meta.url), 'utf8');
   const literalTextColors = css.match(/(?:^|[;{])\s*color\s*:\s*#[\da-f]{3,8}\b/gim);
   if (literalTextColors) throw new Error(`${path} contains hard-coded text colors: ${literalTextColors.join(', ')}`);
   const root = postcss.parse(css, { from: path });
-  const declarations = new Set();
   root.walkRules(rule => {
     if (!rule.selector.trim()) throw new Error(`${path} contains an empty selector`);
     const context = [];

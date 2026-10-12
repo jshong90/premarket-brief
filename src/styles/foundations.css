@@ -1,0 +1,232 @@
+/* foundations: authoritative owned styles. See docs/css-ownership.md. */
+:root {
+  --background: #25282b;
+  --foreground: #e7e8e9;
+  --card: #303438;
+  --card-foreground: var(--foreground);
+  --popover: #383c40;
+  --popover-foreground: var(--foreground);
+  --primary: #d1d3d5;
+  --primary-foreground: #25282b;
+  --secondary: #3a3e42;
+  --secondary-foreground: var(--foreground);
+  --muted: #34383c;
+  --muted-foreground: #aeb2b6;
+  --accent: #44494e;
+  --accent-foreground: var(--foreground);
+  --destructive: #f07878;
+  --border: #666c72;
+  --input: #747a80;
+  --ring: #b7bbc0;
+  --radius: .5rem;
+  --green: #62c982;
+  --red: #f07878;
+  --font-ui: "Source Sans 3", Arial, Helvetica, sans-serif;
+  --font-editorial: "Newsreader", Georgia, serif;
+  --commentary-label-size: 14px;
+  --commentary-body-size: 13px;
+  --brief-body-size: 14px;
+  --section-description-size: 13px;
+  --space-2: 2px;
+  --space-4: 4px;
+  --space-6: 6px;
+  --space-8: 8px;
+  --space-10: 10px;
+  --space-12: 12px;
+  --space-14: 14px;
+  --space-16: 16px;
+  --space-18: 18px;
+  --space-20: 20px;
+  --space-24: 24px;
+  --space-28: 28px;
+  --space-32: 32px;
+  --space-40: 40px;
+  --space-48: 48px;
+  --corner-4: 4px;
+  --corner-5: 5px;
+  --corner-6: 6px;
+  --corner-7: 7px;
+  --corner-8: 8px;
+  --corner-9: 9px;
+  --corner-10: 10px;
+  --corner-12: 12px;
+  --corner-14: 14px;
+  --corner-16: 16px;
+  --border-width: 1px;
+  --text-primary: var(--foreground);
+  --text-secondary: #c5c8cb;
+  --text-muted: var(--muted-foreground);
+  --text-inverse: var(--primary-foreground);
+  --price-up: var(--green);
+  --price-down: var(--red);
+  --text-error: #e2afa7;
+  --text-success: var(--price-up);
+  --rs-exceptional: #c3f86b;
+  --rs-clear: #89b861;
+  --rs-moderate: #708c5d;
+  --rs-market: #bea16e;
+  --rs-laggard: #c5807a;
+  --rs-exceptional-text: #c3f86b;
+  --rs-clear-text: #a6d982;
+  --rs-moderate-text: #a9b7a3;
+  --rs-market-text: #c8b998;
+  --rs-laggard-text: #dea19c;
+  --dashboard-title-size: 43px;
+  --dashboard-section-size: 24px;
+  --dashboard-card-title-size: 16px;
+  --card-radius: 8px;
+  --card-gap: 16px;
+  --card-inset: 20px;
+  --card-compact-inset: 10px;
+  --brief-card-inset: var(--card-inset);
+  --lab-ui-text: #f1f2f3;
+  --lab-ui-muted: #c9cdd1;
+  --lab-ui-secondary: #c4c9ce;
+  --lab-ui-bright: #ffffff;
+  --lab-ui-control: #d6dade;
+  --lab-ui-preview: #eef0ed;
+  --lab-ui-up: #72c98b;
+}
+@media(max-width:640px) {
+  :root {
+    --brief-body-size: 13px;
+    --section-description-size: 12px;
+    --card-inset: 14px;
+    --card-compact-inset: 9px;
+    --brief-card-inset: var(--card-inset);
+  }
+}
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --font-sans: var(--font-ui);
+  --font-mono: ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+}
+* {
+  box-sizing: border-box;
+}
+h1 {
+  font-size: 36px;
+  letter-spacing: -1.5px;
+  font-weight: 500;
+  line-height: 1.1;
+  margin: 9px 0 var(--space-8);
+}
+@media(prefers-reduced-motion:reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
+html[data-theme="light"] {
+  color-scheme: light;
+  --background: #f4f1eb;
+  --foreground: #000000;
+  --card: #fbfaf8;
+  --resilience-track: #dadada;
+  --card-foreground: var(--foreground);
+  --popover: #fbfaf8;
+  --popover-foreground: var(--foreground);
+  --primary: #555555;
+  --primary-foreground: #ffffff;
+  --secondary: #e8e5df;
+  --secondary-foreground: var(--foreground);
+  --muted: #eeece7;
+  --muted-foreground: #6b6b6b;
+  --accent: #e7e4de;
+  --ring: #777777;
+  --green: #27824d;
+  --red: #c63e3e;
+  --destructive: #c63e3e;
+  --text-secondary: #555555;
+  --text-error: #934e45;
+  --rs-exceptional-text: #a64f24;
+  --rs-clear-text: #a64f24;
+  --rs-moderate-text: #86694f;
+  --rs-market-text: #806044;
+  --rs-laggard-text: #a34f45;
+  --accent-foreground: var(--foreground);
+  --border: #b7b3ac;
+  --input: #aaa69f;
+}
+html {
+  color-scheme: dark;
+  scroll-behavior: smooth;
+  scroll-padding-top: var(--dashboard-offset,265px);
+}
+@media(prefers-reduced-motion:reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+html[data-theme="dark"] {
+  --background: #25282b;
+  --foreground: #e7e8e9;
+  --card: #303438;
+  --resilience-track: #222222;
+  --card-foreground: var(--foreground);
+  --popover: #383c40;
+  --popover-foreground: var(--foreground);
+  --primary: #d1d3d5;
+  --primary-foreground: #25282b;
+  --secondary: #3a3e42;
+  --secondary-foreground: var(--foreground);
+  --muted: #34383c;
+  --muted-foreground: #aeb2b6;
+  --accent: #44494e;
+  --ring: #b7bbc0;
+  --green: #62c982;
+  --red: #f07878;
+  --destructive: #f07878;
+  --accent-foreground: var(--foreground);
+  --border: #666c72;
+  --input: #747a80;
+}
+h1,h2,h3 {
+  font-family: var(--font-editorial);
+  font-optical-sizing: auto;
+  color: var(--header-text,var(--foreground));
+}
+h4,h5,h6 {
+  color: var(--header-text,var(--foreground));
+}
+@media(max-width:700px) {
+  :root {
+    --dashboard-title-size: 35px;
+    --brief-card-inset: 14px;
+  }
+}
+@media(max-width:1200px) {
+  :root {
+    --card-inset: 16px;
+    --brief-card-inset: var(--card-inset);
+  }
+}
+body {
+  margin: 0;
+  font-family: var(--font-ui);
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  position: relative;
+  isolation: isolate;
+}
