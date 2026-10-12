@@ -10,7 +10,7 @@ Generated from scripts/pipeline/sources.mjs. Run npm run brief:sources after an 
 | VIX | [TradingView Official MCP](https://www.tradingview.com/) | — | TradingView Official MCP · CBOE:VIX. Retain the observation time. |
 | ES/NQ quotes and Key Levels | [OpenMarket MCP](https://openmarket.xyz/) | — | Use the configured OpenMarket charts. Record the actual symbol and observation times; disclose any CME-related proxy and leave levels blank when the chart does not prove the requested window. |
 | Timestamped ES/NQ scanner benchmark ranges | [TradingView Official MCP](https://www.tradingview.com/) | — | Completed one-minute OHLC bars for the exact overnight window only. Partial or missing ranges remain null; never substitute a quote or an unbounded chart high/low. |
-| US common-stock universe at/above $50B | [Robinhood MCP](https://robinhood.com/) | — | Record the discovered count and market-cap evidence. Set universeComplete=false unless discovery coverage is demonstrated; StockAnalysis is approved for the earnings screen, not as a claimed complete scanner universe. |
+| U.S. equity-universe discovery | [Robinhood MCP](https://robinhood.com/) | — | Report the discovered count and disclose coverage gaps; do not claim complete discovery without evidence. |
 | Sector-strength panel | Not collected | — | Retired. Do not collect or display sector-relative-strength rows. |
 
 | Briefing field | Primary source | Backup | Handling |
