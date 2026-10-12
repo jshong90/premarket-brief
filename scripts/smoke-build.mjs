@@ -11,6 +11,23 @@ const requiredFiles = [
   "data/archive-index.json",
 ];
 
+const isSessionDate = (value) => {
+  if (
+    typeof value !== "string" ||
+    value.length !== 10 ||
+    value[4] !== "-" ||
+    value[7] !== "-"
+  ) {
+    return false;
+  }
+
+  return [...value].every((character, index) => {
+    if (index === 4 || index === 7) return true;
+    const code = character.charCodeAt(0);
+    return code >= 48 && code <= 57;
+  });
+};
+
 for (const relativePath of requiredFiles) {
   const content = await readFile(resolve(outputRoot, relativePath), "utf8");
   if (!content.trim()) {
@@ -25,7 +42,7 @@ if (
   !snapshot ||
   Array.isArray(snapshot) ||
   typeof snapshot !== "object" ||
-  !/^\\d{4}-\\d{2}-\\d{2}$/.test(snapshot.sessionDate ?? "")
+  !isSessionDate(snapshot.sessionDate)
 ) {
   throw new Error("Built snapshot JSON is missing a valid sessionDate.");
 }
@@ -42,14 +59,22 @@ if (
 
 for (const entry of archiveIndex.entries) {
   if (
-    !/^\\d{4}-\\d{2}-\\d{2}$/.test(entry.sessionDate ?? "") ||
+    !isSessionDate(entry.sessionDate) ||
     typeof entry.file !== "string" ||
     entry.file.includes("/") ||
-    entry.file.includes("\\\\")
+    entry.file.includes(String.fromCharCode(92))
   ) {
     throw new Error("Built archive index contains an invalid entry.");
   }
-  await readFile(resolve(outputRoot, "data", entry.file), "utf8");
+
+  const archivedSnapshot = JSON.parse(
+    await readFile(resolve(outputRoot, "data", entry.file), "utf8"),
+  );
+  if (archivedSnapshot.sessionDate !== entry.sessionDate) {
+    throw new Error(
+      `Archive date mismatch for dist/data/${entry.file}.`,
+    );
+  }
 }
 
 console.log(
