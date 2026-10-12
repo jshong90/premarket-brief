@@ -9,7 +9,10 @@ export type Instrument = {
 };
 export type Benchmark = { id: BenchmarkId; high: number | null; low: number | null; drawdown: number | null; source: string; asOf: string | null; highTime?: string; lowTime?: string; issue?: string };
 export type BriefingNote = { title: string; body: string; source: string; url: string; sourceKey?: string; relatedSources?: { source: string; url: string }[]; publishedAt?: string | null; asOf?: string | null };
-export type Briefing = { indices: BriefingNote[]; bonds: BriefingNote[]; macro: BriefingNote[]; earnings: BriefingNote[]; news: BriefingNote[] };
+export type EarningsCompany = { ticker: string; name: string; marketCap: number | null; marketCapAsOf?: string | null; marketCapUrl?: string; marketCapSource?: string };
+export type EarningsSession = { period: "Before Open" | "After Close"; companies: EarningsCompany[] };
+export type EarningsBriefingNote = BriefingNote & { sessions?: EarningsSession[] };
+export type Briefing = { indices: BriefingNote[]; bonds: BriefingNote[]; macro: BriefingNote[]; earnings: EarningsBriefingNote[]; news: BriefingNote[] };
 export type IndexQuote = { id: BenchmarkId; previousClose: number | null; value: number | null; previousCloseAt?: string | null; asOf: string | null; source: string; url?: string; retrievedAt?: string | null; issue?: string };
 export type MarketContextId = "SPX" | "SPY" | "QQQ" | "VIX" | "US10Y";
 export type MarketContextKind = "index" | "etf" | "volatility" | "yield";

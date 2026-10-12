@@ -5,8 +5,17 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "tsc --noEmit && vite build",
-    "test": "node tests/text-tokens.test.mjs && node tests/scanner.test.mjs && node tests/briefing-topics.test.mjs && node tests/snapshot-packets.test.mjs && node tests/massive-api.test.mjs"
+    "archive:index": "node scripts/build-archive-index.mjs",
+    "build": "node scripts/build-archive-index.mjs && tsc --noEmit && vite build",
+    "test": "node scripts/build-archive-index.mjs && node tests/text-tokens.test.mjs && node tests/scanner.test.mjs && node tests/briefing-topics.test.mjs && node tests/earnings-calendar.test.mjs && node tests/archive-catalog.test.mjs && node tests/snapshot-packets.test.mjs && node tests/massive-api.test.mjs && node scripts/brief.mjs sources --check && node tests/collection-pipeline.test.mjs",
+    "brief:plan": "node scripts/brief.mjs plan",
+    "brief:collect": "node scripts/brief.mjs collect",
+    "brief:generate": "node scripts/brief.mjs generate",
+    "brief:validate": "node scripts/brief.mjs validate",
+    "brief:apply": "node scripts/brief.mjs apply",
+    "brief:rollover": "node scripts/brief.mjs rollover",
+    "brief:sources": "node scripts/brief.mjs sources",
+    "brief:publish": "node scripts/brief.mjs publish"
   },
   "dependencies": {
     "react": "19.2.6",
@@ -32,4 +41,3 @@
     "node": ">=22.13.0"
   }
 }
-

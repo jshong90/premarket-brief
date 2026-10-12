@@ -1,7 +1,8 @@
 import { useState } from 'react';
-import type { Briefing, Snapshot, TreasuryYield } from './lib/scanner';
-import { normalizeMacroCalendar } from './lib/macroCalendar';
-import { visibleBriefingSectionKeys, type BriefingSectionKey, type BriefingTopicSelection } from './lib/briefingTopics';
+import type { Briefing, Snapshot, TreasuryYield } from '@/lib/scanner';
+import { groupMacroCalendarRows, normalizeMacroCalendar } from '@/lib/macroCalendar';
+import { eligibleEarningsSessions, hasStructuredEarnings } from '@/lib/earningsCalendar';
+import { visibleBriefingSectionKeys, type BriefingSectionKey, type BriefingTopicSelection } from '@/lib/briefingTopics';
 
 type KeyLevel = { id: 'ES' | 'NQ' | 'YM' | 'RTY'; label: string; high: number | null; low: number | null; highTime?: string | null; lowTime?: string | null; asOf: string | null; retrievedAt?: string | null; source: string; issue?: string };
 type SnapshotKeyLevels = Snapshot & { keyLevels?: KeyLevel[] };
@@ -149,13 +150,49 @@ function TreasuryYieldsTable({ data }: { data: Snapshot }) {
 function MacroCalendarTable({ notes, sessionDate }: { notes: Briefing['macro']; sessionDate: string }) {
   const rows = normalizeMacroCalendar(notes, sessionDate);
   if (!rows.length) return <div className="briefing-empty">No macro events supplied.</div>;
-  return <div className="macro-calendar-wrap"><table className="macro-calendar">
-    <thead><tr><th scope="col">Date</th><th scope="col">Time (ET)</th><th scope="col">Event</th><th scope="col">Source</th></tr></thead>
-    <tbody>{rows.map((row, index) => <tr key={row.date + '-' + row.sortKey + '-' + index}>
-      <td>{row.date.replace(/,\\s*\\d{4}$/, '')}</td><td className="mono">{row.time}</td><td>{row.event}</td>
-      <td>{row.sources.map((source, sourceIndex) => <span key={source.url + '-' + sourceIndex}>{sourceIndex > 0 && ' · '}<a href={source.url} target="_blank" rel="noreferrer">{source.source} ↗</a></span>)}</td>
-    </tr>)}</tbody>
-  </table></div>;
+  const groups = groupMacroCalendarRows(rows, sessionDate);
+  return <div className="macro-calendar" aria-label="Upcoming economic events">
+    <div className="macro-calendar-meta">All times Eastern</div>
+    <div className="macro-days">{groups.map((group) => <article className="macro-day" key={group.key}>
+      <header className="macro-day-header"><h3>{group.heading}</h3>{group.relative && <span className="macro-relative-day">{group.relative}</span>}</header>
+      <ol className="macro-events">{group.rows.map((row, index) => <li className="macro-event" key={row.date + '-' + row.sortKey + '-' + index}>
+        <time className="macro-event-time">{row.time}</time>
+        <div className="macro-event-copy"><p>{row.event}</p><div className="macro-event-sources">{row.sources.map((source, sourceIndex) => <span key={source.url + '-' + sourceIndex}>{sourceIndex > 0 && ' · '}<a href={source.url} target="_blank" rel="noreferrer">{source.source} ↗</a></span>)}</div></div>
+      </li>)}</ol>
+    </article>)}</div>
+  </div>;
+}
+
+function EarningsTicker({ company }: { company: NonNullable<Briefing['earnings'][number]['sessions']>[number]['companies'][number] }) {
+  const cap = (company.marketCap! / 1e9).toFixed(1);
+  return <a className="earnings-ticker" href={company.marketCapUrl} target="_blank" rel="noreferrer" title={`${company.name} · $${cap}B market cap`} aria-label={`${company.ticker}, ${company.name}, market cap $${cap} billion`}>{company.ticker}</a>;
+}
+
+function EarningsCalendar({ notes }: { notes: Briefing['earnings'] }) {
+  const days = notes.map((note) => ({ note, sessions: eligibleEarningsSessions(note) }))
+    .filter(({ sessions }) => sessions.length > 0);
+  const companies = days.flatMap(({ sessions }) => sessions.flatMap((session) => session.companies));
+  const checkedDates = [...new Set(companies.map((company) => company.marketCapAsOf).filter((date): date is string => Boolean(date)))].sort();
+  const capUrl = companies.find((company) => company.marketCapUrl)?.marketCapUrl;
+  const capSource = companies.find((company) => company.marketCapSource)?.marketCapSource;
+  const capDate = checkedDates.length === 1
+    ? new Date(`${checkedDates[0]}T12:00:00Z`).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' })
+    : checkedDates.length ? `${checkedDates[0]}–${checkedDates.at(-1)}` : null;
+
+  return <div className="earnings-calendar">
+    {days.length ? <div className="earnings-days">{days.map(({ note, sessions }) => {
+      const before = sessions.find((session) => session.period === 'Before Open')?.companies ?? [];
+      const after = sessions.find((session) => session.period === 'After Close')?.companies ?? [];
+      return <article className="earnings-day" key={note.title}>
+        <h3 className="earnings-day-title">{note.title}</h3>
+        <div className="earnings-periods">
+          {before.length > 0 && <div className="earnings-period"><span className="earnings-period-label">Before open</span><div className="earnings-tickers">{before.map((company) => <EarningsTicker company={company} key={company.ticker} />)}</div></div>}
+          {after.length > 0 && <div className="earnings-period"><span className="earnings-period-label">After close</span><div className="earnings-tickers">{after.map((company) => <EarningsTicker company={company} key={company.ticker} />)}</div></div>}
+        </div>
+      </article>;
+    })}</div> : <div className="briefing-empty">No companies above the market-cap threshold are listed.</div>}
+    <p className="earnings-calendar-footnote">Companies over $25B market cap{capDate ? ` · checked ${capDate}` : ''}{capUrl && capSource ? <> · <a href={capUrl} target="_blank" rel="noreferrer">{capSource} ↗</a></> : ''}</p>
+  </div>;
 }
 
 const sourceSections: { key: keyof Briefing; label: string }[] = [
@@ -227,6 +264,8 @@ function SourcesCard({ data }: { data: Snapshot }) {
   const keyLevelData = data as SnapshotKeyLevels;
   const keyLevels = keyLevelData.keyLevels ?? [];
   const capturedKeyLevels = keyLevels.filter((row) => row.high!==null && row.low!==null);
+  const latestKeyLevelAsOf = keyLevels.map((row) => row.asOf).filter((value): value is string => Boolean(value)).sort().at(-1);
+  const keyLevelsComplete = data.status === 'frozen' && keyLevels.length === 4 && keyLevels.every((row) => row.high !== null && row.low !== null);
   const retrievedAt = capturedKeyLevels.find((row) => row.retrievedAt)?.retrievedAt;
   const referenceCount = references.length + treasuryCitationCount + indexQuoteReferences.length + (capturedKeyLevels.length ? 1 : 0);
   if (!referenceCount) return null;
@@ -250,7 +289,7 @@ function SourcesCard({ data }: { data: Snapshot }) {
           })}
           {capturedKeyLevels.length > 0 && <li>
             <a href="https://www.tradingview.com/markets/futures/quotes/" target="_blank" rel="noreferrer">Premarket key levels ↗</a>
-            <small>Futures session: {formatFuturesSession(data.sessionDate)}; last complete one-minute bar ends at 9:19 AM ET. Provider delay may exceed 15 minutes.</small>
+            <small>Futures session: {formatFuturesSession(data.sessionDate)}; latest completed bar {latestKeyLevelAsOf ? `observed at ${formatET(latestKeyLevelAsOf)} ET` : 'time unavailable'}. {keyLevelsComplete ? 'The 09:20 ET bar is excluded.' : 'Partial range; the final 09:20 ET cutoff has not been reached.'} Provider timing is shown per row.</small>
             {retrievedAt && <small>Retrieved {new Date(retrievedAt).toLocaleString('en-US', { timeZone: 'America/Los_Angeles', dateStyle: 'short', timeStyle: 'short' })} PT.</small>}
           </li>}
         </ul>
@@ -281,7 +320,7 @@ function SourcesCard({ data }: { data: Snapshot }) {
             key: `${row.tenor}-previous`, label: `${row.tenor} previous session close`, source: row.previousCloseSource, url: row.previousCloseUrl, retrievedAt: row.retrievedAt,
           }] : []),
           ...(row.value !== null && row.source && row.url ? [{
-            key: `${row.tenor}-premarket`, label: `${row.tenor} premarket quote`, source: row.source, url: row.url, retrievedAt: row.retrievedAt,
+            key: `${row.tenor}-latest`, label: `${row.tenor} latest available observation`, source: row.source, url: row.url, retrievedAt: row.retrievedAt,
           }] : []),
         ]).map((citation) => <li key={citation.key}>
           <a href={citation.url} target="_blank" rel="noreferrer">{citation.label} ↗</a>
@@ -297,7 +336,7 @@ function SourcesCard({ data }: { data: Snapshot }) {
 export default function MorningBrief({ data, error, archived = false, topics, showJump = true }: { data: Snapshot; error: string; archived?: boolean; topics?: BriefingTopicSelection | null; showJump?: boolean }) {
   const imported = data.status === 'imported';
   const customized = topics !== undefined && topics !== null;
-  const selectedTopics = topics ?? { equities: true, bonds: true, energy: true, macro: true, earnings: true };
+  const selectedTopics = topics ?? { equities: true, bonds: true, energy: true, macro: true, earnings: true, news: true };
   const visibleKeys: BriefingSectionKey[] = customized
     ? visibleBriefingSectionKeys(selectedTopics)
     : ['indices', 'bonds', 'keyLevels', 'macro', 'earnings', 'news'];
@@ -312,7 +351,7 @@ export default function MorningBrief({ data, error, archived = false, topics, sh
     : key === 'energy' ? <section className="briefing-section panel" key={key} aria-labelledby="brief-energy"><div className="briefing-section-head"><span className="brief-section-number">0{sectionIndex}</span><h2 id="brief-energy">{title}</h2></div><div className="briefing-notes"><div className="briefing-empty">No energy commentary supplied for this snapshot.</div></div></section>
     : <section className="briefing-section panel" key={key} aria-labelledby={'brief-' + key}>
     <div className="briefing-section-head"><span className="brief-section-number">0{sectionIndex}</span><h2 id={'brief-' + key}>{title}</h2></div>
-    <div className="briefing-notes">{key === 'macro' ? <MacroCalendarTable notes={data.briefing?.macro || []} sessionDate={data.sessionDate} /> : (data.briefing?.[key] || []).length ? data.briefing![key].map((note, index) => {
+    <div className="briefing-notes">{key === 'macro' ? <MacroCalendarTable notes={data.briefing?.macro || []} sessionDate={data.sessionDate} /> : key === 'earnings' && hasStructuredEarnings(data.briefing?.earnings ?? []) ? <EarningsCalendar notes={data.briefing?.earnings ?? []} /> : (data.briefing?.[key] || []).length ? data.briefing![key].map((note, index) => {
       return <article className="briefing-note" key={index}><h3>{note.title}</h3><p>{note.body}</p></article>;
     }) : <div className="briefing-empty">No notes supplied for this section.</div>}</div>
   </section>;

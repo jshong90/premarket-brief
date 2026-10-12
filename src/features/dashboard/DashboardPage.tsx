@@ -2,19 +2,19 @@
 
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { flushSync } from 'react-dom';
-import { ArrowDown, ArrowDownUp, ArrowUpRight, ChevronLeft, ChevronRight, CircleHelp, Database, Info, Clock3, LockKeyhole, Search, ShieldCheck, SlidersHorizontal, Sunrise, X } from 'lucide-react';
+import { ArrowDown, ArrowDownUp, ArrowUpRight, Archive, ChevronLeft, ChevronRight, CircleHelp, Database, Info, Clock3, LockKeyhole, Search, ShieldCheck, SlidersHorizontal, Sunrise, X } from 'lucide-react';
 import { Tabs, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Sheet, SheetContent, SheetDescription, SheetHeader, SheetTitle } from '@/components/ui/sheet';
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from '@/components/ui/table';
-import { readSnapshot } from '@/lib/snapshot';
 import { IMPORTED, metrics, topRelativeStrength, type Snapshot, type Instrument, type BenchmarkId, type Band } from '@/lib/scanner';
-import MarketStrip from './MarketStrip';
-import ThemeToggle from './ThemeToggle';
-import MorningBrief from './MorningBrief';
-import MassiveConnectionTest from './MassiveConnectionTest';
-import DesignLabs from './DesignLabs';
+import { loadSnapshot } from '@/data/snapshotRepository';
 import { readBriefingTopics, type BriefingTopicSelection } from '@/lib/briefingTopics';
+import MarketStrip from '@/features/market-context/MarketContextStrip';
+import ThemeToggle from '@/shared/ThemeToggle';
+import MorningBrief from '@/features/briefing/MorningBrief';
+import MassiveConnectionTest from '@/features/connections/MassiveConnectionTest';
+import DesignLabs from '@/features/design-lab/DesignLabs';
 
 const number = (v: number | null | undefined, digits=2) => v == null || !Number.isFinite(v) ? '—' : v.toLocaleString('en-US',{minimumFractionDigits:digits,maximumFractionDigits:digits});
 const quotePrice = (v: number | null | undefined) => v == null || !Number.isFinite(v) ? '—' : v.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:3});
@@ -151,12 +151,8 @@ export default function Scanner() {
     // Read one published data packet per page load. Never poll market prices.
     if (window.location.protocol==='file:') { setError('Snapshot loading requires an HTTP or HTTPS deployment.'); return; }
     const controller=new AbortController();
-    const requestedDate=new URLSearchParams(window.location.search).get('date');
-    const openingRequested=new URLSearchParams(window.location.search).get('scan')==='0635' && !requestedDate;
-    const snapshotFile=requestedDate && /^\d{4}-\d{2}-\d{2}$/.test(requestedDate)?`snapshot-${requestedDate}.json`:openingRequested?'snapshot-opening-0635.json':'snapshot.json';
-    fetch(new URL(`./data/${snapshotFile}`,window.location.href),{cache:'no-store',signal:controller.signal})
-      .then(r=>{if(!r.ok)throw new Error(`Snapshot file unavailable (${r.status}).`);return r.json();})
-      .then(packet=>{setData(readSnapshot(packet));setSnapshotLoaded(true);})
+    loadSnapshot({ search: window.location.search, baseUrl: window.location.href, signal: controller.signal })
+      .then(packet=>{setData(packet);setSnapshotLoaded(true);})
       .catch(e=>{if(e.name!=='AbortError'){setError(e.message||'The snapshot could not be loaded.');setSnapshotLoaded(false);}});
     return()=>controller.abort();
   },[]);
@@ -204,7 +200,7 @@ export default function Scanner() {
   return <div className="app-shell">
     <header className={`topbar${compactHeader?' is-compact':''}`}>
       <div className="topbar-main">
-        <div className="topbar-leading">{(isArchivePreview||archiveDate)&&<a className="snapshot-nav-link" href={isArchivePreview?latestHref:archiveHref} aria-label={isArchivePreview?'Return to the latest snapshot':`View the ${formatDateLabel(archiveDate!)} archive`} title={isArchivePreview?'Latest snapshot':`Previous snapshot · ${formatDateLabel(archiveDate!)}`}>{isArchivePreview?<ChevronRight size={18}/>:<ChevronLeft size={18}/>}<span>{isArchivePreview?'Latest':archiveDate!.slice(5).replace('-', '/')}</span></a>}<a href={latestHref} className="brand" aria-label="The Warren home"><span className="brand-mark">W</span></a><a className="brief-builder-link" href={builderHref}><SlidersHorizontal size={15}/><span>Build your brief</span></a></div>
+        <div className="topbar-leading">{(isArchivePreview||archiveDate)&&<a className="snapshot-nav-link" href={isArchivePreview?latestHref:archiveHref} aria-label={isArchivePreview?'Return to the latest snapshot':`View the ${formatDateLabel(archiveDate!)} archive`} title={isArchivePreview?'Latest snapshot':`Previous snapshot · ${formatDateLabel(archiveDate!)}`}>{isArchivePreview?<ChevronRight size={18}/>:<ChevronLeft size={18}/>}<span>{isArchivePreview?'Latest':archiveDate!.slice(5).replace('-', '/')}</span></a>}<a href={latestHref} className="brand" aria-label="The Warren home"><span className="brand-mark">W</span></a><a className="brief-builder-link" href={builderHref}><SlidersHorizontal size={15}/><span>Build your brief</span></a><a className="brief-builder-link" href="./archive.html"><Archive size={15}/><span>Archive</span></a></div>
         <time className="topbar-date" dateTime={data.sessionDate}>{pageDateLabel}</time>
         <ThemeToggle/><button className="connection-button" onClick={()=>setDrawer('connections')}><Clock3 size={14}/><span>{cutoffPacific} Pacific</span><ChevronRight size={15}/></button>
       </div>

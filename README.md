@@ -6,6 +6,14 @@ This repository is the editable React + TypeScript + Vite project. `index.html` 
 
 ## Daily snapshot
 
+## Site architecture
+
+The site is organized by user task under `src/features/`: the dashboard, morning brief, briefing builder, market context, connection diagnostics, and design lab. `src/pages/ArchivePage.tsx` presents dated snapshots. Shared theme controls live in `src/shared/`, while `src/data/` owns snapshot loading and the archive catalog. `src/lib/` contains validated data models and calculations; page components do not choose data providers.
+
+`public/data/snapshot.json` is the current packet. Dated packets remain immutable. The archive index is generated from valid dated packet files by `npm run archive:index` and regenerated during build, so a new archive appears without a hard-coded page edit. The briefing builder stores display choices in browser local storage separately from the snapshot. Its topics include Equities, Bonds, Energy, Macro Events, Earnings, and Overnight News.
+
+The main dashboard remains the morning brief followed by the relative-strength scanner. `index.html`, `premarket.html`, `briefing-builder.html`, and `archive.html` are Vite entry pages; all share the same theme and style system. Existing date query links continue to open the corresponding archived packet.
+
 **The relative-strength scanner cutoff is 06:20 AM America/Los_Angeles (09:20 AM Eastern), ten minutes before the open.** It follows daylight saving time, rather than remaining fixed to UTC−8 all year. No new scanner session is created on weekends or US stock-market holidays. Index and bond quote updates are separate from this cutoff: refresh them only at the user's request, at the actual observation time, without changing an already captured scanner range.
 
 Stocks and ETFs: 04:00 to 09:20 ET. NQ and ES futures: prior calendar day 18:00 to 09:20 ET. The end is exclusive: the 09:19 one-minute bar is the last eligible bar, and the 09:20 bar is excluded. If collection runs late, request historical bars bounded by the same cutoff; do not use later live range fields.
@@ -14,30 +22,34 @@ The hosted dashboard reads `data/snapshot.json` once when opened and keeps it fi
 
 ## Data status and publishing
 
-The current packet, `public/data/snapshot.json`, is an **October 8, 2026 draft**. Its quote tables use timestamped observations at or before the 09:20 ET exclusive cutoff. Robinhood supplied SPY/QQQ extended-hours one-minute bars and official SIP prior closes; TradingView supplied timestamped NQ/ES futures, VIX, and Treasury-yield bars, with its 15+ minute delay notice disclosed in the packet. NQ and ES key levels use all 920 returned bars; YM is timestamped through 09:18 ET, while no verified RTY range was retained. The 2Y yield remains null after repeated TradingView handshake failures. Section 03 was refreshed against Trading Economics on October 8 and cross-checked against the U.S. Treasury schedule and St. Louis Fed remarks page; already-passed events were removed. The stock scanner remains a draft without a captured $50B+ universe. The prior October 7 packet is archived at `public/data/snapshot-2026-10-07.json`; October 6 remains archived at `public/data/snapshot-2026-10-06.json`.
+The current date, status and observation times live in `public/data/snapshot.json`; the README deliberately does not repeat a daily status that can become stale. Dated packets preserve prior sessions.
+
+Collection and publication now use the [collection workflow](docs/collection-workflow.md). `scripts/pipeline/sources.mjs` is the provider registry; the [generated source table](docs/data-sources.md) is checked by the test suite. The pipeline plans requests, normalizes saved MCP responses, reuses common observations, generates a candidate, validates it, and applies/publishes it explicitly. It records gathering and processing time separately.
 
 The separate [06:35 opening experiment](https://premarket-brief-silk.vercel.app/?dev=1&scan=0635) reads `public/data/snapshot-opening-0635.json`; the default 06:20 snapshot remains the baseline. This October 1 packet uses Robinhood 04:00–09:34 ET stock and sector ETF minute bars and adds TradingView ES/NQ 09:20–09:34 ET futures bars to the original overnight range. The first five minutes of regular trading are included. The same ten-actual-minute gate, downside-capture formula, and top-25 ranking apply. Coverage is 189/312 stocks and 6/11 sector ETFs; the post-cutoff universe remains partial. Index and bond quotes, key levels, and user-authored commentary are copied from the baseline, with no market-quote refresh. The experiment is a separate dated data packet, not a new default cutoff.
 
-The dashboard does not fetch market data or create snapshots at runtime. It reads `data/snapshot.json` once when opened and keeps that packet fixed. To publish a new session, archive the old packet as `public/data/snapshot-YYYY-MM-DD.json`, replace `public/data/snapshot.json`, and point `previousArchiveDate` at the newest archive. To update the current brief, edit only the relevant snapshot fields, validate, test, build, and commit. Vercel rebuilds the app and publishes the packet. A page reload loads the new data.
+The dashboard reads its published JSON once. Collection runs outside the browser through available MCP tools or an explicit authenticated adapter. Use `brief:plan`, `brief:collect`, `brief:generate`, `brief:validate`, `brief:apply`, and `brief:publish`. The final command runs tests and the production build before committing data files; `--push` invokes the existing Git/Vercel deployment path. It does not claim deployment success until Vercel is checked.
 
-Automatic snapshot publication to GitHub is not connected. A scheduled or manual collection process must explicitly produce and commit the JSON packet; the website does not inherit ChatGPT's TradingView connection or run a market-data scheduler. Data sources and availability are described below. No credentials belong in the HTML or public repository.
-
-On a request to refresh index or bond quotes, use Robinhood MCP first. If the instrument or required value is unavailable, check Public.com as the secondary source for that data type; use TradingView Official MCP when neither broker source supplies the required field and timestamp. VIX remains sourced from TradingView. Reuters and CNBC are additional candidates for Treasury-yield reporting. Check the quoted contract or tenor, session, observation time, delay, and units. Record actual sources and timestamps on the affected rows. Never fill gaps with a related cash index, ETF, or estimate. Set `quotesRefreshedAt` to the time of the completed requested update; do not treat this as the scanner's `fetchedAt` or `cutoffAt`. Preserve every user-authored title and body verbatim unless the user requests a wording change.
+Rollover uses `brief:rollover` to prepare an immutable archive and a clean next-session draft. Applying updates the archive pointer/catalog with a stale-write check. Credentials are never part of the public packet. User commentary is preserved verbatim during market refreshes.
 
 ## Data sources by section
 
 The section contracts are stable; providers are replaceable. The dashboard consumes normalized snapshot fields and does not call any market-data provider from the browser. If a source is reliable and supplies the required fields with valid timestamps, keep using it. Change a source only when it fails on coverage, timestamp quality, latency, or required fields. A provider swap should usually update the packet's `source` and URL metadata, not the section's rendering or calculations.
 
-| Dashboard area | Current source assignment | Required handling |
+Source assignments are maintained in the [generated approved source table](docs/data-sources.md), rather than duplicated here. Section contracts remain stable:
+
+| Dashboard area | Packet field | Handling |
 | --- | --- | --- |
-| Market context strip | Robinhood MCP for supported index and ETF quotes; Public.com as the secondary source where Robinhood cannot supply the value; TradingView Official MCP for CBOE:VIX and when neither broker source provides the required field. For Treasury yields, Reuters and CNBC are also candidates. Historical values retain the actual source already recorded in the packet. | Cash SPX is not a premarket instrument. Keep unsupported or uncaptured current values null; never silently substitute ES for SPX. Include the actual source and observation timestamp. |
-| 01 · Overnight movements — indices | Robinhood MCP for available index and futures quotes; TradingView Official MCP for unsupported contracts/values. Prior-session closes retain their recorded source. | Keep NQ and ES quotes in the separate `indexQuotes` array. Do not infer values from commentary. Compute percentage change from a matching previous close and timestamped current quote. A prior close alone is not a current quote. |
-| 01 · Overnight movements — bonds | Robinhood MCP for available Treasury yields; Public.com as the secondary source where supported; TradingView Official MCP when neither connection provides timestamped yields. Reuters and CNBC may supply a report when instrument quotes are unavailable. | Keep the previous-session close separate from a current reading. Record source, observation time, retrieval time, and any reporting lag. Do not estimate missing yields or imply that unsynchronized observations are a single cutoff snapshot. |
-| 02 · Key Levels | TradingView Official MCP timestamped one-minute futures bars for ES, NQ, YM, and RTY. | Futures window is prior-day 18:00 ET through, but not including, 09:20 ET. Derive highs and lows only from eligible bars; preserve the bar timestamps and disclose absent minute buckets. October 1 levels were captured separately from the scanner. |
-| 03 · Upcoming macro events | Trading Economics for U.S. releases explicitly requested or approved for the brief; Federal Reserve Board and relevant regional Fed Bank calendars for Fed events; U.S. Treasury tentative schedule, TreasuryDirect upcoming auctions and timing guidance for auctions. Econoday is a secondary time cross-check only when an official source does not state the exact ET time. | Keep release scope selective; do not import the full economic calendar. Record event date and ET time, link primary sources first, and preserve any secondary time cross-check as a related source. `src/lib/macroCalendar.ts` centralizes source URLs, sorts entries chronologically, and excludes timed events at or after 4:00 p.m. ET from the displayed table. |
-| 04 · Upcoming earnings | Company investor-relations announcements, such as Accenture Newsroom and NIKE Investor Relations. | Prefer the company's own schedule for release date and timing. Keep the announcement's publication date when available. |
-| 05 · Overnight news | Issuer investor-relations releases for company results; Reuters for macro/economic reporting; Associated Press for broad market-close summaries. | Link each factual item to its source and preserve its actual publication or observation date. User-authored notes/commentary are exempt from outside sourcing. |
-| Relative-strength scanner | Robinhood MCP for the $50B+ stock universe, official prior closes, and timestamped premarket equity/sector ETF ranges. TradingView Official MCP supplies NQ and ES futures bars because Robinhood's MCP has no futures-history tool. Requested current sector prices use the latest available TradingView 1-minute regular-session bar close, with its observation time and potential 15+ minute delay kept separate from scanner ranges. Massive is a possible alternate only if its timestamped coverage is valid. | Keep the existing downside-capture calculation and bands. Ignore Robinhood's interpolated bars. This capture requires at least ten actual traded minute bars for an observed equity range; thinner tapes remain unranked. Leave the 09:19 ET cutoff price null when no real trade occurred in that minute. Disclose that the live universe was discovered after the cutoff and any incomplete coverage. |
+| Market context | `marketContext` | Shared canonical quotes; Spreadex SPX is explicitly labeled as a CFD proxy. |
+| Overnight indices | `indexQuotes` | ES/NQ last eligible futures close comes from the same bars as Key Levels when available. |
+| Overnight bonds | `treasuryYields` | US10Y reuses the header observation. Previous-session references retain their own provenance. |
+| Key Levels | `keyLevels` | Timestamped completed one-minute futures ranges; report incomplete coverage. |
+| Macro events | `briefing.macro` | Only approved releases; official Fed and Treasury events; chronological and before 16:00 ET. |
+| Earnings | `briefing.earnings` | Earnings Whispers; company capitalization strictly above $25B with dated evidence. |
+| News / commentary | `briefing.news`, `briefing.indices`, `briefing.bonds` | External factual notes need citations; user-authored commentary stays verbatim. |
+| Scanner | `stocks`, `benchmarks` | Existing scanner logic; shared valid futures records are available for an explicit benchmark capture. |
+
+The collector covers the market tables. The existing scanner universe collection remains a separate operation. Reporting sources such as Reuters/CNBC can support editorial yield context but are not automatically treated as live quote feeds. Massive remains an optional connector with the limitations below.
 
 ### Section 03 refresh
 
@@ -51,7 +63,7 @@ For economic releases, Trading Economics is an index for only the U.S. reports y
 - The expandable Sources card lists briefing-note links, index quote links when supplied, and Treasury-yield references. It does not yet expose links for Market Context rows, whose source and timestamp remain in the packet metadata.
 - The October 1 Key Levels rows contain observed cutoff-window highs and lows with bar and retrieval timestamps. ES and NQ have 920 eligible minute bars; YM and RTY each have eight absent minute buckets, disclosed on their rows. The scanner reuses the captured ES/NQ range as its benchmarks and uses independently sourced Robinhood stock and sector ranges.
 - The TradingView connection can report a delay of 15 minutes or more. A late collection must still use bars bounded by the original cutoff, and the delay must remain visible.
-- Changing a provider does not change the section contract. Change the provider assignment in this README only when the source is deliberately replaced; the packet must continue to meet the same field, timestamp, coverage, and null-handling rules.
+- Changing a provider does not change the section contract. Change the provider registry only when the source is deliberately replaced, then regenerate its documentation; the packet must continue to meet the same field, timestamp, coverage, and null-handling rules.
 
 ## Massive connection (alternate source)
 
@@ -102,7 +114,7 @@ Validation covers TypeScript, snapshot structure, source metadata, date handling
 
 ## Design reference
 
-The combined dashboard uses the theme blocks and semantic text roles in `src/globals.css`. Change a theme token there to update every element that consumes it. Surface, border, and some component colors still have explicit rules; the component table below locates those exceptions. `src/MassiveConnectionTest.css` styles the connection result. The older CSS for the former separate Premarket layout is retained in `src/globals.css`, but both HTML entries now render the combined dashboard.
+The combined dashboard uses the theme blocks and semantic text roles in `src/globals.css`. Change a theme token there to update every element that consumes it. Surface, border, and some component colors still have explicit rules; the component table below locates those exceptions. `src/features/connections/MassiveConnectionTest.css` styles the connection result. The older CSS for the former separate Premarket layout is retained in `src/globals.css`, but both HTML entries now render the combined dashboard.
 
 ### Theme colors
 
@@ -186,3 +198,4 @@ Section cards fade in while moving upward 12px over 650ms whenever they enter th
 ## Consolidated layout
 
 The morning brief has five sections: combined overnight indices and bonds, key levels, upcoming macro events, upcoming earnings, and overnight news. The button beside the Morning brief heading skips to the scanner; the button beside the Relative strength heading returns to the brief. Both use same-page anchors and account for the sticky header.
+

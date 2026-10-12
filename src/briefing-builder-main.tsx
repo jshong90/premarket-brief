@@ -1,6 +1,6 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
-import BriefingBuilder from './BriefingBuilder';
+import BriefingBuilderPage from './features/briefing-builder/BriefingBuilderPage';
 import './globals.css';
 
 try {
@@ -9,4 +9,4 @@ try {
   document.documentElement.dataset.theme = 'dark';
 }
 
-createRoot(document.getElementById('root')!).render(<BriefingBuilder/>);
+createRoot(document.getElementById('root')!).render(<BriefingBuilderPage/>);

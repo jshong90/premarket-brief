@@ -30,6 +30,9 @@ export const MACRO_SELECTION_POLICY = {
 export type MacroCalendarRow = {
   date: string; time: string; event: string; sources: { source: string; url: string }[]; sortKey: number;
 };
+export type MacroCalendarGroup = {
+  key: string; heading: string; relative: 'Today' | 'Tomorrow' | null; rows: MacroCalendarRow[];
+};
 
 function resolveDate(title: string, sessionDate: string) {
   const match = title.match(/\b(January|February|March|April|May|June|July|August|September|October|November|December)\s+(\d{1,2})(?:,\s*(\d{4}))?/i);
@@ -86,4 +89,30 @@ export function normalizeMacroCalendar(notes: MacroNote[], sessionDate: string):
     else rows.push({ date: date.label, time: '—', event: note.body, sources, sortKey: date.key + 86_399_000, order });
   });
   return rows.sort((a, b) => a.sortKey - b.sortKey || a.order - b.order);
+}
+
+export function groupMacroCalendarRows(rows: MacroCalendarRow[], sessionDate: string): MacroCalendarGroup[] {
+  const referenceDay = Date.parse(`${sessionDate}T00:00:00Z`);
+  const groups = new Map<string, MacroCalendarGroup & { dayOrder: number }>();
+  for (const row of [...rows].sort((a, b) => a.sortKey - b.sortKey)) {
+    const dayStart = Math.floor(row.sortKey / 86_400_000) * 86_400_000;
+    const hasRealDate = Number.isFinite(dayStart) && dayStart >= 0 && dayStart < Date.UTC(9999, 0, 1);
+    const key = hasRealDate ? new Date(dayStart).toISOString().slice(0, 10) : row.date;
+    let group = groups.get(key);
+    if (!group) {
+      const difference = hasRealDate ? Math.round((dayStart - referenceDay) / 86_400_000) : Number.NaN;
+      group = {
+        key,
+        heading: hasRealDate
+          ? new Intl.DateTimeFormat('en-US', { weekday: 'long', month: 'short', day: 'numeric', timeZone: 'UTC' }).format(dayStart)
+          : row.date.split(', ').slice(0, 2).join(', '),
+        relative: difference === 0 ? 'Today' : difference === 1 ? 'Tomorrow' : null,
+        rows: [],
+        dayOrder: hasRealDate ? dayStart : row.sortKey,
+      };
+      groups.set(key, group);
+    }
+    group.rows.push(row);
+  }
+  return [...groups.values()].sort((a, b) => a.dayOrder - b.dayOrder).map(({ dayOrder: _dayOrder, ...group }) => group);
 }

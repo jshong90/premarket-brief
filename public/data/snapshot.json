@@ -1,23 +1,25 @@
 {
-  "sessionDate": "2026-10-08",
-  "fetchedAt": "2026-10-08T13:45:01Z",
+  "sessionDate": "2026-10-12",
+  "fetchedAt": "2026-10-12T06:04:26.041Z",
   "status": "draft",
-  "previousArchiveDate": "2026-10-07",
+  "previousArchiveDate": "2026-10-08",
   "universeCount": 0,
   "universeComplete": false,
   "connected": {
     "tradingview": true,
-    "robinhood": true,
-    "massive": false
+    "massive": false,
+    "robinhood": true
   },
   "messages": [
-    "October 8 draft prepared after the 09:20 ET exclusive cutoff. The relative-strength stock universe was not captured; scanner stock and sector arrays remain empty and unranked.",
-    "Robinhood returned 320 timestamped extended-hours 1-minute bars each for SPY and QQQ from 04:00 through 09:19 ET. Their prior closes are official SIP closes dated October 7.",
-    "TradingView supplied timestamped ES/NQ futures, VIX, and Treasury-yield bars. Its provider notice warns data may be delayed 15+ minutes; actual observation times remain on each row.",
-    "TradingView returned 920 bars for ES and NQ through 09:19 ET. The YM range uses the last successfully calculated range through 09:18 ET. No verified RTY high/low pair was retained, so RTY remains null.",
-    "The 2Y yield remains null after TradingView requests failed with WebSocket handshake errors. The 5Y, 10Y, and 30Y values use timestamped bars; no daily-bar or percent-change estimates were substituted.",
-    "SPX is the October 7 cash-index close only; it does not trade premarket and was not substituted with ES.",
-    "Macro calendar checked against Trading Economics on October 8. Waller's 08:30 ET remarks and the 08:30 ET jobless-claims release had passed; only selected remaining events through Friday are listed."
+    "U.S. equity markets were open Monday, October 12, 2026; U.S. Treasury cash markets were closed for Columbus Day.",
+    "Quote inputs are frozen at the last completed bar before 09:20 ET (09:19 ET); data was retrieved at approximately 09:53 ET. The 09:20 bar and later trading are excluded.",
+    "SPY and QQQ use Robinhood extended-hours one-minute bars for 04:00–09:19 ET (320 of 320 bars each); provider delay is not reported.",
+    "TradingView futures coverage for 18:00 ET October 11 through 09:19 ET October 12: ES 920/920 bars, NQ 920/920, YM 904/920, RTY 888/920. YM and RTY ranges are partial. TradingView delay is unknown for this account.",
+    "VIX uses TradingView; first available bar was 04:03 ET and last bar 09:19 ET, so 04:00–04:02 coverage is unavailable.",
+    "SPX is represented by the approved Spreadex CFD proxy on TradingView; it is not the cash SPX index.",
+    "Treasury yields are last-observed TradingView values from Friday, October 9 at 17:25 ET. There was no Monday cash-market session, so these are dated references, not October 12 quotes.",
+    "The relative-strength scanner remains a draft and is not populated by this refresh; no claim of complete $50B+ stock-universe discovery is made.",
+    "Overnight news is left empty for user-provided notes."
   ],
   "stocks": [],
   "sectors": [],
@@ -27,297 +29,648 @@
       "high": null,
       "low": null,
       "drawdown": null,
-      "source": "Pending October 8 relative-strength scanner capture.",
+      "source": "Not captured for October 12 draft",
       "asOf": null,
-      "issue": "No scanner benchmark range captured for this draft."
+      "issue": "No benchmark range has been captured for this draft."
     },
     {
       "id": "NQ",
       "high": null,
       "low": null,
       "drawdown": null,
-      "source": "Pending October 8 relative-strength scanner capture.",
+      "source": "Not captured for October 12 draft",
       "asOf": null,
-      "issue": "No scanner benchmark range captured for this draft."
+      "issue": "No benchmark range has been captured for this draft."
     }
   ],
   "briefing": {
-    "indices": [
-      {
-        "title": "Equity Commentary",
-        "body": "Oil is trading at around $92, gapping up 5% from the $88 technical level owing to the conflict in the Middle East. Oil and bond yields will still prove to be strong headwinds against equities, and of course the anticipation of a potential deal with Iran. The jobless claims report published premarket shows a robust labor market.\n\nThe Fed provided more clarification on the rate path moving forward in its published minutes yesterday, with most board members in favor of another hike before end of year.\n\nBoth indices are right back to yesterday's lows, driven in part from a disappointing Samsung profit forecast. There is a scenario where the opening gap from Monday premarket gets filled if sellers seize momentum. However, SMH (chip ETF) is trading exactly at the $615 key technical level and could rebound from here - otherwise can trade back to Monday's lows.",
-        "source": "Desk commentary",
-        "url": "",
-        "asOf": "2026-10-08T14:39:23.000Z"
-      }
-    ],
-    "bonds": [
-      {
-        "title": "Bond Commentary",
-        "body": "France's national debt is still a point of concern - small cooldown on 10Y from 4.96 to 4.893% overnight, still elevated.\n\nUS Treasury 10Y did not make a new high overnight but still trading near highs at 5.325%.",
-        "source": "Desk commentary",
-        "url": "",
-        "asOf": "2026-10-08T14:39:23.000Z"
-      }
-    ],
+    "indices": [],
+    "bonds": [],
     "macro": [
       {
-        "title": "Thursday, October 8",
-        "body": "11:30 a.m. ET — TREASURY AUCTION · 4-week and 8-week bills",
-        "source": "Trading Economics · U.S. calendar; U.S. Treasury tentative auction schedule",
+        "title": "Monday, October 12",
+        "body": "BOND MARKET HOLIDAY · U.S. fixed-income markets are closed for Columbus Day.",
+        "source": "SIFMA · 2026 holiday schedule",
+        "url": "https://www.sifma.org/resources/general/holiday-schedule/",
+        "relatedSources": [],
+        "asOf": "2026-10-12"
+      },
+      {
+        "title": "Tuesday, October 13",
+        "body": "3:45 a.m. ET — FED · Governor Christopher J. Waller speaks\n6:00 a.m. ET — ECONOMIC RELEASE · NFIB Small Business Optimism Index (September)\n8:15 a.m. ET — ECONOMIC RELEASE · ADP Weekly Employment Change\n10:00 a.m. ET — ECONOMIC RELEASE · Existing Home Sales (September)\n11:30 a.m. ET — TREASURY AUCTION · 3- and 6-month bills\n1:00 p.m. ET — TREASURY AUCTION · 6-week bill\n1:00 p.m. ET — FED · Richmond Fed President Thomas Barkin speaks\n2:00 p.m. ET — ECONOMIC RELEASE · Monthly Budget Statement (September)",
+        "source": "Trading Economics · U.S. calendar",
         "url": "https://tradingeconomics.com/united-states/calendar",
+        "sourceKey": "economicCalendar",
         "relatedSources": [
           {
-            "source": "U.S. Treasury · Q3 2026 tentative auction schedule",
-            "url": "https://home.treasury.gov/system/files/221/TentativeAuctionScheduleQ32026.pdf"
+            "source": "Federal Reserve · October 2026 calendar",
+            "url": "https://www.federalreserve.gov/newsevents/2026-october.htm"
           },
           {
             "source": "TreasuryDirect · upcoming auctions",
             "url": "https://www.treasurydirect.gov/auctions/upcoming/"
           }
         ],
-        "asOf": "2026-10-08",
-        "sourceKey": "treasurySchedule"
+        "asOf": "2026-10-12"
       },
       {
-        "title": "Thursday, October 8",
-        "body": "1:00 p.m. ET — TREASURY AUCTION · reopened 30-year bonds",
-        "source": "Trading Economics · U.S. calendar; U.S. Treasury tentative auction schedule",
+        "title": "Wednesday, October 14",
+        "body": "5:40 a.m. ET — FED · Governor Michelle W. Bowman speaks\n8:30 a.m. ET — ECONOMIC RELEASE · Consumer Price Index and core CPI (September)\n11:30 a.m. ET — TREASURY AUCTION · 17-week bill\n1:30 p.m. ET — FED · Richmond Fed President Thomas Barkin speaks\n2:00 p.m. ET — FED · Beige Book",
+        "source": "Trading Economics · U.S. calendar",
         "url": "https://tradingeconomics.com/united-states/calendar",
+        "sourceKey": "economicCalendar",
         "relatedSources": [
           {
-            "source": "U.S. Treasury · Q3 2026 tentative auction schedule",
-            "url": "https://home.treasury.gov/system/files/221/TentativeAuctionScheduleQ32026.pdf"
+            "source": "Federal Reserve · October 2026 calendar",
+            "url": "https://www.federalreserve.gov/newsevents/2026-october.htm"
+          },
+          {
+            "source": "U.S. Bureau of Labor Statistics · 2026 release schedule",
+            "url": "https://www.bls.gov/schedule/2026/home.htm"
+          },
+          {
+            "source": "TreasuryDirect · upcoming auctions",
+            "url": "https://www.treasurydirect.gov/auctions/upcoming/"
+          },
+          {
+            "source": "Federal Reserve · Beige Book",
+            "url": "https://www.federalreserve.gov/monetarypolicy/beige-book-default.htm"
+          }
+        ],
+        "asOf": "2026-10-12"
+      },
+      {
+        "title": "Thursday, October 15",
+        "body": "8:30 a.m. ET — ECONOMIC RELEASE · Producer Price Index, initial jobless claims, and regional manufacturing surveys (September/October)\n8:30 a.m. ET — ECONOMIC RELEASE · Advance Retail Sales (September)\n11:30 a.m. ET — TREASURY AUCTION · 4-week and 8-week bills",
+        "source": "Trading Economics · U.S. calendar",
+        "url": "https://tradingeconomics.com/united-states/calendar",
+        "sourceKey": "economicCalendar",
+        "relatedSources": [
+          {
+            "source": "U.S. Bureau of Labor Statistics · 2026 release schedule",
+            "url": "https://www.bls.gov/schedule/2026/home.htm"
+          },
+          {
+            "source": "U.S. Census Bureau · economic indicator calendar",
+            "url": "https://www.census.gov/economic-indicators/calendar-listview.html"
           },
           {
             "source": "TreasuryDirect · upcoming auctions",
             "url": "https://www.treasurydirect.gov/auctions/upcoming/"
           }
         ],
-        "asOf": "2026-10-08",
-        "sourceKey": "treasurySchedule"
+        "asOf": "2026-10-12"
       },
       {
-        "title": "Thursday, October 8",
-        "body": "1:40 p.m. ET — FED · St. Louis Fed President Alberto Musalem speaks",
+        "title": "Friday, October 16",
+        "body": "8:30 a.m. ET — ECONOMIC RELEASE · U.S. Import and Export Price Indexes (September)\n8:30 a.m. ET — ECONOMIC RELEASE · NY Fed Services Activity Index\n9:15 a.m. ET — ECONOMIC RELEASE · Industrial Production and Capacity Utilization (September)",
         "source": "Trading Economics · U.S. calendar",
         "url": "https://tradingeconomics.com/united-states/calendar",
+        "sourceKey": "economicCalendar",
         "relatedSources": [
           {
-            "source": "Federal Reserve Bank of St. Louis · president's remarks",
-            "url": "https://www.stlouisfed.org/from-the-president/remarks"
+            "source": "U.S. Bureau of Labor Statistics · 2026 release schedule",
+            "url": "https://www.bls.gov/schedule/2026/home.htm"
+          },
+          {
+            "source": "Federal Reserve · Industrial Production and Capacity Utilization",
+            "url": "https://www.federalreserve.gov/releases/g17/"
           }
         ],
-        "asOf": "2026-10-08",
-        "sourceKey": "stLouisFed"
-      },
-      {
-        "title": "Friday, October 9",
-        "body": "10:00 a.m. ET — ECONOMIC RELEASE · University of Michigan consumer sentiment (preliminary)",
-        "source": "Trading Economics · U.S. calendar",
-        "url": "https://tradingeconomics.com/united-states/calendar",
-        "asOf": "2026-10-08",
-        "sourceKey": "economicCalendar"
+        "asOf": "2026-10-12"
       }
     ],
-    "earnings": [],
+    "earnings": [
+      {
+        "title": "Monday, October 12",
+        "body": "",
+        "source": "Earnings Whispers · confirmed earnings calendar",
+        "url": "https://www.earningswhispers.com/calweek/20261012",
+        "relatedSources": [
+          {
+            "source": "StockAnalysis · daily market-cap data",
+            "url": "https://stockanalysis.com/list/biggest-companies/"
+          }
+        ],
+        "asOf": "2026-10-11",
+        "sessions": [
+          {
+            "period": "Before Open",
+            "companies": [
+              {
+                "ticker": "LVMUY",
+                "name": "LVMH Moët Hennessy Louis Vuitton",
+                "marketCap": 209810000000,
+                "marketCapAsOf": "2026-10-09",
+                "marketCapSource": "StockAnalysis · market capitalization",
+                "marketCapUrl": "https://stockanalysis.com/quote/otc/LVMUY/market-cap/"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Tuesday, October 13",
+        "body": "",
+        "source": "Earnings Whispers · confirmed earnings calendar",
+        "url": "https://www.earningswhispers.com/calweek/20261012",
+        "asOf": "2026-10-11",
+        "sessions": [
+          {
+            "period": "Before Open",
+            "companies": [
+              {
+                "ticker": "UNH",
+                "name": "UnitedHealth Group",
+                "marketCap": 340460000000,
+                "marketCapAsOf": "2026-10-09",
+                "marketCapSource": "StockAnalysis · market capitalization",
+                "marketCapUrl": "https://stockanalysis.com/stocks/unh/market-cap/"
+              },
+              {
+                "ticker": "JPM",
+                "name": "JPMorgan Chase",
+                "marketCap": 885150000000,
+                "marketCapAsOf": "2026-10-09",
+                "marketCapSource": "StockAnalysis · market capitalization",
+                "marketCapUrl": "https://stockanalysis.com/stocks/jpm/market-cap/"
+              },
+              {
+                "ticker": "GS",
+                "name": "Goldman Sachs",
+                "marketCap": 271070000000,
+                "marketCapAsOf": "2026-10-09",
+                "marketCapSource": "StockAnalysis · market capitalization",
+                "marketCapUrl": "https://stockanalysis.com/stocks/gs/market-cap/"
+              },
+              {
+                "ticker": "WFC",
+                "name": "Wells Fargo",
+                "marketCap": 252660000000,
+                "marketCapAsOf": "2026-10-09",
+                "marketCapSource": "StockAnalysis · market capitalization",
+                "marketCapUrl": "https://stockanalysis.com/stocks/wfc/market-cap/"
+              },
+              {
+                "ticker": "JNJ",
+                "name": "Johnson & Johnson",
+                "marketCap": 630040000000,
+                "marketCapAsOf": "2026-10-09",
+                "marketCapSource": "StockAnalysis · market capitalization",
+                "marketCapUrl": "https://stockanalysis.com/stocks/jnj/market-cap/"
+              },
+              {
+                "ticker": "C",
+                "name": "Citigroup",
+                "marketCap": 217460000000,
+                "marketCapAsOf": "2026-10-09",
+                "marketCapSource": "StockAnalysis · market capitalization",
+                "marketCapUrl": "https://stockanalysis.com/stocks/c/market-cap/"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Wednesday, October 14",
+        "body": "",
+        "source": "Earnings Whispers · confirmed earnings calendar",
+        "url": "https://www.earningswhispers.com/calweek/20261012",
+        "asOf": "2026-10-11",
+        "sessions": [
+          {
+            "period": "Before Open",
+            "companies": [
+              {
+                "ticker": "ASML",
+                "name": "ASML Holding",
+                "marketCap": 688720000000,
+                "marketCapAsOf": "2026-10-09",
+                "marketCapSource": "StockAnalysis · market capitalization",
+                "marketCapUrl": "https://stockanalysis.com/stocks/asml/market-cap/"
+              },
+              {
+                "ticker": "BAC",
+                "name": "Bank of America",
+                "marketCap": 379850000000,
+                "marketCapAsOf": "2026-10-09",
+                "marketCapSource": "StockAnalysis · market capitalization",
+                "marketCapUrl": "https://stockanalysis.com/stocks/bac/market-cap/"
+              },
+              {
+                "ticker": "MS",
+                "name": "Morgan Stanley",
+                "marketCap": 298440000000,
+                "marketCapAsOf": "2026-10-09",
+                "marketCapSource": "StockAnalysis · market capitalization",
+                "marketCapUrl": "https://stockanalysis.com/stocks/ms/market-cap/"
+              },
+              {
+                "ticker": "BLK",
+                "name": "BlackRock",
+                "marketCap": 175860000000,
+                "marketCapAsOf": "2026-10-09",
+                "marketCapSource": "StockAnalysis · market capitalization",
+                "marketCapUrl": "https://stockanalysis.com/stocks/blk/market-cap/"
+              },
+              {
+                "ticker": "FAST",
+                "name": "Fastenal",
+                "marketCap": 58240000000,
+                "marketCapAsOf": "2026-10-09",
+                "marketCapSource": "StockAnalysis · market capitalization",
+                "marketCapUrl": "https://stockanalysis.com/stocks/fast/market-cap/"
+              },
+              {
+                "ticker": "PGR",
+                "name": "Progressive",
+                "marketCap": 126410000000,
+                "marketCapAsOf": "2026-10-09",
+                "marketCapSource": "StockAnalysis · market capitalization",
+                "marketCapUrl": "https://stockanalysis.com/stocks/pgr/market-cap/"
+              },
+              {
+                "ticker": "STT",
+                "name": "State Street",
+                "marketCap": 48060000000,
+                "marketCapAsOf": "2026-10-09",
+                "marketCapSource": "StockAnalysis · market capitalization",
+                "marketCapUrl": "https://stockanalysis.com/stocks/stt/market-cap/"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Thursday, October 15",
+        "body": "",
+        "source": "Earnings Whispers · confirmed earnings calendar",
+        "url": "https://www.earningswhispers.com/calweek/20261012",
+        "asOf": "2026-10-11",
+        "sessions": [
+          {
+            "period": "Before Open",
+            "companies": [
+              {
+                "ticker": "TSM",
+                "name": "Taiwan Semiconductor Manufacturing",
+                "marketCap": 2070000000000,
+                "marketCapAsOf": "2026-10-09",
+                "marketCapSource": "StockAnalysis · market capitalization",
+                "marketCapUrl": "https://stockanalysis.com/stocks/tsm/market-cap/"
+              },
+              {
+                "ticker": "ERIC",
+                "name": "Telefonaktiebolaget LM Ericsson",
+                "marketCap": 31540000000,
+                "marketCapAsOf": "2026-10-09",
+                "marketCapSource": "StockAnalysis · market capitalization",
+                "marketCapUrl": "https://stockanalysis.com/stocks/eric/market-cap/"
+              },
+              {
+                "ticker": "SCHW",
+                "name": "Charles Schwab",
+                "marketCap": 167230000000,
+                "marketCapAsOf": "2026-10-09",
+                "marketCapSource": "StockAnalysis · market capitalization",
+                "marketCapUrl": "https://stockanalysis.com/stocks/schw/market-cap/"
+              },
+              {
+                "ticker": "MRSH",
+                "name": "Marsh & McLennan",
+                "marketCap": 83870000000,
+                "marketCapAsOf": "2026-10-09",
+                "marketCapSource": "StockAnalysis · market capitalization",
+                "marketCapUrl": "https://stockanalysis.com/stocks/mrsh/market-cap/"
+              },
+              {
+                "ticker": "PNC",
+                "name": "PNC Financial Services",
+                "marketCap": 87450000000,
+                "marketCapAsOf": "2026-10-09",
+                "marketCapSource": "StockAnalysis · market capitalization",
+                "marketCapUrl": "https://stockanalysis.com/stocks/pnc/market-cap/"
+              },
+              {
+                "ticker": "BNY",
+                "name": "Bank of New York Mellon",
+                "marketCap": 96830000000,
+                "marketCapAsOf": "2026-10-09",
+                "marketCapSource": "StockAnalysis · market capitalization",
+                "marketCapUrl": "https://stockanalysis.com/stocks/bny/market-cap/"
+              }
+            ]
+          },
+          {
+            "period": "After Close",
+            "companies": [
+              {
+                "ticker": "IBKR",
+                "name": "Interactive Brokers Group",
+                "marketCap": 39810000000,
+                "marketCapAsOf": "2026-10-09",
+                "marketCapSource": "StockAnalysis · market capitalization",
+                "marketCapUrl": "https://stockanalysis.com/stocks/ibkr/market-cap/"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "title": "Friday, October 16",
+        "body": "",
+        "source": "Earnings Whispers · confirmed earnings calendar",
+        "url": "https://www.earningswhispers.com/calweek/20261012",
+        "asOf": "2026-10-11",
+        "sessions": [
+          {
+            "period": "Before Open",
+            "companies": [
+              {
+                "ticker": "MTB",
+                "name": "M&T Bank",
+                "marketCap": 31410000000,
+                "marketCapAsOf": "2026-10-09",
+                "marketCapSource": "StockAnalysis · market capitalization",
+                "marketCapUrl": "https://stockanalysis.com/stocks/mtb/market-cap/"
+              },
+              {
+                "ticker": "TFC",
+                "name": "Truist Financial",
+                "marketCap": 56330000000,
+                "marketCapAsOf": "2026-10-09",
+                "marketCapSource": "StockAnalysis · market capitalization",
+                "marketCapUrl": "https://stockanalysis.com/stocks/tfc/market-cap/"
+              },
+              {
+                "ticker": "TRV",
+                "name": "Travelers",
+                "marketCap": 76910000000,
+                "marketCapAsOf": "2026-10-09",
+                "marketCapSource": "StockAnalysis · market capitalization",
+                "marketCapUrl": "https://stockanalysis.com/stocks/trv/market-cap/"
+              }
+            ]
+          }
+        ]
+      }
+    ],
     "news": []
   },
   "marketContext": [
     {
       "id": "SPX",
-      "label": "Prior close",
-      "name": "S&P 500 cash index",
+      "label": "SPX · CFD proxy",
+      "name": "Spreadex SPX CFD proxy",
       "kind": "index",
-      "value": 7800.26,
-      "previousClose": 7800.26,
-      "change": null,
+      "value": 7816.13,
+      "asOf": "2026-10-12T13:19:00.000Z",
+      "previousClose": 7811.93,
+      "previousCloseAt": "2026-10-09T19:59:00.000Z",
+      "previousCloseSource": "TradingView Official MCP - SPREADEX:SPX completed 1-minute close Friday Oct 9 at 15:59 ET",
+      "previousCloseUrl": "https://www.tradingview.com/chart/?symbol=SPREADEX%3ASPX",
+      "retrievedAt": "2026-10-12T13:53:02.081Z",
+      "source": "TradingView Official MCP · SPREADEX:SPX",
+      "url": "https://www.tradingview.com/chart/?symbol=SPREADEX%3ASPX",
+      "issue": "Provider delay unknown. Spreadex CFD proxy; not the SPX cash index. Observation age at retrieval: 34 minutes.",
       "changeUnit": "%",
-      "source": "Robinhood MCP · SPX 5-minute historical bar spanning 15:55–16:00 ET on October 7; prior close only.",
-      "asOf": "2026-10-07T20:00:00.000Z",
-      "previousCloseAt": "2026-10-07T20:00:00.000Z",
-      "issue": "SPX is a cash index and does not trade premarket; ES is not substituted."
+      "change": 0.05376392261580154
     },
     {
       "id": "SPY",
       "label": "SPY",
       "name": "SPDR S&P 500 ETF Trust",
       "kind": "etf",
-      "value": 774.98,
-      "previousClose": 777.22,
-      "change": -0.2882066853657883,
+      "value": 778.9,
+      "asOf": "2026-10-12T13:19:00.000Z",
+      "previousClose": 778.53,
+      "previousCloseAt": "2026-10-09T19:59:00.000Z",
+      "previousCloseSource": "Robinhood one-minute bar close at 15:59 ET",
+      "previousCloseUrl": "https://robinhood.com/stocks/SPY",
+      "retrievedAt": "2026-10-12T13:53:02.081Z",
+      "source": "Robinhood MCP · SPY",
+      "url": "https://robinhood.com/stocks/SPY",
+      "issue": "Provider delay unknown. Observation age at retrieval: 34 minutes.",
       "changeUnit": "%",
-      "source": "Robinhood MCP · official SIP prior close; extended-hours 1-minute bars from 04:00–09:19 ET October 8.",
-      "asOf": "2026-10-08T13:19:00.000Z",
-      "high": 777.32,
-      "low": 772.48,
-      "highTime": "2026-10-08T08:00:00.000Z",
-      "lowTime": "2026-10-08T10:35:00.000Z",
-      "retrievedAt": "2026-10-08T13:38:14.657Z",
-      "issue": "320 actual premarket bars; the 09:20 ET bar is excluded."
+      "change": 0.04752546465776053
     },
     {
       "id": "QQQ",
       "label": "QQQ",
       "name": "Invesco QQQ Trust",
       "kind": "etf",
-      "value": 753.91,
-      "previousClose": 757.73,
-      "change": -0.5041373576339936,
+      "value": 750.09,
+      "asOf": "2026-10-12T13:19:00.000Z",
+      "previousClose": 751.24,
+      "previousCloseAt": "2026-10-09T19:59:00.000Z",
+      "previousCloseSource": "Robinhood one-minute bar close at 15:59 ET",
+      "previousCloseUrl": "https://robinhood.com/stocks/QQQ",
+      "retrievedAt": "2026-10-12T13:53:02.081Z",
+      "source": "Robinhood MCP · QQQ",
+      "url": "https://robinhood.com/stocks/QQQ",
+      "issue": "Provider delay unknown. Observation age at retrieval: 34 minutes.",
       "changeUnit": "%",
-      "source": "Robinhood MCP · official SIP prior close; extended-hours 1-minute bars from 04:00–09:19 ET October 8.",
-      "asOf": "2026-10-08T13:19:00.000Z",
-      "high": 758.11,
-      "low": 751.2,
-      "highTime": "2026-10-08T08:06:00.000Z",
-      "lowTime": "2026-10-08T10:34:00.000Z",
-      "retrievedAt": "2026-10-08T13:38:14.657Z",
-      "issue": "320 actual premarket bars; the 09:20 ET bar is excluded."
+      "change": -0.15308024066875703
     },
     {
       "id": "VIX",
       "label": "VIX",
       "name": "Cboe Volatility Index",
       "kind": "volatility",
-      "value": 15.53,
-      "previousClose": 15.08,
-      "change": 2.984084880636595,
+      "value": 15.41,
+      "asOf": "2026-10-12T13:19:00.000Z",
+      "previousClose": 14.84,
+      "previousCloseAt": "2026-10-09T20:14:00.000Z",
+      "previousCloseSource": "TradingView Official MCP - CBOE:VIX completed 1-minute bar close Friday Oct 9 at 16:14 ET",
+      "previousCloseUrl": "https://www.tradingview.com/chart/?symbol=CBOE%3AVIX",
+      "retrievedAt": "2026-10-12T13:53:02.081Z",
+      "source": "TradingView Official MCP · CBOE:VIX",
+      "url": "https://www.tradingview.com/chart/?symbol=CBOE%3AVIX",
+      "issue": "Provider delay unknown. Observation age at retrieval: 34 minutes.",
       "changeUnit": "%",
-      "source": "TradingView Official MCP · 1-minute bars; provider warns data may be delayed 15+ minutes. CBOE:VIX; last bar at 09:19 ET October 8, prior-session reference at 16:14 ET October 7.",
-      "asOf": "2026-10-08T13:19:00.000Z",
-      "previousCloseAt": "2026-10-07T20:14:00.000Z",
-      "high": 16.02,
-      "low": 15.31,
-      "highTime": "2026-10-08T10:42:00.000Z",
-      "lowTime": "2026-10-08T09:34:00.000Z",
-      "retrievedAt": "2026-10-08T13:37:44.644Z"
+      "change": 3.840970350404316
     },
     {
       "id": "US10Y",
       "label": "10Y",
       "name": "U.S. 10-year Treasury yield",
       "kind": "yield",
-      "value": 5.297,
-      "previousClose": 5.286,
+      "value": 5.242,
+      "previousClose": 5.231,
+      "previousCloseAt": "2026-10-08T20:59:00.000Z",
       "change": 1.100000000000012,
       "changeUnit": "bp",
-      "source": "TradingView Official MCP · 1-minute bars; provider warns data may be delayed 15+ minutes. TVC:US10Y; last bar 09:19 ET October 8, prior-session reference 16:58 ET October 7.",
-      "asOf": "2026-10-08T13:19:00.000Z",
-      "previousCloseAt": "2026-10-07T20:58:00.000Z",
-      "retrievedAt": "2026-10-08T13:37:54.334Z"
+      "source": "TradingView Official MCP · TVC:US10Y one-minute bar, last available Friday Oct 9 at 17:25 ET; previous observation is Thursday at 16:59 ET.",
+      "asOf": "2026-10-09T21:25:00.000Z",
+      "retrievedAt": "2026-10-12T06:04:26.041Z",
+      "issue": "No Monday yield reading: U.S. fixed-income markets are closed for Columbus Day."
     }
   ],
   "keyLevels": [
     {
       "id": "ES",
       "label": "S&P 500 (ES)",
-      "high": 7858.25,
-      "low": 7802.75,
-      "highTime": "2026-10-07T23:35:00.000Z",
-      "lowTime": "2026-10-08T10:34:00.000Z",
-      "asOf": "2026-10-08T13:19:00.000Z",
-      "retrievedAt": "2026-10-08T13:37:44.232Z",
-      "source": "TradingView Official MCP · 1-minute bars; provider warns data may be delayed 15+ minutes. CME_MINI:ES1!; 920 completed bars from 18:00 ET October 7 through 09:19 ET October 8."
+      "high": 7887,
+      "low": 7857.75,
+      "highTime": "2026-10-12T04:48:00.000Z",
+      "lowTime": "2026-10-12T12:39:00.000Z",
+      "asOf": "2026-10-12T13:19:00.000Z",
+      "retrievedAt": "2026-10-12T13:53:02.081Z",
+      "source": "TradingView Official MCP · CME_MINI:ES1!",
+      "issue": "Provider delay unknown."
     },
     {
       "id": "NQ",
       "label": "Nasdaq-100 (NQ)",
-      "high": 31466,
-      "low": 31119.75,
-      "highTime": "2026-10-08T02:34:00.000Z",
-      "lowTime": "2026-10-08T10:34:00.000Z",
-      "asOf": "2026-10-08T13:19:00.000Z",
-      "retrievedAt": "2026-10-08T13:40:03.008Z",
-      "source": "TradingView Official MCP · 1-minute bars; provider warns data may be delayed 15+ minutes. CME_MINI:NQ1!; 920 completed bars from 18:00 ET October 7 through 09:19 ET October 8."
+      "high": 31289.25,
+      "low": 31017.25,
+      "highTime": "2026-10-11T23:34:00.000Z",
+      "lowTime": "2026-10-12T12:38:00.000Z",
+      "asOf": "2026-10-12T13:19:00.000Z",
+      "retrievedAt": "2026-10-12T13:53:02.081Z",
+      "source": "TradingView Official MCP · CME_MINI:NQ1!",
+      "issue": "Provider delay unknown."
     },
     {
       "id": "YM",
       "label": "Dow (YM)",
-      "high": 51470,
-      "low": 50909,
-      "highTime": "2026-10-07T23:38:00.000Z",
-      "lowTime": "2026-10-08T10:33:00.000Z",
-      "asOf": "2026-10-08T13:18:00.000Z",
-      "source": "TradingView Official MCP · 1-minute bars; provider warns data may be delayed 15+ minutes. CBOT_MINI:YM1!; observed range from 18:00 ET October 7 through 09:18 ET October 8.",
-      "issue": "A later 09:19 ET bar returned, but range extraction failed; this retains the last successfully calculated range through 09:18 ET."
+      "high": 52131,
+      "low": 51913,
+      "highTime": "2026-10-12T03:50:00.000Z",
+      "lowTime": "2026-10-12T09:43:00.000Z",
+      "asOf": "2026-10-12T13:19:00.000Z",
+      "retrievedAt": "2026-10-12T13:53:02.081Z",
+      "source": "TradingView Official MCP · CBOT_MINI:YM1!",
+      "issue": "Provider delay unknown. Partial range: 904/920 minute buckets; last bar 2026-10-12T13:19:00.000Z."
     },
     {
       "id": "RTY",
       "label": "Russell 2000 (RTY)",
-      "high": null,
-      "low": null,
-      "highTime": null,
-      "lowTime": null,
-      "asOf": null,
-      "retrievedAt": "2026-10-08T13:41:47.838Z",
-      "source": "TradingView Official MCP · CME_MINI:RTY1! 1-minute futures bars.",
-      "issue": "TradingView requests were intermittent; no verified timestamped high/low pair could be retained, so this range is null."
+      "high": 2834.3,
+      "low": 2816.3,
+      "highTime": "2026-10-12T01:06:00.000Z",
+      "lowTime": "2026-10-12T12:39:00.000Z",
+      "asOf": "2026-10-12T13:19:00.000Z",
+      "retrievedAt": "2026-10-12T13:53:02.081Z",
+      "source": "TradingView Official MCP · CME_MINI:RTY1!",
+      "issue": "Provider delay unknown. Partial range: 888/920 minute buckets; last bar 2026-10-12T13:19:00.000Z."
     }
   ],
   "indexQuotes": [
     {
       "id": "NQ",
-      "value": 31235.5,
-      "previousClose": 31403.75,
-      "previousCloseAt": "2026-10-07T20:59:00.000Z",
-      "asOf": "2026-10-08T13:19:00.000Z",
-      "retrievedAt": "2026-10-08T13:40:03.008Z",
-      "source": "TradingView Official MCP · 1-minute bars; provider warns data may be delayed 15+ minutes. CME_MINI:NQ1!; 09:19 ET observation and last eligible prior-session bar at 16:59 ET.",
-      "url": "https://www.tradingview.com/chart/?symbol=CME_MINI%3ANQ1%21"
+      "value": 31062,
+      "asOf": "2026-10-12T13:19:00.000Z",
+      "previousClose": 31112.25,
+      "previousCloseAt": "2026-10-09T19:59:00.000Z",
+      "previousCloseSource": "TradingView Official MCP - CME_MINI:NQ1! completed 1-minute close Friday Oct 9 at 15:59 ET",
+      "previousCloseUrl": "https://www.tradingview.com/chart/?symbol=CME_MINI%3ANQ1%21",
+      "retrievedAt": "2026-10-12T13:53:02.081Z",
+      "source": "TradingView Official MCP · CME_MINI:NQ1!",
+      "url": "https://www.tradingview.com/chart/?symbol=CME_MINI%3ANQ1%21",
+      "issue": "Provider delay unknown."
     },
     {
       "id": "ES",
-      "value": 7828.75,
-      "previousClose": 7850.25,
-      "previousCloseAt": "2026-10-07T20:59:00.000Z",
-      "asOf": "2026-10-08T13:19:00.000Z",
-      "retrievedAt": "2026-10-08T13:37:44.232Z",
-      "source": "TradingView Official MCP · 1-minute bars; provider warns data may be delayed 15+ minutes. CME_MINI:ES1!; 09:19 ET observation and last eligible prior-session bar at 16:59 ET.",
-      "url": "https://www.tradingview.com/chart/?symbol=CME_MINI%3AES1%21"
+      "value": 7865.25,
+      "asOf": "2026-10-12T13:19:00.000Z",
+      "previousClose": 7861,
+      "previousCloseAt": "2026-10-09T19:59:00.000Z",
+      "previousCloseSource": "TradingView Official MCP - CME_MINI:ES1! completed 1-minute close Friday Oct 9 at 15:59 ET",
+      "previousCloseUrl": "https://www.tradingview.com/chart/?symbol=CME_MINI%3AES1%21",
+      "retrievedAt": "2026-10-12T13:53:02.081Z",
+      "source": "TradingView Official MCP · CME_MINI:ES1!",
+      "url": "https://www.tradingview.com/chart/?symbol=CME_MINI%3AES1%21",
+      "issue": "Provider delay unknown."
     }
   ],
   "treasuryYields": [
     {
       "tenor": "2Y",
-      "value": null,
-      "previousClose": null,
-      "asOf": null,
-      "previousCloseAt": null,
-      "retrievedAt": "2026-10-08T13:41:15.154Z",
-      "source": "TradingView Official MCP · TVC:US02Y 1-minute bars.",
+      "value": 4.791,
+      "previousClose": 4.76,
+      "asOf": "2026-10-09T21:25:00.000Z",
+      "previousCloseAt": "2026-10-08T20:59:00.000Z",
+      "retrievedAt": "2026-10-12T06:04:26.041Z",
+      "source": "TradingView Official MCP · TVC:US02Y one-minute bars; latest available Friday, Oct 9 at 17:25 ET.",
       "url": "https://www.tradingview.com/symbols/TVC-US02Y/",
-      "issue": "Repeated requests failed with a WebSocket handshake error; current and prior-close values remain null."
+      "previousCloseSource": "TradingView Official MCP · TVC:US02Y one-minute bar at 16:59 ET Oct 8.",
+      "previousCloseUrl": "https://www.tradingview.com/symbols/TVC-US02Y/",
+      "issue": "U.S. fixed-income markets are closed Oct 12; no Monday yield observation."
     },
     {
       "tenor": "5Y",
-      "value": 5.052,
-      "previousClose": 5.027,
-      "asOf": "2026-10-08T13:18:00.000Z",
-      "previousCloseAt": "2026-10-07T20:58:00.000Z",
-      "retrievedAt": "2026-10-08T13:38:47.734Z",
-      "source": "TradingView Official MCP · 1-minute bars; provider warns data may be delayed 15+ minutes. TVC:US05Y; current observation 09:18 ET October 8, prior-session reference 16:58 ET October 7.",
-      "url": "https://www.tradingview.com/symbols/TVC-US05Y/"
+      "value": 5.021,
+      "previousClose": 4.992,
+      "asOf": "2026-10-09T21:25:00.000Z",
+      "previousCloseAt": "2026-10-08T20:58:00.000Z",
+      "retrievedAt": "2026-10-12T06:04:26.041Z",
+      "source": "TradingView Official MCP · TVC:US05Y one-minute bars; latest available Friday, Oct 9 at 17:25 ET.",
+      "url": "https://www.tradingview.com/symbols/TVC-US05Y/",
+      "previousCloseSource": "TradingView Official MCP · TVC:US05Y one-minute bar at 16:58 ET Oct 8.",
+      "previousCloseUrl": "https://www.tradingview.com/symbols/TVC-US05Y/",
+      "issue": "U.S. fixed-income markets are closed Oct 12; no Monday yield observation."
     },
     {
       "tenor": "10Y",
-      "value": 5.297,
-      "previousClose": 5.286,
-      "asOf": "2026-10-08T13:19:00.000Z",
-      "previousCloseAt": "2026-10-07T20:58:00.000Z",
-      "retrievedAt": "2026-10-08T13:37:54.334Z",
-      "source": "TradingView Official MCP · 1-minute bars; provider warns data may be delayed 15+ minutes. TVC:US10Y; current observation 09:19 ET October 8, prior-session reference 16:58 ET October 7.",
-      "url": "https://www.tradingview.com/symbols/TVC-US10Y/"
+      "value": 5.242,
+      "previousClose": 5.231,
+      "asOf": "2026-10-09T21:25:00.000Z",
+      "previousCloseAt": "2026-10-08T20:59:00.000Z",
+      "retrievedAt": "2026-10-12T06:04:26.041Z",
+      "source": "TradingView Official MCP · TVC:US10Y one-minute bars; latest available Friday, Oct 9 at 17:25 ET.",
+      "url": "https://www.tradingview.com/symbols/TVC-US10Y/",
+      "previousCloseSource": "TradingView Official MCP · TVC:US10Y one-minute bar at 16:59 ET Oct 8.",
+      "previousCloseUrl": "https://www.tradingview.com/symbols/TVC-US10Y/",
+      "issue": "U.S. fixed-income markets are closed Oct 12; no Monday yield observation."
     },
     {
       "tenor": "30Y",
-      "value": 5.67,
-      "previousClose": 5.673,
-      "asOf": "2026-10-08T13:19:00.000Z",
-      "previousCloseAt": "2026-10-07T20:58:00.000Z",
-      "retrievedAt": "2026-10-08T13:38:50.786Z",
-      "source": "TradingView Official MCP · 1-minute bars; provider warns data may be delayed 15+ minutes. TVC:US30Y; current observation 09:19 ET October 8, prior-session reference 16:58 ET October 7.",
-      "url": "https://www.tradingview.com/symbols/TVC-US30Y/"
+      "value": 5.6,
+      "previousClose": 5.602,
+      "asOf": "2026-10-09T21:25:00.000Z",
+      "previousCloseAt": "2026-10-08T20:57:00.000Z",
+      "retrievedAt": "2026-10-12T06:04:26.041Z",
+      "source": "TradingView Official MCP · TVC:US30Y one-minute bars; latest available Friday, Oct 9 at 17:25 ET.",
+      "url": "https://www.tradingview.com/symbols/TVC-US30Y/",
+      "previousCloseSource": "TradingView Official MCP · TVC:US30Y one-minute bar at 16:57 ET Oct 8.",
+      "previousCloseUrl": "https://www.tradingview.com/symbols/TVC-US30Y/",
+      "issue": "U.S. fixed-income markets are closed Oct 12; no Monday yield observation."
     }
   ],
-  "quotesRefreshedAt": "2026-10-08T13:45:01Z"
+  "quotesRefreshedAt": "2026-10-12T13:53:13.807Z",
+  "sectorQuotesRefreshedAt": null,
+  "collection": {
+    "version": 1,
+    "id": "4ee6b8cd5b36819f475f67a39aa4c448877d487d8daf5967f29693671cdf5045",
+    "startedAt": "2026-10-12T13:47:25.770Z",
+    "finishedAt": "2026-10-12T13:53:13.807Z",
+    "timing": {
+      "elapsedMs": 348037,
+      "processingMs": 61,
+      "providerAttempts": 8
+    },
+    "requestedIds": [
+      "SPX",
+      "SPY",
+      "QQQ",
+      "VIX",
+      "ES",
+      "NQ",
+      "YM",
+      "RTY"
+    ],
+    "messages": [
+      "Collection completed 2026-10-12T13:53:13.807Z; observations retain their individual times.",
+      "SPX: Provider delay unknown. Spreadex CFD proxy; not the SPX cash index. Observation age at retrieval: 34 minutes.",
+      "SPY: Provider delay unknown. Observation age at retrieval: 34 minutes.",
+      "QQQ: Provider delay unknown. Observation age at retrieval: 34 minutes.",
+      "VIX: Provider delay unknown. Observation age at retrieval: 34 minutes.",
+      "ES: Provider delay unknown.",
+      "NQ: Provider delay unknown.",
+      "YM: Provider delay unknown. Partial range: 904/920 minute buckets; last bar 2026-10-12T13:19:00.000Z.",
+      "RTY: Provider delay unknown. Partial range: 888/920 minute buckets; last bar 2026-10-12T13:19:00.000Z."
+    ],
+    "baseHash": "b5305ef3f3adcb58f843a82333bcb7a5c57dabaf7e74d71a70d47af45640503f"
+  }
 }

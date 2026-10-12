@@ -7,84 +7,50 @@ const compile = source => 'data:text/javascript;base64,' + Buffer.from(ts.transp
 }).outputText).toString('base64');
 const scannerUrl = compile(fs.readFileSync('src/lib/scanner.ts', 'utf8'));
 const rangesUrl = compile(fs.readFileSync('src/lib/ranges.ts', 'utf8').replace("'./scanner'", JSON.stringify(scannerUrl)));
-const { normalizeMacroCalendar } = await import(compile(fs.readFileSync('src/lib/macroCalendar.ts', 'utf8')));
+const { normalizeMacroCalendar, groupMacroCalendarRows } = await import(compile(fs.readFileSync('src/lib/macroCalendar.ts', 'utf8')));
 const { readSnapshot } = await import(compile(fs.readFileSync('src/lib/snapshot.ts', 'utf8')
   .replace("'./scanner'", JSON.stringify(scannerUrl))
   .replace("'./ranges'", JSON.stringify(rangesUrl))));
 
 const draft = JSON.parse(fs.readFileSync('public/data/snapshot.json', 'utf8'));
-assert.equal(readSnapshot(draft).status, 'draft');
-assert.equal(draft.sessionDate, '2026-10-08');
-assert.equal(draft.previousArchiveDate, '2026-10-07');
-assert.equal(draft.cutoffAt, undefined);
-assert.equal(draft.stocks.length, 0);
-assert.equal(draft.sectors.length, 0);
-assert.deepEqual(draft.marketContext.map(row => [row.id, row.value, row.previousClose, row.asOf]), [
-  ['SPX', 7800.26, 7800.26, '2026-10-07T20:00:00.000Z'],
-  ['SPY', 774.98, 777.22, '2026-10-08T13:19:00.000Z'],
-  ['QQQ', 753.91, 757.73, '2026-10-08T13:19:00.000Z'],
-  ['VIX', 15.53, 15.08, '2026-10-08T13:19:00.000Z'],
-  ['US10Y', 5.297, 5.286, '2026-10-08T13:19:00.000Z'],
-]);
-assert.ok(Math.abs(draft.marketContext.find(row => row.id === 'SPY').change - ((774.98 / 777.22 - 1) * 100)) < 1e-12);
-assert.ok(Math.abs(draft.marketContext.find(row => row.id === 'US10Y').change - 1.1) < 1e-9);
-assert.deepEqual(draft.treasuryYields.map(row => [row.tenor, row.value, row.previousClose, row.asOf]), [
-  ['2Y', null, null, null],
-  ['5Y', 5.052, 5.027, '2026-10-08T13:18:00.000Z'],
-  ['10Y', 5.297, 5.286, '2026-10-08T13:19:00.000Z'],
-  ['30Y', 5.67, 5.673, '2026-10-08T13:19:00.000Z'],
-]);
-assert.ok(draft.treasuryYields.every(row => row.source.startsWith('TradingView Official MCP') && row.url.startsWith('https://')));
-assert.deepEqual(draft.indexQuotes.map(row => [row.id, row.value, row.previousClose, row.asOf]), [
-  ['NQ', 31235.5, 31403.75, '2026-10-08T13:19:00.000Z'],
-  ['ES', 7828.75, 7850.25, '2026-10-08T13:19:00.000Z'],
-]);
-assert.deepEqual(draft.keyLevels.map(row => [row.id, row.high, row.low, row.asOf]), [
-  ['ES', 7858.25, 7802.75, '2026-10-08T13:19:00.000Z'],
-  ['NQ', 31466, 31119.75, '2026-10-08T13:19:00.000Z'],
-  ['YM', 51470, 50909, '2026-10-08T13:18:00.000Z'],
-  ['RTY', null, null, null],
-]);
-assert.match(draft.keyLevels.find(row => row.id === 'RTY').issue, /no verified timestamped high\/low pair/);
+assert.equal(readSnapshot(draft).sessionDate, draft.sessionDate);
+if (draft.status === 'draft') assert.equal(draft.cutoffAt, undefined);
+if (draft.previousArchiveDate) {
+  const previous = JSON.parse(fs.readFileSync(`public/data/snapshot-${draft.previousArchiveDate}.json`, 'utf8'));
+  assert.equal(previous.sessionDate, draft.previousArchiveDate);
+  assert.ok(previous.sessionDate < draft.sessionDate);
+}
+// A draft may be partially populated before its final capture. Validate provenance
+// for values that are present instead of assuming that every draft stays blank.
+assert.ok(draft.marketContext.every(row => row.value === null || (row.asOf && row.source && row.retrievedAt)));
+assert.ok(draft.treasuryYields.every(row => row.value === null || (row.asOf && row.source && row.retrievedAt)));
+assert.ok(draft.indexQuotes.every(row => row.value === null || (row.asOf && row.source && row.retrievedAt)));
+assert.ok(draft.keyLevels.every(row => row.high === null || (row.low !== null && row.asOf && row.highTime && row.lowTime && row.source && row.retrievedAt)));
 assert.deepEqual(Object.keys(draft.briefing).sort(), ['bonds', 'earnings', 'indices', 'macro', 'news']);
-assert.equal(draft.briefing.indices.length, 1);
-assert.equal(draft.briefing.indices[0].title, 'Equity Commentary');
-assert.equal(draft.briefing.indices[0].source, 'Desk commentary');
-assert.equal(draft.briefing.bonds.length, 1);
-assert.equal(draft.briefing.bonds[0].title, 'Bond Commentary');
-assert.equal(draft.briefing.bonds[0].source, 'Desk commentary');
-assert.equal(draft.briefing.macro.length, 4);
-assert.ok(draft.briefing.macro.every(note => note.sourceKey && note.asOf === '2026-10-08'));
 const normalizedMacro = normalizeMacroCalendar(draft.briefing.macro, draft.sessionDate);
-assert.equal(normalizedMacro.length, 4);
 assert.deepEqual(normalizedMacro.map(row => row.sortKey), [...normalizedMacro.map(row => row.sortKey)].sort((a, b) => a - b));
-assert.ok(normalizedMacro.every(row => row.sortKey % 86400000 < 16 * 60 * 60 * 1000));
+assert.ok(normalizedMacro.every(row => row.time === '—' || row.sortKey % 86400000 < 16 * 60 * 60 * 1000));
+const agendaRows = normalizeMacroCalendar([
+  { title: 'Wednesday, October 14, 2026', body: '10:00 a.m. ET — Later event\n8:30 a.m. ET — Earlier event', source: 'Calendar', url: 'https://example.com/calendar' },
+  { title: 'Thursday, October 15, 2026', body: '8:30 a.m. ET — Next day event', source: 'Calendar', url: 'https://example.com/calendar' },
+], '2026-10-13');
+const agendaGroups = groupMacroCalendarRows(agendaRows, '2026-10-13');
+assert.deepEqual(agendaGroups.map(group => [group.heading, group.relative]), [['Wednesday, Oct 14', 'Tomorrow'], ['Thursday, Oct 15', null]]);
+assert.deepEqual(agendaGroups[0].rows.map(row => row.event), ['Earlier event', 'Later event']);
 const withAfterClose = normalizeMacroCalendar([...draft.briefing.macro, {
-  title: 'Thursday, October 8', body: '7:00 p.m. ET — FED · after-close event',
+  title: 'Thursday, October 15', body: '7:00 p.m. ET — FED · after-close event',
   source: 'Desk calendar', url: 'https://example.com/calendar',
 }], draft.sessionDate);
 assert.equal(withAfterClose.length, normalizedMacro.length);
-const macroDayOrder = new Map([
-  ['Thursday, October 8', 0], ['Friday, October 9', 1],
-]);
-let previousMacroMinute = -1;
 for (const note of draft.briefing.macro) {
   assert.ok(note.url.startsWith('https://'));
-  const time = note.body.match(/^(\d{1,2}):(\d{2})\s*([ap])\.m\. ET — /i);
-  assert.ok(time, `expected timestamped calendar event: ${note.body}`);
-  assert.ok(macroDayOrder.has(note.title));
-  const hour = Number(time[1]) % 12 + (time[3].toLowerCase() === 'p' ? 12 : 0);
-  const minute = macroDayOrder.get(note.title) * 1440 + hour * 60 + Number(time[2]);
-  assert.ok(minute >= previousMacroMinute);
-  assert.ok(hour * 60 + Number(time[2]) < 16 * 60);
-  previousMacroMinute = minute;
   assert.ok((note.relatedSources ?? []).every(source => source.url.startsWith('https://')));
 }
-assert.equal(draft.briefing.macro.filter(note => note.body.includes('FED ·')).length, 1);
-assert.ok(draft.briefing.macro.some(note => note.body.includes('4-week and 8-week bills')));
-assert.ok(draft.briefing.macro.some(note => note.body.includes('reopened 30-year bonds')));
-assert.ok(draft.briefing.macro.some(note => note.body.includes('University of Michigan consumer sentiment')));
-assert.ok(!draft.briefing.macro.some(note => /Waller|jobless claims/i.test(note.body)));
+assert.ok(!normalizedMacro.some(row => /after-close event/i.test(row.event)));
+const oct8Archive = JSON.parse(fs.readFileSync('public/data/snapshot-2026-10-08.json', 'utf8'));
+assert.equal(readSnapshot(oct8Archive).status, 'archived');
+assert.equal(oct8Archive.sessionDate, '2026-10-08');
+assert.equal(oct8Archive.marketContext.find(row => row.id === 'SPY').value, 774.98);
 const oct7Archive = JSON.parse(fs.readFileSync('public/data/snapshot-2026-10-07.json', 'utf8'));
 assert.equal(readSnapshot(oct7Archive).status, 'archived');
 assert.equal(oct7Archive.sessionDate, '2026-10-07');
@@ -166,3 +132,4 @@ assert.equal(readSnapshot(changed(s => { s.briefing.indices.push({ title: 'My no
 assert.throws(() => readSnapshot(changed(s => { s.briefing.indices.push({ title: 'External claim', body: 'News', source: 'Other', url: '' }); })), /HTTPS/);
 
 console.log('PASS: published packets, partial scanner coverage, negative changes, quote and key-level validation, archive link, and user-authored commentary.');
+
