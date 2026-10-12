@@ -137,3 +137,16 @@ Tests/build and rankings/footer markup comparisons cover tab, mode, row and
 search states. Drawer open/close and filter interactions are verified in preview.
 The main page's presentation now composes feature sections; a visual primitive
 reference page is a useful next step rather than adding further generic wrappers.
+
+## Visual reference
+
+`/design-reference.html?dev=1` renders the actual shared primitives with clearly
+labeled synthetic samples. It covers commentary and editorial text, empty states,
+price/percent/yield/basis-point roles, paired layout, key-level timestamps, card
+roles, navigation, Sources disclosure and the resilience scale. ThemeToggle and
+DesignLabs are the same controls as the dashboard, including saved preferences.
+
+No market packet is requested and no fixture is written into public/data. The
+page is noindex and absent from dashboard navigation. The dev parameter is an
+opt-in display convention, not authentication. Use this page to review shared
+style changes together before modifying individual sections.
