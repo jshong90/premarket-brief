@@ -121,3 +121,19 @@ they retain the scanner's distinct precision and 24-hour timestamp conventions.
 Before/after markup matches in 24 header/overview/scale combinations covering
 compact state, archive navigation and imported/current modes. Full tests/build
 pass. Scanner rankings, drawers and status footer remain the next composition step.
+
+## Increment 7: rankings, drawers and footer
+
+ScannerRankings composes the existing table, tabs, filters and empty states.
+ScannerInfoDrawer owns information/connections presentation; InstrumentDrawer
+owns the selected-stock presentation. SnapshotStatus renders observation/cutoff
+status. ScannerRow and SortKey are shared types, not a second data store.
+
+DashboardPage retains all snapshot, filter, sorting, selection, tool-registration
+and motion state. Callbacks preserve the existing actions. Metric calculations
+remain upstream of presentation, and public scanner wording is unchanged.
+
+Tests/build and rankings/footer markup comparisons cover tab, mode, row and
+search states. Drawer open/close and filter interactions are verified in preview.
+The main page's presentation now composes feature sections; a visual primitive
+reference page is a useful next step rather than adding further generic wrappers.
