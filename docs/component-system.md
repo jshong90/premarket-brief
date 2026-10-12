@@ -175,3 +175,5 @@ observers coordinate the layout once. Design Lab modifies the same shared motion
 variables; it is a development control, not a second production animation system.
 
 Browser audit passed synthetic stock-detail open/Escape close, search, company/Recovery sorting, sector filter and benchmark override. Responsive frame widths 320/375/390/768/1200 showed no document overflow; mobile/tablet layouts stacked overnight columns and desktop retained two columns.
+
+The legacy stylesheet is now an import manifest. See [CSS ownership](css-ownership.md) for active rule owners, removed fallbacks and cross-file safeguards.

@@ -115,7 +115,7 @@ Validation covers TypeScript, snapshot structure, source metadata, date handling
 
 ## Design reference
 
-The combined dashboard uses the theme blocks and semantic text, font, and spacing roles in `src/globals.css`. Change the existing role rather than adding another selector patch. Equities, Bonds, and Energy render through the same commentary component. The [styling audit](docs/styling-audit.md) documents the cleanup and the checks that prevent duplicate declarations, hard-coded text/fonts, and non-accessibility `!important` rules. `src/features/connections/MassiveConnectionTest.css` uses the shared surface and status tokens.
+The combined dashboard loads owned stylesheets through the `src/globals.css` import manifest. Theme, text, font and geometry tokens live in `src/styles/foundations.css`; component styles live with their features. See [CSS ownership](docs/css-ownership.md). Change the existing role rather than adding another selector patch. Equities, Bonds, and Energy render through the same commentary component. The [styling audit](docs/styling-audit.md) documents the cleanup and the checks that prevent duplicate declarations, hard-coded text/fonts, and non-accessibility `!important` rules. `src/features/connections/MassiveConnectionTest.css` uses the shared surface and status tokens.
 
 ### Theme colors
 
@@ -157,7 +157,7 @@ These fills appear in the resilience scale, stock capture tracks, and sector bar
 
 ### Component color exceptions
 
-These are explicit component rules in `src/globals.css`; changing only a base token will not necessarily change them.
+These are explicit component rules in the owned feature stylesheets; changing only a base token will not necessarily change them.
 
 | Element | Light | Dark |
 | --- | --- | --- |
