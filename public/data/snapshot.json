@@ -18,9 +18,11 @@
     "TradingView ES/NQ benchmark ranges have 920/920 completed overnight one-minute bars. YM and RTY Key Levels have partial observed coverage (905/920 and 911/920 slots); their levels are explicitly partial.",
     "Robinhood public 100 most popular list was screened with its October 13 fundamentals: 46 U.S. common stocks with market cap at least $50B were discovered after excluding ETFs and identified foreign listings. This is incomplete discovery, not the full U.S. stock universe. Market-cap observations were retrieved after close.",
     "Individual-stock ranges and last prices use Public.com as the approved equity fallback: all 320 premarket minute slots were supplied per stock. Only positive-volume trade bars contribute prices and session volume; flat zero-volume carry bars contribute no observations. Official October 12 closes and company metadata are from Robinhood. Provider delays are unknown; provider feeds can differ.",
-    "Robinhood Treasury yield symbol/index discovery returned no matches; Public.com returned UNKNOWN for all four Treasury yield symbols. Treasury quotes remain null rather than using another source.",
     "Tuesday's events and earnings remain listed despite having passed. Macro/Fed entries use Trading Economics; bill auction dates use U.S. Treasury's tentative schedule and times use Trading Economics. Earnings use Earnings Whispers with dated StockAnalysis evidence and the strict above-$25B filter.",
-    "The sector-strength panel is retired. Equity, bond, energy commentary and overnight news await user-supplied notes."
+    "The sector-strength panel is retired. Equity, bond, energy commentary and overnight news await user-supplied notes.",
+    "Authorized additional fallbacks were tried in order: Yahoo Finance returned HTTP 429 for quote pages and minute-history requests; Trading Economics supplied timestamped pre-cutoff Treasury chart observations.",
+    "Trading Economics Treasury levels: 5Y and 10Y at 09:19 ET, 30Y at 09:18 ET, and 2Y at the start of its latest eligible 09:10 ET five-minute bar. References use the last observed October 9 bars because Treasury cash markets were closed October 12. Source resolution and actual timestamps are disclosed.",
+    "Yahoo did not supply exact ES/NQ futures bars or quotes. Trading Economics public US500/US100 prices are derivative/index proxies and were not substituted into ES/NQ fields."
   ],
   "stocks": [
     {
@@ -1439,18 +1441,18 @@
       "label": "10Y",
       "name": "U.S. 10-year Treasury yield",
       "kind": "yield",
-      "value": null,
-      "previousClose": null,
-      "previousCloseAt": null,
-      "change": null,
+      "value": 5.215,
+      "previousClose": 5.237,
+      "previousCloseAt": "2026-10-09T20:59:00Z",
+      "change": -2.200000000000024,
       "changeUnit": "bp",
-      "source": "Not captured",
-      "asOf": null,
-      "retrievedAt": null,
-      "issue": "No approved October 13 observation available.",
-      "previousCloseSource": "Not captured",
-      "previousCloseUrl": null,
-      "url": null
+      "source": "Trading Economics · USGG10YR:IND public intraday 1-minute chart, UTC",
+      "asOf": "2026-10-13T13:19:00Z",
+      "retrievedAt": "2026-10-13T20:50:34.148716Z",
+      "issue": "09:19 ET premarket yield observation. Previous reference is Friday October 9; Monday was a Treasury cash-market holiday. Provider delay unknown.",
+      "previousCloseSource": "Trading Economics · last observed Friday October 9 16:59 ET 1-minute close, not official settlement",
+      "previousCloseUrl": "https://tradingeconomics.com/united-states/government-bond-yield",
+      "url": "https://tradingeconomics.com/united-states/government-bond-yield"
     }
   ],
   "keyLevels": [
@@ -1464,7 +1466,7 @@
       "asOf": null,
       "retrievedAt": "2026-10-13T20:31:17.766Z",
       "source": "OpenMarket MCP · workspace Ebzd9R2U",
-      "issue": "Connected workspace Ebzd9R2U; CME quote/bar read blocked by exchange_license. No prices or levels released.",
+      "issue": "OpenMarket CME read blocked by exchange_license. Yahoo Finance quote/chart requests returned HTTP 429. Trading Economics US500/US100 proxy readings do not verify the exact ES/NQ contracts or overnight window.",
       "url": "https://openmarket.xyz/chart/Ebzd9R2U"
     },
     {
@@ -1477,7 +1479,7 @@
       "asOf": null,
       "retrievedAt": "2026-10-13T20:31:17.766Z",
       "source": "OpenMarket MCP · workspace Ebzd9R2U",
-      "issue": "Connected workspace Ebzd9R2U; CME quote/bar read blocked by exchange_license. No prices or levels released.",
+      "issue": "OpenMarket CME read blocked by exchange_license. Yahoo Finance quote/chart requests returned HTTP 429. Trading Economics US500/US100 proxy readings do not verify the exact ES/NQ contracts or overnight window.",
       "url": "https://openmarket.xyz/chart/Ebzd9R2U"
     },
     {
@@ -1517,7 +1519,7 @@
       "retrievedAt": "2026-10-13T20:31:17.766Z",
       "source": "OpenMarket MCP · workspace Ebzd9R2U",
       "url": "https://openmarket.xyz/chart/Ebzd9R2U",
-      "issue": "Connected workspace Ebzd9R2U; CME quote/bar read blocked by exchange_license. No prices or levels released."
+      "issue": "OpenMarket CME read blocked by exchange_license. Yahoo Finance quote/chart requests returned HTTP 429. Trading Economics US500/US100 proxy readings do not verify the exact ES/NQ contracts or overnight window."
     },
     {
       "id": "ES",
@@ -1530,64 +1532,64 @@
       "retrievedAt": "2026-10-13T20:31:17.766Z",
       "source": "OpenMarket MCP · workspace Ebzd9R2U",
       "url": "https://openmarket.xyz/chart/Ebzd9R2U",
-      "issue": "Connected workspace Ebzd9R2U; CME quote/bar read blocked by exchange_license. No prices or levels released."
+      "issue": "OpenMarket CME read blocked by exchange_license. Yahoo Finance quote/chart requests returned HTTP 429. Trading Economics US500/US100 proxy readings do not verify the exact ES/NQ contracts or overnight window."
     }
   ],
   "treasuryYields": [
     {
       "tenor": "2Y",
-      "value": null,
-      "previousClose": null,
-      "asOf": null,
-      "previousCloseAt": null,
-      "retrievedAt": null,
-      "source": "Not captured",
-      "url": "https://robinhood.com/",
-      "previousCloseSource": "Not captured",
-      "previousCloseUrl": null,
-      "issue": "Robinhood has no yield quote tool; Public did not recognize this Treasury yield symbol. No October 13 value captured."
+      "value": 4.81,
+      "previousClose": 4.797,
+      "asOf": "2026-10-13T13:10:00Z",
+      "previousCloseAt": "2026-10-09T20:55:00Z",
+      "retrievedAt": "2026-10-13T20:51:24.351060Z",
+      "source": "Trading Economics · USGG2YR:IND public intraday chart (5m, UTC)",
+      "url": "https://tradingeconomics.com/united-states/2-year-note-yield",
+      "previousCloseSource": "Trading Economics · last observed Friday October 9 5m close; not official Treasury settlement",
+      "previousCloseUrl": "https://tradingeconomics.com/united-states/2-year-note-yield",
+      "issue": "Yahoo Finance returned HTTP 429. Trading Economics supplied 5m timestamped observations; latest completed pre-cutoff bar starts 2026-10-13T13:10:00Z. Prior reference is the last observed Friday October 9 bar; Treasury cash market was closed Monday October 12. Provider delay unknown. Minute coverage is sparse; this is a yield level, not a range."
     },
     {
       "tenor": "5Y",
-      "value": null,
-      "previousClose": null,
-      "asOf": null,
-      "previousCloseAt": null,
-      "retrievedAt": null,
-      "source": "Not captured",
-      "url": "https://robinhood.com/",
-      "previousCloseSource": "Not captured",
-      "previousCloseUrl": null,
-      "issue": "Robinhood has no yield quote tool; Public did not recognize this Treasury yield symbol. No October 13 value captured."
+      "value": 5.012,
+      "previousClose": 5.026,
+      "asOf": "2026-10-13T13:19:00Z",
+      "previousCloseAt": "2026-10-09T20:59:00Z",
+      "retrievedAt": "2026-10-13T20:50:35.787813Z",
+      "source": "Trading Economics · USGG5YR:IND public intraday chart (1m, UTC)",
+      "url": "https://tradingeconomics.com/united-states/5-year-note-yield",
+      "previousCloseSource": "Trading Economics · last observed Friday October 9 1m close; not official Treasury settlement",
+      "previousCloseUrl": "https://tradingeconomics.com/united-states/5-year-note-yield",
+      "issue": "Yahoo Finance returned HTTP 429. Trading Economics supplied 1m timestamped observations; latest completed pre-cutoff bar starts 2026-10-13T13:19:00Z. Prior reference is the last observed Friday October 9 bar; Treasury cash market was closed Monday October 12. Provider delay unknown. Minute coverage is sparse; this is a yield level, not a range."
     },
     {
       "tenor": "10Y",
-      "value": null,
-      "previousClose": null,
-      "asOf": null,
-      "previousCloseAt": null,
-      "retrievedAt": null,
-      "source": "Not captured",
-      "url": "https://robinhood.com/",
-      "previousCloseSource": "Not captured",
-      "previousCloseUrl": null,
-      "issue": "Robinhood has no yield quote tool; Public did not recognize this Treasury yield symbol. No October 13 value captured."
+      "value": 5.215,
+      "previousClose": 5.237,
+      "asOf": "2026-10-13T13:19:00Z",
+      "previousCloseAt": "2026-10-09T20:59:00Z",
+      "retrievedAt": "2026-10-13T20:50:34.148716Z",
+      "source": "Trading Economics · USGG10YR:IND public intraday chart (1m, UTC)",
+      "url": "https://tradingeconomics.com/united-states/government-bond-yield",
+      "previousCloseSource": "Trading Economics · last observed Friday October 9 1m close; not official Treasury settlement",
+      "previousCloseUrl": "https://tradingeconomics.com/united-states/government-bond-yield",
+      "issue": "Yahoo Finance returned HTTP 429. Trading Economics supplied 1m timestamped observations; latest completed pre-cutoff bar starts 2026-10-13T13:19:00Z. Prior reference is the last observed Friday October 9 bar; Treasury cash market was closed Monday October 12. Provider delay unknown. Minute coverage is sparse; this is a yield level, not a range."
     },
     {
       "tenor": "30Y",
-      "value": null,
-      "previousClose": null,
-      "asOf": null,
-      "previousCloseAt": null,
-      "retrievedAt": null,
-      "source": "Not captured",
-      "url": "https://robinhood.com/",
-      "previousCloseSource": "Not captured",
-      "previousCloseUrl": null,
-      "issue": "Robinhood has no yield quote tool; Public did not recognize this Treasury yield symbol. No October 13 value captured."
+      "value": 5.565,
+      "previousClose": 5.602,
+      "asOf": "2026-10-13T13:18:00Z",
+      "previousCloseAt": "2026-10-09T20:59:00Z",
+      "retrievedAt": "2026-10-13T20:50:34.852994Z",
+      "source": "Trading Economics · USGG30Y:IND public intraday chart (1m, UTC)",
+      "url": "https://tradingeconomics.com/united-states/30-year-bond-yield",
+      "previousCloseSource": "Trading Economics · last observed Friday October 9 1m close; not official Treasury settlement",
+      "previousCloseUrl": "https://tradingeconomics.com/united-states/30-year-bond-yield",
+      "issue": "Yahoo Finance returned HTTP 429. Trading Economics supplied 1m timestamped observations; latest completed pre-cutoff bar starts 2026-10-13T13:18:00Z. Prior reference is the last observed Friday October 9 bar; Treasury cash market was closed Monday October 12. Provider delay unknown. Minute coverage is sparse; this is a yield level, not a range."
     }
   ],
-  "quotesRefreshedAt": "2026-10-13T20:41:18.261Z",
+  "quotesRefreshedAt": "2026-10-13T20:52:50.516Z",
   "sectorQuotesRefreshedAt": null,
   "cutoffAt": "2026-10-13T13:20:00.000Z"
 }

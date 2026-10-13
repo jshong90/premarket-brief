@@ -5,6 +5,8 @@ export const providers = {
   public: { name: 'Public.com MCP', url: 'https://public.com/' },
   tradingview: { name: 'TradingView Official MCP', url: 'https://www.tradingview.com/' },
   openmarket: { name: 'OpenMarket MCP', url: 'https://openmarket.xyz/' },
+  yahoo: { name: 'Yahoo Finance', url: 'https://finance.yahoo.com/' },
+  tradingeconomics: { name: 'Trading Economics', url: 'https://tradingeconomics.com/' },
 };
 
 // These routes are the collection adapter's supported quote/bar requests.
@@ -21,13 +23,17 @@ export const instruments = {
   QQQ: { name: 'Invesco QQQ Trust', kind: 'equity', unit: 'price', quote: quoteOrder, symbols: { robinhood: 'QQQ', public: 'QQQ' } },
   VIX: { name: 'Cboe Volatility Index', kind: 'volatility', unit: 'price', quote: ['tradingview'], symbols: { tradingview: 'CBOE:VIX' } },
   ...Object.fromEntries(['2Y', '5Y', '10Y', '30Y'].map(tenor => [`US${tenor}`, {
-    name: `U.S. ${tenor} Treasury yield`, kind: 'yield', unit: 'percent', quote: quoteOrder,
-    symbols: { robinhood: `US${tenor}`, public: `US${tenor}` },
+    name: `U.S. ${tenor} Treasury yield`, kind: 'yield', unit: 'percent',
+    quote: tenor === '2Y' ? [...quoteOrder, 'tradingeconomics'] : [...quoteOrder, 'yahoo', 'tradingeconomics'],
+    symbols: { robinhood: `US${tenor}`, public: `US${tenor}`,
+      ...(tenor === '2Y' ? {} : { yahoo: ({ '5Y': '^FVX', '10Y': '^TNX', '30Y': '^TYX' })[tenor] }),
+      tradingeconomics: ({ '2Y': 'USGG2YR:IND', '5Y': 'USGG5YR:IND', '10Y': 'USGG10YR:IND', '30Y': 'USGG30Y:IND' })[tenor],
+    },
   }])),
   ...Object.fromEntries(['ES', 'NQ'].map(id => [id, {
-    name: `${id} futures`, kind: 'futures', unit: 'price', quote: ['openmarket'], bars: ['openmarket'],
+    name: `${id} futures`, kind: 'futures', unit: 'price', quote: ['openmarket', 'yahoo'], bars: ['openmarket', 'yahoo'],
     workspaceId: 'Ebzd9R2U', chartIndex: id === 'NQ' ? 0 : 1,
-    symbols: { openmarket: `CME:${id === 'NQ' ? 'NNQZ6' : 'ESZ6'}` },
+    symbols: { openmarket: `CME:${id === 'NQ' ? 'NNQZ6' : 'ESZ6'}`, yahoo: `${id}=F` },
   }])),
   ...Object.fromEntries(['YM', 'RTY'].map(id => [id, {
     name: `${id} futures`, kind: 'futures', unit: 'price', quote: quoteOrder, bars: ['tradingview'],
@@ -46,16 +52,16 @@ export const marketDataSources = [
     detail: 'Public.com is the quote fallback. Scanner ranges require actual timestamped OHLCV bars; quote-only data stays unranked.',
   },
   {
-    field: 'U.S. Treasury yields (2Y, 5Y, 10Y, 30Y)', primary: [providers.robinhood], backup: [providers.public],
-    detail: 'Use the observation timestamp returned by the source; stale or unsupported readings remain blank.',
+    field: 'U.S. Treasury yields (2Y, 5Y, 10Y, 30Y)', primary: [providers.robinhood], backup: [providers.public, providers.yahoo, providers.tradingeconomics],
+    detail: 'Try Yahoo Finance, then Trading Economics when prior providers fail. Yahoo has no configured 2Y yield symbol. Use exact pre-cutoff timestamped observations; Trading Economics 2Y uses 5-minute bars, other maturities use 1-minute bars. Disclose resolution and compare against the last actual Treasury session, including holidays.',
   },
   {
     field: 'VIX', primary: [providers.tradingview], backup: [],
     detail: 'TradingView Official MCP · CBOE:VIX. Retain the observation time.',
   },
   {
-    field: 'ES/NQ quotes and Key Levels', primary: [providers.openmarket], backup: [],
-    detail: 'Use OpenMarket workspace Ebzd9R2U (NQ pane 0, ES pane 1). Confirm the current contracts before collection. CME exchange-license blocks leave quotes and levels blank; do not substitute TradingView scanner benchmarks into these displays.',
+    field: 'ES/NQ quotes and Key Levels', primary: [providers.openmarket], backup: [providers.yahoo],
+    detail: 'Use OpenMarket workspace Ebzd9R2U (NQ pane 0, ES pane 1). Confirm the current contracts before collection. If CME reads are blocked, try Yahoo ES=F/NQ=F and verify the actual contract and premarket window. Trading Economics is checked next but its public US500/US100 proxies cannot substitute for ES/NQ. Leave unsupported fields blank; keep TradingView scanner benchmarks separate.',
   },
   {
     field: 'Timestamped ES/NQ scanner benchmark ranges', primary: [providers.tradingview], backup: [],
