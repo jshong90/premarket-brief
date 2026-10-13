@@ -24,7 +24,12 @@ export const instruments = {
     name: `U.S. ${tenor} Treasury yield`, kind: 'yield', unit: 'percent', quote: quoteOrder,
     symbols: { robinhood: `US${tenor}`, public: `US${tenor}` },
   }])),
-  ...Object.fromEntries(['ES', 'NQ', 'YM', 'RTY'].map(id => [id, {
+  ...Object.fromEntries(['ES', 'NQ'].map(id => [id, {
+    name: `${id} futures`, kind: 'futures', unit: 'price', quote: ['openmarket'], bars: ['openmarket'],
+    workspaceId: 'Ebzd9R2U', chartIndex: id === 'NQ' ? 0 : 1,
+    symbols: { openmarket: `CME:${id === 'NQ' ? 'NNQZ6' : 'ESZ6'}` },
+  }])),
+  ...Object.fromEntries(['YM', 'RTY'].map(id => [id, {
     name: `${id} futures`, kind: 'futures', unit: 'price', quote: quoteOrder, bars: ['tradingview'],
     symbols: { robinhood: id, public: id, tradingview: `${id === 'YM' ? 'CBOT_MINI' : 'CME_MINI'}:${id}1!` },
   }])),
@@ -50,7 +55,7 @@ export const marketDataSources = [
   },
   {
     field: 'ES/NQ quotes and Key Levels', primary: [providers.openmarket], backup: [],
-    detail: 'Use the configured OpenMarket charts. Record the actual symbol and observation times; disclose any CME-related proxy and leave levels blank when the chart does not prove the requested window.',
+    detail: 'Use OpenMarket workspace Ebzd9R2U (NQ pane 0, ES pane 1). Confirm the current contracts before collection. CME exchange-license blocks leave quotes and levels blank; do not substitute TradingView scanner benchmarks into these displays.',
   },
   {
     field: 'Timestamped ES/NQ scanner benchmark ranges', primary: [providers.tradingview], backup: [],

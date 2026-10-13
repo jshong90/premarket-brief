@@ -1,50 +1,71 @@
 {
   "sessionDate": "2026-10-13",
-  "fetchedAt": "2026-10-13T20:20:25.607Z",
+  "fetchedAt": "2026-10-13T20:31:17.766Z",
   "status": "draft",
   "previousArchiveDate": "2026-10-12",
   "universeCount": 0,
   "universeComplete": false,
   "connected": {
-    "tradingview": false,
+    "tradingview": true,
     "massive": false
   },
   "messages": [
     "October 13 draft prepared after the market close from approved sources; premarket levels are historical one-minute observations ending before 09:20 ET, not live quotes or a contemporaneous scanner capture.",
     "Robinhood SPY and QQQ observed premarket bars have incomplete minute coverage; interpolated and zero-volume minutes were excluded. Last actual bar was 09:19 ET for both; no intraday ranges or resilience rankings are claimed.",
     "TradingView VIX has partial premarket minute coverage and a last observed 09:18 ET bar. The comparison value is the last observed October 12 bar, not an official settlement; provider delay is unknown.",
-    "Approved OpenMarket ES/NQ chart observations could not be read from this connection. Futures quotes, key levels and scanner benchmark ranges remain null.",
-    "Robinhood lacks Treasury yield quote capability in this connection and Public.com did not recognize the tested yield symbols; yield values remain null. SPX CFD proxy was unavailable.",
     "No $50B+ common-stock universe was discovered. Individual equity and sector scanner ranges are unranked and absent. Desk commentary and overnight news were not supplied for October 13.",
-    "Trading Economics scheduled U.S. macro and Fed events and Earnings Whispers earnings for the remainder of this week are cited. Treasury auctions are omitted because a current official schedule could not be confirmed.",
-    "No user-authored October 13 equity, bond or energy commentary was supplied; those sections intentionally have no notes."
+    "No user-authored October 13 equity, bond or energy commentary was supplied; those sections intentionally have no notes.",
+    "OpenMarket workspace Ebzd9R2U is connected. Both CME NNQZ6 and ESZ6 reads are blocked by exchange_license; ES/NQ quote and Key Levels fields remain blank.",
+    "TradingView supplied complete 920/920 overnight one-minute bars for ES/NQ scanner benchmark references. No equity universe was discovered and no resilience rankings are published.",
+    "Tuesday October 13 macro/Fed events and qualifying earnings are retained as the day's calendar despite having passed. Monthly Budget Statement has no verified release time and is shown without one. Treasury bill auction dates are confirmed against the official tentative schedule; displayed times are from Trading Economics.",
+    "Robinhood/Public yield limitations remain unchanged; no unsupported yield has been substituted."
   ],
   "stocks": [],
   "sectors": [],
   "benchmarks": [
     {
       "id": "ES",
-      "high": null,
-      "low": null,
-      "drawdown": null,
-      "source": "Not captured",
-      "asOf": null,
-      "issue": "Approved ES/NQ source did not return timestamped premarket bars for October 13."
+      "high": 7864,
+      "low": 7836,
+      "drawdown": 0.3560528992878953,
+      "source": "TradingView Official MCP · CME_MINI:ES1! · scanner benchmark only",
+      "asOf": "2026-10-13T13:19:00.000Z",
+      "issue": "920/920 completed overnight minute bars; provider delay unknown. Retrospective benchmark reference only; stock scan is unavailable.",
+      "highTime": "2026-10-13T10:13:00.000Z",
+      "lowTime": "2026-10-13T02:43:00.000Z"
     },
     {
       "id": "NQ",
-      "high": null,
-      "low": null,
-      "drawdown": null,
-      "source": "Not captured",
-      "asOf": null,
-      "issue": "Approved ES/NQ source did not return timestamped premarket bars for October 13."
+      "high": 30906,
+      "low": 30604.75,
+      "drawdown": 0.9747298259237702,
+      "source": "TradingView Official MCP · CME_MINI:NQ1! · scanner benchmark only",
+      "asOf": "2026-10-13T13:19:00.000Z",
+      "issue": "920/920 completed overnight minute bars; provider delay unknown. Retrospective benchmark reference only; stock scan is unavailable.",
+      "highTime": "2026-10-12T22:22:00.000Z",
+      "lowTime": "2026-10-13T02:46:00.000Z"
     }
   ],
   "briefing": {
     "indices": [],
     "bonds": [],
     "macro": [
+      {
+        "title": "Tuesday, October 13",
+        "body": "3:45 a.m. ET — FED · Governor Christopher J. Waller speaks\n6:00 a.m. ET — ECONOMIC RELEASE · NFIB Small Business Optimism Index (September)\n8:15 a.m. ET — ECONOMIC RELEASE · ADP Weekly Employment Change\n10:00 a.m. ET — ECONOMIC RELEASE · Existing Home Sales (September)\n1:00 p.m. ET — FED · Richmond Fed President Thomas Barkin speaks",
+        "source": "Trading Economics · U.S. calendar",
+        "url": "https://tradingeconomics.com/united-states/calendar",
+        "sourceKey": "economicCalendar",
+        "asOf": "2026-10-13T20:31:17.766Z"
+      },
+      {
+        "title": "Tuesday, October 13",
+        "body": "ECONOMIC RELEASE · Monthly Budget Statement (September); release time not provided by Trading Economics.",
+        "source": "Trading Economics · U.S. calendar",
+        "url": "https://tradingeconomics.com/united-states/calendar",
+        "sourceKey": "economicCalendar",
+        "asOf": "2026-10-13T20:31:17.766Z"
+      },
       {
         "title": "Wednesday, October 14",
         "body": "5:40 a.m. ET — FED · Governor Michelle W. Bowman speaks\n8:30 a.m. ET — ECONOMIC RELEASE · Consumer Price Index and core CPI (September)\n1:30 p.m. ET — FED · Richmond Fed President Thomas Barkin speaks\n2:00 p.m. ET — FED · Beige Book",
@@ -102,9 +123,110 @@
           }
         ],
         "asOf": "2026-10-13"
+      },
+      {
+        "source": "U.S. Treasury · tentative auction schedule; Trading Economics · auction times",
+        "url": "https://home.treasury.gov/system/files/221/TentativeAuctionScheduleQ32026.pdf",
+        "relatedSources": [
+          {
+            "source": "Trading Economics · U.S. calendar",
+            "url": "https://tradingeconomics.com/united-states/calendar"
+          }
+        ],
+        "asOf": "2026-10-13T20:31:17.766Z",
+        "title": "Tuesday, October 13",
+        "body": "11:30 a.m. ET — TREASURY AUCTION · 13-week and 26-week bills\n1:00 p.m. ET — TREASURY AUCTION · 6-week bill"
+      },
+      {
+        "source": "U.S. Treasury · tentative auction schedule; Trading Economics · auction times",
+        "url": "https://home.treasury.gov/system/files/221/TentativeAuctionScheduleQ32026.pdf",
+        "relatedSources": [
+          {
+            "source": "Trading Economics · U.S. calendar",
+            "url": "https://tradingeconomics.com/united-states/calendar"
+          }
+        ],
+        "asOf": "2026-10-13T20:31:17.766Z",
+        "title": "Wednesday, October 14",
+        "body": "11:30 a.m. ET — TREASURY AUCTION · 17-week bill"
+      },
+      {
+        "source": "U.S. Treasury · tentative auction schedule; Trading Economics · auction times",
+        "url": "https://home.treasury.gov/system/files/221/TentativeAuctionScheduleQ32026.pdf",
+        "relatedSources": [
+          {
+            "source": "Trading Economics · U.S. calendar",
+            "url": "https://tradingeconomics.com/united-states/calendar"
+          }
+        ],
+        "asOf": "2026-10-13T20:31:17.766Z",
+        "title": "Thursday, October 15",
+        "body": "11:30 a.m. ET — TREASURY AUCTION · 4-week and 8-week bills"
       }
     ],
     "earnings": [
+      {
+        "title": "Tuesday, October 13",
+        "body": "",
+        "source": "Earnings Whispers · confirmed earnings calendar",
+        "url": "https://www.earningswhispers.com/calendar/20261013",
+        "asOf": "2026-10-13T20:31:17.766Z",
+        "sessions": [
+          {
+            "period": "Before Open",
+            "companies": [
+              {
+                "ticker": "UNH",
+                "name": "UnitedHealth Group",
+                "marketCap": 340460000000,
+                "marketCapAsOf": "2026-10-09",
+                "marketCapSource": "StockAnalysis · market capitalization",
+                "marketCapUrl": "https://stockanalysis.com/stocks/unh/market-cap/"
+              },
+              {
+                "ticker": "JPM",
+                "name": "JPMorgan Chase",
+                "marketCap": 885150000000,
+                "marketCapAsOf": "2026-10-09",
+                "marketCapSource": "StockAnalysis · market capitalization",
+                "marketCapUrl": "https://stockanalysis.com/stocks/jpm/market-cap/"
+              },
+              {
+                "ticker": "GS",
+                "name": "Goldman Sachs",
+                "marketCap": 271070000000,
+                "marketCapAsOf": "2026-10-09",
+                "marketCapSource": "StockAnalysis · market capitalization",
+                "marketCapUrl": "https://stockanalysis.com/stocks/gs/market-cap/"
+              },
+              {
+                "ticker": "WFC",
+                "name": "Wells Fargo",
+                "marketCap": 252660000000,
+                "marketCapAsOf": "2026-10-09",
+                "marketCapSource": "StockAnalysis · market capitalization",
+                "marketCapUrl": "https://stockanalysis.com/stocks/wfc/market-cap/"
+              },
+              {
+                "ticker": "JNJ",
+                "name": "Johnson & Johnson",
+                "marketCap": 630040000000,
+                "marketCapAsOf": "2026-10-09",
+                "marketCapSource": "StockAnalysis · market capitalization",
+                "marketCapUrl": "https://stockanalysis.com/stocks/jnj/market-cap/"
+              },
+              {
+                "ticker": "C",
+                "name": "Citigroup",
+                "marketCap": 217460000000,
+                "marketCapAsOf": "2026-10-09",
+                "marketCapSource": "StockAnalysis · market capitalization",
+                "marketCapUrl": "https://stockanalysis.com/stocks/c/market-cap/"
+              }
+            ]
+          }
+        ]
+      },
       {
         "title": "Wednesday, October 14",
         "body": "",
@@ -295,8 +417,8 @@
   "marketContext": [
     {
       "id": "SPX",
-      "label": "SPX · CFD proxy",
-      "name": "Spreadex SPX CFD proxy",
+      "label": "SPX · synthetic proxy",
+      "name": "OpenMarket HYPERLIQUID_HIP3 / xyz:SP500 proxy",
       "kind": "index",
       "value": null,
       "asOf": null,
@@ -307,7 +429,7 @@
       "retrievedAt": null,
       "source": "Not captured",
       "url": null,
-      "issue": "No approved October 13 observation available.",
+      "issue": "Approved synthetic SP500 proxy not present in workspace Ebzd9R2U. Not the cash SPX index.",
       "changeUnit": "%",
       "change": null
     },
@@ -393,9 +515,10 @@
       "highTime": null,
       "lowTime": null,
       "asOf": null,
-      "retrievedAt": null,
-      "source": "Not captured",
-      "issue": "Approved source did not return complete timestamped overnight bars for October 13."
+      "retrievedAt": "2026-10-13T20:31:17.766Z",
+      "source": "OpenMarket MCP · workspace Ebzd9R2U",
+      "issue": "Connected workspace Ebzd9R2U; CME quote/bar read blocked by exchange_license. No prices or levels released.",
+      "url": "https://openmarket.xyz/chart/Ebzd9R2U"
     },
     {
       "id": "NQ",
@@ -405,9 +528,10 @@
       "highTime": null,
       "lowTime": null,
       "asOf": null,
-      "retrievedAt": null,
-      "source": "Not captured",
-      "issue": "Approved source did not return complete timestamped overnight bars for October 13."
+      "retrievedAt": "2026-10-13T20:31:17.766Z",
+      "source": "OpenMarket MCP · workspace Ebzd9R2U",
+      "issue": "Connected workspace Ebzd9R2U; CME quote/bar read blocked by exchange_license. No prices or levels released.",
+      "url": "https://openmarket.xyz/chart/Ebzd9R2U"
     },
     {
       "id": "YM",
@@ -443,10 +567,10 @@
       "previousCloseAt": null,
       "previousCloseSource": "Not captured",
       "previousCloseUrl": null,
-      "retrievedAt": null,
-      "source": "Not captured",
-      "url": "https://openmarket.xyz/",
-      "issue": "OpenMarket ES/NQ timestamped observations unavailable for October 13."
+      "retrievedAt": "2026-10-13T20:31:17.766Z",
+      "source": "OpenMarket MCP · workspace Ebzd9R2U",
+      "url": "https://openmarket.xyz/chart/Ebzd9R2U",
+      "issue": "Connected workspace Ebzd9R2U; CME quote/bar read blocked by exchange_license. No prices or levels released."
     },
     {
       "id": "ES",
@@ -456,10 +580,10 @@
       "previousCloseAt": null,
       "previousCloseSource": "Not captured",
       "previousCloseUrl": null,
-      "retrievedAt": null,
-      "source": "Not captured",
-      "url": "https://openmarket.xyz/",
-      "issue": "OpenMarket ES/NQ timestamped observations unavailable for October 13."
+      "retrievedAt": "2026-10-13T20:31:17.766Z",
+      "source": "OpenMarket MCP · workspace Ebzd9R2U",
+      "url": "https://openmarket.xyz/chart/Ebzd9R2U",
+      "issue": "Connected workspace Ebzd9R2U; CME quote/bar read blocked by exchange_license. No prices or levels released."
     }
   ],
   "treasuryYields": [
