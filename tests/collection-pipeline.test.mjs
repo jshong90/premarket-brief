@@ -123,7 +123,7 @@ test('transient failures retry once and do not poison capability cache', async (
 test('ES range failure falls back to a quote without inventing key levels', async () => {
   const capture = await collect({ ...plan, requests: [request('ES')] }, replayAdapter([
     envelope('ES', { kind: 'bars', error: { code: 'unsupported', message: 'No bars' } }),
-    envelope('ES', { kind: 'quote', provider: 'public', symbol: 'ES' }),
+    envelope('ES', { kind: 'quote', provider: 'openmarket', symbol: request('ES').symbols.openmarket }),
   ]), { now });
   assert.equal(capture.canonical.ES.value, 100);
   assert.equal(capture.canonical.ES.high, undefined);
