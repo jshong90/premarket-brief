@@ -2,6 +2,11 @@
   "version": 1,
   "entries": [
     {
+      "sessionDate": "2026-10-12",
+      "file": "snapshot-2026-10-12.json",
+      "status": "partial"
+    },
+    {
       "sessionDate": "2026-10-08",
       "file": "snapshot-2026-10-08.json",
       "status": "archived"

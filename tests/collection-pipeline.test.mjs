@@ -29,7 +29,7 @@ function bars(id = 'ES', count) {
     t: w.futuresStart + i * 60000, h: 101 + i / 1000, l: 99, c: 100,
   })) });
 }
-async function base() { return readJson('public/data/snapshot.json'); }
+async function base() { return readJson('public/data/snapshot-2026-10-12.json'); }
 
 test('DST-aware windows and one shared futures request', () => {
   assert.equal(new Date(windows('2026-11-02').end).toISOString(), '2026-11-02T14:20:00.000Z');
