@@ -31,9 +31,9 @@ export const instruments = {
     },
   }])),
   ...Object.fromEntries(['ES', 'NQ'].map(id => [id, {
-    name: `${id} futures`, kind: 'futures', unit: 'price', quote: ['openmarket', 'yahoo', 'tradingeconomics'], bars: ['openmarket', 'yahoo', 'tradingeconomics'],
+    name: `${id} futures`, kind: 'futures', unit: 'price', quote: ['tradingview', 'openmarket', 'yahoo', 'tradingeconomics'], bars: ['tradingview', 'openmarket', 'yahoo', 'tradingeconomics'],
     workspaceId: 'Ebzd9R2U', chartIndex: id === 'NQ' ? 0 : 1,
-    symbols: { openmarket: `CME:${id === 'NQ' ? 'NNQZ6' : 'ESZ6'}`, yahoo: `${id}=F`, tradingeconomics: id === 'NQ' ? 'US100:IND' : 'SPX:IND' },
+    symbols: { tradingview: `CME_MINI:${id}1!`, openmarket: `CME:${id === 'NQ' ? 'NNQZ6' : 'ESZ6'}`, yahoo: `${id}=F`, tradingeconomics: id === 'NQ' ? 'US100:IND' : 'SPX:IND' },
   }])),
   ...Object.fromEntries(['YM', 'RTY'].map(id => [id, {
     name: `${id} futures`, kind: 'futures', unit: 'price', quote: quoteOrder, bars: ['tradingview'],
@@ -60,8 +60,8 @@ export const marketDataSources = [
     detail: 'TradingView Official MCP · CBOE:VIX. Retain the observation time.',
   },
   {
-    field: 'S&P 500 / Nasdaq-100 quotes and Key Levels', primary: [providers.openmarket], backup: [providers.yahoo, providers.tradingeconomics],
-    detail: 'Use OpenMarket workspace Ebzd9R2U (NQ pane 0, ES pane 1). Confirm the current contracts before collection. If CME reads are blocked, try Yahoo ES=F/NQ=F and verify the actual contract and premarket window. Trading Economics US500 (SPX:IND) and US100 (US100:IND) are authorized reference instruments for these displays. Use S&P 500 / Nasdaq-100 labels, their actual source links and same-instrument prior references. Keep TradingView CME scanner benchmarks separate and disclose incomplete bar coverage.',
+    field: 'ES/NQ quotes and Key Levels', primary: [providers.tradingview], backup: [providers.openmarket, providers.yahoo, providers.tradingeconomics],
+    detail: 'Use TradingView CME_MINI:ES1! and CME_MINI:NQ1! completed 1-minute bars for both the last price and overnight range. OpenMarket workspace Ebzd9R2U (NQ pane 0, ES pane 1) is the first fallback, then Yahoo ES=F/NQ=F. Verify each instrument and exact cutoff window. Trading Economics US500 (SPX:IND) and US100 (US100:IND) are authorized reference instruments for these displays. Use S&P 500 / Nasdaq-100 labels, their actual source links and same-instrument prior references. Keep TradingView CME scanner benchmarks separate and disclose incomplete bar coverage.',
   },
   {
     field: 'Timestamped ES/NQ scanner benchmark ranges', primary: [providers.tradingview], backup: [],

@@ -41,9 +41,9 @@ Source assignments are maintained in the [generated approved source table](docs/
 | Dashboard area | Packet field | Handling |
 | --- | --- | --- |
 | Market context | `marketContext` | OpenMarket's `HYPERLIQUID_HIP3 / xyz:SP500` is a temporary SPX proxy; Robinhood → Public for SPY/QQQ and Treasury yields; TradingView for VIX. |
-| Overnight indices | `indexQuotes` | OpenMarket charts for ES/NQ; retain the actual chart symbol and observation times. |
+| Overnight indices | `indexQuotes` | TradingView ES/NQ completed one-minute bars; retain the actual series and observation times. Approved fallback order is in the source table. |
 | Overnight bonds | `treasuryYields` | Robinhood primary, Public fallback; US10Y can reuse the header observation with its provenance. |
-| Key Levels | `keyLevels` | OpenMarket ES/NQ chart reads; leave values blank unless the chart proves the requested session window and timestamps. |
+| Key Levels | `keyLevels` | TradingView ES/NQ completed one-minute overnight bars; retain coverage and high/low timestamps. Use only declared fallbacks. |
 | Macro events | `briefing.macro` | Trading Economics: U.S. events rated at least two stars; Fed items use it first and official Fed pages as backup. |
 | Treasury auctions | `briefing.macro` | TreasuryDirect / U.S. Treasury official schedules and offering-size announcements. |
 | Earnings | `briefing.earnings` | Earnings Whispers; only companies strictly above $25B with dated StockAnalysis cap evidence. |
@@ -62,7 +62,7 @@ Trading Economics is the primary calendar for U.S. economic releases and Fed pol
 
 - Provider data must retain source, direct URL where applicable, actual bar/observation time, retrieval time, and any delay or coverage issue. Keep provider-specific details in the snapshot metadata so the page remains source-independent.
 - The expandable Sources card lists briefing-note links, index quote links when supplied, and Treasury-yield references. It does not yet expose links for Market Context rows, whose source and timestamp remain in the packet metadata.
-- OpenMarket is the approved source for the SPX proxy and configured ES/NQ Key Levels charts. TradingView remains assigned to VIX and the scanner's timestamped ES/NQ benchmark bars. The sector-strength panel has been retired.
+- TradingView is primary for ES/NQ quotes, Key Levels, VIX and the scanner's timestamped ES/NQ benchmark bars. OpenMarket supplies the SPX reference and is an ES/NQ fallback. The sector-strength panel has been retired.
 - The TradingView connection can report a delay of 15 minutes or more. A late collection must still use bars bounded by the original cutoff, and the delay must remain visible.
 - Changing a provider does not change the section contract. Change the provider registry only when the source is deliberately replaced, then regenerate its documentation; the packet must continue to meet the same field, timestamp, coverage, and null-handling rules.
 

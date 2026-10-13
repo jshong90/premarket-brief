@@ -20,10 +20,8 @@
     "Tuesday's events and earnings remain listed despite having passed. Macro/Fed entries use Trading Economics; bill auction dates use U.S. Treasury's tentative schedule and times use Trading Economics. Earnings use Earnings Whispers with dated StockAnalysis evidence and the strict above-$25B filter.",
     "Authorized additional fallbacks were tried in order: Yahoo Finance returned HTTP 429 for quote pages and minute-history requests; Trading Economics supplied timestamped pre-cutoff Treasury chart observations.",
     "Trading Economics Treasury levels: 5Y and 10Y at 09:19 ET, 30Y at 09:18 ET, and 2Y at the start of its latest eligible 09:10 ET five-minute bar. References use the last observed October 9 bars because Treasury cash markets were closed October 12. Source resolution and actual timestamps are disclosed.",
-    "S&P 500 and Nasdaq-100 quote/Key Levels displays now use the user-selected Trading Economics US500 (SPX:IND) and US100 (US100:IND) reference instruments. Their prior references use the same instruments. Internal ES/NQ record keys remain for compatibility; these display records are index references, not CME futures contracts.",
-    "US500 has 915/920 observed overnight minute bars and its range is partial; US100 has 920/920. Both last premarket observations are 09:19 ET. Yahoo Finance requests were rate-limited.",
-    "The scanner still uses its separately captured TradingView CME ES/NQ benchmark ranges. These reference-display updates do not alter scanner calculations.",
-    "Energy, Equity and Bond Commentary were supplied by the user. Overnight news remains empty."
+    "Energy, Equity and Bond Commentary were supplied by the user. Overnight news remains empty.",
+    "ES/NQ briefing quotes and Key Levels have been overwritten with verified TradingView CME_MINI:ES1! and CME_MINI:NQ1! completed one-minute bars. Both overnight ranges cover 920/920 minutes; prices use 09:19 ET and prior references use October 12 15:59 ET bars from the same series. Provider delay unknown."
   ],
   "stocks": [
     {
@@ -1480,33 +1478,33 @@
   "keyLevels": [
     {
       "id": "ES",
-      "label": "S&P 500",
-      "high": 7814.37,
-      "low": 7786.79,
-      "highTime": "2026-10-13T10:06:00Z",
-      "lowTime": "2026-10-13T02:43:00Z",
-      "asOf": "2026-10-13T13:19:00Z",
-      "retrievedAt": "2026-10-13T21:00:22.768152Z",
-      "source": "Trading Economics · US500 (SPX:IND) · 1-minute chart, UTC",
-      "issue": "915/920 observed overnight minute bars. Partial range: levels use observed bars only. Provider delay unknown.",
-      "url": "https://tradingeconomics.com/united-states/stock-market",
-      "symbol": "SPX:IND",
-      "instrumentType": "index-reference"
+      "label": "S&P 500 (ES)",
+      "high": 7864,
+      "low": 7836,
+      "highTime": "2026-10-13T10:13:00.000Z",
+      "lowTime": "2026-10-13T02:43:00.000Z",
+      "asOf": "2026-10-13T13:19:00.000Z",
+      "retrievedAt": "2026-10-13T21:17:26.728Z",
+      "source": "TradingView Official MCP · CME_MINI:ES1! · completed 1-minute futures bars",
+      "issue": "Complete 920/920 overnight minute coverage; 09:20 ET and later bars excluded. Provider delay unknown.",
+      "url": "https://www.tradingview.com/chart/?symbol=CME_MINI%3AES1!",
+      "symbol": "CME_MINI:ES1!",
+      "instrumentType": "futures"
     },
     {
       "id": "NQ",
-      "label": "Nasdaq-100",
-      "high": 30706.084,
-      "low": 30379.111,
-      "highTime": "2026-10-12T22:23:00Z",
-      "lowTime": "2026-10-13T02:46:00Z",
-      "asOf": "2026-10-13T13:19:00Z",
-      "retrievedAt": "2026-10-13T21:00:23.000562Z",
-      "source": "Trading Economics · US100 (US100:IND) · 1-minute chart, UTC",
-      "issue": "920/920 observed overnight minute bars. Complete returned-bar coverage. Provider delay unknown.",
-      "url": "https://tradingeconomics.com/us100:ind",
-      "symbol": "US100:IND",
-      "instrumentType": "index-reference"
+      "label": "Nasdaq-100 (NQ)",
+      "high": 30906,
+      "low": 30604.75,
+      "highTime": "2026-10-12T22:22:00.000Z",
+      "lowTime": "2026-10-13T02:46:00.000Z",
+      "asOf": "2026-10-13T13:19:00.000Z",
+      "retrievedAt": "2026-10-13T21:17:26.737Z",
+      "source": "TradingView Official MCP · CME_MINI:NQ1! · completed 1-minute futures bars",
+      "issue": "Complete 920/920 overnight minute coverage; 09:20 ET and later bars excluded. Provider delay unknown.",
+      "url": "https://www.tradingview.com/chart/?symbol=CME_MINI%3ANQ1!",
+      "symbol": "CME_MINI:NQ1!",
+      "instrumentType": "futures"
     },
     {
       "id": "YM",
@@ -1536,35 +1534,35 @@
   "indexQuotes": [
     {
       "id": "NQ",
-      "value": 30433.71,
-      "asOf": "2026-10-13T13:19:00Z",
-      "previousClose": 30667.682,
-      "previousCloseAt": "2026-10-12T19:59:00Z",
-      "previousCloseSource": "Trading Economics · same US100 instrument, October 12 15:59 ET 1-minute close",
-      "previousCloseUrl": "https://tradingeconomics.com/us100:ind",
-      "retrievedAt": "2026-10-13T21:00:23.000562Z",
-      "source": "Trading Economics · US100 (US100:IND) · 1-minute chart, UTC",
-      "url": "https://tradingeconomics.com/us100:ind",
-      "issue": "Pre-cutoff observation at 09:19 ET. Prior reference is the same instrument's 15:59 ET bar, not an official settlement. Provider delay unknown.",
-      "label": "Nasdaq-100",
-      "symbol": "US100:IND",
-      "instrumentType": "index-reference"
+      "value": 30640.75,
+      "asOf": "2026-10-13T13:19:00.000Z",
+      "previousClose": 30895.75,
+      "previousCloseAt": "2026-10-12T19:59:00.000Z",
+      "previousCloseSource": "TradingView Official MCP · CME_MINI:NQ1! October 12 15:59 ET one-minute close (not official settlement)",
+      "previousCloseUrl": "https://www.tradingview.com/chart/?symbol=CME_MINI%3ANQ1!",
+      "retrievedAt": "2026-10-13T21:17:26.737Z",
+      "source": "TradingView Official MCP · CME_MINI:NQ1! · completed 1-minute futures bars",
+      "url": "https://www.tradingview.com/chart/?symbol=CME_MINI%3ANQ1!",
+      "issue": "Provider delay unknown. Premarket price is the 09:19 ET completed bar; previous reference is the same series at October 12 15:59 ET, not official settlement.",
+      "label": "NQ",
+      "symbol": "CME_MINI:NQ1!",
+      "instrumentType": "futures"
     },
     {
       "id": "ES",
-      "value": 7797.97,
-      "asOf": "2026-10-13T13:19:00Z",
-      "previousClose": 7807.41,
-      "previousCloseAt": "2026-10-12T19:59:00Z",
-      "previousCloseSource": "Trading Economics · same US500 instrument, October 12 15:59 ET 1-minute close",
-      "previousCloseUrl": "https://tradingeconomics.com/united-states/stock-market",
-      "retrievedAt": "2026-10-13T21:00:22.768152Z",
-      "source": "Trading Economics · US500 (SPX:IND) · 1-minute chart, UTC",
-      "url": "https://tradingeconomics.com/united-states/stock-market",
-      "issue": "Pre-cutoff observation at 09:19 ET. Prior reference is the same instrument's 15:59 ET bar, not an official settlement. Provider delay unknown.",
-      "label": "S&P 500",
-      "symbol": "SPX:IND",
-      "instrumentType": "index-reference"
+      "value": 7847.25,
+      "asOf": "2026-10-13T13:19:00.000Z",
+      "previousClose": 7856.5,
+      "previousCloseAt": "2026-10-12T19:59:00.000Z",
+      "previousCloseSource": "TradingView Official MCP · CME_MINI:ES1! October 12 15:59 ET one-minute close (not official settlement)",
+      "previousCloseUrl": "https://www.tradingview.com/chart/?symbol=CME_MINI%3AES1!",
+      "retrievedAt": "2026-10-13T21:17:26.728Z",
+      "source": "TradingView Official MCP · CME_MINI:ES1! · completed 1-minute futures bars",
+      "url": "https://www.tradingview.com/chart/?symbol=CME_MINI%3AES1!",
+      "issue": "Provider delay unknown. Premarket price is the 09:19 ET completed bar; previous reference is the same series at October 12 15:59 ET, not official settlement.",
+      "label": "ES",
+      "symbol": "CME_MINI:ES1!",
+      "instrumentType": "futures"
     }
   ],
   "treasuryYields": [
@@ -1621,7 +1619,7 @@
       "issue": "Yahoo Finance returned HTTP 429. Trading Economics supplied 1m timestamped observations; latest completed pre-cutoff bar starts 2026-10-13T13:18:00Z. Prior reference is the last observed Friday October 9 bar; Treasury cash market was closed Monday October 12. Provider delay unknown. Minute coverage is sparse; this is a yield level, not a range."
     }
   ],
-  "quotesRefreshedAt": "2026-10-13T21:01:17.026Z",
+  "quotesRefreshedAt": "2026-10-13T21:19:04.588Z",
   "sectorQuotesRefreshedAt": null,
   "cutoffAt": "2026-10-13T13:20:00.000Z"
 }
