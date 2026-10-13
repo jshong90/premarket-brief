@@ -33,7 +33,7 @@ export function readSnapshot(input: unknown): Snapshot {
   if (s.indexQuotes!==undefined) {
     if (!Array.isArray(s.indexQuotes) || s.indexQuotes.length!==2 || new Set(s.indexQuotes.map(row=>row?.id)).size!==2 || !['NQ','ES'].every(id=>s.indexQuotes!.some(row=>row?.id===id))) return fail('indexQuotes must contain NQ and ES exactly once.');
     for (const row of s.indexQuotes) {
-      if (!row || ![row.value,row.previousClose].every(validNumber) || row.value===0 || row.previousClose===0 || typeof row.source!=='string' || !(row.asOf===null || validTime(row.asOf)) || !optionalTime(row.previousCloseAt) || !optionalTime(row.retrievedAt) || row.url!==undefined && (typeof row.url!=='string' || !/^https:\/\//i.test(row.url)) || row.value!==null && !validTime(row.asOf)) return fail('invalid index quote.');
+      if (!row || row.label!==undefined && (typeof row.label!=='string' || !row.label.trim() || row.label.length>120) || row.symbol!==undefined && (typeof row.symbol!=='string' || !row.symbol.trim()) || ![row.value,row.previousClose].every(validNumber) || row.value===0 || row.previousClose===0 || typeof row.source!=='string' || !(row.asOf===null || validTime(row.asOf)) || !optionalTime(row.previousCloseAt) || !optionalTime(row.retrievedAt) || row.url!==undefined && (typeof row.url!=='string' || !/^https:\/\//i.test(row.url)) || row.value!==null && !validTime(row.asOf)) return fail('invalid index quote.');
     }
   }
   if (s.treasuryYields!==undefined) {
@@ -45,7 +45,7 @@ export function readSnapshot(input: unknown): Snapshot {
     const ids=['ES','NQ','YM','RTY'];
     if (!Array.isArray(s.keyLevels) || s.keyLevels.length!==4 || new Set(s.keyLevels.map(row=>row?.id)).size!==4 || ids.some(id=>!s.keyLevels!.some(row=>row?.id===id))) return fail('keyLevels must contain ES, NQ, YM and RTY exactly once.');
     for (const row of s.keyLevels) {
-      if (!row || typeof row.label!=='string' || typeof row.source!=='string' || ![row.high,row.low].every(validNumber) || (row.high===null)!==(row.low===null) || row.high!==null && row.low!==null && row.high<row.low || !(row.asOf===null || validTime(row.asOf)) || !optionalTime(row.highTime) || !optionalTime(row.lowTime) || !optionalTime(row.retrievedAt) || row.high!==null && (!row.highTime || !row.lowTime || !row.asOf || [row.highTime,row.lowTime,row.asOf].some(time=>Date.parse(time!)<keyWindow.futuresStart || Date.parse(time!)>=keyWindow.end))) return fail('invalid key level.');
+      if (!row || typeof row.label!=='string' || row.url!==undefined && (typeof row.url!=='string' || !/^https:\/\//i.test(row.url)) || row.symbol!==undefined && (typeof row.symbol!=='string' || !row.symbol.trim()) || typeof row.source!=='string' || ![row.high,row.low].every(validNumber) || (row.high===null)!==(row.low===null) || row.high!==null && row.low!==null && row.high<row.low || !(row.asOf===null || validTime(row.asOf)) || !optionalTime(row.highTime) || !optionalTime(row.lowTime) || !optionalTime(row.retrievedAt) || row.high!==null && (!row.highTime || !row.lowTime || !row.asOf || [row.highTime,row.lowTime,row.asOf].some(time=>Date.parse(time!)<keyWindow.futuresStart || Date.parse(time!)>=keyWindow.end))) return fail('invalid key level.');
     }
   }
   if (s.briefing!==undefined) {

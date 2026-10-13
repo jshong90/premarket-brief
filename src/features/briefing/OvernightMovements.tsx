@@ -18,7 +18,7 @@ function IndexOvernightTable({ data }: { data: Snapshot }) {
     const legacy = getLegacyQuote(symbol);
     const previous = quote ? quote.previousClose : legacy?.fridayClose ?? null;
     const current = quote ? quote.value : legacy?.scanPrice ?? null;
-    return { id: symbol, label: symbol, previous, current,
+    return { id: symbol, label: quote?.label ?? symbol, previous, current,
       change: previous !== null && current !== null && previous > 0 ? (current / previous - 1) * 100 : quote ? null : legacy?.changePercent ?? null,
       approximate: false, asOf: quote?.asOf ?? null };
   };

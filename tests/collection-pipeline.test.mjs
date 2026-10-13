@@ -187,3 +187,18 @@ test('apply enforces snapshot lease and refuses to overwrite a different archive
     assert.equal((await readJson(path.join(temp, 'archive-index.json'))).entries[0].sessionDate, day);
   } finally { await fs.rm(temp, { recursive: true, force: true }); }
 });
+
+test('reference display labels and links survive generation without changing CME benchmarks', async () => {
+  const original = await base();
+  const responses = ['ES', 'NQ'].map(id => ({
+    ...bars(id), provider: 'tradingeconomics', symbol: request(id).symbols.tradingeconomics,
+    url: id === 'ES' ? 'https://tradingeconomics.com/united-states/stock-market' : 'https://tradingeconomics.com/us100:ind',
+  }));
+  const capture = await collect({ ...plan, requests: [request('ES'), request('NQ')] }, replayAdapter(responses), { now });
+  const packet = generateSnapshot(original, capture);
+  assert.equal(packet.indexQuotes.find(row => row.id === 'ES').label, 'S&P 500');
+  assert.equal(packet.indexQuotes.find(row => row.id === 'NQ').symbol, 'US100:IND');
+  assert.equal(packet.keyLevels.find(row => row.id === 'ES').url, responses[0].url);
+  assert.deepEqual(packet.benchmarks, original.benchmarks);
+  assert.throws(() => generateSnapshot(original, capture, { scannerBenchmarks: true }), /cannot replace CME/);
+});
