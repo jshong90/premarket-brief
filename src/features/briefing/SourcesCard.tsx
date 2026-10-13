@@ -32,14 +32,11 @@ export function SourcesCard({ data }: { data: Snapshot }) {
   const keyLevelData = data as SnapshotKeyLevels;
   const keyLevels = keyLevelData.keyLevels ?? [];
   const capturedKeyLevels = keyLevels.filter((row) => row.high!==null && row.low!==null);
-  const latestKeyLevelAsOf = keyLevels.map((row) => row.asOf).filter((value): value is string => Boolean(value)).sort().at(-1);
-  const keyLevelsComplete = data.status === 'frozen' && keyLevels.length === 4 && keyLevels.every((row) => row.high !== null && row.low !== null);
-  const retrievedAt = capturedKeyLevels.find((row) => row.retrievedAt)?.retrievedAt;
-  const referenceCount = references.length + treasuryCitationCount + indexQuoteReferences.length + (capturedKeyLevels.length ? 1 : 0);
+  const referenceCount = references.length + treasuryCitationCount + indexQuoteReferences.length + capturedKeyLevels.length;
   if (!referenceCount) return null;
 
   return <SourcesDisclosure count={referenceCount}>
-      {Boolean(tradingViewRefs.length || capturedKeyLevels.length) && <section className="sources-group">
+      {Boolean(tradingViewRefs.length) && <section className="sources-group">
         <h3>TradingView Official MCP</h3>
         <p className="sources-intro">Timestamped market data; provider delay may exceed 15 minutes.</p>
         <ul className="sources-list">
@@ -52,17 +49,22 @@ export function SourcesCard({ data }: { data: Snapshot }) {
               {observedAt && <small>Observed {new Date(observedAt).toLocaleString('en-US', { timeZone: 'America/New_York' })} ET.</small>}
             </li>;
           })}
-          {capturedKeyLevels.length > 0 && <li>
-            <a href="https://www.tradingview.com/markets/futures/quotes/" target="_blank" rel="noreferrer">Premarket key levels ↗</a>
-            <small>Futures session: {formatFuturesSession(data.sessionDate)}; latest completed bar {latestKeyLevelAsOf ? `observed at ${formatET(latestKeyLevelAsOf)} ET` : 'time unavailable'}. {keyLevelsComplete ? 'The 09:20 ET bar is excluded.' : 'Partial range; the final 09:20 ET cutoff has not been reached.'} Provider timing is shown per row.</small>
-            {retrievedAt && <small>Retrieved {new Date(retrievedAt).toLocaleString('en-US', { timeZone: 'America/Los_Angeles', dateStyle: 'short', timeStyle: 'short' })} PT.</small>}
-          </li>}
+
         </ul>
+      </section>}
+      {capturedKeyLevels.length > 0 && <section className="sources-group">
+        <h3>Key Levels data</h3>
+        <ul className="sources-list">{capturedKeyLevels.map((row) => <li key={row.id}>
+          <a href={row.url ?? 'https://www.tradingview.com/markets/futures/quotes/'} target="_blank" rel="noreferrer">{row.label} key levels ↗</a>
+          <small>{row.source} · Window: {formatFuturesSession(data.sessionDate)}; the 09:20 ET bar is excluded.</small>
+          {row.asOf && <small>Latest bar {formatET(row.asOf)} ET. {row.issue}</small>}
+          {row.retrievedAt && <small>Retrieved {new Date(row.retrievedAt).toLocaleString('en-US', { timeZone: 'America/Los_Angeles', dateStyle: 'short', timeStyle: 'short' })} PT.</small>}
+        </li>)}</ul>
       </section>}
       {indexQuoteReferences.length > 0 && <section className="sources-group">
         <h3>Index quote data</h3>
         <ul className="sources-list">{indexQuoteReferences.map((row) => <li key={row.id}>
-          <a href={row.url} target="_blank" rel="noreferrer">{row.id} {row.value!==null?'quote':'previous close'} ↗</a>
+          <a href={row.url} target="_blank" rel="noreferrer">{row.label ?? row.id} {row.value!==null?'quote':'previous close'} ↗</a>
           <small>01 · Overnight movements on the indices · {row.source}</small>
           {row.asOf && <small>Observed {new Date(row.asOf).toLocaleString('en-US', { timeZone: 'America/New_York' })} ET.</small>}
           {row.retrievedAt && <small>Retrieved {new Date(row.retrievedAt).toLocaleString('en-US', { timeZone: 'America/Los_Angeles', dateStyle: 'short', timeStyle: 'short' })} PT.</small>}

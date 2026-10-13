@@ -16,6 +16,12 @@ function range(record) {
     retrievedAt: record?.retrievedAt ?? null, source: record?.source ?? 'Not captured',
     issue: record?.high != null ? record.issue : 'No valid timestamped range collected.' };
 }
+function displayIdentity(record, id, fallbackLabel = id) {
+  const reference = record?.provider === 'tradingeconomics' && ['ES', 'NQ'].includes(id);
+  return { label: reference ? (id === 'ES' ? 'S&P 500' : 'Nasdaq-100') : fallbackLabel,
+    ...(record?.symbol ? { symbol: record.symbol } : {}),
+    ...(reference ? { instrumentType: 'index-reference' } : {}) };
+}
 function change(value, close, unit) {
   if (value === null || close === null || close <= 0) return null;
   return unit === 'bp' ? (value - close) * 100 : unit === 'pts' ? value - close : (value / close - 1) * 100;
@@ -53,7 +59,7 @@ export function generateSnapshot(base, capture, { scannerBenchmarks = false } = 
   }
   // Clear only fields being refreshed. An unsuccessful request must not leave
   // yesterday's or an earlier attempt's value behind as if the refresh succeeded.
-  result.indexQuotes = base.indexQuotes?.map(row => touched.has(row.id) ? { id: row.id, ...quote(capture.canonical[row.id]) } : row);
+  result.indexQuotes = base.indexQuotes?.map(row => touched.has(row.id) ? { id: row.id, ...displayIdentity(capture.canonical[row.id], row.id), ...quote(capture.canonical[row.id]) } : row);
   result.treasuryYields = base.treasuryYields?.map(row => touched.has(`US${row.tenor}`) ? {
     tenor: row.tenor, ...quote(capture.canonical[`US${row.tenor}`]), url: capture.canonical[`US${row.tenor}`]?.url ?? 'https://www.tradingview.com/',
   } : row);
@@ -64,8 +70,9 @@ export function generateSnapshot(base, capture, { scannerBenchmarks = false } = 
       name: row.id === 'SPX' ? instruments.SPX.name : row.name, kind: row.kind,
       ...fresh, changeUnit: row.changeUnit, change: change(fresh.value, fresh.previousClose, row.changeUnit) };
   });
-  result.keyLevels = base.keyLevels?.map(row => touched.has(row.id) ? { id: row.id, label: row.label, ...range(capture.canonical[row.id]) } : row);
+  result.keyLevels = base.keyLevels?.map(row => touched.has(row.id) ? { id: row.id, ...displayIdentity(capture.canonical[row.id], row.id, ({ ES: 'S&P 500 (ES)', NQ: 'Nasdaq-100 (NQ)', YM: 'Dow (YM)', RTY: 'Russell 2000 (RTY)' })[row.id]), url: capture.canonical[row.id]?.url ?? 'https://www.tradingview.com/markets/futures/quotes/', ...range(capture.canonical[row.id]) } : row);
   if (scannerBenchmarks) {
+    if (['ES', 'NQ'].some(id => touched.has(id) && capture.canonical[id]?.provider === 'tradingeconomics')) throw new Error('Reference indices cannot replace CME scanner benchmarks');
     if (!base.cutoffAt || Date.parse(capture.finishedAt) < Date.parse(base.cutoffAt)) throw new Error('Benchmark capture requires a cutoff-based scanner packet');
     result.benchmarks = base.benchmarks.map(row => {
       const record = capture.canonical[row.id];

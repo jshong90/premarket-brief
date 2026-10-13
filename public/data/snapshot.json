@@ -14,7 +14,6 @@
     "October 13 premarket report reconstructed after the market close from approved providers. Price/range inputs end before 09:20 ET; retrieval times are separate from observation times. This is a partial capture, not a complete frozen universe.",
     "SPY and QQQ market-context levels use Robinhood actual 09:19 ET extended-hours bars and official October 12 closing prices. TradingView VIX uses its last 09:18 ET observation and the last observed October 12 bar; provider delays are unknown.",
     "SPX is the approved OpenMarket HYPERLIQUID_HIP3 / xyz:SP500 synthetic perpetual proxy, not the cash SPX index. Its prior reference is the same instrument's October 12 15:59 ET bar. OpenMarket historical points supplied all 320 premarket minutes.",
-    "OpenMarket workspace Ebzd9R2U is connected, but both CME NNQZ6 and ESZ6 reads are blocked by exchange_license. Approved ES/NQ quote and Key Levels fields remain null. TradingView scanner benchmark records are kept separate.",
     "TradingView ES/NQ benchmark ranges have 920/920 completed overnight one-minute bars. YM and RTY Key Levels have partial observed coverage (905/920 and 911/920 slots); their levels are explicitly partial.",
     "Robinhood public 100 most popular list was screened with its October 13 fundamentals: 46 U.S. common stocks with market cap at least $50B were discovered after excluding ETFs and identified foreign listings. This is incomplete discovery, not the full U.S. stock universe. Market-cap observations were retrieved after close.",
     "Individual-stock ranges and last prices use Public.com as the approved equity fallback: all 320 premarket minute slots were supplied per stock. Only positive-volume trade bars contribute prices and session volume; flat zero-volume carry bars contribute no observations. Official October 12 closes and company metadata are from Robinhood. Provider delays are unknown; provider feeds can differ.",
@@ -22,7 +21,9 @@
     "The sector-strength panel is retired. Equity, bond, energy commentary and overnight news await user-supplied notes.",
     "Authorized additional fallbacks were tried in order: Yahoo Finance returned HTTP 429 for quote pages and minute-history requests; Trading Economics supplied timestamped pre-cutoff Treasury chart observations.",
     "Trading Economics Treasury levels: 5Y and 10Y at 09:19 ET, 30Y at 09:18 ET, and 2Y at the start of its latest eligible 09:10 ET five-minute bar. References use the last observed October 9 bars because Treasury cash markets were closed October 12. Source resolution and actual timestamps are disclosed.",
-    "Yahoo did not supply exact ES/NQ futures bars or quotes. Trading Economics public US500/US100 prices are derivative/index proxies and were not substituted into ES/NQ fields."
+    "S&P 500 and Nasdaq-100 quote/Key Levels displays now use the user-selected Trading Economics US500 (SPX:IND) and US100 (US100:IND) reference instruments. Their prior references use the same instruments. Internal ES/NQ record keys remain for compatibility; these display records are index references, not CME futures contracts.",
+    "US500 has 915/920 observed overnight minute bars and its range is partial; US100 has 920/920. Both last premarket observations are 09:19 ET. Yahoo Finance requests were rate-limited.",
+    "The scanner still uses its separately captured TradingView CME ES/NQ benchmark ranges. These reference-display updates do not alter scanner calculations."
   ],
   "stocks": [
     {
@@ -1458,29 +1459,33 @@
   "keyLevels": [
     {
       "id": "ES",
-      "label": "S&P 500 (ES)",
-      "high": null,
-      "low": null,
-      "highTime": null,
-      "lowTime": null,
-      "asOf": null,
-      "retrievedAt": "2026-10-13T20:31:17.766Z",
-      "source": "OpenMarket MCP · workspace Ebzd9R2U",
-      "issue": "OpenMarket CME read blocked by exchange_license. Yahoo Finance quote/chart requests returned HTTP 429. Trading Economics US500/US100 proxy readings do not verify the exact ES/NQ contracts or overnight window.",
-      "url": "https://openmarket.xyz/chart/Ebzd9R2U"
+      "label": "S&P 500",
+      "high": 7814.37,
+      "low": 7786.79,
+      "highTime": "2026-10-13T10:06:00Z",
+      "lowTime": "2026-10-13T02:43:00Z",
+      "asOf": "2026-10-13T13:19:00Z",
+      "retrievedAt": "2026-10-13T21:00:22.768152Z",
+      "source": "Trading Economics · US500 (SPX:IND) · 1-minute chart, UTC",
+      "issue": "915/920 observed overnight minute bars. Partial range: levels use observed bars only. Provider delay unknown.",
+      "url": "https://tradingeconomics.com/united-states/stock-market",
+      "symbol": "SPX:IND",
+      "instrumentType": "index-reference"
     },
     {
       "id": "NQ",
-      "label": "Nasdaq-100 (NQ)",
-      "high": null,
-      "low": null,
-      "highTime": null,
-      "lowTime": null,
-      "asOf": null,
-      "retrievedAt": "2026-10-13T20:31:17.766Z",
-      "source": "OpenMarket MCP · workspace Ebzd9R2U",
-      "issue": "OpenMarket CME read blocked by exchange_license. Yahoo Finance quote/chart requests returned HTTP 429. Trading Economics US500/US100 proxy readings do not verify the exact ES/NQ contracts or overnight window.",
-      "url": "https://openmarket.xyz/chart/Ebzd9R2U"
+      "label": "Nasdaq-100",
+      "high": 30706.084,
+      "low": 30379.111,
+      "highTime": "2026-10-12T22:23:00Z",
+      "lowTime": "2026-10-13T02:46:00Z",
+      "asOf": "2026-10-13T13:19:00Z",
+      "retrievedAt": "2026-10-13T21:00:23.000562Z",
+      "source": "Trading Economics · US100 (US100:IND) · 1-minute chart, UTC",
+      "issue": "920/920 observed overnight minute bars. Complete returned-bar coverage. Provider delay unknown.",
+      "url": "https://tradingeconomics.com/us100:ind",
+      "symbol": "US100:IND",
+      "instrumentType": "index-reference"
     },
     {
       "id": "YM",
@@ -1510,29 +1515,35 @@
   "indexQuotes": [
     {
       "id": "NQ",
-      "value": null,
-      "asOf": null,
-      "previousClose": null,
-      "previousCloseAt": null,
-      "previousCloseSource": "Not captured",
-      "previousCloseUrl": null,
-      "retrievedAt": "2026-10-13T20:31:17.766Z",
-      "source": "OpenMarket MCP · workspace Ebzd9R2U",
-      "url": "https://openmarket.xyz/chart/Ebzd9R2U",
-      "issue": "OpenMarket CME read blocked by exchange_license. Yahoo Finance quote/chart requests returned HTTP 429. Trading Economics US500/US100 proxy readings do not verify the exact ES/NQ contracts or overnight window."
+      "value": 30433.71,
+      "asOf": "2026-10-13T13:19:00Z",
+      "previousClose": 30667.682,
+      "previousCloseAt": "2026-10-12T19:59:00Z",
+      "previousCloseSource": "Trading Economics · same US100 instrument, October 12 15:59 ET 1-minute close",
+      "previousCloseUrl": "https://tradingeconomics.com/us100:ind",
+      "retrievedAt": "2026-10-13T21:00:23.000562Z",
+      "source": "Trading Economics · US100 (US100:IND) · 1-minute chart, UTC",
+      "url": "https://tradingeconomics.com/us100:ind",
+      "issue": "Pre-cutoff observation at 09:19 ET. Prior reference is the same instrument's 15:59 ET bar, not an official settlement. Provider delay unknown.",
+      "label": "Nasdaq-100",
+      "symbol": "US100:IND",
+      "instrumentType": "index-reference"
     },
     {
       "id": "ES",
-      "value": null,
-      "asOf": null,
-      "previousClose": null,
-      "previousCloseAt": null,
-      "previousCloseSource": "Not captured",
-      "previousCloseUrl": null,
-      "retrievedAt": "2026-10-13T20:31:17.766Z",
-      "source": "OpenMarket MCP · workspace Ebzd9R2U",
-      "url": "https://openmarket.xyz/chart/Ebzd9R2U",
-      "issue": "OpenMarket CME read blocked by exchange_license. Yahoo Finance quote/chart requests returned HTTP 429. Trading Economics US500/US100 proxy readings do not verify the exact ES/NQ contracts or overnight window."
+      "value": 7797.97,
+      "asOf": "2026-10-13T13:19:00Z",
+      "previousClose": 7807.41,
+      "previousCloseAt": "2026-10-12T19:59:00Z",
+      "previousCloseSource": "Trading Economics · same US500 instrument, October 12 15:59 ET 1-minute close",
+      "previousCloseUrl": "https://tradingeconomics.com/united-states/stock-market",
+      "retrievedAt": "2026-10-13T21:00:22.768152Z",
+      "source": "Trading Economics · US500 (SPX:IND) · 1-minute chart, UTC",
+      "url": "https://tradingeconomics.com/united-states/stock-market",
+      "issue": "Pre-cutoff observation at 09:19 ET. Prior reference is the same instrument's 15:59 ET bar, not an official settlement. Provider delay unknown.",
+      "label": "S&P 500",
+      "symbol": "SPX:IND",
+      "instrumentType": "index-reference"
     }
   ],
   "treasuryYields": [
@@ -1589,7 +1600,7 @@
       "issue": "Yahoo Finance returned HTTP 429. Trading Economics supplied 1m timestamped observations; latest completed pre-cutoff bar starts 2026-10-13T13:18:00Z. Prior reference is the last observed Friday October 9 bar; Treasury cash market was closed Monday October 12. Provider delay unknown. Minute coverage is sparse; this is a yield level, not a range."
     }
   ],
-  "quotesRefreshedAt": "2026-10-13T20:52:50.516Z",
+  "quotesRefreshedAt": "2026-10-13T21:01:17.026Z",
   "sectorQuotesRefreshedAt": null,
   "cutoffAt": "2026-10-13T13:20:00.000Z"
 }

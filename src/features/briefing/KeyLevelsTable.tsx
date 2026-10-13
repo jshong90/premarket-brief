@@ -23,16 +23,16 @@ export function KeyLevelsTable({ data }: { data: Snapshot }) {
   const byId = new Map(keyLevels.map((row) => [row.id, row]));
   const coverageIssues = keyLevels.filter((row) => row.issue);
   return <>
-    <BriefTable role="levels" columns={['Index futures', 'Premarket high', 'Premarket low']}>
+    <BriefTable role="levels" columns={['Market', 'Premarket high', 'Premarket low']}>
         {majorIndices.map((id) => {
           const row = byId.get(id);
           return <tr key={id}>
-            <th scope="row"><a href={`https://www.tradingview.com/chart/?symbol=${encodeURIComponent(tvSymbols[id])}`} target="_blank" rel="noreferrer">{indexNames[id]} ↗</a></th>
+            <th scope="row"><a href={row?.url ?? `https://www.tradingview.com/chart/?symbol=${encodeURIComponent(tvSymbols[id])}`} target="_blank" rel="noreferrer">{row?.label ?? indexNames[id]} ↗</a></th>
             <NumericCell value={row?.high} format="price" asOf={row?.highTime} />
             <NumericCell value={row?.low} format="price" asOf={row?.lowTime} />
           </tr>;
         })}
     </BriefTable>
-    <p className="key-levels-note">Window: {formatFuturesSession(data.sessionDate)}; the 9:20 AM ET bar is excluded. {coverageIssues.length > 0 ? coverageIssues.map((row) => `${row.id}: ${row.issue}`).join(' ') : 'All four rows have complete returned-bar coverage.'}</p>
+    <p className="key-levels-note">Window: {formatFuturesSession(data.sessionDate)}; the 9:20 AM ET bar is excluded. {coverageIssues.length > 0 ? coverageIssues.map((row) => `${row.label}: ${row.issue}`).join(' ') : 'All four rows have complete returned-bar coverage.'}</p>
   </>;
 }
