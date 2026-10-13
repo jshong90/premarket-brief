@@ -18,12 +18,12 @@
     "Robinhood public 100 most popular list was screened with its October 13 fundamentals: 46 U.S. common stocks with market cap at least $50B were discovered after excluding ETFs and identified foreign listings. This is incomplete discovery, not the full U.S. stock universe. Market-cap observations were retrieved after close.",
     "Individual-stock ranges and last prices use Public.com as the approved equity fallback: all 320 premarket minute slots were supplied per stock. Only positive-volume trade bars contribute prices and session volume; flat zero-volume carry bars contribute no observations. Official October 12 closes and company metadata are from Robinhood. Provider delays are unknown; provider feeds can differ.",
     "Tuesday's events and earnings remain listed despite having passed. Macro/Fed entries use Trading Economics; bill auction dates use U.S. Treasury's tentative schedule and times use Trading Economics. Earnings use Earnings Whispers with dated StockAnalysis evidence and the strict above-$25B filter.",
-    "The sector-strength panel is retired. Equity, bond, energy commentary and overnight news await user-supplied notes.",
     "Authorized additional fallbacks were tried in order: Yahoo Finance returned HTTP 429 for quote pages and minute-history requests; Trading Economics supplied timestamped pre-cutoff Treasury chart observations.",
     "Trading Economics Treasury levels: 5Y and 10Y at 09:19 ET, 30Y at 09:18 ET, and 2Y at the start of its latest eligible 09:10 ET five-minute bar. References use the last observed October 9 bars because Treasury cash markets were closed October 12. Source resolution and actual timestamps are disclosed.",
     "S&P 500 and Nasdaq-100 quote/Key Levels displays now use the user-selected Trading Economics US500 (SPX:IND) and US100 (US100:IND) reference instruments. Their prior references use the same instruments. Internal ES/NQ record keys remain for compatibility; these display records are index references, not CME futures contracts.",
     "US500 has 915/920 observed overnight minute bars and its range is partial; US100 has 920/920. Both last premarket observations are 09:19 ET. Yahoo Finance requests were rate-limited.",
-    "The scanner still uses its separately captured TradingView CME ES/NQ benchmark ranges. These reference-display updates do not alter scanner calculations."
+    "The scanner still uses its separately captured TradingView CME ES/NQ benchmark ranges. These reference-display updates do not alter scanner calculations.",
+    "Energy, Equity and Bond Commentary were supplied by the user. Overnight news remains empty."
   ],
   "stocks": [
     {
@@ -973,8 +973,22 @@
     }
   ],
   "briefing": {
-    "indices": [],
-    "bonds": [],
+    "indices": [
+      {
+        "title": "Equity Commentary",
+        "body": "NQ is right back below last week's lows while ES/SPY is holding up significantly better. Price action thus remains extremely tricky going into earnings season and OPEX.",
+        "source": "Desk commentary",
+        "url": ""
+      }
+    ],
+    "bonds": [
+      {
+        "title": "Bond Commentary",
+        "body": "US Treasury 10Y did not make a new high overnight but still trading near highs at 5.20%.",
+        "source": "Desk commentary",
+        "url": ""
+      }
+    ],
     "macro": [
       {
         "title": "Tuesday, October 13",
@@ -1362,7 +1376,14 @@
       }
     ],
     "news": [],
-    "energy": []
+    "energy": [
+      {
+        "title": "Energy Commentary",
+        "body": "Oil is trading at around $93, holding up its gains from the volatility in the Middle East and the Ukraine conflict.",
+        "source": "Desk commentary",
+        "url": ""
+      }
+    ]
   },
   "marketContext": [
     {
