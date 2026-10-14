@@ -56,7 +56,7 @@ export function SourcesCard({ data }: { data: Snapshot }) {
         <h3>Key Levels data</h3>
         <ul className="sources-list">{capturedKeyLevels.map((row) => <li key={row.id}>
           <a href={row.url ?? 'https://www.tradingview.com/markets/futures/quotes/'} target="_blank" rel="noreferrer">{row.label} key levels ↗</a>
-          <small>{row.source} · Window: {formatFuturesSession(data.sessionDate)}; the 09:20 ET bar is excluded.</small>
+          <small>{row.source} · Window: {formatFuturesSession(data.sessionDate)}; the cutoff bar is excluded.</small>
           {row.asOf && <small>Latest bar {formatET(row.asOf)} ET. {row.issue}</small>}
           {row.retrievedAt && <small>Retrieved {new Date(row.retrievedAt).toLocaleString('en-US', { timeZone: 'America/Los_Angeles', dateStyle: 'short', timeStyle: 'short' })} PT.</small>}
         </li>)}</ul>

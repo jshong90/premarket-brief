@@ -32,8 +32,12 @@ function bars(id = 'ES', count) {
 async function base() { return readJson('public/data/snapshot-2026-10-12.json'); }
 
 test('DST-aware windows and one shared futures request', () => {
-  assert.equal(new Date(windows('2026-11-02').end).toISOString(), '2026-11-02T14:20:00.000Z');
+  assert.equal(new Date(windows('2026-11-02').end).toISOString(), '2026-11-02T14:15:00.000Z');
   assert.equal(plan.cutoffAt, '2026-10-12T13:20:00.000Z');
+  assert.equal(new Date(windows('2026-10-13').end).toISOString(), '2026-10-13T13:20:00.000Z');
+  assert.equal(new Date(windows('2026-10-14').end).toISOString(), '2026-10-14T13:15:00.000Z');
+  assert.equal(new Date(windows('2027-03-15').end).toISOString(), '2027-03-15T13:15:00.000Z');
+  assert.equal(new Date(windows('2026-10-01',35).end).toISOString(), '2026-10-01T13:35:00.000Z');
   assert.equal(plan.requests.filter(r => r.id === 'NQ').length, 1);
   assert.equal(request('NQ').kind, 'bars');
   assert.throws(() => makePlan(day, { ...calendar, equitiesOpen: false }), /closed/);
@@ -201,4 +205,22 @@ test('reference display labels and links survive generation without changing CME
   assert.equal(packet.keyLevels.find(row => row.id === 'ES').url, responses[0].url);
   assert.deepEqual(packet.benchmarks, original.benchmarks);
   assert.throws(() => generateSnapshot(original, capture, { scannerBenchmarks: true }), /cannot replace CME/);
+});
+
+
+test('new cutoff excludes 09:15 and five-minute yield bars must finish before cutoff', () => {
+  const d = '2026-10-14';
+  const cal = { ...calendar, sessionDate: d, previousEquitySession: '2026-10-13', previousBondSession: '2026-10-13', previousFuturesSession: '2026-10-13' };
+  const p = makePlan(d, cal, '2026-10-14T13:25:00Z');
+  assert.equal(p.cutoffAt, '2026-10-14T13:15:00.000Z');
+  const req = p.requests.find(r => r.id === 'US2Y');
+  const raw = { id: 'US2Y', provider: 'tradingeconomics', symbol: req.symbols.tradingeconomics, unit: 'percent', url: 'https://tradingeconomics.com/united-states/2-year-note-yield', retrievedAt: '2026-10-14T13:25:00Z', delayMinutes: null, intervalMinutes: 5, data: [{ t: '2026-10-14T13:10:00Z', c: 4.8 }, { t: '2026-10-14T13:11:00Z', c: 9 }, { t: '2026-10-14T13:15:00Z', c: 10 }] };
+  const record = normalizeResponse(raw, req, cal);
+  assert.equal(record.value, 4.8);
+  assert.equal(record.asOf, '2026-10-14T13:10:00.000Z');
+  assert.match(record.issue, /5-minute/);
+  const futures = p.requests.find(r => r.id === 'ES');
+  const range = normalizeResponse({ ...raw, id: 'ES', provider: 'tradingview', symbol: futures.symbols.tradingview, unit: 'price', intervalMinutes: 1, data: [{ t: '2026-10-14T13:14:00Z', h: 101, l: 99, c: 100 }, { t: '2026-10-14T13:15:00Z', h: 900, l: 1, c: 500 }] }, futures, cal);
+  assert.equal(range.high, 101);
+  assert.equal(range.asOf, '2026-10-14T13:14:00.000Z');
 });

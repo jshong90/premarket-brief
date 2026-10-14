@@ -66,7 +66,7 @@ export function generateSnapshot(base, capture, { scannerBenchmarks = false } = 
   result.marketContext = base.marketContext?.map(row => {
     if (!touched.has(row.id)) return row;
     const fresh = quote(capture.canonical[row.id]);
-    return { id: row.id, label: row.id === 'SPX' ? 'SPX · CFD proxy' : row.label,
+    return { id: row.id, label: row.id === 'SPX' ? 'SPX · synthetic reference' : row.label,
       name: row.id === 'SPX' ? instruments.SPX.name : row.name, kind: row.kind,
       ...fresh, changeUnit: row.changeUnit, change: change(fresh.value, fresh.previousClose, row.changeUnit) };
   });
@@ -83,13 +83,14 @@ export function generateSnapshot(base, capture, { scannerBenchmarks = false } = 
   }
   const previousMessages = new Set(base.collection?.messages ?? []);
   const messages = [
+    `Premarket price cutoff ${plan.cutoffAt}; later observations are excluded.`,
     `Collection completed ${capture.finishedAt}; observations retain their individual times.`,
     ...capture.requestedIds.map(id => `${id}: ${capture.canonical[id]?.issue ?? 'No usable data; quote and range fields remain null.'}`),
     ...capture.attempts.filter(a => !['ok', 'partial'].includes(a.status)).map(a => `${a.id} / ${a.provider}: ${a.status}${a.reason ? ` (${a.reason})` : ''}.`),
   ];
   result.messages = [...base.messages.filter(m => !previousMessages.has(m)), ...messages];
   result.quotesRefreshedAt = capture.finishedAt;
-  result.collection = { version: 1, id: digest(capture), startedAt: capture.startedAt, finishedAt: capture.finishedAt,
+  result.collection = { version: 1, id: digest(capture), cutoffAt: plan.cutoffAt, startedAt: capture.startedAt, finishedAt: capture.finishedAt,
     timing: capture.timing, requestedIds: capture.requestedIds, messages };
   // Quotes do not establish a frozen scanner or change its capture time.
   return readSnapshot(result);

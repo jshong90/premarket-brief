@@ -12,7 +12,7 @@ export function readSnapshot(input: unknown): Snapshot {
   const optionalTime = (value: unknown) => value===undefined || value===null || validTime(value);
   if (!/^\d{4}-\d{2}-\d{2}$/.test(s.sessionDate) || !Number.isFinite(Date.parse(s.sessionDate)) || new Date(s.sessionDate).toISOString().slice(0,10) !== s.sessionDate) return fail('invalid session date.');
   if (s.scanVariant!==undefined && s.scanVariant!=='opening-0635') return fail('unknown scanner variant.');
-  const w = windows(s.sessionDate,s.scanVariant==='opening-0635'?35:20);
+  const w = windows(s.sessionDate,s.scanVariant==='opening-0635'?35:undefined);
   if (!['archived','draft','imported','frozen','partial','unavailable'].includes(s.status)) return fail('unknown status.');
   if (![s.stocks,s.sectors,s.benchmarks,s.messages].every(Array.isArray) || s.messages.some(x=>typeof x!=='string')) return fail('missing arrays.');
   if (s.previousArchiveDate!==undefined && (!/^\d{4}-\d{2}-\d{2}$/.test(s.previousArchiveDate) || !Number.isFinite(Date.parse(s.previousArchiveDate)) || new Date(s.previousArchiveDate).toISOString().slice(0,10)!==s.previousArchiveDate || s.previousArchiveDate>=s.sessionDate)) return fail('invalid archive date.');
@@ -41,7 +41,7 @@ export function readSnapshot(input: unknown): Snapshot {
     if (!Array.isArray(s.treasuryYields) || new Set(s.treasuryYields.map(row=>row?.tenor)).size!==s.treasuryYields.length || s.treasuryYields.some(row=>!row || !tenors.includes(row.tenor) || ![row.value,row.previousClose].every(validNumber) || typeof row.source!=='string' || typeof row.url!=='string' || !/^https:\/\//i.test(row.url) || !optionalTime(row.asOf) || !optionalTime(row.previousCloseAt) || !optionalTime(row.retrievedAt) || row.value!==null && (row.asOf===undefined || row.asOf===null) && typeof row.issue!=='string')) return fail('invalid treasury yield rows.');
   }
   if (s.keyLevels!==undefined) {
-    const keyWindow=windows(s.sessionDate); // Key Levels remain the 06:20 premarket capture in both views.
+    const keyWindow=windows(s.sessionDate); // Key Levels use the session-specific premarket cutoff in both views.
     const ids=['ES','NQ','YM','RTY'];
     if (!Array.isArray(s.keyLevels) || s.keyLevels.length!==4 || new Set(s.keyLevels.map(row=>row?.id)).size!==4 || ids.some(id=>!s.keyLevels!.some(row=>row?.id===id))) return fail('keyLevels must contain ES, NQ, YM and RTY exactly once.');
     for (const row of s.keyLevels) {

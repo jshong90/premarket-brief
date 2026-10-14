@@ -6,12 +6,38 @@
   "universeCount": 0,
   "universeComplete": false,
   "connected": {
-    "tradingview": false,
-    "massive": false
+    "tradingview": true,
+    "massive": false,
+    "robinhood": true
   },
   "messages": [
-    "Draft for a new session; quotes and commentary await collection.",
-    "Upcoming macro and earnings schedules are carried forward with their original source verification dates. New-session market data, scanner inputs and desk commentary await collection."
+    "Premarket briefing data captured through 06:15 AM Pacific / 09:15 AM Eastern. Desk commentary is pending; no relative-strength scan was requested.",
+    "Premarket price cutoff 2026-10-14T13:15:00.000Z; later observations are excluded.",
+    "Collection completed 2026-10-14T13:33:23.488Z; observations retain their individual times.",
+    "SPX: Provider delay unknown. OpenMarket synthetic SP500 proxy; not the SPX cash index. Quote from completed 1-minute bars. Observation age at retrieval: 15 minutes.",
+    "SPY: Provider delay unknown. Quote from completed 1-minute bars. Observation age at retrieval: 15 minutes.",
+    "QQQ: Provider delay unknown. Quote from completed 1-minute bars. Observation age at retrieval: 15 minutes.",
+    "VIX: Provider delay unknown. Quote from completed 1-minute bars. Observation age at retrieval: 15 minutes.",
+    "US2Y: Provider delay unknown. Quote from completed 5-minute bars. Observation age at retrieval: 26 minutes.",
+    "US5Y: Provider delay unknown. Quote from completed 1-minute bars. Observation age at retrieval: 18 minutes.",
+    "US10Y: Provider delay unknown. Quote from completed 1-minute bars. Observation age at retrieval: 18 minutes.",
+    "US30Y: Provider delay unknown. Quote from completed 1-minute bars. Observation age at retrieval: 18 minutes.",
+    "ES: Provider delay unknown.",
+    "NQ: Provider delay unknown.",
+    "YM: Provider delay unknown. Partial range: 899/915 minute buckets; last bar 2026-10-14T13:14:00.000Z.",
+    "RTY: Provider delay unknown. Partial range: 883/915 minute buckets; last bar 2026-10-14T13:14:00.000Z.",
+    "US2Y / robinhood: unsupported (No yield instrument resolved through this connector route.).",
+    "US5Y / robinhood: unsupported (No yield instrument resolved through this connector route.).",
+    "US10Y / robinhood: unsupported (No yield instrument resolved through this connector route.).",
+    "US30Y / robinhood: unsupported (No yield instrument resolved through this connector route.).",
+    "US2Y / public: unsupported (No yield instrument resolved through this connector route.).",
+    "US5Y / public: unsupported (No yield instrument resolved through this connector route.).",
+    "US10Y / public: unsupported (No yield instrument resolved through this connector route.).",
+    "US30Y / public: unsupported (No yield instrument resolved through this connector route.).",
+    "US5Y / yahoo: unavailable (Yahoo returned HTTP 429 for yield chart endpoint.).",
+    "US10Y / yahoo: unavailable (Yahoo returned HTTP 429 for yield chart endpoint.).",
+    "US30Y / yahoo: unavailable (Yahoo returned HTTP 429 for yield chart endpoint.).",
+    "Futures previous-session references are 15:59 ET one-minute closing bars, not exchange settlements. Treasury references are the last observed yields before 17:00 ET in the previous bond session. Earnings dates were rechecked with Earnings Whispers; retained market-cap checks keep their original dates. Additional earnings candidates without approved-source cap verification are not included."
   ],
   "stocks": [],
   "sectors": [],
@@ -48,87 +74,117 @@
     "macro": [
       {
         "title": "Wednesday, October 14",
-        "body": "5:40 a.m. ET — FED · Governor Michelle W. Bowman speaks\n8:30 a.m. ET — ECONOMIC RELEASE · Consumer Price Index and core CPI (September)\n1:30 p.m. ET — FED · Richmond Fed President Thomas Barkin speaks\n2:00 p.m. ET — FED · Beige Book",
-        "source": "Trading Economics · U.S. calendar",
-        "url": "https://tradingeconomics.com/united-states/calendar",
+        "body": "5:40 a.m. ET — FED · Governor Michelle W. Bowman speaks\n7:00 a.m. ET — ECONOMIC RELEASE · MBA 30-year mortgage rate\n8:30 a.m. ET — ECONOMIC RELEASE · Consumer Price Index and core CPI (September)\n11:30 a.m. ET — TREASURY AUCTION · 17-week bill\n1:30 p.m. ET — FED · Richmond Fed President Thomas Barkin speaks\n2:00 p.m. ET — FED · Beige Book",
+        "source": "Trading Economics · U.S. calendar; U.S. Treasury for auction dates",
+        "url": "https://tradingeconomics.com/calendar",
         "sourceKey": "economicCalendar",
+        "asOf": "2026-10-14T13:31:08.168069+00:00",
         "relatedSources": [
           {
-            "source": "Federal Reserve · October 2026 calendar",
-            "url": "https://www.federalreserve.gov/newsevents/2026-october.htm"
+            "source": "Trading Economics · Governor Michelle W. Bowman speaks",
+            "url": "https://tradingeconomics.com/united-states/interest-rate"
           },
           {
-            "source": "U.S. Bureau of Labor Statistics · 2026 release schedule",
-            "url": "https://www.bls.gov/schedule/2026/home.htm"
+            "source": "Trading Economics · MBA 30-year mortgage rate",
+            "url": "https://tradingeconomics.com/united-states/mortgage-rate"
           },
           {
-            "source": "Federal Reserve · Beige Book",
-            "url": "https://www.federalreserve.gov/monetarypolicy/beige-book-default.htm"
+            "source": "Trading Economics · Consumer Price Index and core CPI (September)",
+            "url": "https://tradingeconomics.com/united-states/core-inflation-rate-mom"
+          },
+          {
+            "source": "Trading Economics · 17-week bill",
+            "url": "https://tradingeconomics.com/united-states/17-week-bill-yield"
+          },
+          {
+            "source": "Trading Economics · Richmond Fed President Thomas Barkin speaks",
+            "url": "https://tradingeconomics.com/united-states/interest-rate"
+          },
+          {
+            "source": "Trading Economics · Beige Book",
+            "url": "https://tradingeconomics.com/united-states/interest-rate"
+          },
+          {
+            "source": "U.S. Treasury · official tentative auction schedule",
+            "url": "https://home.treasury.gov/system/files/221/TentativeAuctionScheduleQ32026.pdf"
           }
-        ],
-        "asOf": "2026-10-13"
+        ]
       },
       {
         "title": "Thursday, October 15",
-        "body": "8:30 a.m. ET — ECONOMIC RELEASE · Producer Price Index, initial jobless claims, and regional manufacturing surveys (September/October)\n8:30 a.m. ET — ECONOMIC RELEASE · Advance Retail Sales (September)\n12:00 p.m. ET — ECONOMIC RELEASE · EIA crude oil inventories",
-        "source": "Trading Economics · U.S. calendar",
-        "url": "https://tradingeconomics.com/united-states/calendar",
+        "body": "8:30 a.m. ET — ECONOMIC RELEASE · Empire State Manufacturing Survey (October)\n8:30 a.m. ET — ECONOMIC RELEASE · Initial jobless claims\n8:30 a.m. ET — ECONOMIC RELEASE · Philadelphia Fed Manufacturing Index (October)\n8:30 a.m. ET — ECONOMIC RELEASE · Producer Price Index and core PPI (September)\n8:30 a.m. ET — ECONOMIC RELEASE · Retail sales, ex-autos and control group (September)\n10:00 a.m. ET — ECONOMIC RELEASE · Business inventories (August)\n11:30 a.m. ET — TREASURY AUCTION · 4-week bill\n11:30 a.m. ET — TREASURY AUCTION · 8-week bill\n12:00 p.m. ET — ECONOMIC RELEASE · EIA crude oil inventories\n12:00 p.m. ET — ECONOMIC RELEASE · EIA gasoline inventories",
+        "source": "Trading Economics · U.S. calendar; U.S. Treasury for auction dates",
+        "url": "https://tradingeconomics.com/calendar",
         "sourceKey": "economicCalendar",
+        "asOf": "2026-10-14T13:31:08.168069+00:00",
         "relatedSources": [
           {
-            "source": "U.S. Bureau of Labor Statistics · 2026 release schedule",
-            "url": "https://www.bls.gov/schedule/2026/home.htm"
+            "source": "Trading Economics · Empire State Manufacturing Survey (October)",
+            "url": "https://tradingeconomics.com/united-states/ny-empire-state-manufacturing-index"
           },
           {
-            "source": "U.S. Census Bureau · economic indicator calendar",
-            "url": "https://www.census.gov/economic-indicators/calendar-listview.html"
+            "source": "Trading Economics · Initial jobless claims",
+            "url": "https://tradingeconomics.com/united-states/jobless-claims"
+          },
+          {
+            "source": "Trading Economics · Philadelphia Fed Manufacturing Index (October)",
+            "url": "https://tradingeconomics.com/united-states/philadelphia-fed-manufacturing-index"
+          },
+          {
+            "source": "Trading Economics · Producer Price Index and core PPI (September)",
+            "url": "https://tradingeconomics.com/united-states/producer-price-inflation-mom"
+          },
+          {
+            "source": "Trading Economics · Retail sales, ex-autos and control group (September)",
+            "url": "https://tradingeconomics.com/united-states/retail-sales"
+          },
+          {
+            "source": "Trading Economics · Business inventories (August)",
+            "url": "https://tradingeconomics.com/united-states/business-inventories"
+          },
+          {
+            "source": "Trading Economics · 4-week bill",
+            "url": "https://tradingeconomics.com/united-states/4-week-bill-yield"
+          },
+          {
+            "source": "Trading Economics · 8-week bill",
+            "url": "https://tradingeconomics.com/united-states/8-week-bill-yield"
+          },
+          {
+            "source": "Trading Economics · EIA crude oil inventories",
+            "url": "https://tradingeconomics.com/united-states/crude-oil-stocks-change"
+          },
+          {
+            "source": "Trading Economics · EIA gasoline inventories",
+            "url": "https://tradingeconomics.com/united-states/gasoline-stocks-change"
+          },
+          {
+            "source": "U.S. Treasury · official tentative auction schedule",
+            "url": "https://home.treasury.gov/system/files/221/TentativeAuctionScheduleQ32026.pdf"
           }
-        ],
-        "asOf": "2026-10-13T20:41:37.798Z"
+        ]
       },
       {
         "title": "Friday, October 16",
-        "body": "8:30 a.m. ET — ECONOMIC RELEASE · U.S. Import and Export Price Indexes (September)\n8:30 a.m. ET — ECONOMIC RELEASE · NY Fed Services Activity Index\n9:15 a.m. ET — ECONOMIC RELEASE · Industrial Production and Capacity Utilization (September)",
+        "body": "8:30 a.m. ET — ECONOMIC RELEASE · Export prices (September)\n8:30 a.m. ET — ECONOMIC RELEASE · Import prices (September)\n9:15 a.m. ET — ECONOMIC RELEASE · Industrial production (September)",
         "source": "Trading Economics · U.S. calendar",
-        "url": "https://tradingeconomics.com/united-states/calendar",
+        "url": "https://tradingeconomics.com/calendar",
         "sourceKey": "economicCalendar",
+        "asOf": "2026-10-14T13:31:08.168069+00:00",
         "relatedSources": [
           {
-            "source": "U.S. Bureau of Labor Statistics · 2026 release schedule",
-            "url": "https://www.bls.gov/schedule/2026/home.htm"
+            "source": "Trading Economics · Export prices (September)",
+            "url": "https://tradingeconomics.com/united-states/export-prices-mom"
           },
           {
-            "source": "Federal Reserve · Industrial Production and Capacity Utilization",
-            "url": "https://www.federalreserve.gov/releases/g17/"
-          }
-        ],
-        "asOf": "2026-10-13"
-      },
-      {
-        "source": "U.S. Treasury · tentative auction schedule; Trading Economics · auction times",
-        "url": "https://home.treasury.gov/system/files/221/TentativeAuctionScheduleQ32026.pdf",
-        "relatedSources": [
+            "source": "Trading Economics · Import prices (September)",
+            "url": "https://tradingeconomics.com/united-states/import-prices-mom"
+          },
           {
-            "source": "Trading Economics · U.S. calendar",
-            "url": "https://tradingeconomics.com/united-states/calendar"
+            "source": "Trading Economics · Industrial production (September)",
+            "url": "https://tradingeconomics.com/united-states/industrial-production-mom"
           }
-        ],
-        "asOf": "2026-10-13T20:31:17.766Z",
-        "title": "Wednesday, October 14",
-        "body": "11:30 a.m. ET — TREASURY AUCTION · 17-week bill"
-      },
-      {
-        "source": "U.S. Treasury · tentative auction schedule; Trading Economics · auction times",
-        "url": "https://home.treasury.gov/system/files/221/TentativeAuctionScheduleQ32026.pdf",
-        "relatedSources": [
-          {
-            "source": "Trading Economics · U.S. calendar",
-            "url": "https://tradingeconomics.com/united-states/calendar"
-          }
-        ],
-        "asOf": "2026-10-13T20:31:17.766Z",
-        "title": "Thursday, October 15",
-        "body": "11:30 a.m. ET — TREASURY AUCTION · 4-week and 8-week bills"
+        ]
       }
     ],
     "earnings": [
@@ -137,7 +193,7 @@
         "body": "",
         "source": "Earnings Whispers · confirmed earnings calendar",
         "url": "https://www.earningswhispers.com/calendar/20261014",
-        "asOf": "2026-10-13",
+        "asOf": "2026-10-14T13:31:08.143222+00:00",
         "sessions": [
           {
             "period": "Before Open",
@@ -207,7 +263,7 @@
         "body": "",
         "source": "Earnings Whispers · confirmed earnings calendar",
         "url": "https://www.earningswhispers.com/calendar/20261015",
-        "asOf": "2026-10-13",
+        "asOf": "2026-10-14T13:31:08.174798+00:00",
         "sessions": [
           {
             "period": "Before Open",
@@ -298,7 +354,7 @@
         "body": "",
         "source": "Earnings Whispers · confirmed earnings calendar",
         "url": "https://www.earningswhispers.com/calendar/20261016",
-        "asOf": "2026-10-13",
+        "asOf": "2026-10-14T13:31:08.175600+00:00",
         "sessions": [
           {
             "period": "Before Open",
@@ -345,209 +401,292 @@
   "marketContext": [
     {
       "id": "SPX",
-      "label": "SPX · synthetic proxy",
+      "label": "SPX · synthetic reference",
       "name": "OpenMarket HYPERLIQUID_HIP3 / xyz:SP500 proxy",
       "kind": "index",
-      "value": null,
-      "asOf": null,
-      "previousClose": null,
-      "previousCloseAt": null,
-      "retrievedAt": null,
-      "source": "Not captured",
-      "url": "https://openmarket.xyz/chart/p5Zut8Tg",
-      "issue": "Awaiting capture for this session.",
+      "value": 7779.1,
+      "asOf": "2026-10-14T13:14:00.000Z",
+      "previousClose": 7803.9,
+      "previousCloseAt": "2026-10-13T19:59:00.000Z",
+      "previousCloseSource": "OpenMarket · same synthetic instrument, previous-session 15:59 ET bar",
+      "previousCloseUrl": "https://openmarket.xyz/",
+      "retrievedAt": "2026-10-14T13:29:34.839Z",
+      "source": "OpenMarket MCP · HYPERLIQUID_HIP3 / xyz:SP500",
+      "url": "https://openmarket.xyz/",
+      "issue": "Provider delay unknown. OpenMarket synthetic SP500 proxy; not the SPX cash index. Quote from completed 1-minute bars. Observation age at retrieval: 15 minutes.",
       "changeUnit": "%",
-      "change": null
+      "change": -0.3177898230371845
     },
     {
       "id": "SPY",
       "label": "SPY",
       "name": "SPDR S&P 500 ETF Trust",
       "kind": "etf",
-      "value": null,
-      "asOf": null,
-      "previousClose": null,
-      "previousCloseAt": null,
-      "retrievedAt": null,
-      "source": "Not captured",
-      "url": "https://robinhood.com/stocks/SPY",
-      "issue": "Awaiting capture for this session.",
+      "value": 775.45,
+      "asOf": "2026-10-14T13:14:00.000Z",
+      "previousClose": 778.01,
+      "previousCloseAt": "2026-10-13T19:59:00.000Z",
+      "previousCloseSource": "Robinhood · previous-session 15:59 ET closing bar",
+      "previousCloseUrl": "https://robinhood.com/stocks/SPY/",
+      "retrievedAt": "2026-10-14T13:29:29.603Z",
+      "source": "Robinhood MCP · SPY",
+      "url": "https://robinhood.com/stocks/SPY/",
+      "issue": "Provider delay unknown. Quote from completed 1-minute bars. Observation age at retrieval: 15 minutes.",
       "changeUnit": "%",
-      "change": null
+      "change": -0.3290446138224379
     },
     {
       "id": "QQQ",
       "label": "QQQ",
       "name": "Invesco QQQ Trust",
       "kind": "etf",
-      "value": null,
-      "asOf": null,
-      "previousClose": null,
-      "previousCloseAt": null,
-      "retrievedAt": null,
-      "source": "Not captured",
-      "url": "https://robinhood.com/stocks/QQQ",
-      "issue": "Awaiting capture for this session.",
+      "value": 738.85,
+      "asOf": "2026-10-14T13:14:00.000Z",
+      "previousClose": 743.63,
+      "previousCloseAt": "2026-10-13T19:59:00.000Z",
+      "previousCloseSource": "Robinhood · previous-session 15:59 ET closing bar",
+      "previousCloseUrl": "https://robinhood.com/stocks/QQQ/",
+      "retrievedAt": "2026-10-14T13:29:29.603Z",
+      "source": "Robinhood MCP · QQQ",
+      "url": "https://robinhood.com/stocks/QQQ/",
+      "issue": "Provider delay unknown. Quote from completed 1-minute bars. Observation age at retrieval: 15 minutes.",
       "changeUnit": "%",
-      "change": null
+      "change": -0.6427927867353356
     },
     {
       "id": "VIX",
       "label": "VIX",
       "name": "Cboe Volatility Index",
       "kind": "volatility",
-      "value": null,
-      "asOf": null,
-      "previousClose": null,
-      "previousCloseAt": null,
-      "retrievedAt": null,
-      "source": "Not captured",
-      "url": "https://www.tradingview.com/chart/?symbol=CBOE%3AVIX",
-      "issue": "Awaiting capture for this session.",
+      "value": 15.75,
+      "asOf": "2026-10-14T13:14:00.000Z",
+      "previousClose": 15.27,
+      "previousCloseAt": "2026-10-13T20:14:00.000Z",
+      "previousCloseSource": "TradingView · previous-session 16:14 ET VIX bar",
+      "previousCloseUrl": "https://www.tradingview.com/symbols/CBOE-VIX/",
+      "retrievedAt": "2026-10-14T13:29:32.560Z",
+      "source": "TradingView Official MCP · CBOE:VIX",
+      "url": "https://www.tradingview.com/symbols/CBOE-VIX/",
+      "issue": "Provider delay unknown. Quote from completed 1-minute bars. Observation age at retrieval: 15 minutes.",
       "changeUnit": "%",
-      "change": null
+      "change": 3.143418467583503
     },
     {
       "id": "US10Y",
       "label": "10Y",
       "name": "U.S. 10-year Treasury yield",
       "kind": "yield",
-      "value": null,
-      "previousClose": null,
-      "previousCloseAt": null,
-      "change": null,
+      "value": 5.322,
+      "asOf": "2026-10-14T13:13:00.000Z",
+      "previousClose": 5.214,
+      "previousCloseAt": "2026-10-13T20:59:00.000Z",
+      "previousCloseSource": "Trading Economics · previous Treasury session last observed yield before 17:00 ET",
+      "previousCloseUrl": "https://tradingeconomics.com/united-states/government-bond-yield",
+      "retrievedAt": "2026-10-14T13:31:00.154Z",
+      "source": "Trading Economics · USGG10YR:IND",
+      "url": "https://tradingeconomics.com/united-states/government-bond-yield",
+      "issue": "Provider delay unknown. Quote from completed 1-minute bars. Observation age at retrieval: 18 minutes.",
       "changeUnit": "bp",
-      "source": "Not captured",
-      "asOf": null,
-      "retrievedAt": null,
-      "issue": "Awaiting capture for this session.",
-      "url": "https://tradingeconomics.com/united-states/government-bond-yield"
+      "change": 10.799999999999965
     }
   ],
   "keyLevels": [
     {
       "id": "ES",
       "label": "S&P 500 (ES)",
-      "high": null,
-      "low": null,
-      "highTime": null,
-      "lowTime": null,
-      "asOf": null,
-      "retrievedAt": null,
-      "source": "Not captured",
-      "issue": "No valid timestamped range collected."
+      "symbol": "CME_MINI:ES1!",
+      "url": "https://www.tradingview.com/symbols/CME_MINI-ES1!/",
+      "high": 7879.75,
+      "low": 7822,
+      "highTime": "2026-10-14T12:30:00.000Z",
+      "lowTime": "2026-10-14T13:01:00.000Z",
+      "asOf": "2026-10-14T13:14:00.000Z",
+      "retrievedAt": "2026-10-14T13:29:32.776Z",
+      "source": "TradingView Official MCP · CME_MINI:ES1!",
+      "issue": "Provider delay unknown."
     },
     {
       "id": "NQ",
       "label": "Nasdaq-100 (NQ)",
-      "high": null,
-      "low": null,
-      "highTime": null,
-      "lowTime": null,
-      "asOf": null,
-      "retrievedAt": null,
-      "source": "Not captured",
-      "issue": "No valid timestamped range collected."
+      "symbol": "CME_MINI:NQ1!",
+      "url": "https://www.tradingview.com/symbols/CME_MINI-NQ1!/",
+      "high": 30891.5,
+      "low": 30543,
+      "highTime": "2026-10-14T03:20:00.000Z",
+      "lowTime": "2026-10-14T12:59:00.000Z",
+      "asOf": "2026-10-14T13:14:00.000Z",
+      "retrievedAt": "2026-10-14T13:29:34.775Z",
+      "source": "TradingView Official MCP · CME_MINI:NQ1!",
+      "issue": "Provider delay unknown."
     },
     {
       "id": "YM",
       "label": "Dow (YM)",
-      "high": null,
-      "low": null,
-      "highTime": null,
-      "lowTime": null,
-      "asOf": null,
-      "retrievedAt": null,
-      "source": "Not captured",
-      "issue": "No valid timestamped range collected."
+      "symbol": "CBOT_MINI:YM1!",
+      "url": "https://www.tradingview.com/symbols/CBOT_MINI-YM1!/",
+      "high": 52181,
+      "low": 51744,
+      "highTime": "2026-10-14T09:40:00.000Z",
+      "lowTime": "2026-10-14T12:59:00.000Z",
+      "asOf": "2026-10-14T13:14:00.000Z",
+      "retrievedAt": "2026-10-14T13:29:39.116Z",
+      "source": "TradingView Official MCP · CBOT_MINI:YM1!",
+      "issue": "Provider delay unknown. Partial range: 899/915 minute buckets; last bar 2026-10-14T13:14:00.000Z."
     },
     {
       "id": "RTY",
       "label": "Russell 2000 (RTY)",
-      "high": null,
-      "low": null,
-      "highTime": null,
-      "lowTime": null,
-      "asOf": null,
-      "retrievedAt": null,
-      "source": "Not captured",
-      "issue": "No valid timestamped range collected."
+      "symbol": "CME_MINI:RTY1!",
+      "url": "https://www.tradingview.com/symbols/CME_MINI-RTY1!/",
+      "high": 2816,
+      "low": 2760.3,
+      "highTime": "2026-10-14T12:30:00.000Z",
+      "lowTime": "2026-10-14T12:59:00.000Z",
+      "asOf": "2026-10-14T13:14:00.000Z",
+      "retrievedAt": "2026-10-14T13:29:33.046Z",
+      "source": "TradingView Official MCP · CME_MINI:RTY1!",
+      "issue": "Provider delay unknown. Partial range: 883/915 minute buckets; last bar 2026-10-14T13:14:00.000Z."
     }
   ],
   "indexQuotes": [
     {
       "id": "NQ",
-      "value": null,
-      "asOf": null,
-      "previousClose": null,
-      "previousCloseAt": null,
-      "retrievedAt": null,
-      "source": "Not captured",
-      "url": "https://www.tradingview.com/chart/?symbol=CME_MINI%3ANQ1!",
-      "issue": "Awaiting capture for this session.",
       "label": "NQ",
       "symbol": "CME_MINI:NQ1!",
-      "instrumentType": "futures"
+      "value": 30587.75,
+      "asOf": "2026-10-14T13:14:00.000Z",
+      "previousClose": 30788.75,
+      "previousCloseAt": "2026-10-13T19:59:00.000Z",
+      "previousCloseSource": "TradingView · previous-session 15:59 ET closing bar; not futures settlement",
+      "previousCloseUrl": "https://www.tradingview.com/symbols/CME_MINI-NQ1!/",
+      "retrievedAt": "2026-10-14T13:29:34.775Z",
+      "source": "TradingView Official MCP · CME_MINI:NQ1!",
+      "url": "https://www.tradingview.com/symbols/CME_MINI-NQ1!/",
+      "issue": "Provider delay unknown."
     },
     {
       "id": "ES",
-      "value": null,
-      "asOf": null,
-      "previousClose": null,
-      "previousCloseAt": null,
-      "retrievedAt": null,
-      "source": "Not captured",
-      "url": "https://www.tradingview.com/chart/?symbol=CME_MINI%3AES1!",
-      "issue": "Awaiting capture for this session.",
       "label": "ES",
       "symbol": "CME_MINI:ES1!",
-      "instrumentType": "futures"
+      "value": 7830,
+      "asOf": "2026-10-14T13:14:00.000Z",
+      "previousClose": 7856,
+      "previousCloseAt": "2026-10-13T19:59:00.000Z",
+      "previousCloseSource": "TradingView · previous-session 15:59 ET closing bar; not futures settlement",
+      "previousCloseUrl": "https://www.tradingview.com/symbols/CME_MINI-ES1!/",
+      "retrievedAt": "2026-10-14T13:29:32.776Z",
+      "source": "TradingView Official MCP · CME_MINI:ES1!",
+      "url": "https://www.tradingview.com/symbols/CME_MINI-ES1!/",
+      "issue": "Provider delay unknown."
     }
   ],
   "treasuryYields": [
     {
       "tenor": "2Y",
-      "value": null,
-      "previousClose": null,
-      "asOf": null,
-      "previousCloseAt": null,
-      "retrievedAt": null,
-      "source": "Not captured",
+      "value": 4.948,
+      "asOf": "2026-10-14T13:05:00.000Z",
+      "previousClose": 4.814,
+      "previousCloseAt": "2026-10-13T20:57:00.000Z",
+      "previousCloseSource": "Trading Economics · previous Treasury session last observed yield before 17:00 ET",
+      "previousCloseUrl": "https://tradingeconomics.com/united-states/2-year-note-yield",
+      "retrievedAt": "2026-10-14T13:31:01.285Z",
+      "source": "Trading Economics · USGG2YR:IND",
       "url": "https://tradingeconomics.com/united-states/2-year-note-yield",
-      "issue": "Awaiting capture for this session."
+      "issue": "Provider delay unknown. Quote from completed 5-minute bars. Observation age at retrieval: 26 minutes."
     },
     {
       "tenor": "5Y",
-      "value": null,
-      "previousClose": null,
-      "asOf": null,
-      "previousCloseAt": null,
-      "retrievedAt": null,
-      "source": "Not captured",
+      "value": 5.142,
+      "asOf": "2026-10-14T13:13:00.000Z",
+      "previousClose": 5.009,
+      "previousCloseAt": "2026-10-13T20:59:00.000Z",
+      "previousCloseSource": "Trading Economics · previous Treasury session last observed yield before 17:00 ET",
+      "previousCloseUrl": "https://tradingeconomics.com/united-states/5-year-note-yield",
+      "retrievedAt": "2026-10-14T13:31:00.177Z",
+      "source": "Trading Economics · USGG5YR:IND",
       "url": "https://tradingeconomics.com/united-states/5-year-note-yield",
-      "issue": "Awaiting capture for this session."
+      "issue": "Provider delay unknown. Quote from completed 1-minute bars. Observation age at retrieval: 18 minutes."
     },
     {
       "tenor": "10Y",
-      "value": null,
-      "previousClose": null,
-      "asOf": null,
-      "previousCloseAt": null,
-      "retrievedAt": null,
-      "source": "Not captured",
+      "value": 5.322,
+      "asOf": "2026-10-14T13:13:00.000Z",
+      "previousClose": 5.214,
+      "previousCloseAt": "2026-10-13T20:59:00.000Z",
+      "previousCloseSource": "Trading Economics · previous Treasury session last observed yield before 17:00 ET",
+      "previousCloseUrl": "https://tradingeconomics.com/united-states/government-bond-yield",
+      "retrievedAt": "2026-10-14T13:31:00.154Z",
+      "source": "Trading Economics · USGG10YR:IND",
       "url": "https://tradingeconomics.com/united-states/government-bond-yield",
-      "issue": "Awaiting capture for this session."
+      "issue": "Provider delay unknown. Quote from completed 1-minute bars. Observation age at retrieval: 18 minutes."
     },
     {
       "tenor": "30Y",
-      "value": null,
-      "previousClose": null,
-      "asOf": null,
-      "previousCloseAt": null,
-      "retrievedAt": null,
-      "source": "Not captured",
+      "value": 5.624,
+      "asOf": "2026-10-14T13:13:00.000Z",
+      "previousClose": 5.56,
+      "previousCloseAt": "2026-10-13T20:59:00.000Z",
+      "previousCloseSource": "Trading Economics · previous Treasury session last observed yield before 17:00 ET",
+      "previousCloseUrl": "https://tradingeconomics.com/united-states/30-year-bond-yield",
+      "retrievedAt": "2026-10-14T13:31:01.294Z",
+      "source": "Trading Economics · USGG30Y:IND",
       "url": "https://tradingeconomics.com/united-states/30-year-bond-yield",
-      "issue": "Awaiting capture for this session."
+      "issue": "Provider delay unknown. Quote from completed 1-minute bars. Observation age at retrieval: 18 minutes."
     }
-  ]
+  ],
+  "quotesRefreshedAt": "2026-10-14T13:33:23.488Z",
+  "collection": {
+    "version": 1,
+    "id": "b753a865358d8dd6baab20ed7407a54d2b307eb78f1366c59526a9608c2a1b25",
+    "cutoffAt": "2026-10-14T13:15:00.000Z",
+    "startedAt": "2026-10-14T13:33:22.884Z",
+    "finishedAt": "2026-10-14T13:33:23.488Z",
+    "timing": {
+      "elapsedMs": 604,
+      "processingMs": 43,
+      "providerAttempts": 23
+    },
+    "requestedIds": [
+      "SPX",
+      "SPY",
+      "QQQ",
+      "VIX",
+      "US2Y",
+      "US5Y",
+      "US10Y",
+      "US30Y",
+      "ES",
+      "NQ",
+      "YM",
+      "RTY"
+    ],
+    "messages": [
+      "Premarket price cutoff 2026-10-14T13:15:00.000Z; later observations are excluded.",
+      "Collection completed 2026-10-14T13:33:23.488Z; observations retain their individual times.",
+      "SPX: Provider delay unknown. OpenMarket synthetic SP500 proxy; not the SPX cash index. Quote from completed 1-minute bars. Observation age at retrieval: 15 minutes.",
+      "SPY: Provider delay unknown. Quote from completed 1-minute bars. Observation age at retrieval: 15 minutes.",
+      "QQQ: Provider delay unknown. Quote from completed 1-minute bars. Observation age at retrieval: 15 minutes.",
+      "VIX: Provider delay unknown. Quote from completed 1-minute bars. Observation age at retrieval: 15 minutes.",
+      "US2Y: Provider delay unknown. Quote from completed 5-minute bars. Observation age at retrieval: 26 minutes.",
+      "US5Y: Provider delay unknown. Quote from completed 1-minute bars. Observation age at retrieval: 18 minutes.",
+      "US10Y: Provider delay unknown. Quote from completed 1-minute bars. Observation age at retrieval: 18 minutes.",
+      "US30Y: Provider delay unknown. Quote from completed 1-minute bars. Observation age at retrieval: 18 minutes.",
+      "ES: Provider delay unknown.",
+      "NQ: Provider delay unknown.",
+      "YM: Provider delay unknown. Partial range: 899/915 minute buckets; last bar 2026-10-14T13:14:00.000Z.",
+      "RTY: Provider delay unknown. Partial range: 883/915 minute buckets; last bar 2026-10-14T13:14:00.000Z.",
+      "US2Y / robinhood: unsupported (No yield instrument resolved through this connector route.).",
+      "US5Y / robinhood: unsupported (No yield instrument resolved through this connector route.).",
+      "US10Y / robinhood: unsupported (No yield instrument resolved through this connector route.).",
+      "US30Y / robinhood: unsupported (No yield instrument resolved through this connector route.).",
+      "US2Y / public: unsupported (No yield instrument resolved through this connector route.).",
+      "US5Y / public: unsupported (No yield instrument resolved through this connector route.).",
+      "US10Y / public: unsupported (No yield instrument resolved through this connector route.).",
+      "US30Y / public: unsupported (No yield instrument resolved through this connector route.).",
+      "US5Y / yahoo: unavailable (Yahoo returned HTTP 429 for yield chart endpoint.).",
+      "US10Y / yahoo: unavailable (Yahoo returned HTTP 429 for yield chart endpoint.).",
+      "US30Y / yahoo: unavailable (Yahoo returned HTTP 429 for yield chart endpoint.)."
+    ],
+    "baseHash": "70708acaa03a70a5e3d130ac2c300caac45d0498e979ff47b897ae94ac3df02f"
+  }
 }

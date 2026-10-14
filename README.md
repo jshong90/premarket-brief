@@ -14,9 +14,9 @@ The site is organized by user task under `src/features/`: the dashboard, morning
 
 The main dashboard remains the morning brief followed by the relative-strength scanner. `index.html`, `premarket.html`, `briefing-builder.html`, and `archive.html` are Vite entry pages; all share the same theme and style system. Existing date query links continue to open the corresponding archived packet.
 
-**The relative-strength scanner cutoff is 06:20 AM America/Los_Angeles (09:20 AM Eastern), ten minutes before the open.** It follows daylight saving time, rather than remaining fixed to UTC−8 all year. No new scanner session is created on weekends or US stock-market holidays. Index and bond quote updates are separate from this cutoff: refresh them only at the user's request, at the actual observation time, without changing an already captured scanner range.
+**The premarket cutoff is 06:15 AM America/Los_Angeles (09:15 AM Eastern), effective October 14, 2026.** Earlier archived sessions retain their original 06:20 Pacific cutoff. The policy follows daylight saving time. No new session is created on weekends or US stock-market holidays. A quote refresh does not establish or alter a frozen relative-strength scan.
 
-Stocks and ETFs: 04:00 to 09:20 ET. NQ and ES futures: prior calendar day 18:00 to 09:20 ET. The end is exclusive: the 09:19 one-minute bar is the last eligible bar, and the 09:20 bar is excluded. If collection runs late, request historical bars bounded by the same cutoff; do not use later live range fields.
+Stocks and ETFs: 04:00 to 09:15 ET. Futures: prior calendar day 18:00 to 09:15 ET. The end is exclusive: the 09:14 one-minute bar is the last eligible bar. Late collection uses historical observations before that same cutoff, never later live range fields. Treasury providers may return five-minute observations; only fully completed bars qualify and the actual resolution is disclosed.
 
 The hosted dashboard reads `data/snapshot.json` once when opened and keeps it fixed. Both HTML entries show the same combined page. There is no polling or live refresh. The stock table shows only the 25 rankable names with the lowest downside capture for the selected benchmark (ticker breaks ties). Search and sector filters narrow that set; column sorting and the recovery tab reorder it without changing membership or RS rank. Coverage and classification counts still use the whole packet. Reloading the page reads the latest published packet. The `?dev=1` query enables design controls whose changes are local to that browser; it does not publish market data or design choices.
 
@@ -84,7 +84,7 @@ The scanner uses premarket price ranges and some comparison rules to calculate r
 
 `public/data/snapshot.json` is the editable daily packet; Vite publishes it at `dist/data/snapshot.json`. For a new daily packet:
 
-- `sessionDate`: YYYY-MM-DD in New York. A `draft` has a preparation time in `fetchedAt` and no `cutoffAt`. A finalized scanner has `cutoffAt` exactly at 09:20 ET and `fetchedAt` at or after the cutoff. `quotesRefreshedAt` independently records an on-request quote update and may be earlier or later than the scanner cutoff.
+- `sessionDate`: YYYY-MM-DD in New York. A `draft` has a preparation time in `fetchedAt` and no `cutoffAt`. A finalized scanner has `cutoffAt` at the session-specific cutoff (09:15 ET from October 14, 2026; 09:20 ET earlier) and `fetchedAt` at or after the cutoff. `quotesRefreshedAt` independently records an on-request quote update and may be earlier or later than the scanner cutoff.
 - `status`: `draft` for a prepared brief with no frozen scanner; `frozen`, `partial`, or `unavailable` for cutoff-based scanner captures. `imported` is reserved for legacy, unverified examples and must not assert a cutoff.
 - `previousArchiveDate`: most recent dated archive, when available. A `?date=YYYY-MM-DD` request opens its corresponding `snapshot-YYYY-MM-DD.json` file. Update the pointer when archiving a session.
 - `universeCount`: discovered universe size; `universeComplete`: whether discovery is complete; `messages`: coverage and delay notes.
