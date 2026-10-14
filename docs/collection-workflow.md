@@ -47,7 +47,7 @@ The input is an array, or an object containing `responses`. Each envelope contai
 | `url` | Direct HTTPS source reference |
 | `retrievedAt` | Actual ISO time the provider response was obtained |
 | `delayMinutes` | Provider-reported delay, or `null` if unknown |
-| `intervalMinutes` | Required value `1` for bars, including a quote obtained from bars |
+| `intervalMinutes` | Required value `1` for ranges; quotes from timestamped bars support `1` or `5`, with the full interval completed before cutoff |
 | `data` | Market response: a quote object or OHLC minute-bar array/container |
 | `previousClose` | Optional `{value, asOf, symbol, source, url}`; a matched, separately timestamped prior-session reference |
 | `error` | On failure, `{code, message}`; codes include `unsupported`, `unavailable`, `transient`, `invalid` |
@@ -60,8 +60,8 @@ For an authenticated programmatic connection, `brief:collect --adapter /absolute
 
 ## Cutoff, delay and shared observations
 
-- Equities: 04:00 ET through, excluding, 09:20 ET. Futures ranges: prior calendar day 18:00 ET through, excluding, 09:20 ET. DST conversion uses the application's existing rules.
-- Only completed one-minute bars qualify. Retrieval before a minute closes excludes that bar. The 09:20 bar and regular-session values are excluded even when collected late.
+- Equities: 04:00 ET through, excluding, 09:15 ET. Futures ranges: prior calendar day 18:00 ET through, excluding, 09:15 ET. Effective October 14, 2026; earlier archives retain their 09:20 cutoff. DST conversion uses the application's existing rules.
+- Only completed one-minute bars qualify. Retrieval before a minute closes excludes that bar. The 09:15 bar and regular-session values are excluded even when collected late.
 - Range coverage counts unique eligible minute buckets. Missing buckets, unknown delay and actual latest timestamps are disclosed. Partial ranges can appear as partial key levels; they cannot supply complete scanner benchmarks.
 - OpenMarket's `HYPERLIQUID_HIP3 / xyz:SP500` is labeled as a temporary SPX proxy, not the cash index. A cash SPX previous close cannot be used to compute change against it. Both values must refer to the exact same instrument. No silent substitution with ES.
 - Prior-session closes are cached by instrument, exact provider symbol and previous trading date. They retain original provenance. Live quotes and ranges are never silently reused from a previous run.

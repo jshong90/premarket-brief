@@ -94,17 +94,18 @@ export function normalizeResponse(envelope, request, calendar, cache = { previou
     let raw = envelope.data;
     const quoteBars = Array.isArray(raw) ? raw : raw?.bars ?? raw?.results;
     if (Array.isArray(quoteBars)) {
-      if (envelope.intervalMinutes !== 1) throw new Error('A quote from bars requires an explicit one-minute interval');
+      if (![1, 5].includes(envelope.intervalMinutes)) throw new Error('A quote from bars requires an explicit supported interval (1 or 5 minutes)');
       raw = quoteBars.filter(b => b.interpolated !== true && b.is_interpolated !== true)
         .map(b => ({ ...b, asOf: barTime(b.t ?? b.time ?? b.timestamp ?? b.begins_at) }))
-        .filter(b => Date.parse(b.asOf) + 60000 <= latest)
+        .filter(b => Date.parse(b.asOf) + envelope.intervalMinutes * 60000 <= latest)
         .sort((a, b) => Date.parse(a.asOf) - Date.parse(b.asOf)).at(-1);
     }
     const asOf = barTime(raw?.asOf ?? raw?.timestamp ?? raw?.updated_at ?? raw?.t ?? raw?.time ?? raw?.begins_at);
     const value = numeric(raw?.value ?? raw?.price ?? raw?.last_trade_price ?? raw?.c ?? raw?.close ?? raw?.close_price, 'quote');
     if (Date.parse(asOf) > Date.parse(retrievedAt)) throw new Error('Observation is later than retrieval');
     // A bar close can be used as a quote only if the minute has completed.
-    if (envelope.intervalMinutes != null && (envelope.intervalMinutes !== 1 || Date.parse(asOf) + 60000 > latest)) throw new Error('Quote bar has not completed inside the capture window');
+    if (envelope.intervalMinutes != null && (![1, 5].includes(envelope.intervalMinutes) || Date.parse(asOf) + envelope.intervalMinutes * 60000 > latest)) throw new Error('Quote bar has not completed inside the capture window');
+    if (envelope.intervalMinutes != null) issues.push(`Quote from completed ${envelope.intervalMinutes}-minute bars.`);
     if (Date.parse(asOf) >= Date.parse(request.endAt)) throw new Error('Quote is at or after cutoff');
     const outside = Date.parse(asOf) < Date.parse(request.startAt);
     if (outside) issues.push('No observation inside this premarket window; earlier reading was not used as today’s price.');

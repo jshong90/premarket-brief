@@ -33,6 +33,6 @@ export function KeyLevelsTable({ data }: { data: Snapshot }) {
           </tr>;
         })}
     </BriefTable>
-    <p className="key-levels-note">Window: {formatFuturesSession(data.sessionDate)}; the 9:20 AM ET bar is excluded. {coverageIssues.length > 0 ? coverageIssues.map((row) => `${row.label}: ${row.issue}`).join(' ') : 'All four rows have complete returned-bar coverage.'}</p>
+    <p className="key-levels-note">Window: {formatFuturesSession(data.sessionDate)}; the cutoff bar is excluded. {coverageIssues.length > 0 ? coverageIssues.map((row) => `${row.label}: ${row.issue}`).join(' ') : 'All four rows have complete returned-bar coverage.'}</p>
   </>;
 }

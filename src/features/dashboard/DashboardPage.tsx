@@ -1,5 +1,7 @@
 'use client';
 
+import { cutoffMinuteForDate } from '../../lib/ranges';
+
 import { filterScannerRows } from './scannerRows';
 
 import { SectionJump } from '@/components/brief/SectionJump';
@@ -166,8 +168,8 @@ export default function Scanner() {
   const isArchivePreview=/^\d{4}-\d{2}-\d{2}$/.test(new URLSearchParams(window.location.search).get('date')||'');
   const isDraftBrief=data.status==='draft';
   const isOpening=data.scanVariant==='opening-0635';
-  const cutoffPacific=isOpening?'06:35':'06:20';
-  const cutoffEastern=isOpening?'09:35':'09:20';
+  const cutoffPacific=isOpening?'06:35':`06:${cutoffMinuteForDate(data.sessionDate)}`;
+  const cutoffEastern=isOpening?'09:35':`09:${cutoffMinuteForDate(data.sessionDate)}`;
   const isDevelopmentMode=new URLSearchParams(window.location.search).get('dev')==='1';
   const pageDateLabel=dateLabel;
   const archiveDate=data.previousArchiveDate;
@@ -210,7 +212,7 @@ export default function Scanner() {
         <div className="heading-meta"><span className="session-chip"><LockKeyhole size={13}/>{isDraftBrief?'DRAFT':isArchivePreview?'ARCHIVE COPY':mode==='imported'?'LEGACY EXAMPLE':isOpening?'OPENING EXPERIMENT':data.status==='partial'?'PARTIAL SNAPSHOT':'FROZEN SNAPSHOT'}</span></div>
       </div>
       <div className={`source-notice ${mode==='imported'?'is-imported':''}`}>
-        <Info size={16}/><div>{isDraftBrief?<><strong>{dateLabel} brief · draft</strong><span>{data.messages[0]||'Premarket inputs and cutoff ranges are pending.'}</span></>:isArchivePreview?<><strong>{dateLabel} archive</strong><span>{data.messages[0]||'Archived snapshot.'}</span></>:mode==='imported'?<><strong>Legacy example · cutoff unverified</strong><span>Earlier approximate drawdowns. The daily scanner cutoff is 06:20 Pacific.</span></>:<><strong>{isOpening?'Opening experiment':'Frozen scanner'} at {cutoffPacific} Pacific · {data.status==='partial'?'partial coverage':data.status==='unavailable'?'data unavailable':'daily snapshot'}</strong><span>{data.messages[0]||`Ranges through ${cutoffEastern} ET.`}</span></>}</div>
+        <Info size={16}/><div>{isDraftBrief?<><strong>{dateLabel} brief · draft</strong><span>{data.messages[0]||'Premarket inputs and cutoff ranges are pending.'}</span></>:isArchivePreview?<><strong>{dateLabel} archive</strong><span>{data.messages[0]||'Archived snapshot.'}</span></>:mode==='imported'?<><strong>Legacy example · cutoff unverified</strong><span>Earlier approximate drawdowns. The daily cutoff is {cutoffPacific} Pacific.</span></>:<><strong>{isOpening?'Opening experiment':'Frozen scanner'} at {cutoffPacific} Pacific · {data.status==='partial'?'partial coverage':data.status==='unavailable'?'data unavailable':'daily snapshot'}</strong><span>{data.messages[0]||`Ranges through ${cutoffEastern} ET.`}</span></>}</div>
         {!isArchivePreview && data.sessionDate==='2026-10-01' && <a className="text-link" href={isOpening?'./index.html?dev=1':'./index.html?dev=1&scan=0635'}>{isOpening?'Compare 06:20 baseline':'Compare 06:35 experiment'} <ArrowUpRight size={13}/></a>}
       </div>
       <ScannerOverview data={data} mode={mode} isOpening={isOpening} cutoffEastern={cutoffEastern}
